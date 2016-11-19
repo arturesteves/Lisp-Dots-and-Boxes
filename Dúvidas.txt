@@ -1,0 +1,50 @@
+Dúvidas Projecto IA
+----------------------
+
+	Operadores:
+	
+		- São apenas 2?
+			- inserir arco na vertical
+			- inserir arco na horizontal
+			
+			
+	Nó
+		
+		 - Composição:
+			(tabuleiro profundidade pai heuristica)
+			
+		- Valor heurístico por defeito deverá ser 0 ou NIL???
+			- É igual?
+			
+		- Métodos selectores:
+			- Devo ter um método que retorna os arcos-horizontais que deve receber um nó ou um tabuleiro???
+				R: Acho que deve receber um tabuleiro, porque quando tenho um nó consigo ir buscar o tabuleiro e apartir dai vou buscar as varias listas do tabuleiro, se nao preciso sempre de receber um nó
+					
+					- Confirmar esta decisão
+					
+		- Criação:
+			- Porque quando tento criar um nó, exemplo: (CRIA-NO '((t NIL) (T NIL)) 1 3 (no-teste))  o resulto é: (((T NIL) (T NIL)) 1 3 (((# # # #) (# # # #)) 0 NIL NIL))
+				- Porque os #???
+		
+	Variáveis de Teste
+			
+		- Melhor criar num ficheiro à parte?
+		
+		
+	Tabuleiros
+	
+		- Os tabuleiros que estão no enunciado que são para resolver, devem estar no ficheiro "puzzle" ?
+		
+		- No enunciado do lab. 6 é sugerida a implementação da função: tabuleiro-vazio ; 
+			- Qual seria a utilidade desta função?
+			
+	
+	Projecto
+		
+		- Irei ter de guardar o número de caixas a fechar numa variável?, usando o 'defparameter' ?
+			- Porque esta será usada na função 'solucaop' que verifica se um nó é solução
+			
+		- Porque a função existep é diferente conforme os algoritmos?
+			- Quando se usa o 'bfs' não importa a profundidade, porque? Enquanto que no algoritmo 'dfs' já importa a profundidade.
+			
+			- Na função existep-aux , só devo comparar o tabuleiro? 
