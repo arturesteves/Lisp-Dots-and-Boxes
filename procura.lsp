@@ -87,4 +87,11 @@
 ;; (((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)))
 
 
+
+#||
+
+Este ficheiro deverá conter as funções relacionadas com a estrutura do nó, sucessores?
+
+
+||#
  

@@ -4,6 +4,7 @@
 ;;;; Funções do domínio do problema
 
 
+;;; Variáveis de Teste
 
 ;;; Tabuleiros de teste
 ;; tabuleiroTeste1
@@ -26,6 +27,39 @@
 			'((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
 	)
 )
+
+
+
+#||
+
+Adaptar ao problema em mãos
+
+
+
+||#
+;;; variaveis de teste e operadores
+(defun no-teste ()
+"Define um no teste do problema da vasilhas em que A=2, B=2, profundidade=0 e pai=NIL"
+ (list '(2 2) 0 nil))
+
+(defun operadores ()
+ "Cria uma lista com todos os operadores do problema das vasilhas."
+ (list 'vazar-a 'vazar-b 'encher-a 'encher-b 'vazar-a-b 'vazar-b-a))
+
+;;; Construtor
+(defun cria-no (vasilhas &optional (g 0) (pai nil))
+  (list vasilhas g pai)
+)
+
+
+#||
+
+Adaptar ao problema em mãos
+
+
+A estrutura do meu nó será ((tabuleiro) profundidade (pai) (optional heuristica)) ? -> E aplicando os algoritmos de bfs e dfs a heuristica seria 'nil'. 
+
+||#
 
 
 ;;; Métodos de Consulta
