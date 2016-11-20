@@ -4,7 +4,7 @@
 ;;;; Funções do domínio do problema
 
 
-
+ 
 
 #||
 
@@ -147,3 +147,14 @@ A estrutura do meu nó será ((tabuleiro) profundidade (pai) (optional heuristic
 	)
 )
 ||#
+
+
+
+
+;;; Exercicios complementares	
+;; tabuleiro-vazio			-> LAB 6
+;; "constroi um tabuleiro vazio de dimensao n x m a partir de dois valores inteiros recebidos por parametro"
+;; (tabuleiro-vazio 3 3)
+;; (((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)))
+
+

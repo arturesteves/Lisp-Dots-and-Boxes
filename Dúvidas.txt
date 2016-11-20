@@ -48,3 +48,22 @@ Dúvidas Projecto IA
 			- Quando se usa o 'bfs' não importa a profundidade, porque? Enquanto que no algoritmo 'dfs' já importa a profundidade.
 			
 			- Na função existep-aux , só devo comparar o tabuleiro? 
+			
+			
+	---
+	
+	Como sair do menu principal???
+		-> ((= opcao 2) nil) - no entanto continua a mostrar o tabuleiro
+			-> Como sair de um loop?
+		
+	-> Como fazer para o lispworks ler os acentos?
+	
+	-> Temos que ler do utilizador o  numero de caixas a fechar certo? (o objectivo)
+	
+	-> Devo sempre procurar qual a profundidade máxima?
+		-> Ou pergunto apenas quando for o dfs ou algum dos outros algoritmos que sºao variantes do A*
+		
+		-> A mesma pergunta mas para a heurística
+		
+	-> Os tabuleiros a resolver estão num ficheiro à parte? ou estão onde?
+		
