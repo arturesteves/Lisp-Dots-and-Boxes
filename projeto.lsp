@@ -4,7 +4,7 @@
 ;;;; Funções de interacção com o utilizador, de carregamento dos outros ficheiros do projecto e leitura e escrita em ficheiros
 
 ;;;; Tempo
-;;;; Antes dia 19/11/2016 : 1 hora
+;;;; Antes dia 19/11/2016 			: 1 hora e 30 minutos
 ;;;; 19/11/2016 : 13:13 - 14:57: 1 hora e 37 minutos
 ;;;; 20/11/2016 : 16:47 - 19:25: 2 horas e 38 minutos
 ;;;; 20/11/2016 : 20:32 - 21:12: 0 horas e 40 minutos
@@ -23,7 +23,7 @@
 
 ;; menu-inicial
 (defun menu-inicial () "Apresenta o menu principal do programa na consola. Sendo possível iniciar uma procura ou sair do programa"
-	;(loop	; Quero-o aqui, para quando acabar a procura de um problema eu conseguir executar outra procura
+	(loop	; Quero-o aqui, para quando acabar a procura de um problema eu conseguir executar outra procura
 		(progn
 			(format t "~%> ------------------------------------------------------")
 			(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
@@ -40,7 +40,7 @@
 						((not (numberp opcao)) (menu-inicial))		; Analisar esta linha, quando colocar o (loop )
 						((and (<= opcao 2) (>= opcao 1)) (cond
 																				((= opcao 1) (iniciar-procura))
-																				((= opcao 2) nil)	; substituir nil por -> (return) Quando descomentar (loop 
+																				((= opcao 2) (return))	; substituir nil por -> (return) Quando descomentar (loop 
 																			)
 						)
 					(T (progn
@@ -52,7 +52,7 @@
 				)
 			)
 		)
-	;)
+	)
 )
 ;
 
@@ -194,7 +194,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura, talvez seja
 
 ;;; Problemas a Resolver 
 
-(list estado profundidade heuristica no-pai)
+#||
 
 (defun problema-a ()
 "Devolver problema a)"
@@ -225,3 +225,5 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura, talvez seja
 "Devolver problema f)"
   (cria-no (tabuleiro-f) 0 1 NIL)
 )
+
+||#
