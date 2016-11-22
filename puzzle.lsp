@@ -4,17 +4,6 @@
 ;;;; Funções do domínio do problema
 
 
- 
-
-#||
-
-Adaptar ao problema em mãos
-
-
-A estrutura do meu nó será ((tabuleiro) profundidade (pai) (optional heuristica)) ? -> E aplicando os algoritmos de bfs e dfs a heuristica seria 'nil'. 
-
-||#
-
 
 ;;; Métodos de Consulta
 
@@ -157,4 +146,8 @@ A estrutura do meu nó será ((tabuleiro) profundidade (pai) (optional heuristic
 ;; (tabuleiro-vazio 3 3)
 ;; (((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)))
 
+
+
+
+;;; Tabuleiros Teste 
 

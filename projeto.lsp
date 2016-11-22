@@ -8,10 +8,25 @@
 ;;;; 19/11/2016 : 13:13 - 14:57: 1 hora e 37 minutos
 ;;;; 20/11/2016 : 16:47 - 19:25: 2 horas e 38 minutos
 ;;;; 20/11/2016 : 20:32 - 21:12: 0 horas e 40 minutos
-
+;;;; 22/11/2016 : 10:19 - 10:45: 0 horas e 26 minutos 
 ;;;; Total: 
 
+#||
 
+Plano:		(Até Sábado)
+	1. Desenvolver sucessores-aux
+	2. Desenvolver sucessores
+	3. Desenvolver numero-caixas-fechadas
+	4. Desenvolver solucaop
+	5. Implementar A*
+	6. Adaptar/Transferir procura genérica para aplicar o A*
+	7. Testar
+	
+	
+	
+Existem dúvidas no ficheiro 'procura.lisp'	-> Relativamente aos sucessores
+
+||#
 
 
 ;;; Inicialização do Programa
@@ -19,7 +34,7 @@
 (defun iniciar ()	"Função que inicializa o programa, chamando a função que apresenta o menu inicial"
 	(menu-inicial)
 )
-
+;
 
 ;; menu-inicial
 (defun menu-inicial () "Apresenta o menu principal do programa na consola. Sendo possível iniciar uma procura ou sair do programa"

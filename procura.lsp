@@ -68,8 +68,19 @@ solução
 
 (defun existep (no lista-nos algoritmo) ... )
 
-(defun existe-solucao (lista f-solucao f-algoritmo) ...) 
+(defun existe-solucao (lista f-solucao f-algoritmo) ...)	
 
+
+
+Passos:		(Até Sábado)
+	1. Desenvolver sucessores-aux
+	2. Desenvolver sucessores
+	3. Desenvolver numero-caixas-fechadas
+	4. Desenvolver solucaop
+	5. Implementar A*
+	6. Adaptar/Transferir procura genérica para aplicar o A*
+	7. Testar
+	
 ||#
 
 ;;; Procura
@@ -88,6 +99,65 @@ solução
 	(append sucessores abertos)
 )
 
+
+;;; Sucessores
+
+(defun sucessores (no operadores algoritmo-procura profundidade)
+	(cond
+		((and (equal 'dfs algoritmo-procura) (= (get-profundidade-no no) profundidade)) nil)
+		((not (null operadores)) (cons (sucessores-aux no (car operadores)) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
+	)
+)
+
+
+;; sucessores-aux
+;; Teste: (sucessores-aux (no-teste) 'inserir-arco-horizontal)			
+;;					-> Tabuleiro do no-teste: (((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))'((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;
+;;		A CONFIRMAR
+;; Resultado: (
+;;					(((T T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T T) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (T T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T T) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (T NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (NIL T NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (NIL NIL T) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (T NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL T NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					(((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL T)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;;					)
+(defun sucessores-aux (no operador)
+	(list (funcall operador (get-vasilhas-no no)) (+ 1 (get-profundidade-no no)) no)
+)
+
+
+#||
+
+	Dúvida Sucessores:
+	
+		- (defun inserir-arco-horizontal (linha coluna tabuleiro) 
+			-> Quais são realmente os sucessores do meu nó teste?
+			
+				- Primeiro aplico o operador, 'inserir-arco-horizontal' 
+					-> As funções que estão no operador têm que verificar se já existe algo na posicao -> Ou se é possível adicionar.
+					
+				- Segundo aplico o operador, 'inserir-arco-vertical'
+
+				-> Esperado: 
+					-> A função sucessores-aux retornará uma lista com todas possibilidades aplicando o 1º operador.
+						-> Para isso tenho que ter a linha e a coluna.
+						-> Tenho que passar como argumento à função operador a LINHA e a COLUNA??? -> Problema
+						
+					-> Função sucessores retornará todas as possibilidades, quando aplicado os 2 operadores.
+			
+	Resultado esperado ao aplicar o operador '
+			(defun tabuleiro-teste3 () "Retorna um tabuleiro com 1 caixa fechada de dimensão 3 x 3"
+	(list '((NIL T	 NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
+			'((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
+	)
+)
+||#
 
 ;;; 
 ;; Teste: (solucaop (no-teste))   -> Resultado: NIL

@@ -22,11 +22,8 @@ Dúvidas Projecto IA
 					
 					- Confirmar esta decisão
 					
-		- Criação:
-			- Porque quando tento criar um nó, exemplo: (CRIA-NO '((t NIL) (T NIL)) 1 3 (no-teste))  o resulto é: (((T NIL) (T NIL)) 1 3 (((# # # #) (# # # #)) 0 NIL NIL))
-				- Porque os #???
 		
-	Variáveis de Teste
+	Variáveis de Teste 
 			
 		- Melhor criar num ficheiro à parte?
 		
