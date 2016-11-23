@@ -23,7 +23,7 @@ Plano:		(Até Sábado)
 	7. Testar
 	
 	
-	
+	TODO: O menu dos tabuleiros terá que ser dinâmico!!!
 Existem dúvidas no ficheiro 'procura.lisp'	-> Relativamente aos sucessores
 
 ||#
@@ -47,7 +47,7 @@ Existem dúvidas no ficheiro 'procura.lisp'	-> Relativamente aos sucessores
 			(format t "~%>|            2. Sair                                  |")
 			(format t "~%>|                                                     |")
 			(format t "~%> ------------------------------------------------------")
-			(format t "~%> Opcao:")
+			(format t "~%> Opção:")
 			(format t "~%> ")
 			
 			(let ((opcao (ler-teclado)))
@@ -210,7 +210,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura, talvez seja
 ;;; Problemas a Resolver 
 
 #||
-
+	LER DO FICHEIRO 
+	
 (defun problema-a ()
 "Devolver problema a)"
   (cria-no (tabuleiro-a) 0 1 NIL)	;(first (le-tabuleiro (problemas)))	-> Ler de um ficheiro

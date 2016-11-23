@@ -49,7 +49,7 @@
 ;; Teste: (inserir-arco-vertical 3 3 (tabuleiro-teste1))   ->   (((NIL T T) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (T T T) (NIL NIL T) (NIL T NIL)))
 (defun inserir-arco-vertical (linha coluna tabuleiro) "Insere um arco vertical (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(cond
-		((null tabuleiro) nil)
+		((or (null tabuleiro) (possivel-adicionar-arco linha coluna tabuleiro)) nil)
 		(T (cons (get-arcos-horizontais tabuleiro) (list (inserir-arco-na-posicao-aux linha coluna (get-arcos-verticais tabuleiro)))))
 	)
 )
@@ -58,12 +58,33 @@
 ;; Teste: (inserir-arco-horizontal 3 3 (tabuleiro-teste1))   ->   (((NIL T T) (NIL NIL NIL) (NIL NIL T) (NIL NIL NIL)) ((NIL NIL NIL) (T T T) (NIL NIL NIL) (NIL T NIL)))
 (defun inserir-arco-horizontal (linha coluna tabuleiro) "Insere um arco horizontal (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(cond
-		((null tabuleiro) nil)
+		((or (null tabuleiro) (possivel-adicionar-arco linha coluna tabuleiro)) nil)
 		(T (cons (inserir-arco-na-posicao-aux linha coluna (get-arcos-horizontais tabuleiro)) (list (get-arcos-verticais tabuleiro))))
 	)
 )	
 
 
+;; possivel-adicionar-arco
+;; Teste: (possivel-adicionar-arco 1 1 (get-arcos-horizontais (tabuleiro-teste1)))   -> Resultado:   T
+;; Teste: (possivel-adicionar-arco 1 3 (get-arcos-horizontais (tabuleiro-teste1)))   -> Resultado:   NIL
+(defun possivel-adicionar-arco (linha coluna lista) "Recebe indices de linha e coluna e uma lista de arcos horizontais ou de arcos verticais e verifica se naquela posição o valor é [T], se for devolve [NIL], se for [NIL] devolve [T]"
+	(cond
+		((null lista) nil)
+		((= linha 1) (possivel-adicionar-arco-aux coluna (car lista)))
+		(T (possivel-adicionar-arco (- linha 1) coluna (cdr lista)))
+	)
+)
+
+
+;; possivel-adicionar-arco-aux 
+;; Teste: (possivel-adicionar-arco-aux 3 '(NIL T NIL NIL))   -> Resultado: T
+(defun possivel-adicionar-arco-aux (indice lista)
+	(cond
+		((null lista) nil)
+		((and (= indice 1) (eql (car lista) nil)) T)
+		(T (possivel-adicionar-arco-aux (- indice 1) (cdr lista)))
+	)
+)
 
 #|| CONTINUAR A AVALIAR DAQUI PARA BAIXO ||#
 
@@ -77,7 +98,7 @@
 	
 ;)
 
-;;,Acabar
+
 
 ;; get-valor-na-posicao
 ;; Teste: (get-valor-na-posicao 2 '(5 6 4 2 3 1))   ->   6
@@ -89,7 +110,7 @@
 	)
 )
 
-;;;;;TODO, fazer uma função genérica para esta 2 funções a baixo
+
 ;; get-valor-na-posicao-horizontal
 ;; Teste: (get-valor-na-posicao-horizontal 1 3 (get-arcos-horizontais(tabuleiro-teste1)))   ->   T
 (defun get-valor-na-posicao-horizontal (linha coluna lista) "Retorna o valor que está na índice linha e índice coluna recebidos de uma lista de arcos horizontais recebida"
@@ -111,6 +132,7 @@
 )
 
 
+
 (defun numero-caixas-fechadas (tabuleiro)
 	(cond
 		((and (get-valor-na-posicao-horizontal 1 2 (get-arcos-horizontais tabuleiro)) (get-valor-na-posicao-horizontal 2 2 (get-arcos-horizontais tabuleiro))) 1)
@@ -127,27 +149,29 @@
 )
 
 
-#||
-(defun get-arco-aux (linha coluna lista)
+;; get-dimensao-linhas
+;; Teste: (get-dimensao-linhas (tabuleiro-teste4))   -> Resultado: 4
+(defun get-dimensao-linhas (tabuleiro)
+	(get-dimensao-aux (get-arcos-horizontais tabuleiro))
+)
+
+
+;; get-dimensao-colunas
+;; Teste: (get-dimensao-colunas (tabuleiro-teste4))   -> Resultado: 3
+(defun get-dimensao-colunas (tabuleiro)
+	(get-dimensao-aux (get-arcos-verticais tabuleiro))
+)
+
+
+;; get-dimensao-aux
+;; Teste: (get-dimensao-aux (get-arcos-horizontais (tabuleiro-teste1)))   -> Resultado: 4
+(defun get-dimensao-aux (lista) "Dada uma lista de arcos devolve o número de listas existentes"
 	(cond
-		((null lista) nil)
-		((= linha 1) (car lista))
-		(T (arco-horizontal-aux (- linha 1) coluna (cdr lista)))
+		((null lista) 0)
+		(T (+ 1 (get-dimensao-aux (cdr lista))))
 	)
 )
-||#
 
 
 
-
-;;; Exercicios complementares	
-;; tabuleiro-vazio			-> LAB 6
-;; "constroi um tabuleiro vazio de dimensao n x m a partir de dois valores inteiros recebidos por parametro"
-;; (tabuleiro-vazio 3 3)
-;; (((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)))
-
-
-
-
-;;; Tabuleiros Teste 
 

@@ -25,8 +25,8 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 ;;; Metodos seletores
 
-;; get-estado-no
-;; Teste: (get-estado-no (no-teste))   -> Resultado: (((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
+;; get-no-estado
+;; Teste: (get-no-estado (no-teste))   -> Resultado: (((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
 (defun get-no-estado (no) "Retorna o estado do nó, que é representado pelo tabuleiro"
 	(car no)
 )
@@ -101,6 +101,8 @@ Passos:		(Até Sábado)
 
 
 ;;; Sucessores
+#|| 
+OLD
 
 (defun sucessores (no operadores algoritmo-procura profundidade)
 	(cond
@@ -109,6 +111,8 @@ Passos:		(Até Sábado)
 	)
 )
 
+
+||#
 
 ;; sucessores-aux
 ;; Teste: (sucessores-aux (no-teste) 'inserir-arco-horizontal)			
@@ -127,10 +131,234 @@ Passos:		(Até Sábado)
 ;;					(((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL T NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
 ;;					(((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL T)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
 ;;					)
-(defun sucessores-aux (no operador)
+#||
+
+OLD
+(defun sucessores-aux (no operador) 
 	(list (funcall operador (get-vasilhas-no no)) (+ 1 (get-profundidade-no no)) no)
 )
 
+
+||#
+
+#||
+(defun sucessores (no operadores algoritmo-procura profundidade)
+	(cond
+		((and (equal 'dfs algoritmo-procura) (= (get-profundidade-no no) profundidade)) nil)
+		((not (null operadores)) (cons (sucessores-aux no (car operadores)) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
+	)
+)
+||#
+
+#||
+COLOCAR NO FICHEIRO Projecto.lisp
+
+||#
+(defun escreve-no (no) "Permite escrever no ecra um no do problema."
+	(progn
+		(format t (concatenate 'string "~%|>No: " (write-to-string no)))
+	)
+)
+#||
+(defun escreve-lista-nos(lista) "Permite escrever no ecra uma lista de nos do problema das vasilhas, e.g. um conjunto de sucessores, a lista de abertos etc."
+	(cond
+		((null lista) nil)
+		(T (progn 
+				(escreve-no (car lista)) 
+				(escreve-lista-nos-aux (cdr lista))
+			)
+		)
+	)
+)||#
+
+
+(defun escreve-lista-nos (lista) "Permite escrever no ecra uma lista de nos do problema das vasilhas, e.g. um conjunto de sucessores, a lista de abertos etc."
+	(cond
+		((null lista) nil)
+		(T (progn 
+				(escreve-lista-nos-aux (car lista)) 	; horizontais
+				(escreve-lista-nos-aux (cadr lista)) ; verticais
+			)
+		)
+	)
+)
+
+;; Este tem que escrever os nos horizontais e os verticais
+(defun escreve-lista-nos-aux (lista) "Permite escrever no ecra uma lista de nos do problema das vasilhas, e.g. um conjunto de sucessores, a lista de abertos etc."
+	(cond
+		((null lista) nil)
+		(T (progn 
+				(escreve-no (car lista)) 
+				(escreve-lista-nos-aux (cdr lista))
+			)
+		)
+	)
+)
+
+
+
+;;TODO
+;;
+;;
+;; SÓ FALTA RECEBER DIFERENTES VALORES PARA O Nº DE LINHAS E COLUNAS   de cada lista de arco horizontais e verticais
+;;
+;;
+;;	>>>>>>>>>>>>>>>>DÚVIDA<<<<<<<<<<<<<<<<<<<
+
+;; (sucessores (no-teste) (operadores) 'bfs 0)
+;; Teste: (escreve-lista-nos (sucessores (no-teste) (operadores) 'bfs 0))
+#||
+RESULTADO:			EXISTE UM ERRO COM ESTA GERAÇAO, APÓS PASSAR DE UMA LINHA PARA A OUTRA É ADICIONADO O TABULEIRO PAI, O QUE NAO FAZ SENTIDO, PRECISA DE SER REMOVIDO! / NAO GERADO
+
+
+	|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL T))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL T NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (T NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL T) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL T NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (T NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T T) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (T T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T T) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((T T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL T)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL T NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (T NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL T) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL T NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (T NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T T) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (T T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T T) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+|>No: ((((T T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1 (((# # # #) (# # # #)) 0 0 NIL))
+
+||#
+
+(defun sucessores (no operadores algoritmo-procura profundidade)
+	(let ;;((lista-linhas-colunas-possiveis (cond ((eql (car operadores) 'inserir-arco-horizontal) ()))(lista-combinacoes 4 3)))
+		   ((lista-linhas-colunas-possiveis (lista-combinacoes (get-dimensao-linhas (get-no-estado no)) (get-dimensao-colunas (get-no-estado no)))))
+		#||
+		((lista-linhas-colunas-possiveis (lista-combinacoes 4 3)))	;;;; se inserir-arco-horizontal entre 1 e (get-dimensao-linhas tabuleiro) -> ja devolve n + 1
+																							;;;; se inserir-arco-vertical entre 1 e (get-dimensao-colunas tabuleiro) -> ja devolve m + 1
+	||#
+		(cond
+			((and (equal 'dfs algoritmo-procura) (= (get-profundidade-no no) profundidade)) nil)
+			((not (null operadores)) (cons (sucessores-todas-possibilidades no (car operadores) lista-linhas-colunas-possiveis) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
+		)
+	)
+)
+
+
+
+#||
+
+ACHO QUE NAO ESTA A DEVOLVER OS TABULEIROS COM OS NOVOS ARCOS	
+
+||#
+;; (sucessores-todas-possibilidades (no-teste) 'inserir-arco-horizontal (lista-combinacoes (get-dimensao-linhas (get-no-estado (no-teste))) (get-dimensao-colunas (get-no-estado (no-teste)))))
+(defun sucessores-todas-possibilidades (no operador possibilidades)
+	(cond
+		((null possibilidades) nil)
+		(T (cons (sucessores-aux no (list operador (car possibilidades))) (sucessores-todas-possibilidades no operador (cdr possibilidades))))
+	)
+)
+#||
+
+	Tenho 2 operadores, por cada arco tenho várias possibilidades:
+	
+		- inserir-arco-horizontal
+			- inserir-arco-horizontal 1 1 tabuleiro
+			- inserir-arco-horizontal 1 2 tabuleiro
+			- inserir-arco-horizontal 1 3 tabuleiro
+			- inserir-arco-horizontal 2 1 tabuleiro
+			
+		- inserir-arco-vertical
+			- inserir-arco-vertical 1 1 tabuleiro
+			- inserir-arco-vertical 1 2 tabuleiro
+			- inserir-arco-vertical 1 3 tabuleiro
+			- inserir-arco-vertical 2 1 tabuleiro
+||#
+
+;; to be used
+;; (sucessores-aux (no-teste) '(inserir-arco-horizontal (1 1)))
+
+;; Tabuleiro que está no nó (tab3) : 
+;;						'((NIL T	 NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
+;;						'((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
+;;
+;; Resultado: 	((((T T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1
+;;							((((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 0 0 NIL))
+
+;;
+(defun sucessores-aux (no lista-operador-parametros)
+	(let* ((operador (car lista-operador-parametros))
+			(tabuleiro (get-no-estado no))
+			(parametros (append (cadr lista-operador-parametros) (list tabuleiro))))
+
+		;; old
+		;(apply operador parametros)
+		;;(list (apply operador parametros) (+ 1 (get-no-profundidade no)) #|| no ||# "PAI")
+		;;;; DEVOLVE-ME VALORES COM ###### -> rEINICIAR O lisp works
+		(list (apply operador parametros) (+ 1 (get-no-profundidade no)) no)
+	)
+)
+;;,TESTE: (sucessores-todas-possibilidades (no-teste) 'inserir-arco-horizontal (lista-combinacoes (get-dimensao-linhas (get-no-estado (no-teste))) (get-dimensao-colunas (get-no-estado (no-teste)))))
+
+
+
+
+
+
+
+
+;(inserir-arco-horizontal 3 3 (tabuleiro-teste1))
+
+;; lista-combinacoes
+;; Teste: (lista-combinacoes  4 3)   -> Resultado: ((4 3) (4 2) (4 1) (3 3) (3 2) (3 1) (2 3) (2 2) (2 1) (1 3) (1 2) (1 1))
+;; Teste: (reverse (lista-combinacoes 4 3)) -> Resultado: ((1 1) (1 2) (1 3) (2 1) (2 2) (2 3) (3 1) (3 2) (3 3) (4 1) (4 2) (4 3))
+(defun lista-combinacoes (maximo-linhas maximo-colunas) "Recebe uma lista e retorna um conjunto de listas que representa todas as combinacoes possiveis"
+	(cond
+		((zerop maximo-linhas) nil)
+		(T (append (combinacoes-numero-lista maximo-linhas (criar-lista-numeros maximo-colunas)) (lista-combinacoes (- maximo-linhas 1) maximo-colunas)))
+	)
+)
+;
+
+;; criar-lista
+;; Teste: (criar-lista-numeros 5)   -> Resultado: (1 2 3 4 5)
+(defun criar-lista-numeros (tamanho &optional (valor-por-omissao 1)) "Devolve uma lista com o valor por defeito [NIL] se não for indicado qual o valor a preencher a lista. O tamanho da lista é passado como argumento"
+	(cond
+		((zerop tamanho) nil)
+		(T (cons valor-por-omissao (criar-lista-numeros (- tamanho 1) (+ valor-por-omissao 1))))
+	)
+)
+;
+
+;; função auxiliar
+;; combinacoes
+;; Teste: (combinacoes 4 '(1 2 3))   -> Resultado: ((4 3) (4 2) (4 1))
+(defun combinacoes-numero-lista (numero lista) 
+	(let ((ultimo-elemento (car (last lista)))) 
+		
+		(cond
+			((null lista) nil)
+			(T (cons (list numero ultimo-elemento) (combinacoes-numero-lista numero (reverse (cdr (reverse lista))))))
+		)
+	)
+)
+;
 
 #||
 

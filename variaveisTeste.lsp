@@ -2,6 +2,8 @@
 
 ;;; Tabuleiros de teste
 
+
+
 ;; tabuleiro-teste1
 (defun tabuleiro-teste1 () "Retorna um tabuleiro sem caixas fechadas de dimensão 3 x 3"
 	(list '((NIL T T) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL))
@@ -24,9 +26,9 @@
 )
 
 ;; tabuleiro-teste4
-(defun tabuleiro-teste4 () "Retorna um tabuleiro com 1 caixa fechada de dimensão 2 x 3"
+(defun tabuleiro-teste4 () "Retorna um tabuleiro com 1 caixa fechada de dimensão 3 x 2"
 	(list '((NIL T) (NIL T) (NIL NIL) (NIL T))
-			'((NIL T T) (T NIL NIL) (NIL T NIL))
+			'((NIL T T) (T NIL NIL) (T NIL NIL))
 	)
 )
 
@@ -64,7 +66,7 @@
 
 
 ;; tabuleiro-d
-(defun tabuleiro-d () "Tabuleiro D, com 0 caixas fechadas de dimensão 5 x 4"
+(defun tabuleiro-d () "Tabuleiro D, com 0 caixas fechadas de dimensão 4 x 5"
 	(list '((NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL))
 			'((NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL))
 	)
@@ -79,8 +81,8 @@
 )
 
 
-;; tabuleiro-d
-(defun tabuleiro-d () "Tabuleiro D, com 0 caixas fechadas de dimensão 7 x 7"
+;; tabuleiro-f
+(defun tabuleiro-f () "Tabuleiro F, com 0 caixas fechadas de dimensão 7 x 7"
 	(list '((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL T NIL NIL NIL NIL NIL) (NIL T NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
 			'((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL T NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
 	)
