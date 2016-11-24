@@ -311,7 +311,10 @@ ACHO QUE NAO ESTA A DEVOLVER OS TABULEIROS COM OS NOVOS ARCOS
 		;(apply operador parametros)
 		;;(list (apply operador parametros) (+ 1 (get-no-profundidade no)) #|| no ||# "PAI")
 		;;;; DEVOLVE-ME VALORES COM ###### -> rEINICIAR O lisp works
-		(list (apply operador parametros) (+ 1 (get-no-profundidade no)) no)
+		
+		;;CORRECTO
+		;(list (apply operador parametros) (+ 1 (get-no-profundidade no)) no)
+		(list (cadr lista-operador-parametros) (apply operador parametros) (+ 1 (get-no-profundidade no)) no)
 	)
 )
 ;;,TESTE: (sucessores-todas-possibilidades (no-teste) 'inserir-arco-horizontal (lista-combinacoes (get-dimensao-linhas (get-no-estado (no-teste))) (get-dimensao-colunas (get-no-estado (no-teste)))))

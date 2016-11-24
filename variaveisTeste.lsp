@@ -3,6 +3,20 @@
 ;;; Tabuleiros de teste
 
 
+;;
+(defun tab-teste ()
+	(list '((NIL NIL) (T NIL) (NIL NIL) (NIL T) (NIL T))
+			'((NIL NIL NIL NIL) (NIL T T T) (NIL NIL NIL T))
+	)
+)
+
+
+;; tabuleiro-teste0
+(defun tabuleiro-teste0 () "Retorna um tabuleiro sem caixas fechadas de dimensão 3 x 1"
+	(list '((NIL T T) (NIL NIL T))
+			'((NIL) (NIL) (T) (T))
+	)
+)
 
 ;; tabuleiro-teste1
 (defun tabuleiro-teste1 () "Retorna um tabuleiro sem caixas fechadas de dimensão 3 x 3"
