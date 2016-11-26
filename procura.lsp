@@ -14,7 +14,7 @@
 
 ;;; Construtor
 
-;;cria-no
+;; cria-no
 (defun cria-no (estado &optional (profundidade 0) (heuristica 0) (no-pai nil)) 
 "Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
 a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heuróistica por defeito têm valor 0, enquanto que o nó pai por defeito é NIL"
@@ -295,7 +295,7 @@ ACHO QUE NAO ESTA A DEVOLVER OS TABULEIROS COM OS NOVOS ARCOS
 ;; (sucessores-aux (no-teste) '(inserir-arco-horizontal (1 1)))
 
 ;; Tabuleiro que está no nó (tab3) : 
-;;						'((NIL T	 NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
+;;						'((NIL T	 NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) 
 ;;						'((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))
 ;;
 ;; Resultado: 	((((T T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL))) 1
@@ -405,24 +405,6 @@ do seu estado for igual ao número de caixas a fechar lido no início do program
 
 ||#
 
-
-
-
-;;; heuristicas
-
-;; heuristica1
-;; Teste: (heuristica (tabuleiro1) 2)   -> Resultado: 1
-(defun heuristica1 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
-	(- numero-caixas-a-fechar (numero-caixas-fechadas tabuleiro)  1)
-)
-
-
-;;;;;;;;;;;; Necessário definir esta 2ª heurística
-;;;;;;;; A definir ainda
-;;; Usar nº de arcos ligados a um nó?
-(defun heuristica2 (tabuleiro numero-caixas-a-fechar)
-	nil
-)
 
 
  

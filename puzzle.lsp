@@ -175,3 +175,22 @@
 
 
 
+
+;;; heuristicas
+
+;; heuristica1
+;; Teste: (heuristica (tabuleiro1) 2)   -> Resultado: 1
+(defun heuristica1 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
+	(- numero-caixas-a-fechar (numero-caixas-fechadas tabuleiro)  1)
+)
+
+
+;;;;;;;;;;;; Necessário definir esta 2ª heurística
+;;;;;;;; A definir ainda
+;;; Usar nº de arcos ligados a um nó?
+(defun heuristica2 (tabuleiro numero-caixas-a-fechar)
+	nil
+)
+
+
+
