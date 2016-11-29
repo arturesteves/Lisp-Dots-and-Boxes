@@ -97,6 +97,12 @@ Onde está a condição (possivel-adicionar-arco)  -> deverá estar (not (possiv
 
 
 
+#||
+
+	numero-caixas-fechadas 
+||#
+
+
 ;;; heuristicas
 
 ;; heuristica1
