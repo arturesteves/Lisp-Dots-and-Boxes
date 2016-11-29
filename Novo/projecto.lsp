@@ -8,6 +8,7 @@
 #||
 
 Plano:		
+	0. numero-caixas-fechadas 
 	1. Desenvolver sucessores-aux
 	2. Desenvolver sucessores
 	3. Desenvolver numero-caixas-fechadas
