@@ -118,3 +118,11 @@ Onde está a condição (possivel-adicionar-arco)  -> deverá estar (not (possiv
 (defun heuristica2 (tabuleiro numero-caixas-a-fechar)
 	nil
 )
+
+
+#||
+		FALTA
+
+Verificar se é nó objectivo
+
+||#

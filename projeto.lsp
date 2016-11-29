@@ -104,6 +104,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura, talvez seja
 		(format t "~%> 	Tabuleiro D -> Caixas fechadas: 0   |   Dimensao: 5 x 4")
 		(format t "~%> 	Tabuleiro E -> Caixas fechadas: 2   |   Dimensao: 6 x 6")
 		(format t "~%> 	Tabuleiro F -> Caixas fechadas: 0   |   Dimensao: 7 x 7")
+
 		(format t "~%> Estado inicial: ")
 		(format t "~%> ")
 		
