@@ -43,6 +43,13 @@
 )
 
 
+#||
+
+Onde está a condição (possivel-adicionar-arco)  -> deverá estar (not (possivel-adicionar-arco)) -> pq se nao for possivel adicionar devolve nil, e nil nao passa na condição or!!!
+
+
+
+||#
 ;;; Operadores
 
 ;; arco-vertical
@@ -132,6 +139,7 @@
 )
 
 
+#||
 
 (defun numero-caixas-fechadas (tabuleiro)
 	(cond
@@ -147,6 +155,8 @@
 		(T 0)
 	)
 )
+
+||#
 
 
 ;; get-dimensao-linhas
@@ -191,6 +201,103 @@
 (defun heuristica2 (tabuleiro numero-caixas-a-fechar)
 	nil
 )
+
+
+(defun numero-arcos-horizontais-linha (tabuleiro)
+	(get-dimensao-aux (car (get-arcos-horizontais tabuleiro)))
+)
+
+(defun numero-arcos-verticais-coluna (tabuleiro)
+	(get-dimensao-aux (car (get-arcos-verticais tabuleiro)))
+)	
+
+
+#||
+
+
+NOVAS CAIXAS
+
+||#
+(defun numero-caixas-fechadas (tabuleiro)
+	(lista-caixas 1 1 tabuleiro)	; devolve ((T T T T) (T NIL NIL T))
+)
+
+
+;; Percorre colunas 
+(defun lista-caixas (linha coluna tabuleiro)
+	(let ((numero-arcos-horizontais-por-linha (numero-arcos-horizontais-linha tabuleiro) )
+			(numero-arcos-verticais-por-coluna  (numero-arcos-verticais-coluna tabuleiro)))
+		(cond
+			;((> linha numero-arcos-horizontais-por-linha) )
+			(T (list numero-arcos-horizontais-por-linha numero-arcos-verticais-por-coluna))
+		)
+	)
+)
+
+
+;; Percorre linha 
+(defun lista-caixas-aux (linha coluna tabuleiro)
+	(let ((numero-arcos-horizontais-por-linha (numero-arcos-horizontais-linha tabuleiro))
+			(lado-topo (get-valor-na-posicao-horizontal linha coluna tabuleiro))
+			(lado-baixo (get-valor-na-posicao-horizontal (+ linha 1) coluna tabuleiro))
+			(lado-esquerdo (get-valor-na-posicao-vertical linha coluna tabuleiro))
+			(lado-direito)
+			)
+		(cond
+			((> linha numero-arcos-horizontais-por-linha) nil)
+			(T (cons ))
+		)
+	)
+)
+
+
+#||
+
+CONTINUAR
+
+||#
+
+
+
+;; ver o que recebe 
+(defun percorre-linha (linha coluna tabuleiro) "Devolve uma lista com todas as caixas existentes no tabuleiro" ; linhas todas 
+	(let ((numero-arcos-horizontais-por-linha (numero-arcos-horizontais-linha tabuleiro)))
+		(cond
+			((> linha numero-arcos-horizontais-linha) nil)
+			
+			
+			(T (append (list percorre-colunas linha tabuleiro) (percorre-linha (+ linha 1) tabuleiro)))  ;; lista do resulta que vem de outra função
+		)
+	)
+)
+
+
+;; ver o que recebe 
+(defun percorre-colunas (linha-h tabuleiro &optional (coluna-h linha-v coluna-v)) "Devolve uma lista com todas as caixas existentes numa linha"
+	
+	
+	(cond
+		
+		
+		;; quando chama esta função passa sempre o valor de linha - nao soma!
+		(T (list (get-caixa ) (percorre-colunas ))) ;; fazer conds aqui, a linha so pode andar entre linha e linha + 1, se passar linha + 1 entao volta a trás.
+	)
+)
+
+
+(defun get-caixa (linha-h coluna-h linha-v coluna-v tabuleiro)	; devolve a lista com os valores de uma caixa
+	(let* ((lado-topo (get-valor-na-posicao-horizontal linha-h coluna-h (get-arcos-horizontais tabuleiro)))
+			(lado-baixo (get-valor-na-posicao-horizontal (+ linha-h 1) coluna-h (get-arcos-horizontais tabuleiro)))
+			(lado-esquerdo (get-valor-na-posicao-vertical linha-v coluna-v (get-arcos-verticais tabuleiro)))
+			(lado-direito (get-valor-na-posicao-vertical (+ linha-v 1) coluna-v (get-arcos-verticais tabuleiro))))
+			
+		(list lado-topo lado-baixo lado-esquerdo lado-direito)
+	)
+)
+
+
+
+
 
 
 
