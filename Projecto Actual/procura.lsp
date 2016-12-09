@@ -7,55 +7,12 @@
 
 
 
-;;; operadores 
-(defun operadores () "Cria uma lista com todos os operadores do problema dos Pontos e das Caixas"
-	(list 'inserir-arco-vertical 'inserir-arco-horizontal)
-)
-
-
-
-;;; Construtor
-
-;; cria-no
-(defun cria-no (estado &optional (profundidade 0) (heuristica 0) (no-pai nil)) 
-"Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
-a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heuróistica por defeito têm valor 0, enquanto que o nó pai por defeito é NIL"
-
-	(list estado profundidade heuristica no-pai)
-)
-
-
-;;; Metodos seletores
-
-;; get-no-estado
-;; Teste: (get-no-estado (no-teste))   -> Resultado: (((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL T NIL) (NIL T NIL) (NIL NIL NIL) (NIL NIL NIL)))
-(defun get-no-estado (no) "Retorna o estado do nó, que é representado pelo tabuleiro"
-	(car no)
-)
-
-;; get-no-profundidade
-;; Teste: (get-no-profundidade (no-teste))   -> Resultado: 0
-(defun get-no-profundidade (no) "Retorna a profundidade em que o nó se encontra"
-	(cadr no)   ; Igual a: (car (cdr no))
-)
-
-;; get-no-heuristica
-;; Teste: (get-no-profundidade (no-teste))   -> Resultado: 0
-(defun get-no-heuristica (no) "Retorna a heurística do nó"
-	(caddr no)   ; Igual a: (car (cdr (cdr no)))
-)
-
-;; get-no-pai
-;; Teste: (get-no-pai (no-teste))   -> Resultado: NIL
-(defun get-no-pai (no) "Retorna o nó pai deste nó, ou seja, o nó que gerou este nó"
-	(cadddr no)   ; Igual a: (car (cdr (cdr (cdr no))))
-)
-
 
 #|| 
 
 VERIFICAR se está a funcionar bem
 
+MUDAR PARA A PROCURA NOVA!
 ||#
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
 "Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
@@ -91,11 +48,8 @@ VERIFICAR se está a funcionar bem
 	(append sucessores abertos)
 )
 ;; A*
-(defun a-ast (abertos sucessores maxDepth)
-	(sort
-		(append abertos sucessores)
-		#'< :key #'custo
-	)
+(defun a-asterisco (abertos sucessores maxDepth)
+	(sort (append abertos sucessores) #'< :key #'custo)
 )
 
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
@@ -104,59 +58,128 @@ VERIFICAR se está a funcionar bem
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 (defun procuraIdaStar (abertos fechados proxF gerados expandidos heuristica)                                                                          
-  (cond
-   ((null abertos) (format t "não existe solução"))
-   ((verificaObjectivo (caar abertos)) (list (car abertos) gerados expandidos 'IDASTAR))
-   ((visitado (car abertos) fechados) (procuraIdaStar (cdr abertos) fechados 
-                                                      proxF gerados expandidos heuristica))
-   (t (let* ((sucessores (gerarSucessores '(colocar esquerda direita) (car abertos) 1 1 '(preto bege castanho) 
-                                         heuristica)) 
-             (novaListaAbertos (idastar sucessores (cdr abertos) proxF 999)))
-        (procuraIdaStar
-         (car novaListaAbertos)
-         (cons (car abertos) fechados)
-         (cadr novaListaAbertos)
-         (+ gerados (length sucessores))
-         (1+ expandidos)
-         heuristica
-         )
-        );reinicia a procura adicionando os sucessores segundo um dos 3 algoritmos suportados         
-      )
-   )
-  )
+	(cond
+		((null abertos) (format t "não existe solução"))
+		((verificaObjectivo (caar abertos)) (list (car abertos) gerados expandidos 'IDASTAR))
+		((visitado (car abertos) fechados) (procuraIdaStar (cdr abertos) fechados proxF gerados expandidos heuristica))
+		(T (let* ((sucessores (gerarSucessores '(colocar esquerda direita) (car abertos) 1 1 '(preto bege castanho) heuristica)) 
+					(novaListaAbertos (idastar sucessores (cdr abertos) proxF 999)))
+			(procuraIdaStar (car novaListaAbertos) (cons (car abertos) fechados) (cadr novaListaAbertos) (+ gerados (length sucessores))
+							(1+ expandidos) heuristica)
+			);reinicia a procura adicionando os sucessores segundo um dos 3 algoritmos suportados         
+		)
+	)
+)
+
 
 (defun idastar (sucessores abertos f proxF) ;gestão do sucessores e lista de abertos segundo a lógica do IDA*
-  (cond 
-   ((null sucessores) (list  (sort abertos #'< :key #'custo) proxF))
-   ((<= (nth 1 (car sucessores)) f)
-    (cond 
-     ((verificaObjectivo (caar abertos)) (list (cons (car sucessores) abertos) f proxF))
-     (t   (idastar (cdr sucessores) (cons (car sucessores) abertos) f proxF)) ;só adiciona caso o f seja menor que o limiar
-     )
-    )
-     (t 
-      (cond
-       ((and (< (nth 1 (car sucessores)) proxF) (> (nth 1 (car sucessores)) f)) ;caso seja menor calcula o próximo limiar (caso contrário mantém o mesmo próximo limiar)
-        (idastar (cdr sucessores) abertos f (nth 1 (car sucessores))))
-       (t (idastar (cdr sucessores) abertos f proxF))
-       )
-      )
-    )
-   )
+	(cond 
+		((null sucessores) (list  (sort abertos #'< :key #'custo) proxF))
+		((<= (nth 1 (car sucessores)) f)
+			(cond 
+				((verificaObjectivo (caar abertos)) (list (cons (car sucessores) abertos) f proxF))
+				(T (idastar (cdr sucessores) (cons (car sucessores) abertos) f proxF)) ;só adiciona caso o f seja menor que o limiar
+			)
+		)
+		(T (cond
+			((and (< (nth 1 (car sucessores)) proxF) (> (nth 1 (car sucessores)) f)) ;caso seja menor calcula o próximo limiar (caso contrário mantém o mesmo próximo limiar)
+				(idastar (cdr sucessores) abertos f (nth 1 (car sucessores))))
+			(T (idastar (cdr sucessores) abertos f proxF))
+			)
+		)
+	)
+)
 
 
-
+;;;;;;;;;;;;;;;;;; Sucessores
    
-   
+;; sucessores
+(defun sucessores (no operadores algoritmo-procura profundidade) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
+	(let* ((operador (car operadores))
+		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
+		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
+		   (lista-linhas-colunas-possiveis (cond 																;;; Acho que tenho que chamar sempre aqui +1 +1 ?
+											((eql operador 'inserir-arco-horizontal) (reverse (lista-combinacoes (+ numero-linhas 1) numero-colunas)))
+											((eql operador 'inserir-arco-vertical)   (reverse (lista-combinacoes (+ numero-colunas 1) numero-linhas))))))
+		(cond
+			((null operadores) nil)
+			((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
+			;((not (null operadores)) (cons (sucessores-todas-possibilidades no operador lista-linhas-colunas-possiveis) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
+			(T (append (sucessores-todas-possibilidades no operador lista-linhas-colunas-possiveis) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
+		)
+	)
+)
+
+
+;; sucessores-todas-possibilidades
+(defun sucessores-todas-possibilidades (no operador possibilidades)
+	(let* ((primeira-possibilidade (car possibilidades))
+		   (possibilidades-validas (not (null possibilidades)))
+		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador primeira-possibilidade))) (T nil)))
+		   ;(resultado (sucessores-aux no (list operador primeira-possibilidade)))
+		   (resultado-avaliado (cond ((null resultado) nil) (T (list resultado)))))
+		  
+		(cond
+			((null possibilidades) nil)
+			
+			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador (cdr possibilidades))))
+			
+			;;testes 
+			;(T (list operador primeira-possibilidade "-- " (sucessores-todas-possibilidades no operador (cdr possibilidades))))
+			
+		)
+	)
+)
+
+
+;; sucessores-aux
+(defun sucessores-aux (no lista-operador-parametros)
+	(let* ((operador (car lista-operador-parametros))
+			(tabuleiro (get-no-estado no))
+			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
+			(resultado-operacao (apply operador parametros))
+			(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) no)))
+		
+		(cond
+			((null resultado-operacao) nil)
+			(T resultado)
+		)
+	)
+)
+
+;; lista-combinacoes
+(defun lista-combinacoes (maximo-linhas maximo-colunas) "Recebe uma lista e retorna um conjunto de listas que representa todas as combinacoes possiveis"
+	(cond
+		((zerop maximo-linhas) nil)
+		(T (append (combinacoes-numero-lista maximo-linhas (criar-lista-numeros maximo-colunas)) (lista-combinacoes (- maximo-linhas 1) maximo-colunas)))
+	)
+)
+
+;; combinacoes-numero-lista
+(defun combinacoes-numero-lista (numero lista) "Devolve uma lista com várias listas compostas pelo elemento recebido e um elemento da lista recebida"
+	(let ((ultimo-elemento (car (last lista)))) 
+		
+		(cond
+			((null lista) nil)
+			(T (cons (list numero ultimo-elemento) (combinacoes-numero-lista numero (reverse (cdr (reverse lista))))))
+		)
+	)
+)
+
+;; criar-lista-numeros
+(defun criar-lista-numeros (tamanho &optional (valor-por-omissao 1)) "Devolve uma lista com o tamanho recebido como argumento e o valor dos elementos da lista é recebido se não por omissão têm todos o valor 1"
+	(cond
+		((zerop tamanho) nil)
+		(T (cons valor-por-omissao (criar-lista-numeros (- tamanho 1) (+ valor-por-omissao 1))))
+	)
+)
+
+ 
+ 
+ 
+ 
+ 
 #||
-
-Sucessores
-
-||#
-
-
-
- #||
  
  
  Rever / Adaptar ao problema 
@@ -165,6 +188,7 @@ Sucessores
  
  ||#
 
+ #||
 ;;; Função de Calculo da Profundidade
 (defun profundidade (estado)
 "retorna a profundidade de determinado estado"
@@ -173,15 +197,23 @@ Sucessores
 		(t (nth 1 estado))
 	)
 )
+||#
+
+
 
 ;;; Função do calculo do custo
-(defun custo (no)
+
+;; custo
+(defun custo (no)			; -> profundidade  heuristica
 "retorna o valor do custo do nó"
-	(+ (profundidade no)(nth 2 no))
+	(+ (profundidade no)(nth 2 no))	;;(+ (get-profundidade-no no) (get-heuristica-no no))	-> Correcto
 )
 
 
-;;; Função calculo da penetrância
+
+;;; Função calculo da penetrância	-> Correct
+
+;; penetrancia
 (defun penetrancia (no gerados)
 "retorna o valor da penetrância dos nos gerados até o nó objetivo sobre dos nos totais gerados"
 	(cond
@@ -190,11 +222,11 @@ Sucessores
 )
 
 ;;; Função de calculo do fator de ramificação
+
+;; fator-ramificacao
 (defun fator-ramificacao (no expandidos)
 "retorna o valor do fator de ramificaçao medio do numero de nos expandidos por cada no pai"
 	(cond
 		((not (equal expandidos 0)) (float (expt expandidos (/ 1 profundidade no))))
 	)
 )
-
-
