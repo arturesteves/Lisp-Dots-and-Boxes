@@ -165,26 +165,183 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 ||#
 
 
+;; Teste : (caixas-fechadas (tabuleiro-teste))
+;; Resultado: 0
+;;caixas-fechadas
+(defun caixas-fechadas (tabuleiro) "retorna o numero de caixas fechadas de um tabuleiro."
+	(cond
+		((null tabuleiro) nil)
+		(t
+			(contar-objetivo (caixas-fechadas-aux (get-arcos-horizontais tabuleiro)(get-cabecas-por-coluna tabuleiro)))
+		)
+	)
+)
+
+
+;;Teste: (caixas-fechadas-aux (get-arcos-horizontais (tabuleiro-teste)) (get-arcos-verticais (tabuleiro-teste)))
+;;Resultado: ((NIL NIL NIL NIL) (T NIL NIL NIL) (T NIL NIL NIL) (NIL NIL T T) (NIL NIL T T) (NIL NIL T NIL) (NIL NIL NIL NIL) (NIL NIL NIL NIL) (NIL NIL NIL NIL))
+;; Esta função vai buscar os arcos horizontais e verticais e aplica uma função auxiliar de modo a juntar todas as caixas numa só lista.
+;;caixas-fechadas-aux
+(defun caixas-fechadas-aux (horizontais verticais) "retorna a lista completa das caixas verticais e horizontais de um tabuleiro"
+	(cond
+		(
+			(or (null horizontais)
+				(null verticais)
+			) 
+		nil
+		)
+		(t
+			(append (caixas-fechadas-aux2 (car horizontais) (cadr horizontais)  (car verticais))
+					;(caixas-fechadas-aux2 (cdr horizontais) (caddr verticais) (cdr verticais))
+					(caixas-fechadas-aux (cdr horizontais) (cdr verticais))
+			)
+		)
+	)
+)
+  
+ ;; Teste: (caixas-fechadas-aux2(car(get-arcos-horizontais (tabuleiro-teste)))(cadr(get-arcos-horizontais (tabuleiro-teste)))(car(get-arcos-verticais (tabuleiro-teste))))
+ ;; Resultado: ((NIL NIL NIL NIL) (T NIL NIL NIL) (T NIL NIL NIL))
+ ;; Esta função cria uma lista com a cabeça da 1ºlinha e da 2ºlinha e ainda a cabeça do resto da coluna.
+(defun caixas-fechadas-aux2(linha1 linha2 coluna)"retorna uma lista com as caixas das duas linhas e da duas colunas."
+	(cond
+		(
+			(or
+				(null linha1)
+				(null linha2)
+				(null coluna)
+			)
+		nil)
+		(t
+			(cons
+				(list (car linha1)(car linha2)(car coluna)(cadr coluna))
+				(caixas-fechadas-aux2 (cdr linha1)(cdr linha2)(cdr coluna))
+			)
+		)
+	)
+)
+
+;; Teste: (get-cabecas-lista-aux  (get-arcos-horizontais (tabuleiro-teste)) 0)
+;; Resultado:(NIL NIL NIL NIL)
+;; Teste: (get-cabecas-lista-aux  (get-arcos-verticais (tabuleiro-teste)) 0)
+;; Resultado:(NIL T NIL NIL)
+;;get-cabecas-lista-aux
+(defun get-cabecas-lista-aux(lista n)"Função que vai buscar as cabeças de uma linha vertical ou horizontal,escolhida pelo utilizador, e cria numa nova lista."
+	(cond
+		((null lista)nil)
+		(t
+			(cons
+				(nth n (car lista))
+				(get-cabecas-lista-aux (cdr lista)n)
+			)
+		)
+	)
+)
+
+
+;;get-n-arcos-horizontais
+(defun get-n-arcos-horizontais (tabuleiro)"retorna o numero de arcos horizontais"
+	(length (car (get-arcos-horizontais tabuleiro)))
+)
+;;get-n-arcos-verticais
+(defun get-n-arcos-verticais (tabuleiro)"retorna o numero de arcos verticais"
+	(length (car (get-arcos-verticais tabuleiro)))
+)
+
+
+
+;; Teste: (get-cabecas-por-coluna(tabuleiro-teste))
+;; Resultado:((NIL T NIL NIL) (NIL T NIL T) (NIL T NIL NIL))
+;;(get-arcos-verticais (tabuleiro-teste)) =>((NIL NIL NIL) (T T T) (NIL NIL NIL) (NIL T NIL)) 
+(defun get-cabecas-por-coluna(tabuleiro)"retorna as listas de cada cabeca de cada coluna" 
+	(contador 0 (get-n-arcos-verticais tabuleiro) 'get-cabecas-lista-aux (get-arcos-verticais  tabuleiro)) 
+)
+
+
+
+;; Função de iteração
+(defun contador (i tamanhoMax funcao &rest argumentos)
+  (cond 
+		((= i tamanhoMax) nil) ;; a função para quando chegar ao tamanho máximo do nº de arcos 
+		(T (ecase funcao
+			(get-cabecas-lista-aux (cons 
+									(get-cabecas-lista-aux (car argumentos) i)
+									(contador (+ i 1) tamanhoMax funcao (car argumentos))))
+			)
+		 )
+   )
+)
+;
+
+
+
+
+
+;; Teste: (contar-objetivo'((NIL NIL NIL T) (T NIL NIL T) (T NIL NIL T)))
+;; Resultado: 0
+;; Teste: (contar-objetivo'((T T T T) (T T T T) (T NIL NIL T)))
+;; Resultado: 2
+
+;; Esta função irá contar se existe uma caixa fechada na lista que recebe.
+(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada "
+(cond
+((null lista)0)
+((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))
+(t (contar-objetivo(cdr lista)))
+)
+)
+
+;; Teste: (contar-nils-lista '(NIL NIL NIL T))
+;; Resultado: 3
+;; Esta função irá contar se existe NIL na lista. Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada.
+(defun contar-nils-lista (lista) "Função que irá contar o numero de Nill's existentes numa lista."
+	(cond ((null lista) 0) 
+	((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
+	(T (contar-nils-lista (cdr lista)))
+	)
+)
+
+
+
 ;;; heuristicas
 
 ;; heuristica1
 ;; Teste: (heuristica (tabuleiro1) 2)   -> Resultado: 1
 (defun heuristica1 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
-	(- numero-caixas-a-fechar (numero-caixas-fechadas tabuleiro)  1)
+	(- numero-caixas-a-fechar (caixas-fechadas tabuleiro)  1)
 )
 
-
-;;;;;;;;;;;; Necessário definir esta 2ª heurística
-;;;;;;;; A definir ainda
-;;; Usar nº de arcos ligados a um nó?
-(defun heuristica2 (tabuleiro numero-caixas-a-fechar)
-	nil
-)
+;;; Numero de caixas totais de um tabuleiro - caixas objetivos -1
+(defun heuristica2 (tabuleiro numero-caixas-a-fechar numero-caixas-fechadas) "Usada uma heuristica que calcula"
+;;(- numero-caixas-a-fechar (numero-caixas-fechadas tabuleiro) ) nº caixas por fechar - nºcaixas fechadas
+(- (numero-caixas-a-fechar  tabuleiro)  (numero-caixas-fechadas tabuleiro)) ;; =-1 nao é admissivel devia ser 0
 
 
 #||
 		FALTA
 
 Verificar se é nó objectivo
+
+||#
+
+
+;; current-date-string [Data actual]
+(defun current-date-string () "Retorna a data no formato de string"
+	(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
+	(get-decoded-time)
+	(declare (ignore dow dst-p tz))
+	(format nil "~4,'0d-~2,'0d-~2,'0d" yr mon day)
+	)
+)
+
+
+;; Tem que receber o numero de caixas a fechar 
+(defun solucaop (no)	
+"Recebe um nó e verifica se este este é um nó objectivo, verificando o estado. Um nó é objectivo se o número de caixas fechadas 
+do seu estado for igual ao número de caixas a fechar lido no início do programa"
+
+	(= (caixas-fechadas (get-estado-no no)) NUMERO CAIXAS A FECHAR DEFINIDAS NO INICIO DO PROGRAMA))
+)
+
+#|| Ir buscar o nó objectivo da solução -> ver o lab 8 -> pq é ir buscar o nó final que é o 1º tabuleiro e o nó inicial é o último estado)
 
 ||#
