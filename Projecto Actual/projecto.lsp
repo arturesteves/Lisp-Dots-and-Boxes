@@ -39,9 +39,19 @@
 			
 			(let ((opcao (ler-teclado)))
 				(cond
-					((equal opcao 1) (iniciar-procura))
-					((equal opcao 2) (regras-jogo))
-					((equal opcao 3) (return))
+					#||((and (< opcao 4) (> opcao 0)) (case opcao
+                                                    (1 (progn (iniciar-procura) T))
+                                                    (2 (progn (regras-jogo) T))
+                                                    (3 (progn (format T "PROGRAMA TERMINADO") nil)))
+					)||#
+					
+					((not (numberp opcao)) (menu-inicial))		; Analisar esta linha, quando colocar o (loop )
+					((and (<= opcao 3) (>= opcao 1)) (cond
+														((= opcao 1) (iniciar-procura))
+														((= opcao 2) (regras-jogo))	; substituir nil por -> (return) Quando descomentar (loop 
+														((= opcao 3) (return))	; substituir nil por -> (return) Quando descomentar (loop 
+													)
+						)
 					(T (progn
 							(format t "~%> Opcao Invalida!")
 							(format t "~%> Opcoes Validas: [1, 2]")
@@ -64,16 +74,28 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	(let* 	((tabuleiro 						(ler-tabuleiro))
 				 (numero-objectivo-caixas  		(ler-numero-objectivo-caixas))
 				 (algoritmo 					(ler-algoritmo))
-				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade) (ler-heuristica)) (T 9999)))
+				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs) (eql algoritmo 'a*) (eql algoritmo 'ida*) (ler-heuristica)) (T 0)))
 				 ;(escreve-no (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 				 ;(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 			)	
-			(list tabuleiro numero-objectivo-caixas algoritmo profundidade)
+			(escreve-solucao-teste (list tabuleiro numero-objectivo-caixas algoritmo profundidade))
+			
 	)
 )
 ;
+
+(defun escreve-solucao-teste (lista)
+	(cond
+		((null lista) nil)
+		(T (progn 
+			(format t "~%~A" (car lista))
+			(escreve-solucao-teste (cdr lista))
+			)
+		)
+	)
+)
 
 ;; ler-tabuleiro
 (defun ler-tabuleiro () "Lista todos os estados inicias possíveis, recebe a escolha do utilizador e retorna a sua escolha caso esta seja válida"
@@ -136,9 +158,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format t "~%> Serao apresentadoss todos os algoritmos com e o nome a introduzir no sistema: ")
 		(format t "~%> 	Breadth-first Search -> bfs")
 		(format t "~%> 	Depth-first Search -> dfs")
-		(format t "~%> 	A* Search -> a*")
-		(format t "~%> 	IDA* Search -> ida*")
-		(format t "~%> 	A DEFINIR -> *********************")
+		(format t "~%> 	A* Search -> a-asterisco")
+		(format t "~%> 	IDA* Search -> ida-asterisco")
 		(format t "~%> Algoritmo a usar: ")
 		(format t "~%> ")
 		
@@ -208,20 +229,17 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 
 ;; regras-jogo
 (defun regras-jogo() "Apresenta as regras do jogo dos pontos e das caixas"
-	(progn 
-		(format t "~%> 
-			●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● PUZZLE ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● 
-			●●                                                   		            ●●
-			●● O objetivo do puzzle consiste em fechar um determinado número de caixas  ●●
-			●● a partir de uma configuração inicial do tabuleiro.                       ●●
-			●● Quando o número de caixas por fechar é atingido, o puzzle está resolvido.●●
-			●● A resolução do puzzle consiste portanto em executar a sucessão de traços ●●
-			●● que permite chegar a um estado onde o número de caixas por fechar é 	    ●●
-			●● alcançado.		                                                    ●●
-			●●                                                                    	    ●●
-			●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●"
-		)
-		(iniciar)
+	(format t "~%> 
+		●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● PUZZLE ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● 
+		●●                                                   		            ●●
+		●● O objetivo do puzzle consiste em fechar um determinado número de caixas  ●●
+		●● a partir de uma configuração inicial do tabuleiro.                       ●●
+		●● Quando o número de caixas por fechar é atingido, o puzzle está resolvido.●●
+		●● A resolução do puzzle consiste portanto em executar a sucessão de traços ●●
+		●● que permite chegar a um estado onde o número de caixas por fechar é 	    ●●
+		●● alcançado.		                                                    ●●
+		●●                                                                    	    ●●
+		●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●"
 	)
 )
 
@@ -232,10 +250,10 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
 			;(path-daniel "C:\\Users\\Daniel's\\Desktop\\Projeto IA\\"))
-			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
-			(path-artur-teste  "C:\\Users\\artur\\Desktop\\"))
+			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			;(path-artur-teste  "C:\\Users\\artur\\Desktop\\"))
 			;(path-professor ""))
-		path-artur-teste
+		path-artur
 		;path-daniel
 		;path-professor
 	)

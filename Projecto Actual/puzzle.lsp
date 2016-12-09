@@ -162,6 +162,14 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 	(get-dimensao-aux (car (get-arcos-horizontais tabuleiro)))
 )
 
+;; get-dimensao-aux
+;; Teste: (get-dimensao-aux (get-arcos-horizontais (tabuleiro-teste1)))   -> Resultado: 4
+(defun get-dimensao-aux (lista) "Dada uma lista de arcos devolve o número de listas existentes"
+	(cond
+		((null lista) 0)
+		(T (+ 1 (get-dimensao-aux (cdr lista))))
+	)
+)
 
 
 
@@ -316,10 +324,10 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 	(- numero-caixas-a-fechar (caixas-fechadas tabuleiro)  1)
 )
 
-;;; Numero de caixas totais de um tabuleiro - caixas objetivos -1
-(defun heuristica2 (tabuleiro numero-caixas-a-fechar numero-caixas-fechadas) "Usada uma heuristica que calcula"
-;;(- numero-caixas-a-fechar (numero-caixas-fechadas tabuleiro) ) nº caixas por fechar - nºcaixas fechadas
-(- (numero-caixas-a-fechar  tabuleiro)  (numero-caixas-fechadas tabuleiro)) ;; =-1 nao é admissivel devia ser 0
+
+(defun heuristica2 (tabuleiro numero-caixas-a-fechar) ""
+	(- numero-caixas-a-fechar  (caixas-fechadas tabuleiro)) ;; =-1 nao é admissivel devia ser 0
+)
 
 
 #||
@@ -330,6 +338,14 @@ Verificar se é nó objectivo
 ||#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;SOLUÇAO
+
+
+;;; Precisa de ser testada
+(defun solucaop (no numero-caixas-a-fechar)	"Devolve [T] se o número de caixas a fechar for igual ao número de caixas fechadas do nó, e devolve [NIL] se não for"
+	(= (caixas-fechadas (get-no-estado no)) numero-caixas-a-fechar)
+)
+
+
 
 #||
 

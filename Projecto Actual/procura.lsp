@@ -40,12 +40,12 @@ MUDAR PARA A PROCURA NOVA!
 ;;; Algoritmos
 
 ;; Breadht-First (Procura em largura)
-(defun breadth-first(abertos sucessores)
+(defun bfs (abertos sucessores)
 	(append abertos sucessores)
 )
 
 ;; Depth-First (Procura em profundidade)
-(defun depth-first(abertos sucessores)
+(defun dfs (abertos sucessores)
 	(append sucessores abertos)
 )
 
@@ -62,10 +62,10 @@ MUDAR PARA A PROCURA NOVA!
 (defun procuraIdaStar (abertos fechados proxF gerados expandidos heuristica)                                                                          
 	(cond
 		((null abertos) (format t "não existe solução"))
-		((verificaObjectivo (caar abertos)) (list (car abertos) gerados expandidos 'IDASTAR))
+		((verificaObjectivo (caar abertos)) (list (car abertos) gerados expandidos 'ida-asterisco))
 		((visitado (car abertos) fechados) (procuraIdaStar (cdr abertos) fechados proxF gerados expandidos heuristica))
 		(T (let* ((sucessores (gerarSucessores '(colocar esquerda direita) (car abertos) 1 1 '(preto bege castanho) heuristica)) 
-					(novaListaAbertos (idastar sucessores (cdr abertos) proxF 999)))
+					(novaListaAbertos (ida-asterisco sucessores (cdr abertos) proxF 999)))
 			(procuraIdaStar (car novaListaAbertos) (cons (car abertos) fechados) (cadr novaListaAbertos) (+ gerados (length sucessores))
 							(1+ expandidos) heuristica)
 			);reinicia a procura adicionando os sucessores segundo um dos 3 algoritmos suportados         
@@ -74,19 +74,20 @@ MUDAR PARA A PROCURA NOVA!
 )
 
 
-(defun idastar (sucessores abertos f proxF) ;gestão do sucessores e lista de abertos segundo a lógica do IDA*
+;; ida-asterisco
+(defun ida-asterisco (sucessores abertos f proxF) ;gestão do sucessores e lista de abertos segundo a lógica do IDA*
 	(cond 
 		((null sucessores) (list  (sort abertos #'< :key #'custo) proxF))
 		((<= (nth 1 (car sucessores)) f)
 			(cond 
 				((verificaObjectivo (caar abertos)) (list (cons (car sucessores) abertos) f proxF))
-				(T (idastar (cdr sucessores) (cons (car sucessores) abertos) f proxF)) ;só adiciona caso o f seja menor que o limiar
+				(T (ida-asterisco (cdr sucessores) (cons (car sucessores) abertos) f proxF)) ;só adiciona caso o f seja menor que o limiar
 			)
 		)
 		(T (cond
 			((and (< (nth 1 (car sucessores)) proxF) (> (nth 1 (car sucessores)) f)) ;caso seja menor calcula o próximo limiar (caso contrário mantém o mesmo próximo limiar)
-				(idastar (cdr sucessores) abertos f (nth 1 (car sucessores))))
-			(T (idastar (cdr sucessores) abertos f proxF))
+				(ida-asterisco (cdr sucessores) abertos f (nth 1 (car sucessores))))
+			(T (ida-asterisco (cdr sucessores) abertos f proxF))
 			)
 		)
 	)
@@ -177,6 +178,65 @@ MUDAR PARA A PROCURA NOVA!
 )
 
  
+ 
+ 
+ 
+#||
+Estas funções foram copiadas e coladas do laboratório 7, precisam de ser adaptadas ao nosso problema 
+
+
+função: 
+	- existep
+	- existep-aux
+	- existe-solucao
+ 
+ 
+; DANIEL 
+ (defun existep (no lista-nos algoritmo)
+	(let* ((no-comparado (existep-aux no lista-nos))
+			 (valido (not (null no-comparado))))
+		(cond 
+			((and (eql algoritmo 'dfs) valido (= (get-profundidade-no no) (get-profundidade-no no-comparado))) T) ; algoritmo dfs
+			((and (eql algoritmo 'bfs) valido) T)
+			(T nil)
+		)
+	)
+)
+
+(defun existep-aux (no lista-nos)
+	(cond
+		((null lista-nos) nil)
+		((equal (get-vasilhas-no no) (get-vasilhas-no (car lista-nos))) (car lista-nos))
+		(T (existep-aux no (cdr lista-nos)))
+	)
+)
+
+
+
+;;; ARTUR 
+;;;; VERIFICAR O enunciado que esta no lab 7 
+;; existe-solucao		-> Retirar o algoritmo e esta generico
+(defun existe-solucao (lista f-solucao f-algoritmo)
+"Verifica se existe uma solucao ao problema numa lista de sucessores para o algoritmo dfs"
+  (cond
+	 ((not (eql f-algoritmo 'dfs)) nil)
+     ((null lista) nil)
+     ((funcall f-solucao (car lista)) (car lista))
+     (T (existe-solucao (cdr lista) f-solucao f-algoritmo)))
+)
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+||#
+ 
+ 
+ 
 
 ;;; Função do calculo do custo
 
@@ -186,17 +246,16 @@ MUDAR PARA A PROCURA NOVA!
 ;; penetrancia
 (defun penetrancia (no nos-gerados) "Retorna o valor da penetrância dos nos gerados até o nó objetivo sobre dos nos totais gerados"
     (cond
-        ((not (equal  nos-gerados 0)) (float (/ (get-no-profundidade no)  nos-gerados))
-        )
+        ((not (equal  nos-gerados 0)) (float (/ (get-no-profundidade no)  nos-gerados)))
     )
 )
 
 ;;; Função de calculo do fator de ramificação
-
+#||
 ;; fator-ramificacao
 (defun fator-ramificacao (no expandidos)
 "retorna o valor do fator de ramificaçao medio do numero de nos expandidos por cada no pai"
 	(cond
-		((not (equal expandidos 0)) (float (expt expandidos (/ 1 profundidade no))))
+		((not (equal expandidos 0)) (float (expt expandidos (/ 1 (profundidade no)))))
 	)
 )||#
