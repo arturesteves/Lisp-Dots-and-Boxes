@@ -40,15 +40,17 @@ MUDAR PARA A PROCURA NOVA!
 ;;; Algoritmos
 
 ;; Breadht-First (Procura em largura)
-(defun breadth-first(abertos sucessores maxDepth)
+(defun breadth-first(abertos sucessores)
 	(append abertos sucessores)
 )
+
 ;; Depth-First (Procura em profundidade)
-(defun depth-first(abertos sucessores maxDepth)
+(defun depth-first(abertos sucessores)
 	(append sucessores abertos)
 )
+
 ;; A*
-(defun a-asterisco (abertos sucessores maxDepth)
+(defun a-asterisco (abertos sucessores)
 	(sort (append abertos sucessores) #'< :key #'custo)
 )
 
@@ -175,50 +177,18 @@ MUDAR PARA A PROCURA NOVA!
 )
 
  
- 
- 
- 
- 
-#||
- 
- 
- Rever / Adaptar ao problema 
- 
- 
- 
- ||#
-
- #||
-;;; Função de Calculo da Profundidade
-(defun profundidade (estado)
-"retorna a profundidade de determinado estado"
-	(cond
-		((null estado)0)
-		(t (nth 1 estado))
-	)
-)
-||#
-
-
 
 ;;; Função do calculo do custo
 
-;; custo
-(defun custo (no)			; -> profundidade  heuristica
-"retorna o valor do custo do nó"
-	(+ (profundidade no)(nth 2 no))	;;(+ (get-profundidade-no no) (get-heuristica-no no))	-> Correcto
-)
+;;; Funções de Cálculo
 
-
-
-;;; Função calculo da penetrância	-> Correct
 
 ;; penetrancia
-(defun penetrancia (no gerados)
-"retorna o valor da penetrância dos nos gerados até o nó objetivo sobre dos nos totais gerados"
-	(cond
-		((not (equal gerados 0)) (float (/ profundidade no) gerados))
-	)
+(defun penetrancia (no nos-gerados) "Retorna o valor da penetrância dos nos gerados até o nó objetivo sobre dos nos totais gerados"
+    (cond
+        ((not (equal  nos-gerados 0)) (float (/ (get-no-profundidade no)  nos-gerados))
+        )
+    )
 )
 
 ;;; Função de calculo do fator de ramificação
@@ -229,4 +199,4 @@ MUDAR PARA A PROCURA NOVA!
 	(cond
 		((not (equal expandidos 0)) (float (expt expandidos (/ 1 profundidade no))))
 	)
-)
+)||#

@@ -45,6 +45,12 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 
 
+;; Função do calculo do custo
+;; custo
+(defun custo (no)"retorna o valor do custo do nó (f). Soma do valor da profundidade com o valor heuristico."
+    (+ (get-no-profundidade no)(get-no-heuristica no))
+)
+;
 
 ;;; Métodos de Consulta
 
@@ -323,16 +329,9 @@ Verificar se é nó objectivo
 
 ||#
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;SOLUÇAO
 
-;; current-date-string [Data actual]
-(defun current-date-string () "Retorna a data no formato de string"
-	(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
-	(get-decoded-time)
-	(declare (ignore dow dst-p tz))
-	(format nil "~4,'0d-~2,'0d-~2,'0d" yr mon day)
-	)
-)
-
+#||
 
 ;; Tem que receber o numero de caixas a fechar 
 (defun solucaop (no)	
@@ -341,7 +340,7 @@ do seu estado for igual ao número de caixas a fechar lido no início do program
 
 	(= (caixas-fechadas (get-estado-no no)) NUMERO CAIXAS A FECHAR DEFINIDAS NO INICIO DO PROGRAMA))
 )
-
+||#
 #|| Ir buscar o nó objectivo da solução -> ver o lab 8 -> pq é ir buscar o nó final que é o 1º tabuleiro e o nó inicial é o último estado)
 
 ||#

@@ -16,7 +16,7 @@
 		(compile-file (concatenate 'string (diretoria-atual)"procura.lsp"))
 		(load (concatenate 'string (diretoria-atual)"puzzle.ofasl")) 
 		(load (concatenate 'string (diretoria-atual)"procura.ofasl"))
-		(current-date-string)
+		;(current-date-string)
 		(menu-inicial)
 	)
 )
@@ -68,9 +68,9 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs) (eql algoritmo 'a*) (eql algoritmo 'ida*) (ler-heuristica)) (T 0)))
 				 ;(escreve-no (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
-				 (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
+				 ;(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 			)	
-			(list tabuleiro numero-objectivo-caixas algoritmo profundidade heuristica)
+			(list tabuleiro numero-objectivo-caixas algoritmo profundidade)
 	)
 )
 ;
@@ -95,7 +95,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 			   (opcao-valida (existe-lista opcao '(a b c d e f))))		
 					(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"problemas.dat") :direction :input :if-does-not-exist :error)
 						(cond
-							((not (opcao-valida)) (progn
+							((not opcao-valida) (progn
 													(format t "~%> Opcao Invalida!")
 													(format t "~%  ")
 													(terpri)
@@ -221,7 +221,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 			●●                                                                    	    ●●
 			●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●"
 		)
-		(menu-principal)
+		(iniciar)
 	)
 )
 
@@ -232,9 +232,12 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
 			;(path-daniel "C:\\Users\\Daniel's\\Desktop\\Projeto IA\\"))
-			(path-artur  "c:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto"))
+			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			(path-artur-teste  "C:\\Users\\artur\\Desktop\\"))
 			;(path-professor ""))
-		path
+		path-artur-teste
+		;path-daniel
+		;path-professor
 	)
 )
 
@@ -246,20 +249,19 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; resultados
 (defun resultados (algoritmo heuristica solucao abertos fechados) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
 	(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
-						:direction 
-						:output:if-exists 
-						:append 
+						:direction :output
+						:if-exists :append 
 						:if-does-not-exist :create)
     
 ;; Esta parte será escrita no ficheiro do tipo .DAT
-    (format write "Gerado em ~s~%" (current-date-string))
-    (format write "~%Algoritmo: ~s ~%" algoritmo)
-	(format write "~%Heuristica: ~s ~%" heuristica)
-    (format write "Nos Gerados: ~s ~%" (+ (length abertos)(length  fechados)))
-    (format write "Nos expandidos: ~s ~%" (length fechados))
-    ;(format write "Penetrancia: ~a ~%" (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-    (format write "Caminho Percorrido: ~s ~%" solucao)
-    ;(format write "Profundidade da Solução: ~s ~%" (second (car abertos)))
+    (format ficheiro "Gerado em ~s~%" (current-date-string))
+    (format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
+	(format ficheiro "~%Heuristica: ~s ~%" heuristica)
+    (format ficheiro "Nos Gerados: ~s ~%" (+ (length abertos)(length  fechados)))
+    (format ficheiro "Nos expandidos: ~s ~%" (length fechados))
+    ;(format ficheiro "Penetrancia: ~a ~%" (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+    (format ficheiro "Caminho Percorrido: ~s ~%" solucao)
+    ;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
     
     )
 ;;Esta parte será mostrada na consola
@@ -292,3 +294,12 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	(read)
 )
 ;
+
+;; current-date-string [Data actual]
+(defun current-date-string () "Retorna a data no formato de string"
+	(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
+	(get-decoded-time)
+	(declare (ignore dow dst-p tz))
+	(format nil "~4,'0d-~2,'0d-~2,'0d" yr mon day)
+	)
+)
