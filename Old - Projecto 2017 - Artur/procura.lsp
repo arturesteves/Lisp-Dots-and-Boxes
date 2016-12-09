@@ -4,7 +4,7 @@
 ;;;; Implementação dos algoritmos de procura
 
 
-
+;; COlocar esta no ficheiro do puzzle
 
 ;;; operadores 
 (defun operadores () "Cria uma lista com todos os operadores do problema dos Pontos e das Caixas"
@@ -246,6 +246,14 @@ RESULTADO:			EXISTE UM ERRO COM ESTA GERAÇAO, APÓS PASSAR DE UMA LINHA PARA A 
 
 ||#
 
+#||
+Ou seja quando o operador for inserir-arco-horizontal a lista de combinações é: (lista-combinacoes NUMERO_LINHAS NUMERO_COLUNAS)
+		quando o operador for inserir-arco-vertical   a lista de combinações é: (lista-combinacoes NUMERO_COLUNAS NUMERO_LINHAS)
+
+||#		
+		
+		
+		
 (defun sucessores (no operadores algoritmo-procura profundidade)
 	(let ;;((lista-linhas-colunas-possiveis (cond ((eql (car operadores) 'inserir-arco-horizontal) ()))(lista-combinacoes 4 3)))
 		   ((lista-linhas-colunas-possiveis (lista-combinacoes (get-dimensao-linhas (get-no-estado no)) (get-dimensao-colunas (get-no-estado no)))))
@@ -329,7 +337,13 @@ ACHO QUE NAO ESTA A DEVOLVER OS TABULEIROS COM OS NOVOS ARCOS
 ;(inserir-arco-horizontal 3 3 (tabuleiro-teste1))
 
 ;; lista-combinacoes
+		;Este teste devolve todas as possibilidades para inserir arcos na horizontal
 ;; Teste: (lista-combinacoes  4 3)   -> Resultado: ((4 3) (4 2) (4 1) (3 3) (3 2) (3 1) (2 3) (2 2) (2 1) (1 3) (1 2) (1 1))
+
+;;		;Estes teste devolve todas as possibilidades para inserir arcos na vertical
+;; Teste: (lista-combinacoes  3 4)   -> Resultado: ((3 4) (3 3) (3 2) (3 1) (2 4) (2 3) (2 2) (2 1) (1 4) (1 3) (1 2) (1 1))
+
+
 ;; Teste: (reverse (lista-combinacoes 4 3)) -> Resultado: ((1 1) (1 2) (1 3) (2 1) (2 2) (2 3) (3 1) (3 2) (3 3) (4 1) (4 2) (4 3))
 (defun lista-combinacoes (maximo-linhas maximo-colunas) "Recebe uma lista e retorna um conjunto de listas que representa todas as combinacoes possiveis"
 	(cond
