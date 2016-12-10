@@ -55,7 +55,7 @@
 		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
 		(T 
 			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max));lista dos sucessores do primeiro dos abertos
-			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo)));verifica se existe uma solucao nos sucessores para o dfs
+			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
 		          (cond
 		            (solucao solucao); devolve a solucao
 					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
@@ -286,13 +286,14 @@ função:
  
  
 ;; existe-solucao
-(defun existe-solucao (lista f-solucao f-algoritmo)
+(defun existe-solucao (lista f-solucao f-algoritmo numero-objectivo-caixas)
 "Verifica se existe uma solucao ao problema numa lista de sucessores para o algoritmo dfs"
-  (cond
-	 ((not (eql f-algoritmo 'dfs)) nil)
-     ((null lista) nil)
-     ((funcall f-solucao (car lista)) (car lista))
-     (T (existe-solucao (cdr lista) f-solucao f-algoritmo)))
+	(cond
+		((not (eql f-algoritmo 'dfs)) nil)
+		((null lista) nil)
+		((funcall f-solucao (car lista) numero-objectivo-caixas) (car lista))
+		(T (existe-solucao (cdr lista) f-solucao f-algoritmo numero-objectivo-caixas))
+	)
 )
 
 ;;; Função do calculo do custo
