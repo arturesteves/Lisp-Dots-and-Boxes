@@ -39,13 +39,19 @@
 			
 			(let ((opcao (ler-teclado)))
 				(cond
-					((not (numberp opcao)) (menu-inicial))		
+					#||((and (< opcao 4) (> opcao 0)) (case opcao
+                                                    (1 (progn (iniciar-procura) T))
+                                                    (2 (progn (regras-jogo) T))
+                                                    (3 (progn (format T "PROGRAMA TERMINADO") nil)))
+					)||#
+					
+					((not (numberp opcao)) (menu-inicial))		; Analisar esta linha, quando colocar o (loop )
 					((and (<= opcao 3) (>= opcao 1)) (cond
 														((= opcao 1) (iniciar-procura))
-														((= opcao 2) (regras-jogo))	
-														((= opcao 3) (return))	
+														((= opcao 2) (regras-jogo))	; substituir nil por -> (return) Quando descomentar (loop 
+														((= opcao 3) (return))	; substituir nil por -> (return) Quando descomentar (loop 
 													)
-					)
+						)
 					(T (progn
 							(format t "~%> Opcao Invalida!")
 							(format t "~%> Opcoes Validas: [1, 2]")

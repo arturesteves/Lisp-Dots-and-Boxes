@@ -207,6 +207,54 @@
 
  
  
+ 
+ 
+#||
+Estas funções foram copiadas e coladas do laboratório 7, precisam de ser adaptadas ao nosso problema 
+
+
+função: 
+	- existep
+	- existep-aux
+	- existe-solucao
+ 
+ 
+; DANIEL 
+ (defun existep (no lista-nos algoritmo)
+	(let* ((no-comparado (existep-aux no lista-nos))
+			 (valido (not (null no-comparado))))
+		(cond 
+			((and (eql algoritmo 'dfs) valido (= (get-profundidade-no no) (get-profundidade-no no-comparado))) T) ; algoritmo dfs
+			((and (eql algoritmo 'bfs) valido) T)
+			(T nil)
+		)
+	)
+)
+
+(defun existep-aux (no lista-nos)
+	(cond
+		((null lista-nos) nil)
+		((equal (get-vasilhas-no no) (get-vasilhas-no (car lista-nos))) (car lista-nos))
+		(T (existep-aux no (cdr lista-nos)))
+	)
+)
+
+
+
+;;; ARTUR 
+;;;; VERIFICAR O enunciado que esta no lab 7 
+;; existe-solucao		-> Retirar o algoritmo e esta generico
+(defun existe-solucao (lista f-solucao f-algoritmo)
+"Verifica se existe uma solucao ao problema numa lista de sucessores para o algoritmo dfs"
+  (cond
+	 ((not (eql f-algoritmo 'dfs)) nil)
+     ((null lista) nil)
+     ((funcall f-solucao (car lista)) (car lista))
+     (T (existe-solucao (cdr lista) f-solucao f-algoritmo)))
+)
+
+||#
+
 ;; Teste: (existep '((0 0) 2 1 nil) '(((1 1) 1 1 nil) ((1 0) 2 1 nil) ((0 0) 2 1 nil) ((2 2) 1 1 nil)) 'dfs)
 ;; Resultado: NIL
 ;;existep
