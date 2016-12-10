@@ -69,15 +69,16 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 (numero-objectivo-caixas  		(ler-numero-objectivo-caixas))
 				 (algoritmo 					(ler-algoritmo))
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
-				 (heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
+				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs) (eql algoritmo 'a*) (eql algoritmo 'ida*) (ler-heuristica)) (T 0)))
 				 ;(escreve-no (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 				 ;(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 			)
 				;;teste 
 			;;(escreve-solucao-teste (list no numero-objectivo-caixas algoritmo profundidade))
-			(escreve-solucao-teste-2 (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+			(escreve-solucao-teste-2 (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) numero-objectivo-caixas))
 			;(no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores
+			
 	)
 )
 ;
@@ -198,11 +199,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 						(terpri)
 						(ler-heuristica)
 					))		
-				(T (cond
-						((= resposta 1) 'heuristica1)
-						((= resposta 2) 'heuristica2)
-					)
-				)
+				(T resposta)
 			)
 		)
 	)

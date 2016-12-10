@@ -8,28 +8,31 @@
 
 
 
-(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
+#|| 
+
+(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
 "Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
  de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
  de profundidade, uma heuristica e um algoritmo de ordenacao
 "
 	(cond
 		((null abertos) nil); nao existe solucao ao problema
-		((funcall f-solucao (car abertos) numero-objectivo-caixas)  (list (car abertos) (- (get-universal-time) tempo-inicial))); se o primeiro dos abertos e solucao este no e devolvido com o tempo de exe
-		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
+		((funcall f-solucao (car abertos))  (list (car abertos) (- (get-universal-time) tempo-inicial))); se o primeiro dos abertos e solucao este no e devolvido com o tempo de exe
+		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
 		(T 
-			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
-			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
+			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max f-heuristica))
+			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo)));verifica se existe uma solucao nos sucessores para o dfs
 		          (cond
 		            (solucao (list solucao (- (get-universal-time) tempo-inicial))); devolve a solucao, com o tempo de execucao
-					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
+					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
 					)
 			)
 		)
 	)
 )
 
-;;;;; para desaparecer 
+||#
+
 (defun no-teste-tab-a ()
 	(list '(
 		((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) 
@@ -40,8 +43,7 @@
 )
 ;(procura-generica (no-teste-tab-a) 999 'solucaop 'sucessores 'bfs (operadores) 3)
 
-;;;;;;;;; PROCURA-GENERICA mais desactualizada  -> funciona apenas com o bfs e dfs -> to be removed 
-#||
+;;;;;;;;; PROCURA-GENERICA mais desactualizada  -> funciona apenas com o bfs e dfs 
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil))
 "Permite procurar a solucao de um problema usando a procura no espaço de estados. A partir de um estado inicial,
  de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
@@ -62,7 +64,6 @@
 		)
 	)
 )
-||#
 
 ;;; Algoritmos
 
@@ -124,7 +125,7 @@
 ;;;;;;;;;;;;;;;;;; Sucessores
    
 ;; sucessores
-(defun sucessores (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
+(defun sucessores (no operadores algoritmo-procura profundidade) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
 	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
 		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
@@ -135,24 +136,24 @@
 			((null operadores) nil)
 			((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
 			;((not (null operadores)) (cons (sucessores-todas-possibilidades no operador lista-linhas-colunas-possiveis) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
-			(T (append (sucessores-todas-possibilidades no operador lista-linhas-colunas-possiveis funcao-heuristica numero-objectivo-caixas) (sucessores no (cdr operadores) algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas)))
+			(T (append (sucessores-todas-possibilidades no operador lista-linhas-colunas-possiveis) (sucessores no (cdr operadores) algoritmo-procura profundidade)))
 		)
 	)
 )
 
 
 ;; sucessores-todas-possibilidades
-(defun sucessores-todas-possibilidades (no operador possibilidades funcao-heuristica numero-objectivo-caixas)
+(defun sucessores-todas-possibilidades (no operador possibilidades)
 	(let* ((primeira-possibilidade (car possibilidades))
 		   (possibilidades-validas (not (null possibilidades)))
-		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador primeira-possibilidade) funcao-heuristica numero-objectivo-caixas)) (T nil)))
+		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador primeira-possibilidade))) (T nil)))
 		   ;(resultado (sucessores-aux no (list operador primeira-possibilidade)))
 		   (resultado-avaliado (cond ((null resultado) nil) (T (list resultado)))))
 		  
 		(cond
 			((null possibilidades) nil)
 			
-			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador (cdr possibilidades) funcao-heuristica numero-objectivo-caixas)))
+			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador (cdr possibilidades))))
 			
 			;;testes 
 			;(T (list operador primeira-possibilidade "-- " (sucessores-todas-possibilidades no operador (cdr possibilidades))))
@@ -163,12 +164,12 @@
 
 
 ;; sucessores-aux
-(defun sucessores-aux (no lista-operador-parametros funcao-heuristica numero-objectivo-caixas)
+(defun sucessores-aux (no lista-operador-parametros)
 	(let* ((operador (car lista-operador-parametros))
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
+			(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) no)))
 		
 		(cond
 			((null resultado-operacao) nil)
