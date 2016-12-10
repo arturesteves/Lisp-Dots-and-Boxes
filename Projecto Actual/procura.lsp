@@ -33,7 +33,15 @@
 
 ||#
 
-;(procura-generica 
+(defun no-teste-tab-a ()
+	(list '(
+		((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) 
+		((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))
+		)
+		0 nil
+	)
+)
+;(procura-generica (no-teste-tab-a) 999 'solucaop 'sucessores 'bfs (operadores) 3)
 
 ;;;;;;;;; PROCURA-GENERICA mais desactualizada  -> funciona apenas com o bfs e dfs 
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil))
