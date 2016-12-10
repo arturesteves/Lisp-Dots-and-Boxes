@@ -10,10 +10,6 @@
 
 #|| 
 
-VERIFICAR se está a funcionar bem
-
-MUDAR PARA A PROCURA NOVA!
-||#
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
 "Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
  de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
@@ -35,7 +31,31 @@ MUDAR PARA A PROCURA NOVA!
 	)
 )
 
+||#
 
+;(procura-generica 
+
+;;;;;;;;; PROCURA-GENERICA mais desactualizada  -> funciona apenas com o bfs e dfs 
+(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil))
+"Permite procurar a solucao de um problema usando a procura no espaço de estados. A partir de um estado inicial,
+ de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
+ de profundidade, uma heuristica e um algoritmo de ordenacao
+"
+	(cond
+		((null abertos) nil); nao existe solucao ao problema
+		((funcall f-solucao (car abertos) numero-objectivo-caixas)  (car abertos)); se o primeiro dos abertos e solucao este no e devolvido
+		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
+		(T 
+			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max));lista dos sucessores do primeiro dos abertos
+			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo)));verifica se existe uma solucao nos sucessores para o dfs
+		          (cond
+		            (solucao solucao); devolve a solucao
+					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
+					)
+			)
+		)
+	)
+)
 
 ;;; Algoritmos
 
@@ -225,18 +245,47 @@ função:
      (T (existe-solucao (cdr lista) f-solucao f-algoritmo)))
 )
 
- 
- 
- 
- 
- 
- 
- 
- 
 ||#
+
+;; Teste: (existep '((0 0) 2 1 nil) '(((1 1) 1 1 nil) ((1 0) 2 1 nil) ((0 0) 2 1 nil) ((2 2) 1 1 nil)) 'dfs)
+;; Resultado: NIL
+;;existep
+ (defun existep (no lista-nos algoritmo)"Retorna verdadeiro se o nó existir na lista.Para o algoritmo dfs,o conceito de nó repetido é particular."
+    (let* ((no-comparado (existep-aux no lista-nos))
+             (valido (not (null no-comparado))))
+        (cond 
+            ((and (eql algoritmo 'dfs) valido (= (get-no-profundidade no) (get-no-profundidade no-comparado))) T) ; algoritmo dfs
+            ((and (eql algoritmo 'bfs) valido) T)
+            ((and (eql algoritmo 'a-asterisco) valido) T) ;; confirmar se nao existe alguma limitaçao
+            ((and (eql algoritmo 'ida-asterisco) valido) T) ;; confirmar se nao existe alguma limitaçao
+            (T nil)
+        )
+    )
+)
+
+
+;; Teste: (existep-aux '((0 0) 2 1 nil) '(((1 1) 1 1 nil) ((1 0) 1 1 nil) ((0 0) 2 1 nil) ((2 2) 1 1 nil)))
+;; Resultado: T
+;existep-aux **
+(defun existep-aux (no lista-nos)"Verifica se um nó existe numa lista de nos"
+    (cond
+        ((null lista-nos) nil)
+        ;((equal no (car lista-nos)) T)
+        ((equal (get-no-estado no) (get-no-estado (car lista-nos)))(car lista-nos))
+        (T (existep-aux no (cdr lista-nos)))
+    )
+) 
  
  
- 
+;; existe-solucao
+(defun existe-solucao (lista f-solucao f-algoritmo)
+"Verifica se existe uma solucao ao problema numa lista de sucessores para o algoritmo dfs"
+  (cond
+	 ((not (eql f-algoritmo 'dfs)) nil)
+     ((null lista) nil)
+     ((funcall f-solucao (car lista)) (car lista))
+     (T (existe-solucao (cdr lista) f-solucao f-algoritmo)))
+)
 
 ;;; Função do calculo do custo
 

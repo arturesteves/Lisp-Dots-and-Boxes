@@ -9,11 +9,20 @@
 ;;; Construtor
 
 ;; cria-no
+#||
 (defun cria-no (estado &optional (profundidade 0) (heuristica 0) (no-pai nil)) 
 "Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
 a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heuróistica por defeito têm valor 0, enquanto que o nó pai por defeito é NIL"
 
 	(list estado profundidade heuristica no-pai)
+)
+||#
+;;; SUBSTITUIR PELA DE CIMA
+(defun cria-no (estado &optional (profundidade 0) (no-pai nil)) 
+"Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
+a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heuróistica por defeito têm valor 0, enquanto que o nó pai por defeito é NIL"
+
+	(list estado profundidade no-pai)
 )
 
 

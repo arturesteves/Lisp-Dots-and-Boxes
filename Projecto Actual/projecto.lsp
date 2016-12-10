@@ -71,7 +71,7 @@
 "Pede ao utilizador toda a informação necessário para começar uma procura no espaço de estados. 
 Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante o algoritmo escolhido é indicada a profundidade máxima e a heurística"
 
-	(let* 	((tabuleiro 						(ler-tabuleiro))
+	(let* 	((tabuleiro 						(cria-no (ler-tabuleiro)))
 				 (numero-objectivo-caixas  		(ler-numero-objectivo-caixas))
 				 (algoritmo 					(ler-algoritmo))
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
@@ -79,12 +79,18 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs) (eql algoritmo 'a*) (eql algoritmo 'ida*) (ler-heuristica)) (T 0)))
 				 ;(escreve-no (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
 				 ;(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
-			)	
-			(escreve-solucao-teste (list tabuleiro numero-objectivo-caixas algoritmo profundidade))
+			)
+				;;teste 
+			;;(escreve-solucao-teste (list tabuleiro numero-objectivo-caixas algoritmo profundidade))
+			(escreve-solucao-teste-2 (procura-generica tabuleiro profundidade 'solucaop 'sucessores algoritmo numero-objectivo-caixas (operadores)))
+			;(no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores
 			
 	)
 )
 ;
+(defun escreve-solucao-teste-2 (lista)
+	(format t "~%~%~A" lista)
+)
 
 (defun escreve-solucao-teste (lista)
 	(cond
