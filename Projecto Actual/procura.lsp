@@ -259,12 +259,31 @@
     )
 )
 
+;;fator-ramificacao 
+;; B+B^2+B^3+...+B^L=T [L comprimento do caminho até ao objetivo, T numero total de nós gerados]
+;; Função recebe o comprimento do caminho até no objetivo, numero total de nós gerados e tem uma margem de B entre [1,10e11]. Através nessa margem
+;; cria-se uma margem média, e a medida da função vai variar até chegar a uma margem. 
+;; Teste:     (fator-ramificacao 3 6 1 10)
+;; Resultado: 1.2273736
+(defun fator-ramificacao (L valor-t  &optional (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
+    (let* ((bmedio (/ (+ bmin bmax) 2))) ;; se for 1 10 da 7,5
+          (setq margem-erro 0.5) ;;defini-se uma margem de erro que o valor final poderá ter.
+        (cond 
+            ((< (- bmax bmin) margem-erro) (/ (+ bmax bmin) 2))
+            ((< (f-polinomial L valor-t bmedio) 0) (fator-ramificacao L valor-t  bmedio bmax)) ; se a soma dos polinomios for menor que 0 chama-se outra vez a func com o bmin a ser o bmedio achado
+            (T 
+                (float(fator-ramificacao L valor-t bmin bmedio))
+            )
+        )
+    )
+)
+
 ;;; Função de calculo do fator de ramificação
-#||
-;; fator-ramificacao
-(defun fator-ramificacao (no expandidos)
-"retorna o valor do fator de ramificaçao medio do numero de nos expandidos por cada no pai"
-	(cond
-		((not (equal expandidos 0)) (float (expt expandidos (/ 1 (profundidade no)))))
-	)
-)||#
+(defun f-polinomial (L valor-t B) "funcao polinomial para calcular o valor de um dado B elevado a um valor L ate este ser 1"
+        (cond 
+            ((= L 1) (- B valor-t)) 
+            (t 
+                (float (+ (expt B L) (f-polinomial (- L 1) valor-t B)))
+            )
+        )
+)
