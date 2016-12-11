@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <style>
+        * {
+            font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+            font-size: 20px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 20px;
+        }
+        
+        .estrotura {
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .corpo,
+        .resultado {
+            white-space: PRE;
+        }
+        
+        .coluna {
+            display: inline-block;
+        }
+        
+        .linha {
+            display: block;
+        }
+        
+        .ligacaoV,
+        .ligacaoH {
+            cursor: pointer;
+            cursor: hand;
+        }
+        
+        .destacado.marcado {
+            background-color: orangered;
+        }
+        
+        .destacado {
+            background-color: red;
+        }
+        
+        .marcado {
+            background-color: orange;
+        }
+        
+        #leitor {
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="leitor" class="estrotura" style="width: 700px">
+        <div class="cabeca">
+            <input type="text" id="lista" value="'(((NIL T T) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL)) ((NIL NIL NIL) (T T T) (NIL NIL NIL) (NIL NIL NIL)))">
+            <button id="converter">Converter</button>
+        </div>
+        <div class="corpo">
+
+        </div>
+        <div class="resultado" style="width: 100%; white-space: normal;">
+            <div class="horizontal" style="float:left; vertical-align: top; white-space: PRE;">
+            </div>
+            <div class="vertical" style="float:left; vertical-align: top; white-space: PRE;">
+            </div>
+        </div>
+    </div>
+    <div id="construtor" class="estrotura" style="width: 400px; float: right;">
+        <div class="cabeca">
+            <label for="linhas">Linhas: </label>
+            <input type="text" id="linhas" value="3" style="width: 20px">
+            <label for="colunas">Colunas: </label>
+            <input type="text" id="colunas" value="3" style="width: 20px">
+            <button id="gerar">Gerar</button>
+        </div>
+        <div class="corpo">
+
+        </div>
+
+    </div>
+</body>
+
+</html>
