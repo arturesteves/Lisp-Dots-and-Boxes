@@ -14,8 +14,8 @@
  de profundidade, uma heuristica e um algoritmo de ordenacao
 "
 	(cond
-		((null abertos) nil); nao existe solucao ao problema							;; length abertos e length fechados 
-		((funcall f-solucao (car abertos) numero-objectivo-caixas)  (list (car abertos) (length abertos) (length fechados) (- (get-universal-time) tempo-inicial))); se o primeiro dos abertos e solucao este no e devolvido com o tempo de exe
+		((null abertos) nil); nao existe solucao ao problema
+		((funcall f-solucao (car abertos) numero-objectivo-caixas)  (list (car abertos) (- (get-universal-time) tempo-inicial))); se o primeiro dos abertos e solucao este no e devolvido com o tempo de exe
 		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
 		(T 
 			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
@@ -168,8 +168,6 @@
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			
-			;; Usar a função cria-no
 			(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
 		
 		(cond
@@ -267,10 +265,9 @@
 ;; cria-se uma margem média, e a medida da função vai variar até chegar a uma margem. 
 ;; Teste:     (fator-ramificacao 3 6 1 10)
 ;; Resultado: 1.2273736
-(defun fator-ramificacao (L valor-t  &optional (margem-erro 0.5) (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
+(defun fator-ramificacao (L valor-t  &optional (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
     (let* ((bmedio (/ (+ bmin bmax) 2))) ;; se for 1 10 da 7,5
-          ;(setq margem-erro 0.5) ;;defini-se uma margem de erro que o valor final poderá ter.
-		  ;;defini-se uma margem de erro que o valor final poderá ter.
+          (setq margem-erro 0.5) ;;defini-se uma margem de erro que o valor final poderá ter.
         (cond 
             ((< (- bmax bmin) margem-erro) (/ (+ bmax bmin) 2))
             ((< (f-polinomial L valor-t bmedio) 0) (fator-ramificacao L valor-t  bmedio bmax)) ; se a soma dos polinomios for menor que 0 chama-se outra vez a func com o bmin a ser o bmedio achado

@@ -5,6 +5,8 @@
 ;;;; Funções de interacção com o utilizador, de carregamento dos outros ficheiros do projecto e leitura e escrita em ficheiros
 
 
+
+
 ;;; ******************************************************************
 ;;; Inicialização do Programa 
 ;; iniciar 
@@ -14,6 +16,7 @@
 		(compile-file (concatenate 'string (diretoria-atual)"procura.lsp"))
 		(load (concatenate 'string (diretoria-atual)"puzzle.ofasl")) 
 		(load (concatenate 'string (diretoria-atual)"procura.ofasl"))
+		;(current-date-string)
 		(menu-inicial)
 	)
 )
@@ -62,30 +65,22 @@
 "Pede ao utilizador toda a informação necessário para começar uma procura no espaço de estados. 
 Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante o algoritmo escolhido é indicada a profundidade máxima e a heurística"
 
-	(let* 	(	 (no 							(cria-no (ler-tabuleiro)))
+	(let* 	((no 						(cria-no (ler-tabuleiro)))
 				 (numero-objectivo-caixas  		(ler-numero-objectivo-caixas))
 				 (algoritmo 					(ler-algoritmo))
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
 				 (heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
-				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
-			)	
-			(resultados no algoritmo heuristica solucao)
-			
-
+				 ;(heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs) (eql algoritmo 'a*) (eql algoritmo 'ida*) (ler-heuristica)) (T 0)))
+				 ;(escreve-no (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
+				 ;(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores))
+			)
+				;;teste 
+			;;(escreve-solucao-teste (list no numero-objectivo-caixas algoritmo profundidade))
+			(escreve-solucao-teste-2 (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+			;(no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores
 	)
 )
 ;
-
-#|
-(defun escrever-caminho()
-	(format t "~%>")
-	(format t "~%> Escreve a diretoria onde se encontram os ficheiros! ")
-	(let ((resposta (ler-teclado)))
-	(concatenate 'string resposta "\\puzzle.lsp")
-	)
-)
-|#
-
 (defun escreve-solucao-teste-2 (lista)
 	(format t "~%~%~A" lista)
 )
@@ -100,7 +95,6 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		)
 	)
 )
-
 
 ;; ler-tabuleiro
 (defun ler-tabuleiro () "Lista todos os estados inicias possíveis, recebe a escolha do utilizador e retorna a sua escolha caso esta seja válida"
@@ -161,10 +155,10 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	(progn
 		(format t "~%> Qual o algoritmo que pretende usar para efectuar a procura?")
 		(format t "~%> Serao apresentadoss todos os algoritmos com e o nome a introduzir no sistema: ")
-		(format t "~%> 	Breadth-first Search ->  bfs")
-		(format t "~%> 	Depth-first Search ->    dfs")
-		(format t "~%> 	A* Search ->             a-asterisco")
-		(format t "~%> 	IDA* Search ->           ida-asterisco")
+		(format t "~%> 	Breadth-first Search -> bfs")
+		(format t "~%> 	Depth-first Search -> dfs")
+		(format t "~%> 	A* Search -> a-asterisco")
+		(format t "~%> 	IDA* Search -> ida-asterisco")
 		(format t "~%> Algoritmo a usar: ")
 		(format t "~%> ")
 		
@@ -253,12 +247,14 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 )
 
 
+;;; ******************************************************************
 ;;; Funções I/O
 ;; diretoria-atual
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
 			;(path-daniel "C:\\Users\\Daniel's\\Desktop\\Projeto IA\\"))
 			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			;(path-artur-teste  "C:\\Users\\artur\\Desktop\\"))
 			;(path-professor ""))
 		path-artur
 		;path-daniel
@@ -268,61 +264,41 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 
 
 
+
+;;; ******************************************************************
 ;;; Estatisticas
-
 ;; resultados
-(defun resultados (no-inicial algoritmo heuristica solucao) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
-	(let* ((tamanho-lista-abertos (car (cdr solucao)))
-			(tamanho-lista-fechados (car (cdr (cdr solucao))))					  
-			(nos-gerados (- (+ tamanho-lista-abertos tamanho-lista-fechados) 1))	; porque o nó inicial não conta
-			(profundidade (get-no-profundidade (get-no-estado solucao)))
-			(no-final (get-no-estado solucao)))
-						
-		(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
-							:direction :output
-							:if-exists :append 
-							:if-does-not-exist :create)
-		
-	;; Esta parte será escrita no ficheiro do tipo .DAT
-		(format ficheiro "Gerado em ~s~%" (current-date-string))
-		(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
-		(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
-		(format ficheiro "~%Heuristica: ~s ~%" heuristica)
-		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
-		(format ficheiro "Nos Gerados: ~s ~%" nos-gerados)
-		(format ficheiro "Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format ficheiro "Penetrancia: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))
-		(format ficheiro "~%Solução: ~s ~%" solucao)
-		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-		
-		;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
-		(format ficheiro "___________________________________________________~%")
-		
-		)
-	;;Esta parte será mostrada na consola
-		(format t "Gerado em ~s~%" (current-date-string))
-		(format t "~%Estado inicial: ~s ~%" no-inicial)
-		(format t "~%Algoritmo: ~s ~%" algoritmo)
-		(format t "~%Heuristica: ~s ~%" heuristica)
-		(format t "~%Profundidade: ~s ~%" profundidade)
-		(format t "Nos Gerados: ~s ~%" nos-gerados)
-		(format t "Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format t "Penetrancia: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))	
-		(format t "~%Solução: ~s ~%" solucao)
-		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-		(format t "___________________________________________________~%")
-	)
+(defun resultados (algoritmo heuristica solucao abertos fechados) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
+	(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
+						:direction :output
+						:if-exists :append 
+						:if-does-not-exist :create)
+    
+;; Esta parte será escrita no ficheiro do tipo .DAT
+    (format ficheiro "Gerado em ~s~%" (current-date-string))
+    (format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
+	(format ficheiro "~%Heuristica: ~s ~%" heuristica)
+    (format ficheiro "Nos Gerados: ~s ~%" (+ (length abertos)(length  fechados)))
+    (format ficheiro "Nos expandidos: ~s ~%" (length fechados))
+    ;(format ficheiro "Penetrancia: ~a ~%" (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+    (format ficheiro "Caminho Percorrido: ~s ~%" solucao)
+    ;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
+    
+    )
+;;Esta parte será mostrada na consola
+  (format t "Gerado em ~s~%" (current-date-string))
+  (format t "~%Algoritmo: ~s ~%" algoritmo)
+  (format t "~%Heuristica: ~s ~%" heuristica)
+  (format t "Nos Gerados: ~s ~%" (+ (length abertos)(length  fechados)))
+  (format t "Nos expandidos: ~s ~%" (length fechados))
+ ; (format t "Penetrancia: ~a ~%" (float (/ (second (car abertos))(+ (length abertos) (length fechados))))) 
+  (format t "Caminho Percorrido: ~s ~%" solucao)
+ ; (format t "Profundidade da Solução: ~s ~%" (second (car abertos)))
+  ;(format t "Tempo de Execução: ~%")
 )
+;
 
-#|
-(length (get-no-pai (get-no-estado '(((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 2 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 1 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL))) 0) )))
-->4
-|#
-
-
-
+;;; ******************************************************************
 ;;; Funções Auxiliares
 ;; existe-lista
 (defun existe-lista (elemento lista) "Retorna [T] se o elemento recebido existe na lista recebida e devolve [NIL] se o elemento não existe"
@@ -340,13 +316,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 )
 ;
 
-
 ;; current-date-string [Data actual]
 (defun current-date-string () "Retorna a data no formato de string"
 	(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
 	(get-decoded-time)
-	(declare (ignore dow dst-p tz sec min hr))
-	 (format nil "~A-~A-~A : ~A:~A:~A" yr mon day hr min sec)
+	(declare (ignore dow dst-p tz))
+	(format nil "~4,'0d-~2,'0d-~2,'0d" yr mon day)
 	)
 )
-
