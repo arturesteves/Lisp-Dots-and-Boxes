@@ -276,7 +276,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 			(tamanho-lista-fechados (car (cdr (cdr solucao))))					  
 			(nos-gerados (- (+ tamanho-lista-abertos tamanho-lista-fechados) 1))	; porque o nó inicial não conta
 			(profundidade (get-no-profundidade (get-no-estado solucao)))
-			(no-final (get-no-estado solucao)))
+			(no-final (get-no-estado solucao))
+			(tempo (car (cdr (cdr (cdr solucao))))))
 						
 		(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
 							:direction :output
@@ -295,6 +296,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format ficheiro "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))
 		(format ficheiro "~%Solução: ~s ~%" solucao)
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
+		(format ficheiro "~%Tempo decorrido: ~s ~%" tempo)
 		
 		;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
 		(format ficheiro "___________________________________________________~%")
@@ -312,6 +314,7 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format t "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))	
 		(format t "~%Solução: ~s ~%" solucao)
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
+		(format t "~%Tempo decorrido: ~s ~%" tempo)
 		(format t "___________________________________________________~%")
 	)
 )
