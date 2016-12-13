@@ -1,0 +1,513 @@
+Gerado em "2016-12-13 : 20:3:49"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 4 
+
+N�s Gerados: 21824 
+
+N�s expandidos: 2127 
+
+Penetr�ncia: 1.8328446E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 1 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:11:39"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 4 
+
+N�s Gerados: 21824 
+
+N�s expandidos: 2127 
+
+Penetr�ncia: 1.8328446E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 1 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:12:19"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 4 
+
+Algoritmo: DFS 
+ NIL 
+
+Profundidade: 4 
+
+N�s Gerados: 1890 
+
+N�s expandidos: 1855 
+
+Penetr�ncia: 0.0021164022 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:13:2"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((T T T) (T T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 10 
+
+Algoritmo: DFS 
+ NIL 
+
+Profundidade: 6 
+
+N�s Gerados: 82 
+
+N�s expandidos: 6 
+
+Penetr�ncia: 0.07317073 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T T NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T T T) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T T T) (T NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T T T) (T T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((T T T) (T T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 3 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:13:34"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA1 
+
+Profundidade: 4 
+
+N�s Gerados: 3860 
+
+N�s expandidos: 310 
+
+Penetr�ncia: 0.0010362695 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:16:7"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL T NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (T T T) (T T T) (NIL T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA1 
+
+Profundidade: 7 
+
+N�s Gerados: 47256 
+
+N�s expandidos: 5487 
+
+Penetr�ncia: 1.4812935E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) (((NIL T NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) (((NIL T NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (T T T) (NIL T T) (NIL T T))) (((NIL T NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (T T T) (T T T) (NIL T T)))) 
+
+Caixas Fechadas: 5 
+
+Tempo decorrido: 142 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:21:12"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA2 
+
+Profundidade: 4 
+
+N�s Gerados: 3860 
+
+N�s expandidos: 310 
+
+Penetr�ncia: 0.0010362695 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)) ((NIL NIL NIL) (NIL T T) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:21:34"
+
+Estado inicial: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 1 
+
+N�s Gerados: 198 
+
+N�s expandidos: 15 
+
+Penetr�ncia: 0.005050505 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T)))) 
+
+Caixas Fechadas: 7 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:21:43"
+
+Estado inicial: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T NIL) (T T T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 4 
+
+N�s Gerados: 14210 
+
+N�s expandidos: 1505 
+
+Penetr�ncia: 2.814919E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (T NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (T NIL T T) (T NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T)))) 
+
+Caixas Fechadas: 9 
+
+Tempo decorrido: 1 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:21:56"
+
+Estado inicial: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) 
+
+Profundidade m�xima 7 
+
+Algoritmo: DFS 
+ NIL 
+
+Profundidade: 1 
+
+N�s Gerados: 16 
+
+N�s expandidos: 1 
+
+Penetr�ncia: 0.0625 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T)))) 
+
+Caixas Fechadas: 7 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:22:9"
+
+Estado inicial: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA1 
+
+Profundidade: 1 
+
+N�s Gerados: 198 
+
+N�s expandidos: 15 
+
+Penetr�ncia: 0.005050505 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T)))) 
+
+Caixas Fechadas: 7 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:22:17"
+
+Estado inicial: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL T T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (T NIL T T) (T T T T) (T NIL T T) (NIL T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA2 
+
+Profundidade: 2 
+
+N�s Gerados: 2990 
+
+N�s expandidos: 267 
+
+Penetr�ncia: 6.688963E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL T T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL T T NIL) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (T NIL T T) (T T T T) (T NIL T T) (NIL T T T)))) 
+
+Caixas Fechadas: 6 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:22:27"
+
+Estado inicial: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 3 
+
+N�s Gerados: 13246 
+
+N�s expandidos: 985 
+
+Penetr�ncia: 2.2648346E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T NIL T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T)))) 
+
+Caixas Fechadas: 7 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:22:36"
+
+Estado inicial: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (T T T T) (T T T T) (T T T T))) 
+
+Profundidade m�xima 10 
+
+Algoritmo: DFS 
+ NIL 
+
+Profundidade: 10 
+
+N�s Gerados: 6400 
+
+N�s expandidos: 6311 
+
+Penetr�ncia: 0.0015625 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (T NIL T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (T T T T) (T NIL T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (T T T T) (T T T T) (NIL T T T))) (((T T T T) (T T T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((T NIL T T) (T NIL T T) (T T T T) (T T T T) (T T T T)))) 
+
+Caixas Fechadas: 10 
+
+Tempo decorrido: 2 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:27:34"
+
+Estado inicial: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL T T) (T NIL T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (T T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA1 
+
+Profundidade: 8 
+
+N�s Gerados: 76968 
+
+N�s expandidos: 6710 
+
+Penetr�ncia: 1.039393E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (NIL NIL T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T NIL T T) (T NIL T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T NIL T T) (T T T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (NIL NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (T NIL T T) (NIL NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (T NIL T T) (T NIL T T) (NIL NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) (((NIL NIL T NIL) (T NIL T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) (((NIL NIL T T) (T NIL T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (NIL T T T))) (((NIL NIL T T) (T NIL T T) (T NIL T T) (T NIL T T) (T NIL T T)) ((NIL NIL T T) (NIL NIL T T) (T T T T) (T T T T) (T T T T)))) 
+
+Caixas Fechadas: 10 
+
+Tempo decorrido: 289 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:46:56"
+
+Estado inicial: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 2 
+
+N�s Gerados: 11489 
+
+N�s expandidos: 295 
+
+Penetr�ncia: 1.7407956E-4 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T)))) 
+
+Caixas Fechadas: 5 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:51:37"
+
+Estado inicial: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 
+
+Profundidade m�xima 4 
+
+Algoritmo: DFS 
+ NIL 
+
+Profundidade: 1 
+
+N�s Gerados: 42 
+
+N�s expandidos: 1 
+
+Penetr�ncia: 0.023809525 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T)))) 
+
+Caixas Fechadas: 4 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:51:45"
+
+Estado inicial: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA1 
+
+Profundidade: 2 
+
+N�s Gerados: 1676 
+
+N�s expandidos: 43 
+
+Penetr�ncia: 0.0011933175 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T)))) 
+
+Caixas Fechadas: 5 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
+Gerado em "2016-12-13 : 20:51:51"
+
+Estado inicial: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) 
+
+Profundidade m�xima 9999 
+
+Algoritmo: A-ASTERISCO 
+ HEURISTICA2 
+
+Profundidade: 2 
+
+N�s Gerados: 1676 
+
+N�s expandidos: 43 
+
+Penetr�ncia: 0.0011933175 
+
+Fator de Ramifica��o 
+
+Caminho at� � solu��o: ((((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T NIL T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL NIL NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T))) (((NIL NIL NIL T NIL NIL) (NIL T NIL T T T) (T T T T T NIL) (NIL NIL NIL T T NIL) (NIL NIL NIL T T NIL) (NIL NIL T T T T) (NIL NIL T T T T)) ((NIL NIL NIL T T T) (NIL T NIL NIL T T) (NIL T T NIL T T) (NIL NIL T T NIL NIL) (T NIL T T T NIL) (NIL NIL T T NIL NIL) (NIL T T T T T)))) 
+
+Caixas Fechadas: 5 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
