@@ -4,8 +4,6 @@
 ;;;; Programador: Daniel Costa - 120221058
 ;;;; Implementação dos algoritmos de procura
 
-
-
 #||
 (procura-generica (no-teste-tab-a) 5 'solucaop 'sucessores 'dfs (operadores) nil 3)
 (procura-generica (no-teste-tab-a) nil 'solucaop 'sucessores 'bfs (operadores) nil 3)
