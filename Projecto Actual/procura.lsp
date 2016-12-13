@@ -6,8 +6,10 @@
 
 
 
-
-
+#||
+(procura-generica (no-teste-tab-a) 5 'solucaop 'sucessores 'dfs (operadores) nil 3)
+(procura-generica (no-teste-tab-a) nil 'solucaop 'sucessores 'bfs (operadores) nil 3)
+	||#
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
 "Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
  de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
@@ -21,7 +23,8 @@
 			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
 			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
 		          (cond
-		            (solucao (list solucao (- (get-universal-time) tempo-inicial))); devolve a solucao, com o tempo de execucao
+		            ;(solucao (list solucao (list (car abertos) (length abertos) (length fechados) (- (get-universal-time) tempo-inicial)))); devolve a solucao, com o tempo de execucao
+					(solucao (append (list solucao) (list (length abertos) (length fechados) (- (get-universal-time) tempo-inicial)))); devolve a solucao, com o tempo de execucao
 					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
 					)
 			)
@@ -168,9 +171,9 @@
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			
-			;; Usar a função cria-no
-			(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
+			;; usando a função cria-no
+			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
+			;(resultado (list resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
 		
 		(cond
 			((null resultado-operacao) nil)

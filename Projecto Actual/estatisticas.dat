@@ -70,3 +70,147 @@ Solução: (((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL 
 
 Caixas Fechadas: 3 
 ___________________________________________________
+Gerado em "2016-12-13 : 0:54:45"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: BFS 
+
+Heuristica: NIL 
+
+Profundidade: 2 
+Nos Gerados: 1355 
+Nos expandidos: 97 
+Penetrancia: 0.0014760147 
+Fator de Ramificação:8.75E11 
+
+Solução: (((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 2 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 1 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL))) 1259 97 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 0:55:6"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: A-ASTERISCO 
+
+Heuristica: HEURISTICA1 
+
+Profundidade: 2 
+Nos Gerados: 410 
+Nos expandidos: 28 
+Penetrancia: 0.004878049 
+Fator de Ramificação:8.75E11 
+
+Solução: (((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 2 0 ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 1 1 ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL))) 383 28 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:19:20"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: BFS 
+
+Heuristica: NIL 
+
+Profundidade: 2 
+Nos Gerados: 1355 
+Nos expandidos: 97 
+Penetrancia: 0.0014760147 
+Fator de Ramificação:8.75E11 
+
+Solução: (((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 2 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 1 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL))) 1259 97 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:22:13"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: BFS 
+
+Heuristica: NIL 
+
+Profundidade: 2 
+Nos Gerados: 1355 
+Nos expandidos: 97 
+Penetrancia: 0.0014760147 
+Fator de Ramificação:8.75E11 
+
+Solução: ((((# # # #) (# # # #)) 2 NIL ((# #) 1 NIL (# 0 NIL NIL))) 1259 97 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:27:14"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: BFS 
+
+Heuristica: NIL 
+
+Profundidade: 2 
+Nos Gerados: 1355 
+Nos expandidos: 97 
+Penetrancia: 0.0014760147 
+Fator de Ramificação:8.75E11 
+
+Solução: ((((# # # #) (# # # #)) 2 NIL ((# #) 1 NIL (# 0 NIL NIL))) 1259 97 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:33:0"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: BFS 
+
+Heuristica: NIL 
+
+Profundidade: 2 
+Nos Gerados: 1355 
+Nos expandidos: 97 
+Penetrancia: 0.0014760147 
+Fator de Ramificação:8.75E11 
+
+Solução: ((((# # # #) (# # # #)) 2 NIL ((# #) 1 NIL (# 0 NIL NIL))) 1259 97 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:36:10"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: DFS 
+
+Heuristica: NIL 
+
+Profundidade: 3 
+Nos Gerados: 91 
+Nos expandidos: 67 
+Penetrancia: 0.032967035 
+Fator de Ramificação:8.75E11 
+
+Solução: ((((# # # #) (# # # #)) 3 NIL ((# #) 2 NIL (# 1 NIL #))) 25 67 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
+Gerado em "2016-12-13 : 1:42:42"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Algoritmo: DFS 
+
+Heuristica: NIL 
+
+Profundidade: 5 
+Nos Gerados: 91 
+Nos expandidos: 40 
+Penetrancia: 0.054945056 
+Fator de Ramificação:8.75E11 
+
+Solução: (((((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((T T T) (NIL T NIL) (NIL T T) (NIL T T))) 5 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((T T T) (NIL T NIL) (NIL T T) (NIL T T))) 4 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((T T T) (NIL T NIL) (NIL NIL T) (NIL T T))) 3 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((T T NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 2 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((T NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 1 NIL ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL)))))) 52 40 0) 
+
+Caixas Fechadas: 3 
+___________________________________________________
