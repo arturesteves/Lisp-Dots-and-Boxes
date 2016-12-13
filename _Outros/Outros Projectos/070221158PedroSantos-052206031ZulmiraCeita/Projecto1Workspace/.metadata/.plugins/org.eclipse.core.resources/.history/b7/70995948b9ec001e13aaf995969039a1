@@ -1,0 +1,272 @@
+(in-package :projecto1)
+;menu que inicia o jogo
+(defun menuPrincipal ()
+  (progn
+    (format t "лллллллллллллллллллллллллллл")(terpri)
+    (format t "                           л")(terpri)
+    (format t "      PUZZLE SOLIT┴RIO     л")(terpri)
+    (format t "                           л")(terpri)
+    (format t "   1- Escolher Tabuleiro   л")(terpri)
+    (format t "                           л")(terpri)
+    (format t "   0- Sair                 л")(terpri)
+    (format t "                           л")(terpri)
+    (format t "лллллллллллллллллллллллллллл")(terpri)
+    (format t "                            ")(terpri)
+    (format t "Escolha uma opчуo: ")
+  )
+  (let ((op(read)))
+    (cond
+      ((equal op 1) (menuTabuleiro)) ;menuTabuleiro vai servir para escolher os tabuleiros
+      ((equal op 0)(format t "Saiu da сrea de Jogo"))
+      (T (progn
+          (format t "Opчуo Invсlida!")(terpri)
+          (menuPrincipal)
+        )
+      )
+    )
+  )
+)
+
+;menu para escolher tabuleiro
+(defun menuTabuleiro()
+  (progn
+    (format t "лллллллллллллллллллллллллллллллллллллллллллллллллллллллTABULEIROSлллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                                                                                                                                                л")(terpri)
+    (format t "  a-   0 0 0        b-   0 0 0        c-   1 1 1        d-   1 1 1        e-   1 1 1        f-   1 0 1        g-   1 1 1        h-   1 1 1      л")(terpri)
+    (format t "       0 0 0             0 0 0             0 0 0             0 0 0             0 1 0             0 1 0             1 1 1             1 1 1      л")(terpri)
+    (format t "   0 0 0 1 0 0 0     0 0 0 1 0 0 0     1 0 0 0 0 0 1     1 1 1 1 1 1 1     0 0 1 1 1 0 0     1 0 1 0 1 0 1     1 1 1 1 1 1 1     1 1 1 1 1 1 1  л")(terpri)
+    (format t "   0 0 0 0 0 0 0     0 0 1 1 1 0 0     1 0 0 0 0 0 1     0 0 0 0 0 0 0     0 1 1 1 1 1 0     0 1 0 1 0 1 0     1 1 1 0 1 1 1     1 1 1 1 1 1 1  л")(terpri)
+    (format t "   0 0 0 1 0 0 0     0 0 0 1 0 0 0     1 0 0 0 0 0 1     1 1 1 1 1 1 1     1 1 1 1 1 1 1     1 0 1 0 1 0 1     1 1 1 1 1 1 1     1 1 1 1 1 1 1  л")(terpri)
+    (format t "       0 1 0             0 1 0             0 0 0             0 0 0             0 0 0             0 1 0             1 1 1             1 1 1      л")(terpri)
+    (format t "       0 0 0             0 0 0             1 1 1             1 1 1             0 0 0             1 0 1             1 1 1             1 1 1      л")(terpri)
+    (format t "                                                                                                                                                л")(terpri)
+    (format t "  V - Voltar                                                                                                                                    л")(terpri)
+    (format t "                                                                                                                                                л")(terpri)
+    (format t "ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                    ")(terpri)
+    (format t "Escolha um tabuleiro: ")(terpri)
+  )
+  (let((op(read-char))); a espera de um caracter correspondente ao tabuleiro 
+    (cond
+      ((equal op #\a)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\b)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\c)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\d)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\e)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\f)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\g)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\h)(menuAlgoritmo (converteLetras op)))
+      ((equal op #\v)(menuPrincipal))
+      (T(progn
+          (format t "Escolha um tabuleiro vсlido!")(terpri)
+          (menuTabuleiro)
+          )
+        )
+      )
+    )
+  )
+
+;menu para escolher algoritmo
+(defun menuAlgoritmo(tabuleiro)
+  (progn
+    (format t "ллллллллллллллллллллллллллл")(terpri)
+    (format t "                          л")(terpri)
+    (format t "      ALGORITMOS          л")(terpri)
+    (format t "                          л")(terpri)
+    (format t "    1 - Breath-First      л")(terpri)
+    (format t "    2 - Depth-First       л")(terpri)
+    (format t "    3 - Depth-limited     л")(terpri)
+    (format t "    4 - A*                л")(terpri)
+    (format t "    5 - IDA*              л")(terpri)
+    (format t "                          л")(terpri)
+    (format t "    0 - Voltar            л")(terpri)
+    (format t "ллллллллллллллллллллллллллл")(terpri)
+    (format t "Escolha um algoritmo: ")
+    )
+  (let((op (read)))
+    (cond
+      ((equal op 1)(time(procura-generica(cria-estado tabuleiro) ;; inicia procura breadth-first                                
+                                     nil 
+                                     'largura 
+                                     '(cc cb ce cd c b e d) 
+                                     'semheuristica
+                                     )
+                    
+                    
+                    ) 
+       )
+      ((equal op 2)(time(procura-generica(cria-estado tabuleiro) ;; inicia procura depth-first                                
+                                     nil 
+                                     'profundidade 
+                                     '(cc cb ce cd c b e d)
+                                     'semheuristica
+                                     )
+                    
+                    ) 
+       )
+      ((equal op 3)(menuLimite tabuleiro))
+      ((equal op 4)(menuHeuristica tabuleiro 'a-star))
+      ((equal op 5)(menuHeuristica tabuleiro 'ida-star))
+      ((equal op 0)(menuTabuleiro)) 
+      (T(progn
+          (format t "Escolha um tabuleiro vсlido!")
+          (menuTabuleiro)
+          )
+        )
+      ) 
+    )
+  )
+
+;; menu para a definiчуo do limite para Depth-limited
+(defun menuLimite (tabuleiro)
+  (progn
+    (format t "ллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                                      л")(terpri)
+    (format t "      LIMITE DA PROCURA               л")(terpri)
+    (format t "                                      л")(terpri)
+    (format t "ллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                                       ")(terpri)
+    (format t "Introduza um limite de procura: ")
+    )
+  
+  (let
+    ((op (read)))
+    (cond
+      ((numberp op) 
+       (time(procura-generica(cria-estado tabuleiro)          ;; inicia a procura Depth-limited com a profundidade mсxima definida                      
+                             nil 
+                             'profundidade-limitada
+                             '(cc cb ce cd c b e d)
+                             'semheuristica
+                             op
+                             )
+            
+            )
+       
+       )
+      (T (menuLimite tabuleiro))
+      )
+    )
+  
+  )
+
+;menu para escolher a heurэstica nos algoritmos A* e IDA*
+
+(defun menuHeuristica (tabuleiro algoritmo)
+  (progn
+    (format t "ллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                                      л")(terpri)
+    (format t "      HEUR═STICAS                     л")(terpri)
+    (format t "                                      л")(terpri)
+    (format t "    1 - N║ de peчas no tabuleiro      л")(terpri)
+    (format t "    2 - Heuristica alternativa        л")(terpri)
+    (format t "                                      л")(terpri)
+    (format t "ллллллллллллллллллллллллллллллллллллллл")(terpri)
+    (format t "                                       ")(terpri)
+    (format t "Escolha uma heurэstica: ")
+    )
+  (let
+    ((op (read)))
+    (cond
+      ((equal op 1)
+       (if (equal algoritmo 'a-star)(time(procura-generica(cria-estado tabuleiro 'heuristica1)     ;; inicia a procura A* com heuristica 1                           
+                                            nil 
+                                            algoritmo 
+                                            '(cc cb ce cd c b e d) 
+                                            'heuristica1
+                                            )
+                            
+                       
+                      ) 
+           (time(procura-ida-star (cria-estado tabuleiro 'heuristica1) nil '(c b e d cc cb ce cd) 'heuristica1 (heuristica1 tabuleiro) 9999)) ;; inicia a procura IDA* com heuristica 1 
+           )
+       
+                     
+                )
+      
+      ((equal op 2)
+       (if (equal algoritmo 'a-star)(time(procura-generica(cria-estado tabuleiro 'heuristica2)   ;; inicia a procura A* com heuristica 2                               
+                                            nil 
+                                            algoritmo 
+                                            '(cc cb ce cd c b e d) 
+                                            'heuristica2
+                                            )
+                            
+                       
+                      ) 
+           (time(procura-ida-star (cria-estado tabuleiro 'heuristica1) nil '(c b e d cc cb ce cd) 'heuristica2 (heuristica2 tabuleiro) 9999))) ;; inicia a procura IDA* com heuristica 2        
+       )
+      )
+    )			
+)
+
+
+;funчуo que lъ os problemas do ficheiro
+(defun le_problemas (caminho)
+(with-open-file (f caminho
+:direction :input
+:if-exists NIL
+:if-does-not-exist :error)
+(read f)
+)
+)
+
+
+
+;funчуo para criar o estado do tabuleiro inicial numa lista para inicializar a lista de abertos
+(defun cria-estado (tabuleiro &optional (heuristica 'semheuristica))
+  (list(make-estado :tabuleiro (nth tabuleiro (le_problemas "C://Problemas.dat"))
+                                                              :f (funcall heuristica (nth tabuleiro (le_problemas "C://Problemas.dat")))
+                                                              :g 0
+                                                              :h (funcall heuristica (nth tabuleiro (le_problemas "C://Problemas.dat"))) 
+                                                              :movactual NIL 
+                                                              :nopai nil)
+   )
+)
+
+;funчуo que converte o cєdigo ASCII das letras introduzidas em n·meros para utilizaчуo no menu dos tabuleiros
+(defun converteLetras (letra)
+  (- (char-code letra) 97)
+)
+
+;escreve os resultados do programa para ficheiro (localizado em C:\Soluчїes.dat)
+(defun escrever_ficheiro (resultado)
+  (with-open-file (file "C:/Solucoes.dat"   
+                          :direction :output 
+                          :if-exists :append
+                          :if-does-not-exist :create)
+    (format file "~a" resultado)
+    )
+)
+
+
+(defun imprime-tabuleiro (tabuleiro) ;imprime cada linha do tabuleiro individualmente
+ (cond
+   ((null tabuleiro) (terpri))
+    (T (concatenate 'string (format NIL "~a~%" (car tabuleiro)) (imprime-tabuleiro (cdr tabuleiro))))
+ )
+ )
+ 
+(defun devolver (no la lf algoritmo heuristica tempo limite &optional (prevNosGerados 0) (prevNosExpandidos 0)) ;funчуo que devolver os resultados e estatэsticas ao utilizador
+  (let ((resultado (concatenate ' string
+    (format nil "Algoritmo: ~A ~%" algoritmo)
+    (format nil "Heuristica: ~A ~%" heuristica)
+    (format nil "Limite/Limiar: ~A ~%" limite)
+    (format nil "Movimentos: ~A ~%" (movimentos-solucao no nil))
+    (format nil "Penetтncia: ~A ~%" (penetrancia la lf no prevNosGerados))
+    (format nil "Nєs Gerados: ~A ~%" (nos-gerados la lf prevNosGerados))
+    (format nil "Nєs Expandidos: ~A ~%" (nos-expandidos lf prevNosExpandidos))
+    (format nil "Profundidade da Soluчуo: ~A ~%" (profundidade-solucao no))
+    (format nil "Factor de ramificaчуo mщdio: ~A ~%" (factor-ramificacao-medio la lf no prevNosGerados))
+    (format nil "~%Tabuleiro Inicial:~%~A ~%" (imprime-tabuleiro (tabuleiro-inicial no)))
+    (format nil "Tabuleiro Final:~%~A ~%" (imprime-tabuleiro (estado-tabuleiro no)))
+    (format nil "Tempo decorrido (em segundos): ~% ~A ~%" (- (get-universal-time) tempo))
+   )))
+    (progn (format T "~a" resultado) (escrever_ficheiro resultado)) ;output para o ecrу e para o ficheiro de soluчуo
+   )
+)
+
+(defun solucao-nao-encontrada () ;funчуo que mostra uma mensagem de soluчуo nуo encontrada
+ (format T "SOLU╟├O N├O ENCONTRADA") 
+)
+

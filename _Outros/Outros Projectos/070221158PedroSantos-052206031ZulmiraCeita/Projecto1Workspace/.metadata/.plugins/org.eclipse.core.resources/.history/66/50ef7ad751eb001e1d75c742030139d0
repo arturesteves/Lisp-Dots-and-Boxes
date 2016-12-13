@@ -1,0 +1,225 @@
+(in-package :projecto1)
+
+
+;menu que inicia o jogo
+
+(defun menuPrincipal ()
+  (progn
+    (format t "««««««««««««««««««««««««««««")(terpri)
+    (format t "                           «")(terpri)
+    (format t "      PUZZLE SOLITÁRIO     «")(terpri)
+    (format t "                           «")(terpri)
+    (format t "   1- Escolher Tabuleiro   «")(terpri)
+    (format t "                           «")(terpri)
+    (format t "   0- Sair                 «")(terpri)
+    (format t "                           «")(terpri)
+    (format t "««««««««««««««««««««««««««««")(terpri)
+    (format t "                            ")(terpri)
+    (format t "Escolha uma opção: ")
+  )
+  (let ((op(read)))
+    (cond
+      ((= op 1) (menuTabuleiro)) ;menuTabuleiro vai servir para escolher os tabuleiros
+      ((= op 0)(format t "Saiu da área de Jogo"))
+      (T(progn
+          (format t "Opção Inválida!")(terpri)
+          (menuPrincipal)
+        )
+      )
+    )
+  )
+)
+
+
+; ; ; ;_________________________________________________________________________________________________________________________________________________
+
+; ; ; ;menu para escolher o tabuleiro
+
+; ; ; (defun menuTabuleiro()
+  ; ; ; (progn
+    ; ; ; (format t "««««««««««««««««««««")(terpri)
+    ; ; ; (format t "                    ")(terpri)
+    ; ; ; (format t "      TABULEIROS    ")(terpri)
+    ; ; ; (format t "                    ")(terpri)
+    ; ; ; (format t "        1 - a       ")(terpri)
+    ; ; ; (format t "        2 - b       ")(terpri)
+    ; ; ; (format t "        3 - c       ")(terpri)
+    ; ; ; (format t "        4 - d       ")(terpri)
+    ; ; ; (format t "        5 - e       ")(terpri)
+    ; ; ; (format t "        6 - f       ")(terpri)
+    ; ; ; (format t "        7 - g       ")(terpri)
+    ; ; ; (format t "        8 - h      ")(terpri)
+    ; ; ; (format t "                    ")(terpri)
+    ; ; ; (format t "««««««««««««««««««««")(terpri)
+    ; ; ; (format t "                    ")(terpri)
+    ; ; ; (format t "Escolha um tabuleiro: ")
+  ; ; ; )
+  ; ; ; (let((op(read)))
+    ; ; ; (cond
+      ; ; ; ((= op 1)(menuAlgoritmo (1- op))) ;1-op porque o nth começa em 0,logo a posição 0 corresponderá ao tabuleiro 1
+      ; ; ; ((= op 2)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 3)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 4)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 5)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 6)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 7)(menuAlgoritmo (1- op)))
+      ; ; ; ((= op 8)(menuAlgoritmo (1- op)))
+      ; ; ; (T(progn
+          ; ; ; (format t "Escolha um tabuleiro válido!")
+          ; ; ; (menuTabuleiro)
+         ; ; ; )
+       ; ; ; )
+    ; ; ; )
+   ; ; ; )
+; ; ; )
+
+; ; ; ;_______________________________________________________________________
+
+; ; ; ;menu para escolha dos algoritmos
+
+; ; ; (defun menuAlgoritmo(tabuleiro)
+  ; ; ; (progn
+    ; ; ; (format t "«««««««««««««««««««««««««««")(terpri)
+    ; ; ; (format t "                           ")(terpri)
+    ; ; ; (format t "      ALGORITMOS           ")(terpri)
+    ; ; ; (format t "                           ")(terpri)
+    ; ; ; (format t "    1 - Breath-First       ")(terpri)
+    ; ; ; (format t "    2 - Depth-First        ")(terpri)
+    ; ; ; (format t "    3 - A*                 ")(terpri)
+    ; ; ; (format t "    4 - IDA*               ")(terpri)
+    ; ; ; (format t "                           ")(terpri)
+    ; ; ; (format t "    0 - Voltar             ")(terpri)
+    ; ; ; (format t "«««««««««««««««««««««««««««")(terpri)
+    ; ; ; )
+  ; ; ; (let((op (read)))
+    ; ; ; (cond
+      ; ; ; ((= op 1)(progn(time(procura-generica (list( make-estado :tabuleiro (nth tabuleiro (le_problemas "C://Problemas.dat"))
+                                                   ; ; ; :f 0
+                                                   ; ; ; :g 0
+                                                   ; ; ; :h 0 
+                                                   ; ; ; :movactual NIL 
+                                                   ; ; ; :nopai nil)
+                                              ; ; ; )
+                                             ; ; ; nil 
+                                             ; ; ; 'largura 
+                                             ; ; ; '(c b e d cc cb ce cd) 
+                                             ; ; ; 'semheuristica
+                            ; ; ; )
+                       ; ; ; )  
+                      
+                 ; ; ; ) 
+       ; ; ; )
+      ; ; ; ((= op 2)(progn(time(procura-generica (list(make-estado :tabuleiro (nth tabuleiro (le_problemas "C://Problemas.dat"))
+                                                           ; ; ; :f 0
+                                                           ; ; ; :g 0
+                                                           ; ; ; :h 0 
+                                                           ; ; ; :movactual NIL 
+                                                           ; ; ; :nopai nil)
+                                               ; ; ; )
+                                               ; ; ; nil 
+                                               ; ; ; 'largura 
+                                               ; ; ; '(c b e d cc cb ce cd) 
+                                               ; ; ; 'semheuristica
+                             ; ; ; )
+                         ; ; ; )
+                           
+                        
+                 ; ; ; ) 
+       ; ; ; )
+      ; ; ; ((= op 3)(menuHeuristica tabuleiro 'a-star))
+      ; ; ; ((> op 4)(menuHeuristica tabuleiro 'ida-star))
+      ; ; ; ((= op 0)(menuTabuleiro)) 
+      ; ; ; (T(progn
+          ; ; ; (format t "Escolha um tabuleiro válido!")
+          ; ; ; (menuTabuleiro)
+          ; ; ; )
+        ; ; ; )
+      
+      
+      ; ; ; ) 
+    ; ; ; )
+  
+  
+  ; ; ; )
+	 
+	 
+; ; ; ;________________________________________________________________________
+
+; ; ; ;menu para escolher a heurística
+
+; ; ; (defun menuHeuristica (tabuleiro algoritmo)
+  ; ; ; (progn
+    ; ; ; (format t "«««««««««««««««««««««««««««««««««««««««")(terpri)
+    ; ; ; (format t "                                       ")(terpri)
+    ; ; ; (format t "      HEURÍSTICAS                      ")(terpri)
+    ; ; ; (format t "                                       ")(terpri)
+    ; ; ; (format t "    1 - Nº de peças no tabuleiro       ")(terpri)
+    ; ; ; (format t "    2 - ..........                     ")(terpri)
+    ; ; ; (format t "                                       ")(terpri)
+    ; ; ; (format t "«««««««««««««««««««««««««««««««««««««««")(terpri)
+    ; ; ; (format t "                                       ")(terpri)
+    ; ; ; (format t "Escolha uma heurística: ")
+    ; ; ; )
+  ; ; ; (let
+    ; ; ; ((op (read)))
+    ; ; ; (cond
+      ; ; ; ((= op 1)(progn(time(procura-generica (list(make-estado :tabuleiro (nth tabuleiro (le_problemas "C://Problemas.dat"))
+                                                              ; ; ; :f 0
+                                                              ; ; ; :g 0
+                                                              ; ; ; :h 0 
+                                                              ; ; ; :movactual NIL 
+                                                              ; ; ; :nopai nil)
+                                              ; ; ; )
+                                              ; ; ; nil 
+                                              ; ; ; algoritmo 
+                                              ; ; ; '(c b e d cc cb ce cd) 
+                                              ; ; ; 'heuristica1
+                             ; ; ; )
+                        ; ; ; )  
+                       
+                ; ; ; )
+                     
+       ; ; ; )
+    ; ; ; )
+  ; ; ; )			
+; ; ; )
+
+; ; ; ;____________________________________________________________________________________________________________________
+
+; ; ; ;função para escrever num ficherio txt as...
+
+; ; ; (defun escrever_ficheiro (algoritmo gerados expandidos penetrancia no)
+  ; ; ; (with-open-file (writer "c:/resultados.dat"   
+                          ; ; ; :direction :output 
+                          ; ; ; :if-exists :append
+                          ; ; ; :if-does-not-exist :create)
+    ; ; ; (format writer "~%~%~%~s" algoritmo)
+    ; ; ; (format writer "~%Nós gerados: ~s ~%"  gerados )
+    ; ; ; (format writer "Nós expandidos: ~s ~%" expandidos )
+    ; ; ; (format writer "Movimentos: ~s ~%" movimentos-solucao no nil)
+    ; ; ; (format writer "Penetrancia: ~s,3F ~%" penetrancia )
+    ; ; ; (format writer "Profundidade: ~s ~%" profundidade-solucao no)
+    ; ; ; (format writer "Nó Final: ~s ~%" no)
+    ; ; ; )
+; ; ; )
+
+
+;____________________________________________________________________________________________________________________
+;(le_problemas "D:/PEDRO/Development/Eclipse/projecto1/Problemas.dat")
+
+
+
+(defun le_problemas (caminho)
+(with-open-file (f caminho
+:direction :input
+:if-exists NIL
+:if-does-not-exist :error)
+(read f)
+)
+)
+
+
+(defun converteLetras (letra)
+  (- (char-code letra) 97)
+)
+

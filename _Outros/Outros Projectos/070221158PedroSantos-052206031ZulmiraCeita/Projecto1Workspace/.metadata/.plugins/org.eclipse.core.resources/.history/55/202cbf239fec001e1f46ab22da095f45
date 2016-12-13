@@ -1,0 +1,191 @@
+(in-package :projecto1)
+
+(defstruct estado
+tabuleiro
+f
+g
+h
+movActual
+noPai  
+)
+
+(defun semheuristica (tabuleiro)
+  0
+)
+
+(defun heuristica1 (tabuleiro)
+  (1- (conta1s tabuleiro))
+)
+;;<TENTATIVA DE HEURISTICA 2>
+(defun heuristica2-aux (tabuleiro x y soma)
+(cond
+((> x 7) soma)
+((> y 7) (heuristica2-aux tabuleiro (1+ x) 1 soma))
+(T
+(heuristica2-aux tabuleiro x (1+ y) (+ soma (distancia-ao-centro tabuleiro x y)))
+)
+)
+)
+
+(defun heuristica2 (tabuleiro)
+  (+ (heuristica1 tabuleiro) 
+     (heuristica2-aux tabuleiro 1 1 0)
+     )
+)
+
+(defun distancia-ao-centro (tabuleiro x y)
+(if (equal (valor-coordenada x y tabuleiro) 1)
+    (+ (abs (- 4 x)) (abs (- 4 y)))
+    0
+)  
+)
+
+(defun remove-nil (n)
+(if (null n) 0 n)
+)
+;;</TENTATIVA DE HEUSTICA 2>
+
+(defun nos-gerados (la lf &optional (prevNosGerados 0))
+   (+ prevNosGerados (length la) (length lf))
+)
+
+(defun nos-expandidos (lf &optional (prevNosExpandidos 0))
+   (+ prevNosExpandidos (length lf))
+)
+
+(defun penetrancia (la lf no &optional (prevNosGerados 0))
+   (float (/ (profundidade-solucao no) (nos-gerados la lf prevNosGerados)))
+)
+
+(defun profundidade-solucao (no)
+   (estado-g no)
+)
+
+(defun factor-ramificacao-medio (la lf no &optional (prevNosGerados 0))
+  (float (/ (nos-gerados la lf prevNosGerados) (profundidade-solucao no)))
+)
+
+
+(defun ida-star (sucessores restla limiar proxlimiar)
+  (cond ((null sucessores) (list (ordenar-sucessores restla) proxlimiar))
+    ((<= (estado-f (car sucessores)) limiar)
+	(ida-star (cdr sucessores) (cons (car sucessores) restla) limiar proxlimiar))
+    (T 
+     (if
+         (and (< (estado-f (car sucessores)) proxlimiar) (> (estado-f (car sucessores)) limiar))
+         (ida-star (cdr sucessores) restla limiar (estado-f (car sucessores)))
+         (ida-star (cdr sucessores) restla limiar proxlimiar)
+         )
+     )
+    )
+  )
+
+(defun procura-ida-star (la lf operadores heuristica limiar proxlimiar &optional (tempo (get-universal-time)) (funcaosucessores 'sucessores) (prevNosGerados 0) (prevNosExpandidos 0))
+(cond
+((null la)
+(if (= limiar proxlimiar)
+nil
+(procura-ida-star (last lf) nil operadores heuristica proxlimiar 9999 tempo funcaosucessores (nos-gerados la lf prevNosGerados) (nos-expandidos lf prevNosExpandidos))
+)
+)	
+((objectivo (estado-tabuleiro (car la))) (devolver (car la) la lf 'IDA-star heuristica tempo limiar prevNosGerados prevNosExpandidos))
+((visitado (car la) lf)(procura-ida-star (cdr la) lf operadores heuristica limiar proxlimiar tempo funcaosucessores prevNosGerados prevNosExpandidos))
+(T (let ((retorno(ida-star (funcall funcaosucessores (car la) operadores nil heuristica) (cdr la) limiar proxlimiar)))
+	(procura-ida-star
+         (car retorno) (cons (car la) lf) operadores heuristica limiar (cadr retorno) tempo funcaosucessores prevNosGerados prevNosExpandidos
+	)
+    )
+)
+)
+)
+
+(defun procura-generica (la lf algoritmo operadores heuristica &optional limite (tempo (get-universal-time)) (funcaosucessores 'sucessores))
+(cond
+((null la) nil)	
+((objectivo (estado-tabuleiro (car la))) (devolver (car la) la lf algoritmo heuristica tempo limite))
+((visitado (car la) lf)(procura-generica (cdr la) lf algoritmo operadores heuristica limite tempo funcaosucessores))
+(T (procura-generica
+    (funcall algoritmo (funcall funcaosucessores (car la) operadores nil heuristica) (cdr la) limite) (cons (car la) lf) algoritmo operadores heuristica limite tempo funcaosucessores
+    )                    
+)
+)
+) 
+
+(defun visitado (no lf)
+(cond
+  ((null lf) nil)
+  ((equal (estado-tabuleiro no) (estado-tabuleiro (car lf))) T)
+  (T (visitado no (cdr lf)))
+)
+)
+
+(defun largura (sucessores restla limite)
+  (append restla sucessores)
+)
+
+(defun profundidade (sucessores restla limite)
+  (append sucessores restla)
+)
+
+(defun profundidade-limitada (sucessores restla limite)
+  (cond ((null sucessores) restla)
+        ((<= (estado-g (car sucessores)) limite) (append sucessores restla))
+        (T restla)
+  )
+)
+
+(defun insere-ordenado (no la)
+  (cond ((null la) (list no))
+    ((< (estado-f no) (estado-f (car la))) (cons no la))
+    (T (cons (car la) (insere-ordenado no (cdr la)))
+    )
+ ) 
+ )
+
+(defun ordenar-sucessores (sucessores) 
+(cond ((null sucessores) nil)
+       (T (insere-ordenado (car sucessores) (ordenar-sucessores (cdr sucessores))))                  
+)
+)
+
+(defun a-star (sucessores restla limite)
+  (ordenar-sucessores (append sucessores restla))
+)
+
+(defun movimentos-solucao (no solucoes)
+	(cond
+		((null (estado-noPai no)) solucoes)
+		(T  (movimentos-solucao (estado-noPai no) (cons (estado-movActual no) solucoes)))
+	) 
+)
+
+(defun tabuleiro-inicial (no)
+	(cond
+		((null (estado-noPai no)) (estado-tabuleiro no))
+		(T  (tabuleiro-inicial (estado-noPai no)))
+	) 
+)
+
+(defun devolver (no la lf algoritmo heuristica tempo limite &optional (prevNosGerados 0) (prevNosExpandidos 0))
+  (let ((resultado (concatenate ' string
+    (format nil "Algoritmo: ~A ~%" algoritmo)
+    (format nil "Heuristica: ~A ~%" heuristica)
+    (format nil "Limite/Limiar: ~A ~%" limite)
+    (format nil "Movimentos: ~A ~%" (movimentos-solucao no nil))
+    (format nil "Penetância: ~A ~%" (penetrancia la lf no prevNosGerados))
+    (format nil "Nós Gerados: ~A ~%" (nos-gerados la lf prevNosGerados))
+    (format nil "Nós Expandidos: ~A ~%" (nos-expandidos lf prevNosExpandidos))
+    (format nil "Profundudade da Solução: ~A ~%" (profundidade-solucao no))
+    (format nil "Factor de ramificação médio: ~A ~%" (factor-ramificacao-medio la lf no prevNosGerados))
+    (format nil "Tabuleiro Inicial:~%~A ~%" (imprime-tabuleiro (tabuleiro-inicial no)))
+    (format nil "Tabuleiro Final:~%~A ~%" (imprime-tabuleiro (estado-tabuleiro no)))
+    (format nil "Tempo decorrido: ~% ~A ~%" (- (get-universal-time) tempo))
+   )))
+    (progn (format T "~a" resultado) (escrever_ficheiro resultado))
+   )
+)
+
+(defun semsolucao ()
+ (format T "SOLUÇÃO NÃO ENCONTRADA") 
+)
+  )

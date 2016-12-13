@@ -1,0 +1,1440 @@
+Algoritmo: LARGURA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((CC 4 2) (CC 4 4)) 
+Penetância: 0.013986014 
+Nós Gerados: 143 
+Nós Expandidos: 13 
+Profundidade da Solução: 2 
+Factor de ramificação médio: 71.5 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((CC 4 2) (CC 4 4)) 
+Penetância: 0.0952381 
+Nós Gerados: 21 
+Nós Expandidos: 2 
+Profundidade da Solução: 2 
+Factor de ramificação médio: 10.5 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 50 
+Movimentos: ((CC 4 2) (CC 4 4)) 
+Penetância: 0.0952381 
+Nós Gerados: 21 
+Nós Expandidos: 2 
+Profundidade da Solução: 2 
+Factor de ramificação médio: 10.5 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: NIL 
+Movimentos: ((CC 4 2) (CB 4 5)) 
+Penetância: 0.071428575 
+Nós Gerados: 28 
+Nós Expandidos: 3 
+Profundidade da Solução: 2 
+Factor de ramificação médio: 14.0 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: 2 
+Movimentos: ((CC 4 2) (CB 4 5)) 
+Penetância: 0.33333334 
+Nós Gerados: 6 
+Nós Expandidos: 4 
+Profundidade da Solução: 2 
+Factor de ramificação médio: 3.0 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: LARGURA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((CE 4 4) (CC 4 2) (CE 5 4) (CD 2 4) (CC 4 4)) 
+Penetância: 1.2377187e-5 
+Nós Gerados: 403969 
+Nós Expandidos: 29367 
+Profundidade da Solução: 5 
+Factor de ramificação médio: 80793.8 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 1 1 1 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 569 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((C 3 4) (CD 3 5) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (CD 3 3) (CD 4 4)
+             (C 5 3) (CC 5 4) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (C 6 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (CD 5 5)) 
+Penetância: 0.11405835 
+Nós Gerados: 377 
+Nós Expandidos: 43 
+Profundidade da Solução: 43 
+Factor de ramificação médio: 8.767442 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 1 1 1 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 100 
+Movimentos: ((C 3 4) (CD 3 5) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (CD 3 3) (CD 4 4)
+             (C 5 3) (CC 5 4) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (C 6 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (CD 5 5)) 
+Penetância: 0.11405835 
+Nós Gerados: 377 
+Nós Expandidos: 43 
+Profundidade da Solução: 43 
+Factor de ramificação médio: 8.767442 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 1 1 1 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: NIL 
+Movimentos: ((CD 4 4) (CC 4 2) (CD 3 4) (CE 6 4) (CC 4 4)) 
+Penetância: 0.031446543 
+Nós Gerados: 159 
+Nós Expandidos: 11 
+Profundidade da Solução: 5 
+Factor de ramificação médio: 31.8 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 1 1 1 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: 5 
+Movimentos: ((CD 4 4) (CC 4 2) (CD 3 4) (CE 6 4) (CB 4 5)) 
+Penetância: 0.1923077 
+Nós Gerados: 26 
+Nós Expandidos: 19 
+Profundidade da Solução: 5 
+Factor de ramificação médio: 5.2 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 1 1 1 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((D 1 3) (B 1 4) (CD 1 3) (B 1 5) (B 1 4) (D 1 3) (CD 2 3) (C 3 1)
+             (C 3 2) (CD 3 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (C 4 1) (C 3 1) (CD 3 2) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (CD 4 3)
+             (CC 5 1) (C 5 3) (C 5 4) (C 5 5) (E 5 6) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (B 5 7) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3)
+             (D 4 4) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (C 6 3)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2)
+             (C 5 3) (C 5 4) (C 5 5) (C 5 6) (C 6 4) (B 5 7) (B 5 6) (B 5 5)
+             (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (E 6 5) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (D 3 7) (B 4 7) (B 4 6) (CD 4 5) (B 6 5) (B 6 4) (E 6 3) (C 5 3)
+             (C 5 4) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3) (C 6 3) (C 6 4)
+             (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 3) (C 5 1)
+             (C 5 2) (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3) (C 6 3) (C 6 4)
+             (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 4) (C 5 1)
+             (C 5 2) (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.12171946 
+Nós Gerados: 2210 
+Nós Expandidos: 269 
+Profundidade da Solução: 269 
+Factor de ramificação médio: 8.215613 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 100 
+Movimentos: ((D 1 3) (B 1 4) (CD 1 3) (B 1 5) (B 1 4) (D 1 3) (CD 2 3) (C 3 1)
+             (C 3 2) (CD 3 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (C 4 1) (C 3 1) (CD 3 2) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (CD 4 3)
+             (CC 5 1) (C 5 3) (C 5 4) (C 5 5) (E 5 6) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (B 5 7) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3)
+             (D 4 4) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (C 6 3)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (E 7 5) (CB 6 5) (CE 7 3) (D 4 2)
+             (B 7 4) (D 5 3) (CE 7 3) (CC 5 2)) 
+Penetância: 0.02524615 
+Nós Gerados: 3961 
+Nós Expandidos: 3029 
+Profundidade da Solução: 100 
+Factor de ramificação médio: 39.61 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 1 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 2 
+__________________________________________________________ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: NIL 
+Movimentos: ((E 7 5) (CC 7 3) (CE 7 5) (B 5 7) (CB 5 6) (CD 3 7) (D 1 3)
+             (CB 1 5) (CD 1 3) (C 3 1) (CC 3 2) (CE 5 1) (C 3 1) (C 3 2)
+             (CC 3 3) (E 5 7) (B 3 5) (D 3 4) (B 4 7) (B 4 6) (CB 4 5) (C 4 3)
+             (CE 5 4)) 
+Penetância: 0.057356607 
+Nós Gerados: 401 
+Nós Expandidos: 34 
+Profundidade da Solução: 23 
+Factor de ramificação médio: 17.434782 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 1 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((C 1 3) (D 1 4) (B 1 5) (CD 1 4) (C 2 3) (CD 2 4) (B 2 5) (B 2 4)
+             (E 2 3) (C 1 3) (C 1 4) (C 3 1) (B 1 5) (B 1 4) (D 1 3) (C 2 3)
+             (C 2 4) (CC 3 2) (B 2 5) (B 2 4) (E 2 3) (C 1 3) (C 1 4) (CC 3 4)
+             (B 1 5) (B 1 4) (D 1 3) (C 2 3) (C 2 4) (D 2 5) (B 3 5) (CD 3 4)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 7) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (CC 3 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (C 4 1) (C 3 1) (CD 3 2) (C 4 3) (CC 4 4) (B 4 6) (B 4 5)
+             (CD 4 4) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (E 5 1) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CD 3 1) (E 5 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CC 5 2) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (CC 5 4) (C 5 3) (CD 5 4)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (B 5 7) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4) (CC 5 5) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (C 6 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4) (C 5 5) (C 5 6)
+             (E 6 4) (C 5 4) (C 5 5) (E 5 6) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3)
+             (C 4 4) (B 5 7) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (D 4 4)
+             (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2)
+             (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7)
+             (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 6 5) (C 3 1)
+             (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3)
+             (C 5 4) (C 5 5) (C 5 6) (B 6 4) (B 5 7) (B 5 6) (B 5 5) (B 5 4)
+             (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (E 6 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7)
+             (B 4 7) (B 4 6) (B 4 5) (B 4 4) (CD 4 3) (C 6 3) (C 6 4) (E 6 5)
+             (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3) (C 6 3) (C 6 4) (E 6 5)
+             (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 3) (C 5 1) (C 5 2)
+             (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3) (C 6 3) (C 6 4) (E 6 5)
+             (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 4) (C 5 1) (C 5 2)
+             (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.08107103 
+Nós Gerados: 5378 
+Nós Expandidos: 436 
+Profundidade da Solução: 436 
+Factor de ramificação médio: 12.334863 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 1 1 1 1 1 1)
+(0 0 0 0 0 0 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 1 
+__________________________________________________________ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: NIL 
+Movimentos: ((B 7 5) (CC 7 3) (CD 5 3) (CD 3 3) (CD 1 3) (B 7 5) (CC 7 3)
+             (B 7 5) (CD 5 5) (CB 7 5) (CD 3 5) (CD 1 5) (E 7 3) (CE 6 3)
+             (CD 3 3) (B 5 7) (CB 5 6) (CD 3 7) (CC 5 3) (C 3 1) (CE 5 1)
+             (CC 3 1) (C 3 3) (CB 3 5) (E 5 7) (C 3 3) (D 3 4) (B 4 7) (B 4 6)
+             (CE 5 5) (D 3 5) (CB 4 5)) 
+Penetância: 0.046309695 
+Nós Gerados: 691 
+Nós Expandidos: 39 
+Profundidade da Solução: 32 
+Factor de ramificação médio: 21.59375 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 1 1 1 1 1 1)
+(0 0 0 0 0 0 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 200 
+Movimentos: ((C 1 3) (D 1 4) (B 1 5) (CD 1 4) (C 2 3) (CD 2 4) (B 2 5) (B 2 4)
+             (E 2 3) (C 1 3) (C 1 4) (C 3 1) (B 1 5) (B 1 4) (D 1 3) (C 2 3)
+             (C 2 4) (CC 3 2) (B 2 5) (B 2 4) (E 2 3) (C 1 3) (C 1 4) (CC 3 4)
+             (B 1 5) (B 1 4) (D 1 3) (C 2 3) (C 2 4) (D 2 5) (B 3 5) (CD 3 4)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 7) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (CC 3 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (C 4 1) (C 3 1) (CD 3 2) (C 4 3) (CC 4 4) (B 4 6) (B 4 5)
+             (CD 4 4) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (E 5 1) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CD 3 1) (E 5 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CC 5 2) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (CC 5 4) (C 5 3) (CD 5 4)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (B 5 7) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4) (CC 5 5) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2)
+             (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (C 6 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4) (C 5 5) (CE 7 5)
+             (B 5 5) (CC 7 3) (CD 5 4) (B 5 6) (E 7 5) (CD 5 5) (CB 7 5)) 
+Penetância: 0.021481002 
+Nós Gerados: 9264 
+Nós Expandidos: 5869 
+Profundidade da Solução: 199 
+Factor de ramificação médio: 46.552765 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 1 1 1 1 1 1)
+(0 0 0 0 0 0 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 6 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((C 1 3) (C 1 4) (D 1 5) (E 2 3) (C 1 3) (C 1 4) (B 2 4) (B 1 5)
+             (B 1 4) (E 2 5) (C 1 3) (CB 1 5) (C 1 3) (C 1 4) (D 1 5) (C 2 3)
+             (E 2 4) (C 1 4) (B 2 5) (B 1 5) (B 1 4) (D 1 3) (CC 2 3) (B 2 5)
+             (B 2 4) (E 2 3) (C 1 3) (C 1 4) (B 3 3) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (C 2 4) (B 3 2) (B 2 5) (B 2 4) (E 2 3) (C 1 3) (C 1 4)
+             (D 3 1) (B 1 5) (B 1 4) (D 1 3) (C 2 3) (C 2 4) (CC 3 4) (B 2 5)
+             (B 2 4) (E 2 3) (C 1 3) (C 1 4) (CD 3 6) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (C 2 4) (D 2 5) (C 3 5) (C 3 6) (D 3 7) (C 4 1) (E 4 2)
+             (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (CD 3 7) (B 4 3) (B 4 2)
+             (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7)
+             (CC 4 4) (B 4 6) (CD 4 5) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (CC 5 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (CD 5 5) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 5 6) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CD 4 5) (B 5 7) (B 5 6) (B 5 5) (CD 5 4) (C 6 3) (E 6 4) (C 5 4)
+             (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (B 6 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 4) (C 5 1) (C 5 2)
+             (E 6 5) (C 5 3) (CC 5 4) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 3)
+             (C 5 1) (C 5 2) (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 4)
+             (C 5 1) (C 5 2) (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.07052562 
+Nós Gerados: 4509 
+Nós Expandidos: 318 
+Profundidade da Solução: 318 
+Factor de ramificação médio: 14.179245 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 1 1 1 0 0)
+(0 1 1 1 1 1 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 200 
+Movimentos: ((C 1 3) (C 1 4) (D 1 5) (E 2 3) (C 1 3) (C 1 4) (B 2 4) (B 1 5)
+             (B 1 4) (E 2 5) (C 1 3) (CB 1 5) (C 1 3) (C 1 4) (D 1 5) (C 2 3)
+             (E 2 4) (C 1 4) (B 2 5) (B 1 5) (B 1 4) (D 1 3) (CC 2 3) (B 2 5)
+             (B 2 4) (E 2 3) (C 1 3) (C 1 4) (B 3 3) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (C 2 4) (B 3 2) (B 2 5) (B 2 4) (E 2 3) (C 1 3) (C 1 4)
+             (D 3 1) (B 1 5) (B 1 4) (D 1 3) (C 2 3) (C 2 4) (CC 3 4) (B 2 5)
+             (B 2 4) (E 2 3) (C 1 3) (C 1 4) (CD 3 6) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (C 2 4) (D 2 5) (C 3 5) (C 3 6) (D 3 7) (C 4 1) (E 4 2)
+             (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (CD 3 7) (B 4 3) (B 4 2)
+             (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7)
+             (CC 4 4) (B 4 6) (CD 4 5) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (CC 5 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (CD 5 5) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 5 6) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CD 4 5) (B 5 7) (B 5 6) (B 5 5) (CD 5 4) (C 6 3) (E 6 4) (C 5 4)
+             (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3)
+             (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (B 6 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7)
+             (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 4) (C 5 1) (C 5 2)
+             (E 6 5) (C 5 3) (CC 5 4) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (E 7 5) (CC 7 3) (C 4 4) (C 4 5) (CE 7 5) (B 4 6) (CD 4 5)) 
+Penetância: 0.042475987 
+Nós Gerados: 4685 
+Nós Expandidos: 1150 
+Profundidade da Solução: 199 
+Factor de ramificação médio: 23.542713 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 1 1 1 0 0)
+(0 1 1 1 1 1 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 1 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 1 
+__________________________________________________________ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: NIL 
+Movimentos: ((CC 2 3) (CC 3 4) (CD 3 6) (CE 4 3) (CD 1 3) (CC 4 4) (CB 5 4)
+             (CB 5 6) (CE 6 4) (CE 7 3) (CC 5 2) (CE 5 4) (CC 3 3) (CD 2 5)
+             (CC 4 5)) 
+Penetância: 0.012701101 
+Nós Gerados: 1181 
+Nós Expandidos: 54 
+Profundidade da Solução: 15 
+Factor de ramificação médio: 78.73333 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 1 1 1 0 0)
+(0 1 1 1 1 1 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((C 1 3) (CD 1 4) (B 1 5) (B 1 4) (D 1 3) (CD 2 3) (C 3 1) (CD 3 2)
+             (CC 3 4) (CD 3 6) (B 3 7) (B 3 6) (B 3 5) (CD 3 4) (CD 4 3)
+             (CC 5 1) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CD 4 5) (CD 5 4) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 7) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4)
+             (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (C 6 3) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4)
+             (C 5 5) (C 5 6) (E 6 4) (C 5 4) (C 5 5) (E 5 6) (C 4 6) (E 4 7)
+             (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (B 5 7) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (C 4 3) (D 4 4) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4)
+             (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (B 6 5) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7)
+             (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1)
+             (C 5 2) (C 5 3) (C 5 4) (C 5 5) (C 5 6) (B 6 4) (B 5 7) (B 5 6)
+             (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3)
+             (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (E 6 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (CD 4 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 3)
+             (C 5 1) (C 5 2) (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 7 4)
+             (C 5 1) (C 5 2) (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.09994273 
+Nós Gerados: 3492 
+Nós Expandidos: 349 
+Profundidade da Solução: 349 
+Factor de ramificação médio: 10.005731 
+
+Tabuleiro Inicial:
+(NIL NIL 1 0 1 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(1 0 1 0 1 0 1)
+(0 1 0 1 0 1 0)
+(1 0 1 0 1 0 1)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 1 0 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 250 
+Movimentos: ((C 1 3) (CD 1 4) (B 1 5) (B 1 4) (D 1 3) (CD 2 3) (C 3 1) (CD 3 2)
+             (CC 3 4) (CD 3 6) (B 3 7) (B 3 6) (B 3 5) (CD 3 4) (CD 4 3)
+             (CC 5 1) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CD 4 5) (CD 5 4) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 7) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4)
+             (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (C 6 3) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (C 5 3) (C 5 4)
+             (C 5 5) (C 5 6) (E 6 4) (C 5 4) (C 5 5) (E 5 6) (C 4 6) (E 4 7)
+             (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (B 5 7) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (C 4 3) (D 4 4) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4)
+             (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (B 6 5) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7)
+             (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1)
+             (C 5 2) (C 5 3) (C 5 4) (C 5 5) (C 5 6) (B 6 4) (B 5 7) (B 5 6)
+             (B 5 5) (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3)
+             (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (E 6 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (CD 4 3) (C 6 3)
+             (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (D 4 4) (B 5 4) (CD 5 3)
+             (E 7 3) (CB 7 5) (CE 7 3)) 
+Penetância: 0.07608034 
+Nós Gerados: 3286 
+Nós Expandidos: 660 
+Profundidade da Solução: 250 
+Factor de ramificação médio: 13.144 
+
+Tabuleiro Inicial:
+(NIL NIL 1 0 1 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(1 0 1 0 1 0 1)
+(0 1 0 1 0 1 0)
+(1 0 1 0 1 0 1)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 1 0 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 1 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 1 
+__________________________________________________________ 
+Algoritmo: A-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: NIL 
+Movimentos: ((E 7 5) (CE 6 5) (CD 3 5) (E 7 3) (CE 6 3) (CD 3 3) (C 1 3)
+             (CD 1 4) (B 1 5) (D 1 4) (C 3 1) (CD 3 2) (CC 5 2) (CB 5 5)
+             (E 6 4) (CC 5 3) (E 5 7) (CB 4 7) (CE 5 5) (CB 3 5) (D 2 4)
+             (CC 3 3) (B 3 5) (CD 3 4) (B 3 7) (B 3 6) (B 3 5) (D 3 4) (C 5 1)
+             (C 5 2) (CC 5 3) (E 5 5) (CB 4 5)) 
+Penetância: 0.029516995 
+Nós Gerados: 1118 
+Nós Expandidos: 47 
+Profundidade da Solução: 33 
+Factor de ramificação médio: 33.878788 
+
+Tabuleiro Inicial:
+(NIL NIL 1 0 1 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(1 0 1 0 1 0 1)
+(0 1 0 1 0 1 0)
+(1 0 1 0 1 0 1)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 1 0 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 1 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: NIL 
+Movimentos: ((CD 2 4) (D 1 4) (C 1 3) (CD 1 4) (B 1 5) (B 1 4) (C 2 3) (C 1 3)
+             (C 1 4) (E 2 4) (B 1 4) (B 1 5) (CC 1 3) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (CB 2 5) (C 2 3) (C 2 4) (E 2 5) (B 1 5) (B 1 4) (E 3 3)
+             (CD 1 3) (E 3 3) (C 2 3) (C 2 4) (E 2 5) (B 1 5) (B 1 4) (CC 3 1)
+             (C 1 3) (C 1 4) (D 1 5) (B 2 5) (B 2 4) (CE 3 3) (C 1 3) (C 1 4)
+             (D 1 5) (B 2 5) (B 2 4) (D 2 3) (B 3 3) (B 3 2) (B 3 4) (C 3 1)
+             (CC 3 2) (B 3 4) (B 3 3) (B 3 2) (B 3 5) (C 3 1) (C 3 2) (CC 3 3)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 6) (C 3 1) (C 3 2) (C 3 3)
+             (CC 3 4) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 7) (C 3 1)
+             (C 3 2) (C 3 3) (C 3 4) (CC 3 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (E 4 2) (CC 3 1) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (C 4 1) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (E 4 2) (B 3 2) (B 4 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (CC 4 1) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (CB 4 3) (C 4 1) (C 4 2) (E 4 3) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 4 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (CC 4 2) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 5) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (CC 4 3) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 6) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (CC 4 4)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CC 4 5) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (E 5 1) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CD 3 1) (E 5 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 2) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (CE 5 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2)
+             (D 4 1) (C 5 1) (CB 5 3) (C 5 1) (C 5 2) (E 5 3) (C 4 3) (C 4 4)
+             (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (B 5 4) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (D 4 1) (C 5 1) (CC 5 2) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 5) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (CC 5 3) (B 5 5)
+             (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (B 5 6) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1)
+             (C 5 1) (C 5 2) (C 5 3) (CC 5 4) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 7)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2)
+             (C 5 3) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (E 6 3)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (CD 4 3) (E 6 3) (C 5 3) (C 5 4) (C 5 5)
+             (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2)
+             (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 6 4)
+             (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7) (B 5 6)
+             (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 3) (C 5 1) (E 6 4) (C 5 2)
+             (CC 5 3) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (B 6 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 4) (C 5 1)
+             (C 5 2) (C 5 3) (D 5 4) (B 6 4) (B 6 5) (CC 6 3) (B 6 5) (B 6 4)
+             (E 6 3) (C 5 3) (C 5 4) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3)
+             (C 6 3) (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2)
+             (C 7 3) (C 5 1) (C 5 2) (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3)
+             (C 6 3) (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2)
+             (C 7 4) (C 5 1) (C 5 2) (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.08961004 
+Nós Gerados: 7488 
+Nós Expandidos: 671 
+Profundidade da Solução: 671 
+Factor de ramificação médio: 11.159464 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+(1 1 1 1 1 1 1)
+(1 1 1 0 1 1 1)
+(1 1 1 1 1 1 1)
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: PROFUNDIDADE-LIMITADA 
+Heuristica: SEMHEURISTICA 
+Limite/Limiar: 700 
+Movimentos: ((CD 2 4) (D 1 4) (C 1 3) (CD 1 4) (B 1 5) (B 1 4) (C 2 3) (C 1 3)
+             (C 1 4) (E 2 4) (B 1 4) (B 1 5) (CC 1 3) (B 1 5) (B 1 4) (D 1 3)
+             (C 2 3) (CB 2 5) (C 2 3) (C 2 4) (E 2 5) (B 1 5) (B 1 4) (E 3 3)
+             (CD 1 3) (E 3 3) (C 2 3) (C 2 4) (E 2 5) (B 1 5) (B 1 4) (CC 3 1)
+             (C 1 3) (C 1 4) (D 1 5) (B 2 5) (B 2 4) (CE 3 3) (C 1 3) (C 1 4)
+             (D 1 5) (B 2 5) (B 2 4) (D 2 3) (B 3 3) (B 3 2) (B 3 4) (C 3 1)
+             (CC 3 2) (B 3 4) (B 3 3) (B 3 2) (B 3 5) (C 3 1) (C 3 2) (CC 3 3)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 6) (C 3 1) (C 3 2) (C 3 3)
+             (CC 3 4) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 3 7) (C 3 1)
+             (C 3 2) (C 3 3) (C 3 4) (CC 3 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (E 4 2) (CC 3 1) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (C 4 1) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1)
+             (E 4 2) (B 3 2) (B 4 3) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (CC 4 1) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (CB 4 3) (C 4 1) (C 4 2) (E 4 3) (C 3 3) (C 3 4)
+             (C 3 5) (C 3 6) (B 4 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (CC 4 2) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 5) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2)
+             (CC 4 3) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 6) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (CC 4 4)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 4 7) (B 3 7) (B 3 6) (B 3 5)
+             (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (CC 4 5) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (E 5 1) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (CD 3 1) (E 5 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6)
+             (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 2) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (CE 5 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2)
+             (D 4 1) (C 5 1) (CB 5 3) (C 5 1) (C 5 2) (E 5 3) (C 4 3) (C 4 4)
+             (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (D 3 1) (C 4 1) (B 5 4) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (D 4 1) (C 5 1) (CC 5 2) (B 5 4) (B 5 3) (B 5 2) (E 5 1)
+             (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (E 4 7) (B 3 7)
+             (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 5) (C 3 1) (C 3 2)
+             (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7) (B 4 6) (B 4 5)
+             (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2) (CC 5 3) (B 5 5)
+             (B 5 4) (B 5 3) (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4)
+             (C 4 5) (C 4 6) (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3)
+             (B 3 2) (B 5 6) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6)
+             (D 3 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1)
+             (C 5 1) (C 5 2) (C 5 3) (CC 5 4) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (B 5 7)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2) (D 4 1) (C 5 1) (C 5 2)
+             (C 5 3) (C 5 4) (CC 5 5) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3)
+             (B 5 2) (E 5 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6)
+             (E 4 7) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (E 6 3)
+             (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (D 3 7) (B 4 7)
+             (B 4 6) (B 4 5) (B 4 4) (CD 4 3) (E 6 3) (C 5 3) (C 5 4) (C 5 5)
+             (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4) (B 4 3) (B 4 2)
+             (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5) (C 3 6) (B 6 4)
+             (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2) (D 3 1) (C 4 1)
+             (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7) (B 5 7) (B 5 6)
+             (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 3) (C 5 1) (E 6 4) (C 5 2)
+             (CC 5 3) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6) (B 4 5) (B 4 4)
+             (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3) (C 3 4) (C 3 5)
+             (C 3 6) (B 6 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4) (B 3 3) (B 3 2)
+             (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5) (C 4 6) (D 4 7)
+             (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2) (C 6 4) (C 5 1)
+             (C 5 2) (C 5 3) (D 5 4) (B 6 4) (B 6 5) (CC 6 3) (B 6 5) (B 6 4)
+             (E 6 3) (C 5 3) (C 5 4) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (E 7 3) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (CD 5 3) (E 7 3)
+             (C 6 3) (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (B 7 4) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2)
+             (C 7 3) (C 5 1) (C 5 2) (C 5 3) (E 7 4) (CD 5 4) (B 7 4) (E 7 3)
+             (C 6 3) (C 6 4) (E 6 5) (C 5 5) (C 5 6) (E 5 7) (B 4 7) (B 4 6)
+             (B 4 5) (B 4 4) (B 4 3) (B 4 2) (E 4 1) (C 3 1) (C 3 2) (C 3 3)
+             (C 3 4) (C 3 5) (C 3 6) (B 7 5) (B 3 7) (B 3 6) (B 3 5) (B 3 4)
+             (B 3 3) (B 3 2) (D 3 1) (C 4 1) (C 4 2) (C 4 3) (C 4 4) (C 4 5)
+             (C 4 6) (D 4 7) (B 5 7) (B 5 6) (B 5 5) (B 5 4) (B 5 3) (B 5 2)
+             (C 7 4) (C 5 1) (C 5 2) (C 5 3) (E 7 5) (C 5 4) (CD 5 5)) 
+Penetância: 0.08961004 
+Nós Gerados: 7488 
+Nós Expandidos: 671 
+Profundidade da Solução: 671 
+Factor de ramificação médio: 11.159464 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+(1 1 1 1 1 1 1)
+(1 1 1 0 1 1 1)
+(1 1 1 1 1 1 1)
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 1)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+__________________________________________________________ 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: 31 
+Movimentos: ((CD 2 4) (CE 5 4) (CE 7 4) (CB 4 6) (CE 6 5) (CB 5 7) (CC 5 4)
+             (CC 5 2) (CE 7 3) (CB 5 4) (CC 5 1) (CE 4 4) (CD 4 3) (CC 4 1)
+             (CD 3 7) (CB 5 7) (CD 4 5) (CE 7 5) (CD 3 3) (CE 6 3) (CC 3 1)
+             (CD 2 5) (CE 5 5) (CB 3 6) (CB 3 4) (CD 1 3) (CE 4 3) (CB 1 5)
+             (CD 1 3) (CC 3 2) (CE 3 4)) 
+Penetância: 0.0066709705 
+Nós Gerados: 4647 
+Nós Expandidos: 4418 
+Profundidade da Solução: 31 
+Factor de ramificação médio: 149.90323 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+(1 1 1 1 1 1 1)
+(1 1 1 0 1 1 1)
+(1 1 1 1 1 1 1)
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(1 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 7 
+__________________________________________________________ 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA1 
+Limite/Limiar: 15 
+Movimentos: ((CC 6 3) (CD 5 5) (CD 4 3) (CE 7 3) (CC 5 3) (CD 4 5) (CE 7 5)
+             (CD 3 4) (CC 5 4) (CE 5 6) (CB 3 6) (CB 3 4) (CD 1 3) (CC 3 2)
+             (CE 3 4)) 
+Penetância: 0.0015454359 
+Nós Gerados: 9706 
+Nós Expandidos: 9573 
+Profundidade da Solução: 15 
+Factor de ramificação médio: 647.06665 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 1 1 1 0 0)
+(0 1 1 1 1 1 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(1 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 17 
+__________________________________________________________ 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: 55 
+Movimentos: ((D 1 3) (CB 1 5) (CD 1 3) (C 3 1) (CC 3 2) (CE 5 1) (E 7 5)
+             (CC 7 3) (CE 7 5) (B 5 7) (CB 5 6) (CD 3 7) (C 3 1) (E 5 7)
+             (E 5 4) (B 4 7) (B 4 6) (CB 4 5) (C 4 3) (CD 3 4) (E 5 4) (D 3 2)
+             (C 4 2) (CC 4 3)) 
+Penetância: 0.05491991 
+Nós Gerados: 437 
+Nós Expandidos: 38 
+Profundidade da Solução: 24 
+Factor de ramificação médio: 18.208334 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(1 0 0 0 0 0 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 1 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+________________________________________________________________________
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: 79 
+Movimentos: ((C 1 3) (CB 1 5) (CE 3 5) (CE 5 5) (CE 7 5) (C 1 3) (CB 1 5)
+             (C 1 3) (CE 3 3) (CC 1 3) (CE 5 3) (CE 7 3) (B 5 7) (CB 5 6)
+             (CD 3 7) (CC 5 3) (E 5 7) (E 5 5) (CD 3 5) (E 5 5) (C 5 1)
+             (CD 3 1) (CC 5 1) (E 5 3) (CD 3 3) (E 5 3) (B 4 7) (CB 4 6)
+             (B 1 5) (CC 4 3) (B 4 5) (D 1 4) (D 2 4) (CD 3 4)) 
+Penetância: 0.040621266 
+Nós Gerados: 837 
+Nós Expandidos: 48 
+Profundidade da Solução: 34 
+Factor de ramificação médio: 24.617647 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(1 1 1 1 1 1 1)
+(0 0 0 0 0 0 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 1 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+
+_________________________________________________________________________________________
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: 64 
+Movimentos: ((C 1 3) (CD 1 4) (E 7 5) (CE 6 5) (CD 3 5) (CC 3 3) (E 7 3)
+             (CE 6 3) (E 6 4) (CB 5 5) (CE 5 3) (E 5 7) (CB 4 7) (CD 3 5)
+             (E 5 5) (E 5 1) (CC 4 1) (CD 3 3) (B 1 5) (E 5 3) (D 3 7) (B 4 7)
+             (CC 4 5) (B 4 7) (B 4 6) (D 3 1) (C 4 1) (CB 4 3) (CB 4 5) (C 4 3)
+             (C 4 1) (C 4 2) (CC 4 3) (B 4 5) (D 1 4) (D 2 4) (CD 3 4)) 
+Penetância: 0.029042386 
+Nós Gerados: 1274 
+Nós Expandidos: 62 
+Profundidade da Solução: 37 
+Factor de ramificação médio: 34.432434 
+
+Tabuleiro Inicial:
+(NIL NIL 1 0 1 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(1 0 1 0 1 0 1)
+(0 1 0 1 0 1 0)
+(1 0 1 0 1 0 1)
+(NIL NIL 0 1 0 NIL NIL)
+(NIL NIL 1 0 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 1 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: 45 
+Movimentos: ((CC 2 3) (CC 6 3) (CE 3 5) (CC 3 3) (CE 5 3) (CB 5 5) (CD 3 5)
+             (CE 6 5) (C 1 3) (CB 1 5) (E 7 3) (CE 6 3) (CD 3 3) (E 5 3)
+             (CC 4 5) (B 4 7) (B 4 6) (D 1 3) (D 2 3) (CD 3 3) (CB 4 5)
+             (CE 5 3)) 
+Penetância: 0.040515654 
+Nós Gerados: 543 
+Nós Expandidos: 30 
+Profundidade da Solução: 22 
+Factor de ramificação médio: 24.681818 
+
+Tabuleiro Inicial:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 1 0 NIL NIL)
+(0 0 1 1 1 0 0)
+(0 1 1 1 1 1 0)
+(1 1 1 1 1 1 1)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 0 0 0)
+(0 0 1 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0
+______________________________________________________________________________________
+
+Algoritmo: IDA-STAR 
+Heuristica: HEURISTICA2 
+Limite/Limiar: 116 
+Movimentos: ((CD 2 4) (CC 3 2) (CD 1 3) (CB 1 5) (CE 5 2) (CE 3 5) (CB 3 7)
+             (CE 5 7) (CE 5 6) (C 1 3) (CB 1 5) (CB 5 4) (CC 5 1) (CE 7 4)
+             (CD 3 1) (CB 3 3) (CB 3 5) (CB 3 7) (B 7 5) (CC 7 3) (CD 5 3)
+             (CB 5 5) (CE 7 5) (E 7 3) (CD 5 3) (CD 3 3) (E 7 3) (CE 6 3)
+             (B 5 5) (CD 3 5) (CB 5 5) (CE 5 3) (E 5 1) (CD 3 1) (E 5 1)
+             (C 4 1) (C 4 2) (CD 3 3) (C 1 3) (E 5 3) (CC 4 3) (B 4 5) (D 1 4)
+             (D 2 4) (CD 3 4)) 
+Penetância: 0.038330495 
+Nós Gerados: 1174 
+Nós Expandidos: 62 
+Profundidade da Solução: 45 
+Factor de ramificação médio: 26.088888 
+
+Tabuleiro Inicial:
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+(1 1 1 1 1 1 1)
+(1 1 1 0 1 1 1)
+(1 1 1 1 1 1 1)
+(NIL NIL 1 1 1 NIL NIL)
+(NIL NIL 1 1 1 NIL NIL)
+ 
+Tabuleiro Final:
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+(0 0 0 0 0 0 0)
+(0 0 0 0 1 0 0)
+(0 0 0 0 0 0 0)
+(NIL NIL 0 0 0 NIL NIL)
+(NIL NIL 0 0 0 NIL NIL)
+ 
+Tempo decorrido (em segundos): 
+ 0 
+___________________________________________________
