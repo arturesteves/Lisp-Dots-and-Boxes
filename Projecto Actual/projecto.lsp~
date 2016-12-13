@@ -18,34 +18,6 @@
 	)
 )
 
-#|
-(defun iniciar ()"Função que inicializa o programa, chamando a função que apresenta o menu inicial."
-	(progn
-		(let ((caminho (inserir-diretoria)))
-			  (load-files caminho)
-    	 )
-	)
-)
-
-
-(defun inserir-diretoria() 
-    (progn
-        (format t "~%Introduza o caminho do ficheiro ~%")
-        (format nil (read-line))
-    )
-)
-;;load-files ()
-(defun load-files (opcao) "Funcao que carrega os ficheiros de puzzle e procura para o programa e executa o menu"
-                (progn 
-                    (compile-file (concatenate 'string opcao "\\puzzle.lsp"))
-                    (compile-file (concatenate 'string opcao "\\procura.lsp"))
-                    (load (concatenate 'string opcao "\\puzzle.ofasl")) 
-                    (load (concatenate 'string opcao "\\procura.ofasl"))
-					(menu-inicial)
-               )
-)
-
-|#
 
 ;; menu-inicial
 (defun menu-inicial () "Apresenta o menu principal do programa na consola. Sendo possível iniciar uma procura ou sair do programa"
@@ -59,7 +31,7 @@
 			(format t "~%>|            3. Sair                                  |")
 			(format t "~%>|                                                     |")
 			(format t "~%> ------------------------------------------------------")
-			(format t "~%> Op��o")
+			(format t "~%> Opção:")
 			(format t "~%> ")
 			
 			(let ((opcao (ler-teclado)))
@@ -320,16 +292,16 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format ficheiro "Gerado em ~s~%" (current-date-string))
 		(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
 		(format ficheiro "~%Estado final: ~s ~%" estado-solucao)
-		(format ficheiro "~%Profundidade m�xima ~s ~%" profundidade-maxima)
+		(format ficheiro "~%Profundidade máxima: ~s ~%" profundidade-maxima)
 		(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
-		(format ficheiro " ~s ~%" heuristica)
+		(format ficheiro "~%Heurística: ~s ~%" heuristica)
 		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
-		(format ficheiro "~%N�s Gerados: ~s ~%" nos-gerados)
-		(format ficheiro "~%N�s expandidos: ~s ~%" tamanho-lista-fechados)
-		(format ficheiro "~%Penetr�ncia: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "~%Fator de Ramifica��o ~%" (fator-ramificacao profundidade nos-gerados))
+		(format ficheiro "~%Nós Gerados: ~s ~%" nos-gerados)
+		(format ficheiro "~%Nós expandidos: ~s ~%" tamanho-lista-fechados)
+		(format ficheiro "~%Penetrância: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format ficheiro "~%Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))
 		;(format ficheiro "~%Solução: ~s ~%" solucao)	
-		(format ficheiro "~%Caminho at� � solu��o: ~s ~%" caminho)	
+		(format ficheiro "~%Caminho até à solução: ~s ~%" caminho)	
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
 		(format ficheiro "~%Tempo decorrido: ~s segundos ~%" tempo)
 		
@@ -341,16 +313,16 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format t "Gerado em ~s~%" (current-date-string))
 		(format t "~%Estado inicial: ~s ~%" no-inicial)
 		(format t "~%Estado final: ~s ~%" estado-solucao)
-		(format t "~%Profundidade m�xima ~s ~%" profundidade-maxima)
+		(format t "~%Profundidade máxima: ~s ~%" profundidade-maxima)
 		(format t "~%Algoritmo: ~s ~%" algoritmo)
-		(format t "~%Heuristica: ~s ~%" heuristica)
+		(format t "~%Heurística: ~s ~%" heuristica)
 		(format t "~%Profundidade: ~s ~%" profundidade)
-		(format t "~%N�s Gerados: ~s ~%" nos-gerados)
-		(format t "~%N�s expandidos: ~s ~%" tamanho-lista-fechados)
-		(format t "~%Penetr�ncia: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "~%Fator de Ramifica��o ~%" (fator-ramificacao profundidade nos-gerados))	
+		(format t "~%Nós Gerados: ~s ~%" nos-gerados)
+		(format t "~%Nós expandidos: ~s ~%" tamanho-lista-fechados)
+		(format t "~%Penetrância: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format t "~%Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))	
 		;(format t "~%Solução: ~s ~%" solucao)	
-		(format t "~%Caminho at� � solu��o:: ~s ~%" caminho)	
+		(format t "~%Caminho até à solução: ~s ~%" caminho)	
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
 		(format t "~%Tempo decorrido: ~s segundos ~%" tempo)
 		(format t "___________________________________________________~%")
