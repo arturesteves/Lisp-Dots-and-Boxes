@@ -22,9 +22,9 @@
 		(T 
 			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
 			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
-		          (cond
+		          (cond	
 		            ;(solucao (list solucao (list (car abertos) (length abertos) (length fechados) (- (get-universal-time) tempo-inicial)))); devolve a solucao, com o tempo de execucao
-					(solucao (append (list solucao) (list (length abertos) (length fechados) (- (get-universal-time) tempo-inicial)))); devolve a solucao, com o tempo de execucao
+					(solucao (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial)))); devolve a solucao, com o tempo de execucao
 					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
 					)
 			)
@@ -283,29 +283,22 @@
 ;;fator-ramificacao 
 ;; B+B^2+B^3+...+B^L=T [L comprimento do caminho até ao objetivo, T numero total de nós gerados]
 ;; Função recebe o comprimento do caminho até no objetivo, numero total de nós gerados e tem uma margem de B entre [1,10e11]. Através nessa margem
-;; cria-se uma margem média, e a medida da função vai variar até chegar a uma margem. 
-;; Teste:     (fator-ramificacao 3 6 1 10)
-;; Resultado: 1.2273736
 (defun fator-ramificacao (L valor-t  &optional (margem-erro 0.5) (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
-    (let* ((bmedio (/ (+ bmin bmax) 2))) ;; se for 1 10 da 7,5
-          ;(setq margem-erro 0.5) ;;defini-se uma margem de erro que o valor final poderá ter.
-		  ;;defini-se uma margem de erro que o valor final poderá ter.
+    (let* ((bmedio (/ (+ bmin bmax) 2)))
         (cond 
             ((< (- bmax bmin) margem-erro) (/ (+ bmax bmin) 2))
-            ((< (f-polinomial L valor-t bmedio) 0) (fator-ramificacao L valor-t  bmedio bmax)) ; se a soma dos polinomios for menor que 0 chama-se outra vez a func com o bmin a ser o bmedio achado
+            ((> (- (f-polinomial L bmedio) valor-t) margem-erro) (fator-ramificacao L valor-t margem-erro bmin bmedio))
             (T 
-                (float(fator-ramificacao L valor-t bmin bmedio))
+                (float(fator-ramificacao L valor-t margem-erro bmedio bmax))
             )
         )
     )
 )
 
-;;; Função de calculo do fator de ramificação
-(defun f-polinomial (L valor-t B) "funcao polinomial para calcular o valor de um dado B elevado a um valor L ate este ser 1"
-        (cond 
-            ((= L 1) (- B valor-t)) 
-            (t 
-                (float (+ (expt B L) (f-polinomial (- L 1) valor-t B)))
-            )
-        )
+
+(defun f-polinomial (polinomio x)
+    (cond 
+        ((= polinomio 1) x)
+        (t (+ (expt x polinomio) (f-polinomial (- polinomio 1) x)))
+    )
 )
