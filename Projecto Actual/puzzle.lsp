@@ -281,3 +281,11 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 #|| Ir buscar o nó objectivo da solução -> ver o lab 8 -> pq é ir buscar o nó final que é o 1º tabuleiro e o nó inicial é o último estado)
 
 ||#
+
+;; caminho-solucao
+(defun caminho-solucao (no &optional (solucao nil)) "Retorna o caminho até à solução. Ou seja todos os estados desde o inicial à solução."
+	(cond
+		((null (get-no-estado no)) solucao)
+		(T (caminho-solucao (get-no-pai no) (cons (get-no-estado no) solucao)))
+	) 
+)

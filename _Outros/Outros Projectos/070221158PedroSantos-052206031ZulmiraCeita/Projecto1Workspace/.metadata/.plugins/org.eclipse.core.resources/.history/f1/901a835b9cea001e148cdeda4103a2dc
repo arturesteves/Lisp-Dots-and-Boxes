@@ -1,0 +1,197 @@
+(in-package :projecto1)
+
+(defun valor-coordenada (x y tabuleiro)
+(let ((a (1- x)) (b (- 7 y)))
+(if (or (< a 0) (< b 0))
+nil
+(nth a (nth b tabuleiro))
+) 
+)
+)
+
+(defun substituir-nth (lista n elem)
+  (cond
+    ((null lista) nil)
+    ((= n 1) (cons elem (cdr lista)))
+    (T (cons (car lista) (substituir-nth (cdr lista) (1- n) elem)))))
+
+(defun mudar-coordenada (x y valor tabuleiro)
+(substituir-nth tabuleiro (- 8 y) (substituir-nth (nth (- 7 y) tabuleiro) x valor))
+)
+
+(defun conta1s (L)
+  (cond ((null L) 0)
+   ((numberp L) (if (= L 1) 1 0))
+   (T (apply '+ (mapcar 'conta1s L)))))
+
+
+
+(defun c-mover (x y tabuleiro)
+ (mudar-coordenada x (1+ y) 1 (mudar-coordenada x y 0 tabuleiro))
+)
+
+(defun b-mover (x y tabuleiro)
+ (mudar-coordenada x (1- y) 1 (mudar-coordenada x y 0 tabuleiro))
+)
+
+(defun e-mover (x y tabuleiro)
+ (mudar-coordenada (1- x) y 1 (mudar-coordenada x y 0 tabuleiro))
+)
+
+(defun d-mover (x y tabuleiro)
+ (mudar-coordenada (1+ x) y 1 (mudar-coordenada x y 0 tabuleiro))
+)
+
+(defun cc-mover (x y tabuleiro)
+ (mudar-coordenada x (+ y 2) 1 (mudar-coordenada x (1+ y) 0 (mudar-coordenada x y 0 tabuleiro)))
+)
+
+(defun cb-mover (x y tabuleiro)
+ (mudar-coordenada x (- y 2) 1 (mudar-coordenada x (1- y) 0 (mudar-coordenada x y 0 tabuleiro)))
+)
+
+(defun ce-mover (x y tabuleiro)
+ (mudar-coordenada (- x 2) y 1 (mudar-coordenada (1- x) y 0 (mudar-coordenada x y 0 tabuleiro)))
+)
+
+(defun cd-mover (x y tabuleiro)
+ (mudar-coordenada (+ x 2) y 1 (mudar-coordenada (1+ x) y 0 (mudar-coordenada x y 0 tabuleiro)))
+)
+
+
+
+(defun c (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada x (1+ y) tabuleiro) 0)) (c-mover x y tabuleiro))
+  (T nil)
+  )
+)
+
+(defun b (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada x (1- y) tabuleiro) 0)) (b-mover x y tabuleiro))
+  (T nil)
+  )
+)
+
+(defun e (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada (1- x) y tabuleiro) 0)) 
+   (e-mover x y tabuleiro)
+   )
+  (T nil)
+  )
+)
+
+(defun d (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada (1+ x) y tabuleiro) 0)) 
+  (d-mover x y tabuleiro)
+   )
+  (T nil)
+  )
+)
+
+(defun cc (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada x (1+ y) tabuleiro) 1)(equal (valor-coordenada x (+ y 2) tabuleiro) 0)) (cc-mover x y tabuleiro))
+  (T nil)
+)
+)
+
+(defun cb (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada x (1- y) tabuleiro) 1)(equal (valor-coordenada x (- y 2) tabuleiro) 0)) (cb-mover x y tabuleiro))
+  (T nil)
+)
+)
+
+(defun ce (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada (1- x) y tabuleiro) 1)(equal (valor-coordenada (- x 2) y tabuleiro) 0)) (ce-mover x y tabuleiro))
+  (T nil)
+)
+)
+
+(defun cd (x y tabuleiro)
+(cond
+  ((and (equal (valor-coordenada x y tabuleiro) 1)(equal (valor-coordenada (1+ x) y tabuleiro) 1)(equal (valor-coordenada (+ x 2) y tabuleiro) 0)) (cd-mover x y tabuleiro))
+  (T nil)
+)
+)
+
+(defun objectivo (tabuleiro)
+  (if (= (conta1s tabuleiro) 1) t nil)
+)
+
+(defun sucessores-aux (no operadores gerados x y heuristica)
+  (cond
+    ((null operadores) gerados)
+    (T 
+     (let ((tabGerado (funcall (car operadores) x y (estado-tabuleiro no))))
+       (if (null tabGerado) 
+           (sucessores-aux no (cdr operadores) gerados x y heuristica)
+           (let ((heur (funcall heuristica tabGerado)) (nivel (1+ (estado-g no))))
+           (sucessores-aux no (cdr operadores) (cons (make-estado 
+                                                      :tabuleiro tabGerado
+                                                      :f (+ nivel heur)
+                                                      :g nivel
+                                                      :h heur
+                                                      :movActual (list (car operadores) x y)
+                                                      :noPai no
+                                                      ) 
+                                                     gerados) x y heuristica)
+           )
+           )
+       )
+     )
+    )
+  )
+
+(defun sucessores-coord (no operadores gerados x y heuristica)
+  (cond
+    ((> x 7) gerados)
+    ((> y 7) (sucessores-coord no operadores gerados (1+ x) 1 heuristica))
+    (T (sucessores-coord no operadores (sucessores-aux no operadores gerados x y heuristica) x (1+ y) heuristica)
+    )
+    )   
+ )
+
+(defun sucessores (no operadores gerados heuristica)
+	(sucessores-coord no operadores gerados 1 1 heuristica)
+)
+
+(defun sucessores-aux2 (no operador gerados x y heuristica)
+  (cond
+    ((> x 7) gerados)
+    ((> y 7) (sucessores-aux2 no operador gerados (1+ x) 1 heuristica))
+    (T
+     (let ((tabGerado (funcall operador x y (estado-tabuleiro no))))
+       (if (null tabGerado) 
+           (sucessores-aux2 no operador gerados x (1+ y) heuristica)
+           (let ((heur (funcall heuristica tabGerado)) (nivel (1+ (estado-g no))))
+           (sucessores-aux2 no operador(cons (make-estado 
+                                                      :tabuleiro tabGerado
+                                                      :f (+ nivel heur)
+                                                      :g nivel
+                                                      :h heur
+                                                      :movActual (list operador x y)
+                                                      :noPai no
+                                                      ) 
+                                             gerados) x (1+ y) heuristica)
+           )
+           )
+       )
+     )
+    )   
+  )
+
+
+
+(defun sucessores2 (no operadores gerados heuristica)
+ (cond
+   ((null operadores) gerados)
+   (T (sucessores2 no (cdr operadores) (sucessores-aux2 no (car operadores) gerados 1 1 heuristica) heuristica))
+  )
+)
+

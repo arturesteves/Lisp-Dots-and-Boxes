@@ -67,9 +67,10 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 (algoritmo 					(ler-algoritmo))
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
 				 (heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
-				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
-			)	
-			(resultados no algoritmo heuristica solucao)
+				 (tempo-inicial					(get-universal-time))
+				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas)))	
+			
+			(resultados no profundidade algoritmo heuristica solucao tempo-inicial) ; tempo-inicial
 			
 
 	)
@@ -271,13 +272,16 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;;; Estatisticas
 
 ;; resultados
-(defun resultados (no-inicial algoritmo heuristica solucao) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
+(defun resultados (no-inicial profundidade-maxima algoritmo heuristica solucao tempo-inicial) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
 	(let* ((tamanho-lista-abertos (car (cdr solucao)))
-			(tamanho-lista-fechados (car (cdr (cdr solucao))))					  
+			(no-solucao (car solucao))
+			(estado-solucao (get-no-estado no-solucao))
+			(tamanho-lista-fechados (+ (car (cdr (cdr solucao))) 1)) ; é somado sempre +1, pq a procura generica apenas coloca na lista de fechados o nó quando este é solução, mas a verdade é que é necessário contar com ele			  
 			(nos-gerados (- (+ tamanho-lista-abertos tamanho-lista-fechados) 1))	; porque o nó inicial não conta
 			(profundidade (get-no-profundidade (get-no-estado solucao)))
 			(no-final (get-no-estado solucao))
-			(tempo (car (cdr (cdr (cdr solucao))))))
+			(tempo (- (get-universal-time) tempo-inicial))
+			(caminho (caminho-solucao no-solucao)))
 						
 		(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
 							:direction :output
@@ -287,16 +291,19 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	;; Esta parte será escrita no ficheiro do tipo .DAT
 		(format ficheiro "Gerado em ~s~%" (current-date-string))
 		(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
+		(format ficheiro "~%Estado final: ~s ~%" estado-solucao)
+		(format ficheiro "~%Profundidade máxima: ~s ~%" profundidade-maxima)
 		(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
-		(format ficheiro "~%Heuristica: ~s ~%" heuristica)
+		(format ficheiro "~%Heurística: ~s ~%" heuristica)
 		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
-		(format ficheiro "Nos Gerados: ~s ~%" nos-gerados)
-		(format ficheiro "Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format ficheiro "Penetrancia: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))
-		(format ficheiro "~%Solução: ~s ~%" solucao)
+		(format ficheiro "~%Nós Gerados: ~s ~%" nos-gerados)
+		(format ficheiro "~%Nós expandidos: ~s ~%" tamanho-lista-fechados)
+		(format ficheiro "~%Penetrância: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format ficheiro "~%Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))
+		;(format ficheiro "~%Solução: ~s ~%" solucao)	
+		(format ficheiro "~%Caminho até à solução: ~s ~%" caminho)	
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-		(format ficheiro "~%Tempo decorrido: ~s ~%" tempo)
+		(format ficheiro "~%Tempo decorrido: ~s segundos ~%" tempo)
 		
 		;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
 		(format ficheiro "___________________________________________________~%")
@@ -305,16 +312,19 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	;;Esta parte será mostrada na consola
 		(format t "Gerado em ~s~%" (current-date-string))
 		(format t "~%Estado inicial: ~s ~%" no-inicial)
+		(format t "~%Estado final: ~s ~%" estado-solucao)
+		(format t "~%Profundidade máxima: ~s ~%" profundidade-maxima)
 		(format t "~%Algoritmo: ~s ~%" algoritmo)
-		(format t "~%Heuristica: ~s ~%" heuristica)
+		(format t "~%Heurística: ~s ~%" heuristica)
 		(format t "~%Profundidade: ~s ~%" profundidade)
-		(format t "Nos Gerados: ~s ~%" nos-gerados)
-		(format t "Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format t "Penetrancia: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))	
-		(format t "~%Solução: ~s ~%" solucao)
+		(format t "~%Nós Gerados: ~s ~%" nos-gerados)
+		(format t "~%Nós expandidos: ~s ~%" tamanho-lista-fechados)
+		(format t "~%Penetrância: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format t "~%Fator de Ramificação:~a ~%" (fator-ramificacao profundidade nos-gerados))	
+		;(format t "~%Solução: ~s ~%" solucao)	
+		(format t "~%Caminho até à solução: ~s ~%" caminho)	
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-		(format t "~%Tempo decorrido: ~s ~%" tempo)
+		(format t "~%Tempo decorrido: ~s segundos ~%" tempo)
 		(format t "___________________________________________________~%")
 	)
 )
@@ -343,13 +353,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 )
 ;
 
-
 ;; current-date-string [Data actual]
 (defun current-date-string () "Retorna a data no formato de string"
 	(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
-	(get-decoded-time)
-	(declare (ignore dow dst-p tz sec min hr))
-	 (format nil "~A-~A-~A : ~A:~A:~A" yr mon day hr min sec)
+		(get-decoded-time)
+		(declare (ignore dow dst-p tz))	
+		(format nil "~A-~A-~A : ~A:~A:~A" yr mon day hr min sec)
 	)
 )
-
