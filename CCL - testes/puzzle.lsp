@@ -121,8 +121,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 ;; operadores 
 (defun operadores () "Cria uma lista com todos os operadores do problema dos Pontos e das Caixas"
-	;(list 'inserir-arco-vertical 'inserir-arco-horizontal)
-	(list 'inserir-arco-horizontal 'inserir-arco-vertical)
+	(list 'inserir-arco-vertical 'inserir-arco-horizontal)
 )
 
 ;; numero-linhas-tabuleiro
@@ -240,7 +239,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 ;; Teste: (contar-objetivo'((NIL NIL NIL T) (T NIL NIL T) (T NIL NIL T)))
 ;; Resultado: 0
 ;; contar-objetivo
-(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada. "
+(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada "
 	(cond
 		((null lista)0)
 		((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))

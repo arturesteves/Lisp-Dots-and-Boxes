@@ -12,8 +12,8 @@
 	(progn
 		(compile-file (concatenate 'string (diretoria-atual)"puzzle.lsp"))  
 		(compile-file (concatenate 'string (diretoria-atual)"procura.lsp"))
-		(load (concatenate 'string (diretoria-atual)"puzzle.ofasl")) 
-		(load (concatenate 'string (diretoria-atual)"procura.ofasl"))
+		(load (concatenate 'string (diretoria-atual)"puzzle.wx32fsl")) 
+		(load (concatenate 'string (diretoria-atual)"procura.wx32fsl"))
 		(menu-inicial)
 	)
 )
@@ -258,11 +258,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; diretoria-atual
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
-			(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
-			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			;(path-daniel "C:\\Users\\Daniel's\\Desktop\\Projeto IA\\"))
+			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
 			;(path-professor ""))
-		;path-artur
-		path-daniel
+		path-artur
+		;path-daniel
 		;path-professor
 	)
 )
