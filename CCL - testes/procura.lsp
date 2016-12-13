@@ -79,7 +79,7 @@
 
 ;; A*
 (defun a-asterisco (abertos sucessores)
-	(sort (append abertos sucessores) #'< :key #'custo)	
+	(sort (append abertos sucessores) #'< :key #'custo)
 )
 
 
@@ -97,7 +97,7 @@
 
 
 
-
+#||
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
@@ -137,6 +137,7 @@
 	)
 )
 
+||#
 
 ;;;;;;;;;;;;;;;;;; Sucessores
    

@@ -121,8 +121,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 ;; operadores 
 (defun operadores () "Cria uma lista com todos os operadores do problema dos Pontos e das Caixas"
-	;(list 'inserir-arco-vertical 'inserir-arco-horizontal)
-	(list 'inserir-arco-horizontal 'inserir-arco-vertical)
+	(list 'inserir-arco-vertical 'inserir-arco-horizontal)
 )
 
 ;; numero-linhas-tabuleiro
