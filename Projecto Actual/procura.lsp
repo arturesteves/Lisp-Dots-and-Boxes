@@ -48,8 +48,9 @@
 					   
 					   (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
 							  (cond
-								(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
-
+								;(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
+									;; solucao ou no-atual?
+								(solucao (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial))))); devolve a solucao, com o tempo de execucao
 									(T (progn
 									   (setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores))
 										   (setf fechados (cons no-atual fechados))
@@ -65,6 +66,48 @@
 )
 
 
+
+(defun procura-ida-asterisco (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas limiar prox-limiar &aux (tempo-inicial (get-universal-time)))
+"Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
+ de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
+ de profundidade, uma heuristica e um algoritmo de ordenacao
+" 
+	(let ( (abertos (list no-inicial)) (fechados nil) )
+		(loop
+		  (let ((no-atual (first abertos)))
+				 (cond
+					   ((null abertos) (return nil))
+					  ((funcall f-solucao no-atual numero-objectivo-caixas) (return (list no-atual (length abertos) (length fechados) (- (get-universal-time) tempo-inicial) )))
+					  ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos))); se o no ja existe nos fechados e ignorado
+					   (T 
+							(let* ((lista-sucessores (funcall f-sucessores no-atual lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
+					   
+					   (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
+							  (cond
+								;(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
+									;; solucao ou no-atual?
+								(solucao (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial))))); devolve a solucao, com o tempo de execucao
+									(T (progn
+									   (setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores))
+										   (setf fechados (cons no-atual fechados))
+										)                
+									)            
+								)          
+							)         
+						)      
+					)     
+			)     
+		)    
+	)
+)
+
+
+
+
+
+
+
+
 ;;;;; para desaparecer 
 (defun no-teste-tab-a ()
 	(list '(
@@ -74,31 +117,6 @@
 		0 nil
 	)
 )
-;(procura-generica (no-teste-tab-a) 999 'solucaop 'sucessores 'bfs (operadores) 3)
-
-;;;;;;;;; PROCURA-GENERICA mais desactualizada  -> funciona apenas com o bfs e dfs -> to be removed 
-#||
-(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil))
-"Permite procurar a solucao de um problema usando a procura no espaço de estados. A partir de um estado inicial,
- de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
- de profundidade, uma heuristica e um algoritmo de ordenacao
-"
-	(cond
-		((null abertos) nil); nao existe solucao ao problema
-		((funcall f-solucao (car abertos) numero-objectivo-caixas)  (car abertos)); se o primeiro dos abertos e solucao este no e devolvido
-		((existep (first abertos) fechados f-algoritmo) (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (cdr abertos) fechados)); se o no ja existe nos fechados e ignorado
-		(T 
-			(let* ((lista-sucessores (funcall f-sucessores (first abertos)  lista-operadores f-algoritmo prof-max));lista dos sucessores do primeiro dos abertos
-			      (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
-		          (cond
-		            (solucao solucao); devolve a solucao
-					(T (procura-generica no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores numero-objectivo-caixas (funcall f-algoritmo (rest abertos) lista-sucessores) (cons (car abertos) fechados))); expande a arvore se o primeiro dos abertos nao for solucao
-					)
-			)
-		)
-	)
-)
-||#
 
 ;;; Algoritmos
 
@@ -117,14 +135,32 @@
 	(sort (append abertos sucessores) #'< :key #'custo)	
 )
 
+;; ;; IDA*
+(defun ida-asterisco (abertos sucessores &optional limiar prox-limiar)
+	(cond
+		((null sucessores)(list (sort abertos #'< :key #'custo) prox-limiar))
+		(
+			(<= (get-no-profundidade (car sucessores))limiar) ;; se o f do sucessor for <= que o limiar ele volta a fazer
+			(ida-asterisco (cons (car sucessores) abertos) (cdr sucessores)  limiar prox-limiar)
+		)
+		(T
+			(cond
+				(	(and 
+						(< (get-no-profundidade (car sucessores))prox-limiar)
+						(< (get-no-profundidade (car sucessores) limiar))
+				
+					)
+					(ida-asterisco abertos (cdr sucessores) limiar (get-no-profundidade(car sucessores)))
+				)
+				(t
+					(ida-asterisco abertos (cdr sucessores) limiar prox-limiar)
+				)
+			)
+		)
+	)
+)
 
 
-
-
-;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
-;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
-;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
-;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 ;; IDA* 				<------------------------------------------------ VERIFICAR --------------------
 (defun procuraIdaStar (abertos fechados proxF gerados expandidos heuristica)                                                                          
 	(cond
@@ -136,26 +172,6 @@
 			(procuraIdaStar (car novaListaAbertos) (cons (car abertos) fechados) (cadr novaListaAbertos) (+ gerados (length sucessores))
 							(1+ expandidos) heuristica)
 			);reinicia a procura adicionando os sucessores segundo um dos 3 algoritmos suportados         
-		)
-	)
-)
-
-
-;; ida-asterisco
-(defun ida-asterisco (sucessores abertos f proxF) ;gestão do sucessores e lista de abertos segundo a lógica do IDA*
-	(cond 
-		((null sucessores) (list  (sort abertos #'< :key #'custo) proxF))
-		((<= (nth 1 (car sucessores)) f)
-			(cond 
-				((verificaObjectivo (caar abertos)) (list (cons (car sucessores) abertos) f proxF))
-				(T (ida-asterisco (cdr sucessores) (cons (car sucessores) abertos) f proxF)) ;só adiciona caso o f seja menor que o limiar
-			)
-		)
-		(T (cond
-			((and (< (nth 1 (car sucessores)) proxF) (> (nth 1 (car sucessores)) f)) ;caso seja menor calcula o próximo limiar (caso contrário mantém o mesmo próximo limiar)
-				(ida-asterisco (cdr sucessores) abertos f (nth 1 (car sucessores))))
-			(T (ida-asterisco (cdr sucessores) abertos f proxF))
-			)
 		)
 	)
 )
