@@ -48,8 +48,9 @@
 					   
 					   (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
 							  (cond
-								(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
-
+								;(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
+									;; solucao ou no-atual?
+								(solucao (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial))))); devolve a solucao, com o tempo de execucao
 									(T (progn
 									   (setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores))
 										   (setf fechados (cons no-atual fechados))

@@ -286,11 +286,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; diretoria-atual
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
-			(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
-			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			;(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
+			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
 			;(path-professor ""))
-		;path-artur
-		path-daniel
+		path-artur
+		;path-daniel
 		;path-professor
 	)
 )
@@ -301,7 +301,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 
 ;; resultados
 (defun resultados (no-inicial profundidade-maxima algoritmo heuristica solucao tempo-inicial) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
-	(let* ((tamanho-lista-abertos (car (cdr solucao)))
+	(let*  ;;; verificar se a solucao é null!! se a solução for null nao faz sentido ir buscar valores!!!
+		((tamanho-lista-abertos (car (cdr solucao)))
 			(no-solucao (car solucao))
 			(estado-solucao (get-no-estado no-solucao))
 			(tamanho-lista-fechados (+ (car (cdr (cdr solucao))) 1)) ; é somado sempre +1, pq a procura generica apenas coloca na lista de fechados o nó quando este é solução, mas a verdade é que é necessário contar com ele			  
@@ -316,18 +317,29 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 							:if-exists :append 
 							:if-does-not-exist :create)
 		
+	#||	(format t "solucao: ~s~%" solucao)
+		(format t "L. abertos: ~s~%" tamanho-lista-abertos)
+		(format t "estado-solucao: ~s~%" estado-solucao)
+		(format t "tamanho-lista-fechados: ~s~%" tamanho-lista-fechados)
+		(format t "nos-gerados: ~s~%" nos-gerados)
+		(format t "profundidade: ~s~%" profundidade)
+		(format t "no-final: ~s~%" no-final)
+		(format t "tempo: ~s~%" tempo)
+		(format t "caminho: ~s~%" caminho)
+		||#
+		;#||
 	;; Esta parte será escrita no ficheiro do tipo .DAT
 		(format ficheiro "Gerado em ~s~%" (current-date-string))
 		(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
 		(format ficheiro "~%Estado final: ~s ~%" estado-solucao)
-		(format ficheiro "~%Profundidade maxima ~s ~%" profundidade-maxima)
+		(format ficheiro "~%Profundidade maxima: ~s ~%" profundidade-maxima)
 		(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
 		(format ficheiro " ~s ~%" heuristica)
 		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
 		(format ficheiro "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format ficheiro "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
 		(format ficheiro "~%Penetrancia: ~s ~%"(penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
+		(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))	; nao e nos-gerados mas sim nos-expandidos
 		;(format ficheiro "~%Solução: ~s ~%" solucao)	
 		(format ficheiro "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
@@ -335,25 +347,28 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		
 		;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
 		(format ficheiro "___________________________________________________~%")
-		
+	;	||#
 		)
+		;#||
 	;;Esta parte será mostrada na consola
 		(format t "Gerado em ~s~%" (current-date-string))
 		(format t "~%Estado inicial: ~s ~%" no-inicial)
 		(format t "~%Estado final: ~s ~%" estado-solucao)
-		(format t "~%Profundidade maxima ~s ~%" profundidade-maxima)
+		(format t "~%Profundidade maxima: ~s ~%" profundidade-maxima)
 		(format t "~%Algoritmo: ~s ~%" algoritmo)
 		(format t "~%Heuristica: ~s ~%" heuristica)
 		(format t "~%Profundidade: ~s ~%" profundidade)
 		(format t "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format t "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
 		(format t "~%Penetrancia: ~s ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
+		(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))	
 		;(format t "~%Solução: ~s ~%" solucao)	
 		(format t "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
 		(format t "~%Tempo decorrido: ~s segundos ~%" tempo)
 		(format t "___________________________________________________~%")
+	;||#
+	
 	)
 )
 
