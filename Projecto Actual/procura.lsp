@@ -8,6 +8,7 @@
 (procura-generica (no-teste-tab-a) 5 'solucaop 'sucessores 'dfs (operadores) nil 3)
 (procura-generica (no-teste-tab-a) nil 'solucaop 'sucessores 'bfs (operadores) nil 3)
 	||#
+	#||
 (defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &optional (abertos (list no-inicial)) (fechados nil) (tempo-inicial (get-universal-time)))
 "Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
  de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
@@ -29,6 +30,40 @@
 		)
 	)
 )
+||#
+(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &aux (tempo-inicial (get-universal-time)))
+"Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
+ de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
+ de profundidade, uma heuristica e um algoritmo de ordenacao
+" 
+	(let ( (abertos (list no-inicial)) (fechados nil) )
+		(loop
+		  (let ((no-atual (first abertos)))
+				 (cond
+					   ((null abertos) (return nil))
+					  ((funcall f-solucao no-atual numero-objectivo-caixas) (return (list no-atual (length abertos) (length fechados) (- (get-universal-time) tempo-inicial) )))
+					  ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos))); se o no ja existe nos fechados e ignorado
+					   (T 
+							(let* ((lista-sucessores (funcall f-sucessores no-atual lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
+					   
+					   (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
+							  (cond
+								(solucao (return (list no-atual (- (get-universal-time) tempo-inicial) (length abertos)(length fechados)))); devolve a solucao, com o tempo de execucao
+
+									(T (progn
+									   (setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores))
+										   (setf fechados (cons no-atual fechados))
+										)                
+									)            
+								)          
+							)         
+						)      
+					)     
+			)     
+		)    
+	)
+)
+
 
 ;;;;; para desaparecer 
 (defun no-teste-tab-a ()
@@ -81,18 +116,6 @@
 (defun a-asterisco (abertos sucessores)
 	(sort (append abertos sucessores) #'< :key #'custo)	
 )
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -266,7 +289,6 @@
 	)
 )
 
-;;; Função do calculo do custo
 
 ;;; Funções de Cálculo
 
