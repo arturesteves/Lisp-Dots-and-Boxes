@@ -286,11 +286,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; diretoria-atual
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
-			;(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
-			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
+			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
 			;(path-professor ""))
-		path-artur
-		;path-daniel
+		;path-artur
+		path-daniel
 		;path-professor
 	)
 )
@@ -326,8 +326,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
 		(format ficheiro "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format ficheiro "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format ficheiro "~%Penetrancia: ~a ~%"  (penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "~%Fator de Ramificacao: ~%" (fator-ramificacao profundidade nos-gerados))
+		(format ficheiro "~%Penetrancia: ~s ~%"(penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
 		;(format ficheiro "~%Solução: ~s ~%" solucao)	
 		(format ficheiro "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
@@ -347,8 +347,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		(format t "~%Profundidade: ~s ~%" profundidade)
 		(format t "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format t "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
-		(format t "~%Penetrancia: ~a ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "~%Fator de Ramificacao: ~%" (fator-ramificacao profundidade nos-gerados))	
+		(format t "~%Penetrancia: ~s ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
+		(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
 		;(format t "~%Solução: ~s ~%" solucao)	
 		(format t "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
