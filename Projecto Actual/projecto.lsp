@@ -55,8 +55,9 @@
 			(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
 			(format t "~%>|                                                     |")
 			(format t "~%>|            1. Iniciar Procura                       |")     
-			(format t "~%>|            2. Regras do Jogo                        |")     
-			(format t "~%>|            3. Sair                                  |")
+			(format t "~%>|            2. Regras do Jogo                        |")
+			(format t "~%>|            3. Exemplo Puzzle                        |")  			
+			(format t "~%>|            4. Sair                                  |")
 			(format t "~%>|                                                     |")
 			(format t "~%> ------------------------------------------------------")
 			(format t "~%> Opcao")
@@ -65,10 +66,12 @@
 			(let ((opcao (ler-teclado)))
 				(cond
 					((not (numberp opcao)) (menu-inicial))		
-					((and (<= opcao 3) (>= opcao 1)) (cond
+					((and (<= opcao 5) (>= opcao 1)) (cond
 														((= opcao 1) (iniciar-procura))
-														((= opcao 2) (regras-jogo))	
-														((= opcao 3) (return))	
+														((= opcao 2) (regras-jogo))
+														((= opcao 3) (imprime-tabuleiro))	
+													   ;((= opcao 4) (return))
+														((= opcao 4) (progn (format t "PROGRAMA TERMINADO")) (return))
 													)
 					)
 					(T (progn
@@ -96,10 +99,12 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
 				 (heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
 				 (tempo-inicial					(get-universal-time))
-				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas)))	
+				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+				; (solucao-ida 					(procura-ida-asterisco no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+			)	
 			
 			(resultados no profundidade algoritmo heuristica solucao tempo-inicial) ; tempo-inicial
-			
+		;	(resultados no profundidade algoritmo heuristica solucao-ida tempo-inicial)
 
 	)
 )
@@ -114,21 +119,6 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	)
 )
 |#
-
-(defun escreve-solucao-teste-2 (lista)
-	(format t "~%~%~A" lista)
-)
-
-(defun escreve-solucao-teste (lista)
-	(cond
-		((null lista) nil)
-		(T (progn 
-			(format t "~%~A" (car lista))
-			(escreve-solucao-teste (cdr lista))
-			)
-		)
-	)
-)
 
 
 ;; ler-tabuleiro
@@ -268,18 +258,30 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; regras-jogo
 (defun regras-jogo() "Apresenta as regras do jogo dos pontos e das caixas"
 	(format t "~%> 
-		●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● PUZZLE ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● 
-		●●                                                   		            ●●
-		●● O objetivo do puzzle consiste em fechar um determinado número de caixas  ●●
-		●● a partir de uma configuração inicial do tabuleiro.                       ●●
-		●● Quando o número de caixas por fechar é atingido, o puzzle está resolvido.●●
-		●● A resolução do puzzle consiste portanto em executar a sucessão de traços ●●
-		●● que permite chegar a um estado onde o número de caixas por fechar é 	    ●●
-		●● alcançado.		                                                    ●●
-		●●                                                                    	    ●●
-		●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●"
+		 ---------------- Regras do Puzzle dos Pontos e das Caixas ----------------- 
+		| O objetivo do puzzle consiste em fechar um determinado número de caixas 	|
+		| a partir de uma configuração inicial do tabuleiro.                      	|
+		| Quando o número de caixas por fechar é atingido, o puzzle está resolvido.	|
+		| A resolução do puzzle consiste portanto em executar a sucessão de traços 	|
+		| que permite chegar a um estado onde o número de caixas por fechar é 	    |
+		| alcançado.		                                                    	|
+		 ---------------------------------------------------------------------------"
 	)
 )
+
+(defun imprime-tabuleiro ()
+	(format t "~%> Tabuleiro Exemplo com 1 caixa fechada!")
+	(format t "~%>
+	●	●	●---●
+			|	|
+	●	●---●---●
+		|	|
+	●	●	●	●
+
+	●	●	●	● 
+	")
+)
+
 
 
 ;;; Funções I/O
@@ -301,7 +303,8 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 
 ;; resultados
 (defun resultados (no-inicial profundidade-maxima algoritmo heuristica solucao tempo-inicial) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
-	(let* ((tamanho-lista-abertos (car (cdr solucao)))
+	(let*  ;;; verificar se a solucao é null!! se a solução for null nao faz sentido ir buscar valores!!!
+		((tamanho-lista-abertos (car (cdr solucao)))
 			(no-solucao (car solucao))
 			(estado-solucao (get-no-estado no-solucao))
 			(tamanho-lista-fechados (+ (car (cdr (cdr solucao))) 1)) ; é somado sempre +1, pq a procura generica apenas coloca na lista de fechados o nó quando este é solução, mas a verdade é que é necessário contar com ele			  
@@ -309,51 +312,67 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 			(profundidade (get-no-profundidade (get-no-estado solucao)))
 			(no-final (get-no-estado solucao))
 			(tempo (- (get-universal-time) tempo-inicial))
-			(caminho (caminho-solucao no-solucao)))
+			(caminho (caminho-solucao no-solucao))
+			(valor-heuristico (get-no-heuristica no-solucao)))
 						
 		(with-open-file (ficheiro (concatenate 'string (diretoria-atual)"estatisticas.dat") 
 							:direction :output
 							:if-exists :append 
 							:if-does-not-exist :create)
 		
+	#||	(format t "solucao: ~s~%" solucao)
+		(format t "L. abertos: ~s~%" tamanho-lista-abertos)
+		(format t "estado-solucao: ~s~%" estado-solucao)
+		(format t "tamanho-lista-fechados: ~s~%" tamanho-lista-fechados)
+		(format t "nos-gerados: ~s~%" nos-gerados)
+		(format t "profundidade: ~s~%" profundidade)
+		(format t "no-final: ~s~%" no-final)
+		(format t "tempo: ~s~%" tempo)
+		(format t "caminho: ~s~%" caminho)
+		||#
+		;#||
 	;; Esta parte será escrita no ficheiro do tipo .DAT
 		(format ficheiro "Gerado em ~s~%" (current-date-string))
 		(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
 		(format ficheiro "~%Estado final: ~s ~%" estado-solucao)
-		(format ficheiro "~%Profundidade maxima ~s ~%" profundidade-maxima)
+		(format ficheiro "~%Profundidade maxima: ~s ~%" profundidade-maxima)
 		(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
 		(format ficheiro " ~s ~%" heuristica)
 		(format ficheiro "~%Profundidade: ~s ~%" profundidade)
 		(format ficheiro "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format ficheiro "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
 		(format ficheiro "~%Penetrancia: ~s ~%"(penetrancia no-final nos-gerados)); (float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
-		;(format ficheiro "~%Solução: ~s ~%" solucao)	
+		(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))	; nao e nos-gerados mas sim nos-expandidos
+		(format ficheiro "~%Valor Heuristico: ~s ~%" valor-heuristico)
 		(format ficheiro "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
 		(format ficheiro "~%Tempo decorrido: ~s segundos ~%" tempo)
 		
 		;(format ficheiro "Profundidade da Solução: ~s ~%" (second (car abertos)))
 		(format ficheiro "___________________________________________________~%")
-		
+	;	||#
 		)
+		;#||
 	;;Esta parte será mostrada na consola
 		(format t "Gerado em ~s~%" (current-date-string))
 		(format t "~%Estado inicial: ~s ~%" no-inicial)
 		(format t "~%Estado final: ~s ~%" estado-solucao)
-		(format t "~%Profundidade maxima ~s ~%" profundidade-maxima)
+		(format t "~%Profundidade maxima: ~s ~%" profundidade-maxima)
 		(format t "~%Algoritmo: ~s ~%" algoritmo)
 		(format t "~%Heuristica: ~s ~%" heuristica)
 		(format t "~%Profundidade: ~s ~%" profundidade)
 		(format t "~%Nos Gerados: ~s ~%" nos-gerados)
 		(format t "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
 		(format t "~%Penetrancia: ~s ~%" (penetrancia no-final nos-gerados)) ;(float (/ (second (car abertos))(+ (length abertos) (length fechados)))))
-		(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade nos-gerados))	
+		(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))
+		(format t "~%Valor Heuristico: ~s ~%" valor-heuristico)
 		;(format t "~%Solução: ~s ~%" solucao)	
 		(format t "~%Caminho ate a solucao: ~s ~%" caminho)	
 		(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
 		(format t "~%Tempo decorrido: ~s segundos ~%" tempo)
 		(format t "___________________________________________________~%")
+	;||#
+	
 	)
 )
 
