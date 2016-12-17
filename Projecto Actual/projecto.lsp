@@ -99,7 +99,10 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 				 (profundidade 					(cond ((eql algoritmo 'dfs) (ler-profundidade)) (T 9999)))
 				 (heuristica 					(cond ((not (or (eql algoritmo 'dfs) (eql algoritmo 'bfs))) (ler-heuristica)) (T nil)))
 				 (tempo-inicial					(get-universal-time))
-				 (solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+				 (solucao 						(cond ((eql algoritmo 'ida-asterisco) (procura-ida-asterisco no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
+													  (T (procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))))
+				 
+				 ;(solucao 						(procura-generica no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
 				; (solucao-ida 					(procura-ida-asterisco no profundidade 'solucaop 'sucessores algoritmo (operadores) heuristica numero-objectivo-caixas))
 			)	
 			
@@ -288,11 +291,11 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 ;; diretoria-atual
 (defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
 	(let (
-			(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
-			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
+			;(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
+			(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
 			;(path-professor ""))
-		;path-artur
-		path-daniel
+		path-artur
+		;path-daniel
 		;path-professor
 	)
 )

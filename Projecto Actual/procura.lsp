@@ -69,13 +69,13 @@
 (defun procura-ida-asterisco  (no-inicial prof-max f-solucao f-sucessores  f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &aux (tempo-inicial (get-universal-time)))
     (let ( 	(abertos (list no-inicial)) 
 			(fechados nil) 
-			(limiar (funcall f-heuristica numero-objectivo-caixas (get-no-estado no-inicial))))   
+			(limiar (funcall f-heuristica (get-no-estado no-inicial) numero-objectivo-caixas)))
 		(loop
             (let ((no-atual (first abertos)))
                 (cond
                     ((null abertos) (return nil))
                     ((and (funcall f-solucao no-atual numero-objectivo-caixas) (>= limiar (custo no-atual))) (return (list no-atual (length abertos) (length fechados))))
-                    ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos)))); se o no ja existe nos fechados e ignorado
+                    ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos))); se o no ja existe nos fechados e ignorado
                     (T 
                         (let* ((lista-sucessores (funcall f-sucessores no-atual lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
                                 (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs						
@@ -93,6 +93,7 @@
                             )
                         )
                     )
+				)
 			)
         )
     )
@@ -100,7 +101,7 @@
 
 ;;get-novo-limiar
 (defun novo-limiar (limiar sucessores)
-    (let ((min-custo (custo (first (sort sucessores)))))
+    (let ((min-custo (custo (first (sort sucessores #'< :key #'custo)))))
         (cond
             ((null sucessores) limiar)
             ((> min-custo limiar) min-custo)
@@ -128,8 +129,8 @@
 ;; ;; IDA*
 (defun ida-asterisco (abertos sucessores limiar)
 	(cond
-		;((null sucessores) abertos)
-		((null sucessores)(list (sort abertos #'< :key #'custo) limiar)) ;; https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/
+		((null sucessores) abertos)
+		;((null sucessores)(list (sort abertos #'< :key #'custo) limiar)) ;; https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/
 		(
 			(> (custo (car sucessores))limiar) ;; se o custo do sucessor for <= que o limiar ele volta a fazer
 			;(ida-asterisco (cons (car sucessores) abertos) (cdr sucessores)  limiar)
