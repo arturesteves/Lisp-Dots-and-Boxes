@@ -46,9 +46,8 @@
 			(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
 			(format t "~%>|                                                     |")
 			(format t "~%>|            1. Iniciar Procura                       |")     
-			(format t "~%>|            2. Regras do Jogo                        |")
-			(format t "~%>|            3. Exemplo Puzzle                        |")  			
-			(format t "~%>|            4. Sair                                  |")
+			(format t "~%>|            2. Regras do Jogo                        |")		
+			(format t "~%>|            3. Sair                                  |")
 			(format t "~%>|                                                     |")
 			(format t "~%> ------------------------------------------------------")
 			(format t "~%> Opcao")
@@ -59,9 +58,8 @@
 					((not (numberp opcao)) (menu-inicial caminho))		
 					((and (<= opcao 5) (>= opcao 1)) (cond
 														((= opcao 1) (iniciar-procura caminho))
-														((= opcao 2) (regras-jogo))
-														((= opcao 3) (imprime-tabuleiro))	
-														((= opcao 4) (progn (format t "PROGRAMA TERMINADO")) (return))
+														((= opcao 2) (regras-jogo))	
+														((= opcao 3) (progn (format t "PROGRAMA TERMINADO")) (return))
 													)
 					)
 					(T (progn
@@ -256,58 +254,6 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 		 ---------------------------------------------------------------------------"
 	)
 )
-
-(defun imprime-tabuleiro ()
-	(format t "~%> Tabuleiro Exemplo com 1 caixa fechada!")
-	(format t "~%>
-●  ●  ●--●
-      |  |
-●  ●  ●--●
-   |
-●  ●  ●  ●
-   |
-●  ●  ●  ●
-	")
-)
-
-
-;; Funções para imprimir o tabuleiro - falta acabar 
-(defun imprime-tab (tabuleiro)
-	(let ((arcos-horizontais (get-arcos-horizontais tabuleiro))
-		  (arcos-verticais (get-arcos-verticais tabuleiro)))
-		(mapcar #'(lambda (linha)
-						(cond
-							(()(format t "~%"))
-							(T ))
-				  )arcos-horizontais
-		)
-	)
-)
-(defun imprime-tab-aux (arcos-horizontais arcos-verticais)
-	(let ((primeira-linha (car arcos-horizontais))
-		  (primeira-coluna (car arcos-verticais)))
-		  
-		(cond
-			((or (null primeira-linha) (null primeira-coluna)) nil)
-			(T (progn
-					(imprimir-secao '- primeira-linha)
-					(imprimir-secao '| primeira-coluna)
-					(imprime-tab-aux (cdr arcos-horizontais) (cdr arcos-verticais))
-				))
-		)
-	)
-)
-
-(defun imprimir-secao (simbolo arcos)
-	(cond
-		((null arcos) nil)
-		(T (progn 
-			(format t "~%~s " simbolo)
-			(imprimir-secao simbolo (cdr arcos)))
-		)
-	)
-)
-
 
 ;;; Estatisticas
 ;;sem-resultados
