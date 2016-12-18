@@ -18,7 +18,7 @@
 )
 
 ;;inserir-diretoria
-(defun inserir-diretoria() 
+(defun inserir-diretoria() "Função que pede ao utilizador para colocar a raiz da pasta onde se encontram os ficheiros do projeto."
     (progn
         (format t "~%Introduza o caminho do ficheiro ~%")
         (format nil (read-line))
@@ -106,17 +106,6 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 	)
 )
 ;
-
-;;escrever-caminho
-(defun escrever-caminho() "função que pede ao utilizador o caminho para ler os ficheiros."
-	(format t "~%>")
-	(format t "~%> Escreve a diretoria onde se encontram os ficheiros! ")
-	(let ((resposta (ler-teclado)))
-	(concatenate 'string resposta "\\puzzle.lsp")
-	)
-)
-
-
 
 
 ;; ler-tabuleiro
@@ -271,37 +260,20 @@ Sendo necessário fornecer o estado inicial, o algoritmo de procura e consoante 
 (defun imprime-tabuleiro ()
 	(format t "~%> Tabuleiro Exemplo com 1 caixa fechada!")
 	(format t "~%>
-	●	●	●---●
-			|	|
-	●	●---●---●
-		|	|
-	●	●	●	●
-
-	●	●	●	● 
+●  ●  ●--●
+      |  |
+●  ●  ●--●
+   |
+●  ●  ●  ●
+   |
+●  ●  ●  ●
 	")
 )
 
 
-#|
-;;; Funções I/O
-;; diretoria-atual
-(defun diretoria-atual () "Função que define um caminho para leitura dos ficheiros."
-	(let (
-			(path-daniel "C:\\Users\\Daniel's\\Documents\\Projecto_IA\\Projecto Actual\\"))
-			;(path-artur  "C:\\Users\\artur\\Documents\\Projectos\\Escola\\Projecto_IA\\Projecto Actual\\"))
-			;(path-professor ""))
-		;path-artur
-		path-daniel
-		;path-professor
-	)
-)
-
-|#
-
-
 ;;; Estatisticas
 ;;sem-resultados
-(defun sem-resultados (no-inicial diretoria) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
+(defun sem-resultados (no-inicial diretoria) "Função que imprime num ficheiro do tipo .DAT que não existe solução de determinado nó"
 		
 		(with-open-file (ficheiro (concatenate 'string diretoria "\\estatisticas.dat") 
 							:direction :output

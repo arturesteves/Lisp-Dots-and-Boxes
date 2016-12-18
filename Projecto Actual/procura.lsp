@@ -41,8 +41,8 @@
 
 ;;procura-ida-asterisco
 (defun procura-ida-asterisco  (no-inicial prof-max f-solucao f-sucessores  f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &aux (tempo-inicial (get-universal-time)))
- "Permite procurar a solucao de um problema usando procura no espaço de estados. A partir de um estado inicial,
-gera os sucessores e do algoritmo IDA* a partir de um estado inicial e um limiar.
+	 "Permite procurar a solucao de um problema usando procura no espaço de estados. A partir de um estado inicial,
+	gera os sucessores e do algoritmo IDA* a partir de um estado inicial e um limiar.
 " 
    (let ( 	(abertos (list no-inicial)) 
 			(fechados nil) 
@@ -78,7 +78,7 @@ gera os sucessores e do algoritmo IDA* a partir de um estado inicial e um limiar
 ;;; Funções auxiliares dos Sucessores
 
 ;;get-novo-limiar
-(defun novo-limiar (limiar sucessores)
+(defun novo-limiar (limiar sucessores) "Função auxiliar da procura do algoritmo IDA*, que serve para implementar um novo limiar caso seja maior que o custo."
     (let ((min-custo (custo (first (sort sucessores #'< :key #'custo)))))
         (cond
             ((null sucessores) limiar)
@@ -251,7 +251,6 @@ gera os sucessores e do algoritmo IDA* a partir de um estado inicial e um limiar
 
 ;;fator-ramificacao 
 ; B+B^2+B^3+...+B^L=T [L comprimento do caminho até ao objetivo, T numero total de nós gerados]
-;Função recebe o comprimento do caminho até no objetivo, numero total de nós gerados e tem uma margem de B entre [1,10e11]. Através nessa margem
 (defun fator-ramificacao (L valor-t  &optional (margem-erro 0.5) (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
     (let* ((bmedio (/ (+ bmin bmax) 2)))
         (cond 

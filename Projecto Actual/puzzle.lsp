@@ -256,8 +256,8 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 )
 
 ;; heuristica2
-(defun heuristica2 (tabuleiro numero-caixas-a-fechar) ""
-	(- numero-caixas-a-fechar  (caixas-fechadas tabuleiro)) ;; =-1 nao é admissivel devia ser 0
+(defun heuristica2 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
+	(/ (+ numero-caixas-a-fechar  (caixas-fechadas tabuleiro)) 2)
 )
 
 ;; Solução
