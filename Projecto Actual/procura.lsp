@@ -82,6 +82,7 @@
 								;(solucao (existe-solucao lista-sucessores f-solucao numero-objectivo-caixas 'dfs))) ida*
                             (cond
 							;(solucao (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial))))); devolve a solucao, com o tempo de execucao
+							  ((null lista-sucessores) (return nil))
 							  ((and solucao (>= limiar (custo solucao))) (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (+ 1 (length fechados)) (- (get-universal-time) tempo-inicial)))))
 							  ; ((and solucao (>= limiar (custo solucao))) (return (list solucao (+ (length abertos) (length lista-sucessores)) (1+ (length fechados)))))
                                 (T
