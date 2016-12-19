@@ -723,3 +723,32 @@ Caixas Fechadas: 45
 
 Tempo decorrido: 0 segundos 
 ___________________________________________________
+Gerado em "2016-12-19 : 2:6:53"
+
+Estado inicial: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) 0 NIL NIL) 
+
+Estado final: (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T))) 
+
+Profundidade maxima: 9999 
+
+Algoritmo: BFS 
+ NIL 
+
+Profundidade: 2 
+
+Nos Gerados: 1129 
+
+Nos expandidos: 81 
+
+Penetrancia: 0.0017714792 
+
+Fator de Ramificacao: 8.50333 
+
+Valor Heuristico: NIL 
+
+Caminho ate a solucao: ((((NIL NIL NIL) (NIL NIL T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL NIL T) (NIL T T))) (((NIL NIL NIL) (NIL T T) (NIL T T) (NIL NIL T)) ((NIL NIL NIL) (NIL T NIL) (NIL T T) (NIL T T)))) 
+
+Caixas Fechadas: 3 
+
+Tempo decorrido: 0 segundos 
+___________________________________________________
