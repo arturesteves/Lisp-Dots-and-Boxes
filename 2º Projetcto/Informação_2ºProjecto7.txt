@@ -1,0 +1,85 @@
+Receber tabuleiro e devolver jogada
+
+tabuleiro 7x7 sempre
+
+Receber peça do jogador que é 1 ou 2 (indica o nº do jogador)
+
+1ª alteração é nos operadores 
+	- operador tabuleiro x y peça 
+	
+
+
+peciso mudar os sucessores e operadores (pq tem que receber o vlaor da peça a colocar)
+
+Os sucessores tem que reecber o no e uma peça e posso tambem receber uma função de avaliação!, mas apenas vale a pena se tiver varias funcoes de avaliação se so tiver 1 nao e preciso
+									----------- 
+
+Como saber quem ta a ganhar?
+	- Valores associados ao programa do jogo
+	
+		- nº de caixas do jogador 1 
+		- nº de caixas do jogador 2 
+			- > Estes valores sao passados para dentro do no? ou dos sucessores para fazer a avaliacao
+		
+		Como associar uma caixa fechada a um jogador?
+			- Verificar o nº de caixas fechadas antes de jogar e o nº de caixas fechadas depois de jogar 
+			
+		- verificar sempre se e fim do jogo
+			- ou seja se o nº de caixas fechadas for 49 que e o nº maximo de caixas a jogar.
+			
+		- Quando um jogador fecha uma caixa volta a jogar !
+			- Volta a enviar o tabuleiro para o memsmo jogador.
+			
+			
+Pode existir 2 modos de jogo:
+	- 1º jogar ate ao fim
+	- 2º acabar o jogo assim que um jogador ja nao puder ganhar 
+	
+	
+- validar as posicoes a jogar dentro dos operadores!
+
+A expansão da arvore tera que estar limitada pelo tempo ou pela profundidade
+
+Na expansao tem que existir um controlo do tempo! 
+	- Ao fim de x tempo sai dos sucessores!
+	
+	
+1ª implementação do alfa-beta fazeer com a limitacao da profundidade e vemos os tempos e assim temos uma ideia do que iremos analisar em X tempo.
+	- Ou seja nos sucessores passamos o S-max (profundidade maxima) 
+	- Adaptar a procura na profundidade 
+		- podemos usar a estrutura da procura generica para fazer o alfa beta !
+		
+		
+	- avaliar o no: 2 tipos de nos (avaliar estas 2 situações sempre!!!) 
+		- ou acabou o tempo	 ou a chegou a profundidade maxima 
+		- ou nos que correspondem ao fim do jogo (ganhou, perdeu ou empatou)
+		
+		
+	Estratégias:
+		- dentro da função avaliacao -> Aqui é onde está a inteligência do jogo!!!		-> SUPER IMPORTANTE
+										
+										
+		- Podemos dar mais valor a peças colocadas no centro!
+		- Podemos imitar as jogadas do utilizador 
+		
+	alfa e beta são parâmetros do alfa beta 
+	
+	
+	Verificar o tempo:
+		- quando chega a 90% do tempo para de expandir a árvore e devolve. -> maximizar isto!
+			- Fazer as estatísticas para ver quantos nós é que o jgoador x expandiu e explorou ... e maximizar isto !
+			
+
+Usar hash tables para uma implementação mais rápida
+
+Se o tabuleiro não for devolvido dentro do tempo o jogador perde logo o jogo!
+
+A limitação do tempo é no campeonato!
+
+
+Fazer uma verificação no cria-no qe se o tabuleiro for nil então não cria o nó e devolve nil -> Assim não cria todos os sucessores só cria os necessáros e depois não
+é preciso fazer filtragens
+
+
+Necessário mudar as funções de contar nº de caixas fechadas, agora em vez de retirar apenas o valor, tem que fazer uma conversao,
+se apresentar um 1 ou 2 converte para T
