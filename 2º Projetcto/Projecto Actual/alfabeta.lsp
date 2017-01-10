@@ -4,128 +4,34 @@
 ;;;; Programador: Daniel Costa - 120221058
 ;;;; Implementação dos algoritmos de procura
 
-;;; Implementação das Procuras
+;;; Constantes
+(defvar *corte-alfa* 0)
+(defvar *corte-beta* 0)
 
-;; procura-generica
-(defun procura-generica (no-inicial prof-max f-solucao f-sucessores f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &aux (tempo-inicial (get-universal-time)))
-"Permite procurar a solucao de um problema usando a procura no espaÃ§o de estados. A partir de um estado inicial,
- de uma funcao que gera os sucessores e de um dado algoritmo. De acordo com o algoritmo pode ser usada um limite
- de profundidade, uma heuristica e um algoritmo de ordenacao
-" 
-	(let ( (abertos (list no-inicial)) (fechados nil) )
-		(loop
-		  (let ((no-atual (first abertos)))
-				 (cond
-					   ((null abertos) (return nil))
-					  ((funcall f-solucao no-atual numero-objectivo-caixas) (return (list no-atual (length abertos) (length fechados) (- (get-universal-time) tempo-inicial) )))
-					  ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos))); se o no ja existe nos fechados e ignorado
-					   (T 
-							(let* ((lista-sucessores (funcall f-sucessores no-atual lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
-					   
-					   (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs
-							  (cond
-								(solucao (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (length fechados) (- (get-universal-time) tempo-inicial))))); devolve a solucao, com o tempo de execucao
-									(T (progn
-										(setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores))
-										(setf fechados (cons no-atual fechados))
-										)                
-									)            
-								)          
-							)         
-						)      
-					)     
-			)     
-		)    
-	)
+
+
+
+;;Algoritmo alfa-beta
+(defun alfa-beta (no profundidade-limite peca caixas-fechadas-j1 caixas-fechadas-j2 &aux (tempo-inicial (get-universal-time)))
 )
 
-;;procura-ida-asterisco
-(defun procura-ida-asterisco  (no-inicial prof-max f-solucao f-sucessores  f-algoritmo lista-operadores f-heuristica numero-objectivo-caixas &aux (tempo-inicial (get-universal-time)))
-	 "Permite procurar a solucao de um problema usando procura no espaço de estados. A partir de um estado inicial,
-	gera os sucessores e do algoritmo IDA* a partir de um estado inicial e um limiar.
-" 
-   (let ( 	(abertos (list no-inicial)) 
-			(fechados nil) 
-			(limiar (funcall f-heuristica (get-no-estado no-inicial) numero-objectivo-caixas)))
-		(loop
-            (let ((no-atual (first abertos)))
-                (cond
-                    ((null abertos) (return nil))
-                    ((and (funcall f-solucao no-atual numero-objectivo-caixas) (>= limiar (custo no-atual))) (return (list no-atual (length abertos) (length fechados))))
-                    ((existep no-atual fechados f-algoritmo) (setf abertos (rest abertos))); se o no ja existe nos fechados e ignorado
-                    (T 
-                        (let* ((lista-sucessores (funcall f-sucessores no-atual lista-operadores f-algoritmo prof-max f-heuristica numero-objectivo-caixas))
-                                (solucao (existe-solucao lista-sucessores f-solucao f-algoritmo numero-objectivo-caixas)));verifica se existe uma solucao nos sucessores para o dfs						
-                            (cond
-								((null lista-sucessores) (return nil)) ;; retorna nil quando esta a null a lista de sucessores
-								((and solucao (>= limiar (custo solucao))) (return (append (list solucao) (list (+ (length abertos) (length lista-sucessores)) (+ 1 (length fechados)) (- (get-universal-time) tempo-inicial)))))
-								(T
-									(progn
-										(setf limiar (novo-limiar limiar lista-sucessores))
-										(setf abertos (funcall f-algoritmo (rest abertos) lista-sucessores limiar))
-										(setf fechados (cons no-atual fechados))
-									)
-								)
-                            )
-                        )
-                    )
-				)
-			)
-        )
-    )
-)
 
-;;; Funções auxiliares dos Sucessores
 
-;;get-novo-limiar
-(defun novo-limiar (limiar sucessores) "Função auxiliar da procura do algoritmo IDA*, que serve para implementar um novo limiar caso seja maior que o custo."
-    (let ((min-custo (custo (first (sort sucessores #'< :key #'custo)))))
-        (cond
-            ((null sucessores) limiar)
-            ((> min-custo limiar) min-custo)
-            (T limiar)
-        )
-    )
-)
-
-;;; Algoritmos
-
-;; Breadht-First (Procura em largura)
-(defun bfs (abertos sucessores)
-	(append abertos sucessores)
-)
-
-;; Depth-First (Procura em profundidade)
-(defun dfs (abertos sucessores)
-	(append sucessores abertos)
-)
-
-;; A*
-(defun a-asterisco (abertos sucessores)
-	(sort (append abertos sucessores) #'< :key #'custo)	
-)
-
-;; IDA*
-(defun ida-asterisco (abertos sucessores limiar)
-	(cond
-		((null sucessores) abertos)
-		(
-			(> (custo (car sucessores))limiar) ;; se o custo do sucessor for <= que o limiar ele volta a fazer
-			(ida-asterisco abertos (cdr sucessores) limiar)
-		)
-		(T
-			(cons
-				(car sucessores)
-				(ida-asterisco abertos (cdr sucessores) limiar)
-			)
-		)
-	)
-)
 
 
 ;;; Sucessores
-   
+
+;; Tipo-jogador MAX e MIN
+;; Simbolo-jogador 1 e 2
+
 ;;sucessores
+(defun sucessores (no peca caixas-fechadas-j1 caixas-fechadas-j2) 
+
+)
+
+
+
+#|
 (defun sucessores (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
 	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
@@ -200,9 +106,36 @@
 	)
 )
 
+|#
+ 
+ 
+ 
  
 ;;; Funções de Verificações
 
+(defun existep (no lista-nos) "Retorna verdadeiro se o nó existir na lista"
+	(cond
+		((null lista-nos) nil)
+		( (equal (get-no-estado no) (get-no-estado (car lista-nos))) T)
+		;((equal no (car lista-nos)) T)
+		(t
+			(existep no (cdr lista-nos))
+		)
+	)
+)
+
+;; existe-solucao
+(defun existe-solucao (lista f-solucao numero-objectivo-caixas) "Verifica se existe uma solucao ao problema numa lista de sucessores"
+	(cond
+		((null lista) nil)
+		((funcall f-solucao (car lista) numero-objectivo-caixas) (car lista))
+		(T (existe-solucao (cdr lista) f-solucao numero-objectivo-caixas))
+	)
+)
+
+
+
+#|
 ;;existep
  (defun existep (no lista-nos algoritmo)"Retorna verdadeiro se o nó existir na lista.Para o algoritmo dfs,o conceito de nó repetido é particular."
     (let* ((no-comparado (existep-aux no lista-nos))
@@ -217,8 +150,6 @@
     )
 )
 
-
-
 ;existep-aux 
 (defun existep-aux (no lista-nos)"Verifica se um nó existe numa lista de nos"
     (cond
@@ -227,8 +158,8 @@
         (T (existep-aux no (cdr lista-nos)))
     )
 ) 
- 
- 
+
+
 ;; existe-solucao
 (defun existe-solucao (lista f-solucao f-algoritmo numero-objectivo-caixas) "Verifica se existe uma solucao ao problema numa lista de sucessores para o algoritmo dfs"
 	(cond
@@ -238,8 +169,17 @@
 		(T (existe-solucao (cdr lista) f-solucao f-algoritmo numero-objectivo-caixas))
 	)
 )
+|#
 
 
+
+
+
+#|
+
+		JA NAO É NECESSÁRIO
+		
+		
 ;;; Funções de Cálculo
 
 ;;penetrancia
@@ -270,3 +210,5 @@
         (t (+ (expt x polinomio) (f-polinomial (- polinomio 1) x)))
     )
 )
+
+|#

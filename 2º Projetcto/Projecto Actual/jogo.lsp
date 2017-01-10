@@ -1,12 +1,12 @@
-	 ;;;; projecto.lisp
-	;;;; Disciplina de IA - 2016 / 2017
-	;;;; Programador: Artur Esteves - 140221076
-	;;;; Programador: Daniel Costa - 120221058
-	;;;; Funções de interacção com o utilizador, de carregamento dos outros ficheiros do projecto e leitura e escrita em ficheiros
+;;;; jogo.lisp
+;;;; Disciplina de IA - 2016 / 2017
+;;;; Programador: Artur Esteves - 140221076
+;;;; Programador: Daniel Costa - 120221058
 
 
-	;;; ******************************************************************
-	;;; Inicialização do Programa 
+;;;; Constantes:
+(defvar *jogador1* 1)
+(defvar *jogador2* 2)
 
 	#|
 	;;iniciar
@@ -47,9 +47,8 @@
 				(format t "~%> ------------------------------------------------------")
 				(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
 				(format t "~%>|                                                     |")
-				(format t "~%>|            1. Iniciar Jogo	                        |")     
-				(format t "~%>|            2. Regras do Jogo                        |")		
-				(format t "~%>|            3. Sair                                  |")
+				(format t "~%>|            1. Iniciar Jogo	                        |")     	
+				(format t "~%>|            2. Sair                                  |")
 				(format t "~%>|                                                     |")
 				(format t "~%> ------------------------------------------------------")
 				(format t "~%> Opcao")
@@ -59,10 +58,9 @@
 					(cond
 						;((not (numberp opcao)) (menu-inicial caminho))		
 						((not (numberp opcao)) (menu-inicial))		
-						((and (<= opcao 3) (>= opcao 1)) (cond
-															((= opcao 1) (menu-selecionar-jogo))
-															((= opcao 2) (regras-jogo))	
-															((= opcao 3) (progn (format t "PROGRAMA TERMINADO")) (return))
+						((and (<= opcao 2) (>= opcao 1)) (cond
+															((= opcao 1) (menu-selecionar-jogo))	
+															((= opcao 2) (progn (format t "PROGRAMA TERMINADO")) (return))
 														)
 						)
 						(T (progn
@@ -135,116 +133,115 @@
 )
 
 
+;;; Função de Impresso
 
+(defun converte-arco-horizontal (v)
+  "Converte os inteiros dos arcos horizontais para os simbolos --- (jogador com peca 1) e ... (jogador com peca 2)"
+  (cond ((equal v 1) "___")
+        ((equal v 2) "...")
+        (t "   ")))
 
-;; regras-jogo
-(defun regras-jogo() "Apresenta as regras do jogo dos pontos e das caixas"
-	(format t "~%> 
-		 ---------------- Regras do Puzzle dos Pontos e das Caixas ----------------- 
-		| O objetivo do puzzle consiste em fechar um determinado número de caixas 	|
-		| a partir de uma configuração inicial do tabuleiro.                      	|
-		| Quando o número de caixas por fechar é atingido, o puzzle está resolvido.	|
-		| A resolução do puzzle consiste portanto em executar a sucessão de traços 	|
-		| que permite chegar a um estado onde o número de caixas por fechar é 	    |
-		| alcançado.		                                                    	|
-		 ---------------------------------------------------------------------------"
-	)
+(defun converte-arco-vertical (v)
+  "Converte os inteiros dos arcos verticais para os simbolos | (jogador com peca 1) e  . (jogador com peca 2) "
+  (cond ((equal v 1) "|  ")
+        ((equal v 2) ".  ")
+        (t "   ")))
+
+(defun rodar (matriz)
+  (apply #'mapcar #'list matriz))
+  
+ 
+(defun imprime-linha (lista)
+  "Imprime uma linha formatada do tabuleiro"
+  (format t ". ~A . ~A . ~A . ~A . ~A . ~A . ~A . ~%"
+          (converte-arco-horizontal (first lista))
+          (converte-arco-horizontal (second lista))
+          (converte-arco-horizontal (third lista))
+          (converte-arco-horizontal (fourth lista))
+          (converte-arco-horizontal (fifth lista))
+          (converte-arco-horizontal (sixth lista))
+          (converte-arco-horizontal (seventh lista))
+          (converte-arco-horizontal (eighth lista))
+))
+
+(defun imprime-arcos-horizontais (lista)
+(mapcar #'(lambda (linha) (imprime-linha linha) ) lista)
 )
 
-	#|
-	;;; Estatisticas
-	;;sem-resultados
-	(defun sem-resultados (no-inicial diretoria) "Função que imprime num ficheiro do tipo .DAT que não existe solução de determinado nó"
-			
-			(with-open-file (ficheiro (concatenate 'string diretoria "\\estatisticas.dat") 
-								:direction :output
-								:if-exists :append 
-								:if-does-not-exist :create)
-				(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
-				(format ficheiro "Sem Solução")
-				(format t "~%Estado inicial: ~s ~%" no-inicial)
-				(format t "Sem Solução")
-		)
-	)
-	;; resultados
-	(defun resultados (no-inicial profundidade-maxima algoritmo heuristica solucao tempo-inicial diretoria) "Função que imprime num ficheiro do tipo .DAT as estatisticas do jogo."
-		(let* 
-			(
-				(tamanho-lista-abertos (car (cdr solucao)))
-				(no-solucao (car solucao))
-				(estado-solucao (get-no-estado no-solucao))
-				(tamanho-lista-fechados (+ (car (cdr (cdr solucao))) 1))
-				(nos-gerados (- (+ tamanho-lista-abertos tamanho-lista-fechados) 1))
-				(profundidade (get-no-profundidade (get-no-estado solucao)))
-				(no-final (get-no-estado solucao))
-				(tempo (- (get-universal-time) tempo-inicial))
-				(caminho (caminho-solucao no-solucao))
-				(valor-heuristico (get-no-heuristica no-solucao))
-			)
-							
-			(with-open-file (ficheiro (concatenate 'string diretoria "\\estatisticas.dat") 
-								:direction :output
-								:if-exists :append 
-								:if-does-not-exist :create)
+(defun imprime-coluna (lista)
+  "Imprime uma linha formatada do tabuleiro"
+  (format t "~A   ~A   ~A   ~A   ~A   ~A   ~A   ~A  ~%"
+          (converte-arco-vertical (first lista))
+          (converte-arco-vertical (second lista))
+          (converte-arco-vertical (third lista))
+          (converte-arco-vertical (fourth lista))
+          (converte-arco-vertical (fifth lista))
+          (converte-arco-vertical (sixth lista))
+          (converte-arco-vertical (seventh lista))
+          (converte-arco-vertical (eighth lista))
 
-								
-				;; Esta parte será escrita no ficheiro do tipo .DAT
-				(format ficheiro "Gerado em ~s~%" (current-date-string))
-				(format ficheiro "~%Estado inicial: ~s ~%" no-inicial)
-				(format ficheiro "~%Estado final: ~s ~%" estado-solucao)
-				(format ficheiro "~%Profundidade maxima: ~s ~%" profundidade-maxima)
-				(format ficheiro "~%Algoritmo: ~s ~%" algoritmo)
-				(format ficheiro " ~s ~%" heuristica)
-				(format ficheiro "~%Profundidade: ~s ~%" profundidade)
-				(format ficheiro "~%Nos Gerados: ~s ~%" nos-gerados)
-				(format ficheiro "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
-				(format ficheiro "~%Penetrancia: ~s ~%"(penetrancia no-final nos-gerados));
-				(format ficheiro "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))	
-				(format ficheiro "~%Valor Heuristico: ~s ~%" valor-heuristico)
-				(format ficheiro "~%Caminho ate a solucao: ~s ~%" caminho)	
-				(format ficheiro "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-				(format ficheiro "~%Tempo decorrido: ~s segundos ~%" tempo)
-				(format ficheiro "___________________________________________________~%")
-			)
+))
+;; (imprime-tabuleiro (tabuleiro-teste))
+(defun imprime-tabuleiro (tabuleiro)
+  "Imprime o tabuleiro, linha a linha"
+  (let ((linhas (first tabuleiro)) (colunas (rodar (second tabuleiro))))
+    (mapcar #'(lambda (linha coluna) (progn (imprime-linha linha) (imprime-coluna coluna) (imprime-coluna coluna))) linhas colunas)
+  )
+)
 
-			;;Esta parte será mostrada na consola
-			(format t "Gerado em ~s~%" (current-date-string))
-			(format t "~%Estado inicial: ~s ~%" no-inicial)
-			(format t "~%Estado final: ~s ~%" estado-solucao)
-			(format t "~%Profundidade maxima: ~s ~%" profundidade-maxima)
-			(format t "~%Algoritmo: ~s ~%" algoritmo)
-			(format t "~%Heuristica: ~s ~%" heuristica)
-			(format t "~%Profundidade: ~s ~%" profundidade)
-			(format t "~%Nos Gerados: ~s ~%" nos-gerados)
-			(format t "~%Nos expandidos: ~s ~%" tamanho-lista-fechados)
-			(format t "~%Penetrancia: ~s ~%" (penetrancia no-final nos-gerados))
-			(format t "~%Fator de Ramificacao: ~s ~%" (fator-ramificacao profundidade tamanho-lista-fechados))
-			(format t "~%Valor Heuristico: ~s ~%" valor-heuristico)
-			(format t "~%Caminho ate a solucao: ~s ~%" caminho)	
-			(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas (get-no-estado no-final)))
-			(format t "~%Tempo decorrido: ~s segundos ~%" tempo)
-			(format t "___________________________________________________~%")	
-		)
-	)
-	|#
+
+
+
+
+
+;;; Auxiliares do Jogo
+(defun tabuleiro-inicial (&optional stream)
+  "Permite criar o tabuleiro inicial do jogo."
+  (cond ((null stream) '(
+    ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
+    ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+    (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
+))
+        (t (read stream))))
+
+(defun vencedor-p (novo-numero-caixas peca caixas-jogador1 caixas-jogador2)
+  "determina se existe um vencedor. Se existir devolve o jogador que venceu. Senao devolve NIL."
+  (cond
+    ((and (= peca *jogador1*) (>= novo-numero-caixas 25)) *jogador1*)
+    ((and (= peca *jogador2*) (>= novo-numero-caixas 25)) *jogador2*)
+    (T NIL)
+    )
+)
 
 
 
 ;;; Funções Auxiliares
 
-;; ler-teclado
 (defun ler-teclado () "Ler do teclado algo do utilizador"
 	(read)
 )
-	;
 
-	#|
-	;; current-date-string [Data actual]
-	(defun current-date-string () "Retorna a data no formato de string"
-		(multiple-value-bind (sec min hr day mon yr dow dst-p tz)
-			(get-decoded-time)
-			(declare (ignore dow dst-p tz))	
-			(format nil "~A-~A-~A : ~A:~A:~A" yr mon day hr min sec)
-		)
-	)
-	|#
+
+
+	
+;;; Testes
+(defun tabuleiro-teste ()
+  '(
+    ((NIL NIL NIL 2 1 NIL NIL) (NIL NIL NIL NIL 2 1 2)
+    (1 2 1 2 2 2 NIL) (2 NIL NIL NIL 1 2 NIL)
+    (2 2 NIL NIL 2 1 NIL) (2 2 NIL 1 1 2 NIL)
+    (2 2 NIL 2 1 1 NIL) (1 1 NIL 1 2 2 NIL))
+    ((NIL NIL NIL 1 1 1 1) (NIL NIL NIL 1 1 1 1)
+    (NIL 1 NIL NIL 1 1 2) (NIL 2 1 NIL 1 2 1)
+    (1 NIL NIL 1 NIL NIL NIL) (1 NIL NIL 1 1 NIL NIL)
+    (NIL NIL 1 1 NIL NIL NIL) (NIL 2 1 2 1 NIL 2))
+  )
+)
+	
+	
+	

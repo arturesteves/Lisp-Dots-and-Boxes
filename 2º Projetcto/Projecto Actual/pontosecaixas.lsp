@@ -1,16 +1,15 @@
-;;;; puzzle.lisp
+;;;; pontosecaixas.lisp
 ;;;; Disciplina de IA - 2016 / 2017
 ;;;; Programador: Artur Esteves - 140221076
 ;;;; Programador: Daniel Costa - 120221058
-;;;; Funções do domínio do problema
+
 
 ;;; Construtor
-
 ;; cria-no
-(defun cria-no (estado &optional (profundidade 0) (heuristica nil) (no-pai nil)) 
+(defun cria-no (estado &optional (profundidade 0) (heuristica nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 "Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
 a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heurística por omissão têm valor nil, enquanto que o nó pai por defeito é NIL"
-	(list estado profundidade heuristica no-pai)
+	(list estado profundidade heuristica no-pai caixas-jogador-1 caixas-jogador-2)
 )
 
 
@@ -18,23 +17,33 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 ;;get-no-estado
 (defun get-no-estado (no) "Retorna o estado do nó, que é representado pelo tabuleiro"
-	(car no)
+	(first no)
 )
 
 ;;get-no-profundidade
 (defun get-no-profundidade (no) "Retorna a profundidade em que o nó se encontra"
-	(cadr no)   ; Igual a: (car (cdr no))
+	(second no)   ; Igual a: (car (cdr no))
 )
 
 ;;get-no-heuristica
 (defun get-no-heuristica (no) "Retorna a heurística do nó"
-	(caddr no)   ; Igual a: (car (cdr (cdr no)))
+	(third no)   ; Igual a: (car (cdr (cdr no)))
 )
-
+#|
 ;;get-no-pai
 (defun get-no-pai (no) "Retorna o nó pai deste nó, ou seja, o nó que gerou este nó"
 	(cadddr no)   ; Igual a: (car (cdr (cdr (cdr no))))
 )
+|#
+
+(defun get-caixas-jogador-1(no) "Retorna o numero de caixas do jogador 1"
+	(fourth no)
+)
+
+(defun get-caixas-jogador-2(no) "Retorna o numero de caixas do jogador 2"
+	(fifth no)
+)
+
 
 ;;custo
 (defun custo (no)"retorna o valor do custo do nó (f). Soma do valor da profundidade com o valor heuristico."
@@ -54,15 +63,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 
 
-
-
-
-
-
-
-
-
-
 #|
 
 			ALTERAR OS OPERADORES
@@ -71,11 +71,13 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 ;;; Funcões auxiliares dos operadores
 
 ;;inserir-arco-na-posicao
-(defun inserir-arco-na-posicao (indice lista) "Insere um arco (representado pelo valor [T]) no índice da lista recebida"
+;(defun inserir-arco-na-posicao (indice lista jogador)  "Insere um arco (representado pelo valor [T]) no índice da lista recebida"
+(defun inserir-arco-na-posicao (indice lista jogador) "Insere um arco (representado pelo valor [1 ou 2]) no índice da lista recebida"
 	(cond
 		((null lista) nil)
-		((= indice 1) (cons T (cdr lista)))
-		(T (cons (car lista) (inserir-arco-na-posicao (- indice 1) (cdr lista))))
+		;((= indice 1) (cons T (cdr lista)))
+		((= indice 1) (cons jogador (cdr lista)))
+		(T (cons (car lista) (inserir-arco-na-posicao (- indice 1) (cdr lista) jogador)))
 	)
 )
 
@@ -133,7 +135,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 		((and (= indice 1) (eql (car lista) nil)) T)
 		(T (possivel-adicionar-arco-aux (- indice 1) (cdr lista)))
 	)
-)
+)	
 
 ;;operadores 
 (defun operadores () "Cria uma lista com todos os operadores do problema dos Pontos e das Caixas"
@@ -163,11 +165,66 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 
 
-#|
 
-		ALTERAR O NUMERO DE CAIXAS PARA CONTAR 1 e 2
+
+#|
+	Funções que contam o numero de vezes do jogador existentes numa lista
+
+
+(defun contar-fehadas-jogador1(lista) "Conta o numero de vezes existente do jogador 1 numa determinada lista"
+	(cond
+		((null lista)0)
+		((equal 1 (car lista)) (+ 1 (contar-fehadas-jogador1 (cdr lista))))
+		(t (contar-fehadas-jogador1 (cdr lista)))
+	)
+)
+
+(defun contar-fehadas-jogador2(lista)  "Conta o numero de vezes existente do jogador 2 numa determinada lista"
+	(cond
+		((null lista)0)
+		((equal 2 (car lista)) (+ 1 (contar-fehadas-jogador2 (cdr lista))))
+		(t (contar-fehadas-jogador2 (cdr lista)))
+	)
+)
+
+
+(defun objetivo-jogador1(lista) "Conta se existe vitoria de o jogador um numa determinada lista. Caso exista uma caixa (1 1 1 1) significa que está fechada pelo jogador 1"
+	(cond
+		((null lista)0)
+		((= (contar-fehadas-jogador1 (car lista)) 0) (+ 1 (objetivo-jogador1 (cdr lista))))
+		(t (objetivo-jogador1(cdr lista)))
+	)
+)
+
+
+(defun objetivo-jogador2(lista) "Conta se existe vitoria de o jogador um numa determinada lista. Caso exista uma caixa (2 2 2 2) significa que está fechada pelo jogador 2"
+	(cond 
+		((null lista)0)
+		((= (contar-fehadas-jogador2 (car lista)) 0) (+ 1 (objetivo-jogador2 (cdr lista))))
+		(t (objetivo-jogador2(cdr lista)))
+	)
+)
 |#
 
+
+;; contar-objetivo
+(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada. "
+	(cond
+		((null lista)0)
+		((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))
+		(t (contar-objetivo(cdr lista)))
+	)
+)
+
+
+;; contar-nils-lista
+(defun contar-nils-lista (lista) "Função que irá contar o numero de NILS's existentes numa lista.Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada."
+	(cond 
+		((null lista) 0) 
+		((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
+		(T (contar-nils-lista (cdr lista)))
+	)
+)
 
 ;;; Função Validação de Caixas
 ;;caixas-fechadas
@@ -175,6 +232,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 	(cond
 		((null tabuleiro) nil)
 		(t
+			;(caixas-fechadas-aux (get-arcos-horizontais tabuleiro)(get-cabecas-por-coluna tabuleiro))
 			(contar-objetivo (caixas-fechadas-aux (get-arcos-horizontais tabuleiro)(get-cabecas-por-coluna tabuleiro)))
 		)
 	)
@@ -252,27 +310,8 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 )
 
 
-;; contar-objetivo
-(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada. "
-	(cond
-		((null lista)0)
-		((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))
-		(t (contar-objetivo(cdr lista)))
-	)
-)
 
-
-;; contar-nils-lista
-(defun contar-nils-lista (lista) "Função que irá contar o numero de NILS's existentes numa lista.Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada."
-	(cond 
-		((null lista) 0) 
-		((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
-		(T (contar-nils-lista (cdr lista)))
-	)
-)
-
-
-
+#|
 ;;; Heuristicas
 
 ;; heuristica1
@@ -284,6 +323,10 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 (defun heuristica2 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
 	(/ (+ numero-caixas-a-fechar  (caixas-fechadas tabuleiro)) 2)
 )
+
+|#
+
+
 
 
 
@@ -307,4 +350,48 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 		((null (get-no-estado no)) solucao)
 		(T (caminho-solucao (get-no-pai no) (cons (get-no-estado no) solucao)))
 	) 
+)
+
+
+;;Teste: (vencedor-p (caixas-fechadas (tabuleiro-teste)))
+;;Resultado: "Jogador 1"
+(defun vencedor-p (tabuleiro)
+	(cond
+		((< (objetivo-jogador1 tabuleiro) (objetivo-jogador2 tabuleiro)) '1)
+		(t
+			'2
+		)
+	)
+)
+
+;;Teste:  (avaliar-folha (caixas-fechadas (tabuleiro-teste)))
+;; Resultado: 100
+(defun avaliar-folha(no-final) "Jogador é MAX ou MIN"
+	(cond
+		((equal (vencedor-p no-final) 1) 100)
+		((equal (vencedor-p no-final) 2) (- 100))
+		(t
+			0
+		)
+	)
+)
+
+(defun avaliar-folha-limite(no)
+
+)
+
+
+
+(defun tabuleiro-teste()
+	'(
+		((NIL NIL NIL 2 1 NIL NIL) (NIL NIL NIL NIL 2 1 2)
+		 (1 2 1 2 2 2 NIL) (2 NIL NIL NIL 1 2 NIL)
+		 (2 2 NIL NIL 2 1 NIL) (2 2 NIL 1 1 2 NIL)
+		 (2 2 NIL 2 1 1 NIL) (1 1 NIL 1 2 2 NIL))
+		 
+		 ((NIL NIL NIL 1 1 1 1) (NIL NIL NIL 1 1 1 1)
+		 (NIL 1 NIL NIL 1 1 2) (NIL 2 1 NIL 1 2 1)
+		 (1 NIL NIL 1 NIL NIL NIL) (1 NIL NIL 1 1 NIL NIL)
+		 (NIL NIL 1 1 NIL NIL NIL) (NIL 2 1 2 1 NIL 2))
+	)
 )
