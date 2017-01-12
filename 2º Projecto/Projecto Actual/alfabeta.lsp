@@ -8,13 +8,56 @@
 (defvar *corte-alfa* 0)
 (defvar *corte-beta* 0)
 
+;;Teste		:(vencedorp (no-teste2) 5 4) || (vencedorp (no-teste2) 1 8)
+;;Resultado :1 || 2
+(defun vencedorp(no caixas-fechadas-j1 caixas-fechadas-j2) "retorna o jogador que venceu a partir. Caso empate retorna 0"
+	(cond
+		(or	((AND		;; Alterar para dentro da primeira validação. Se todas as caixas tao fechadas. Ele faz as verificações
+			(= 	(+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))
+			(> caixas-fechadas-j1 caixas-fechadas-j2)
+			)1)
+			
+			((AND
+			(= 	(+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))
+			(< caixas-fechadas-j1 caixas-fechadas-j2)
+			)2))
+			
+		(t nil)
+	)
+)
 
+(defun verifica-todas-caixas-fechadas(no)
+	(* 	(length (car (get-arcos-horizontais (get-no-estado no))))
+		(length (car (get-arcos-verticais (get-no-estado no))))
+	)
+)
+
+
+
+(defun avaliar-folha(no) "Retorna o valor [100] em caso de vitoria do jogador MAX, o valor [-100] em caso de vitoria do jogador MIN ou o valor [0] em caso de empate."
+	(cond
+		((equal (verificar-profundidade-jogador no) 'MAX) 100)
+		(t -100)
+	)
+)
+
+;verificar-jogador
+(defun verificar-profundidade-jogador(no) "Função que verifica se o jogador encontra-se na profundidade de MAX ou MIN"
+	(let ((profundidade (get-no-profundidade no)))
+		(cond
+			((or
+				(evenp profundidade) ;;evenp returns true if integer is even (divisible by two); otherwise, returns false.
+				(= profundidade 0)) 'MAX)
+				(t 'MIN)
+		)
+	)
+)
 
 
 ;;Algoritmo alfa-beta
 (defun alfa-beta (no profundidade-limite peca caixas-fechadas-j1 caixas-fechadas-j2 &aux (tempo-inicial (get-universal-time)))
-)
 
+)
 
 
 
@@ -25,11 +68,48 @@
 ;; Simbolo-jogador 1 e 2
 
 ;;sucessores
-(defun sucessores (no peca caixas-fechadas-j1 caixas-fechadas-j2) 
-
+(defun sucessores (no peca caixas-fechadas-j1 caixas-fechadas-j2)
+	(let* (
+		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
+		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
+		   (lista-linhas-colunas-possiveis (cond 
+											((eql operador 'inserir-arco-horizontal) (reverse (lista-combinacoes (+ numero-linhas 1) numero-colunas)))
+											((eql operador 'inserir-arco-vertical)   (reverse (lista-combinacoes (+ numero-colunas 1) numero-linhas))))))
+		(cond
+			((equal peca 1))
+			((equal peca 2))
+		)
+	)
 )
 
 
+(defun sucessores-todas-possibilidades (no operador possibilidades funcao-heuristica numero-objectivo-caixas)
+	(let* ((primeira-possibilidade (car possibilidades))
+		   (possibilidades-validas (not (null possibilidades)))
+		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador primeira-possibilidade) funcao-heuristica numero-objectivo-caixas)) (T nil)))
+		   (resultado-avaliado (cond ((null resultado) nil) (T (list resultado)))))
+		  
+		(cond
+			((null possibilidades) nil)
+			
+			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador (cdr possibilidades) funcao-heuristica numero-objectivo-caixas)))
+		)
+	)
+)
+
+(defun sucessores-aux (no lista-operador-parametros funcao-heuristica numero-objectivo-caixas)
+	(let* ((operador (car lista-operador-parametros))
+			(tabuleiro (get-no-estado no))
+			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
+			(resultado-operacao (apply operador parametros))
+			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
+		(cond
+			((null resultado-operacao) nil)
+			(T resultado)
+		)
+	)
+)
+	
 
 #|
 (defun sucessores (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
@@ -78,6 +158,7 @@
 		)
 	)
 )
+|#
 
 ;;lista-combinacoes
 (defun lista-combinacoes (maximo-linhas maximo-colunas) "Recebe uma lista e retorna um conjunto de listas que representa todas as combinacoes possiveis"
@@ -106,7 +187,6 @@
 	)
 )
 
-|#
  
  
  
@@ -169,46 +249,4 @@
 		(T (existe-solucao (cdr lista) f-solucao f-algoritmo numero-objectivo-caixas))
 	)
 )
-|#
-
-
-
-
-
-#|
-
-		JA NAO É NECESSÁRIO
-		
-		
-;;; Funções de Cálculo
-
-;;penetrancia
-(defun penetrancia (no nos-gerados) "Retorna o valor da penetrância dos nos gerados até o nó objetivo sobre dos nos totais gerados"
-    (cond
-        ((not (equal  nos-gerados 0)) (float (/ (get-no-profundidade no)  nos-gerados)))
-    )
-)
-
-;;fator-ramificacao 
-; B+B^2+B^3+...+B^L=T [L comprimento do caminho até ao objetivo, T numero total de nós gerados]
-(defun fator-ramificacao (L valor-t  &optional (margem-erro 0.5) (bmin 1) (bmax 10e11)) "retorna o valor do fator de ramificaçao do no"
-    (let* ((bmedio (/ (+ bmin bmax) 2)))
-        (cond 
-            ((< (- bmax bmin) margem-erro) (/ (+ bmax bmin) 2))
-            ((> (- (f-polinomial L bmedio) valor-t) margem-erro) (fator-ramificacao L valor-t margem-erro bmin bmedio))
-            (T 
-                (float(fator-ramificacao L valor-t margem-erro bmedio bmax))
-            )
-        )
-    )
-)
-
-;;; Funções auxiliares
-(defun f-polinomial (polinomio x)
-    (cond 
-        ((= polinomio 1) x)
-        (t (+ (expt x polinomio) (f-polinomial (- polinomio 1) x)))
-    )
-)
-
 |#

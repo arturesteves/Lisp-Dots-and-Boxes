@@ -39,44 +39,44 @@
 
 	|#
 
-	;; menu-inicial
-	;(defun menu-inicial (caminho) "Apresenta o menu principal do programa na consola. Sendo possível iniciar uma procura ou sair do programa"
-	(defun menu-inicial()
-		(loop	
-			(progn
-				(format t "~%> ------------------------------------------------------")
-				(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
-				(format t "~%>|                                                     |")
-				(format t "~%>|            1. Iniciar Jogo	                        |")     	
-				(format t "~%>|            2. Sair                                  |")
-				(format t "~%>|                                                     |")
-				(format t "~%> ------------------------------------------------------")
-				(format t "~%> Opcao")
-				(format t "~%> ")
-				
-				(let ((opcao (ler-teclado)))
-					(cond
-						;((not (numberp opcao)) (menu-inicial caminho))		
-						((not (numberp opcao)) (menu-inicial))		
-						((and (<= opcao 2) (>= opcao 1)) (cond
-															((= opcao 1) (menu-selecionar-jogo))	
-															((= opcao 2) (progn (format t "PROGRAMA TERMINADO")) (return))
-														)
-						)
-						(T (progn
-								(format t "~%> Opcao Invalida!")
-								(format t "~%> Opcoes Validas: [1, 2]")
-								(format t "~%  ")
-							)
+;; menu-inicial
+;(defun menu-inicial (caminho) "Apresenta o menu principal do programa na consola. Sendo possível iniciar uma procura ou sair do programa"
+(defun menu-inicial()
+	(loop	
+		(progn
+			(format t "~%> ------------------------------------------------------")
+			(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
+			(format t "~%>|                                                     |")
+			(format t "~%>|            1. Iniciar Jogo	                        |")     	
+			(format t "~%>|            2. Sair                                  |")
+			(format t "~%>|                                                     |")
+			(format t "~%> ------------------------------------------------------")
+			(format t "~%> Opcao")
+			(format t "~%> ")
+			
+			(let ((opcao (ler-teclado)))
+				(cond
+					;((not (numberp opcao)) (menu-inicial caminho))		
+					((not (numberp opcao)) (menu-inicial))		
+					((and (<= opcao 2) (>= opcao 1)) (cond
+														((= opcao 1) (iniciar-jogada))	
+														((= opcao 2) (progn (format t "PROGRAMA TERMINADO")) (return))
+													)
+					)
+					(T (progn
+							(format t "~%> Opcao Invalida!")
+							(format t "~%> Opcoes Validas: [1, 2]")
+							(format t "~%  ")
 						)
 					)
 				)
 			)
 		)
 	)
+)
 
-	;;menu-selecionar-jogo
-(defun menu-selecionar-jogo()
+;;menu-selecionar-jogo
+(defun iniciar-jogada()
 		(loop	
 			(progn
 				(format t "~%> ------------------------------------------------------")
@@ -94,7 +94,7 @@
 					(cond
 						((not (numberp opcao)) (menu-selecionar-jogo))		
 						((and (<= opcao 3) (>= opcao 1)) (cond
-															((= opcao 1) (preparar-jogar-humano-pc))
+															((= opcao 1)  (humano-joga (tabuleiro-inicial) *jogador1* 0 0) (humano-joga (tabuleiro-inicial) *jogador2* 0 0))
 															((= opcao 2) "jogar-pc-pc")	
 															((= opcao 3) (progn (format t "PROGRAMA TERMINADO")) (return))
 														)
@@ -109,31 +109,112 @@
 				)
 			)
 		)
+)	
+	
+
+#|
+		HUMANO COMEÇA A JOGAR
+|#
+
+(defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
+	(let* (	
+			(primeiro-jogador (progn (format t "Deseja ser o primeiro a jogar? (s/n) ~%")(ler-teclado)))
+			(jogada (le-jogada tabuleiro))
+			(novo-tabuleiro (faz-jogada (first jogada) peca (second jogada) (third jogada)))
+			(numero-caixas-jogador (get-numero-caixas novo-tabuleiro))
+			); usar a funcao get-numero-caixas desenvolvida no 1ยบ projeto
+			(cond
+				(	(vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2)
+					(format t "~&Ganhou!")
+				)
+				(	(tabuleiro-preenchido-p novo-tabuleiro)
+					(format t "~&Empatamos.")
+				)
+				(
+					(and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
+					(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+				)
+				(
+					(and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
+					(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+				)
+				(t 
+					(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+				)
+			)
+	)
 )
 
-(defun preparar-jogar-humano-pc() "Menu que apresenta as varias escolhas de jogar, que o humano tem para o jogo que ira realizar."
-		(let* ((peca-humano			(progn
-									(format t "Que peça pretende utilizar, 1 ou 2? (Selecionar 1 ou 2) ~%") (ler-teclado)))
-				(primeiro-a-jogar 	(progn
-									(format t "Pretende ser o primeiro a jogar? (s/n) ~%")(ler-teclado)))
-			)
-			(cond ((AND 
-				(OR (equal primeiro-a-jogar 's) (equal primeiro-a-jogar 'n))
-				(OR (equal peca-humano '1) (equal peca-humano '2))
-			)
-				(iniciar-jogo-humano peca-humano primeiro-a-jogar)
-				)
-			(t (preparar-jogar-humano-pc))
+
+
+(defun le-jogada (tabuleiro) "Le uma jogada fazendo a verificacao da sua legalidade. A jogada lida (arco-horizontal ou arco-vertical) e a posicao na no tabuleiro (entre 1 e 8)"
+  (format t "~&A sua jogada: ")
+  (let  ( 
+		 (operador (le-operador))
+		 (x (le-valor 'x))
+		 (y (le-valor 'y)) 
+		)
+    (cond
+          ((or
+             (and (equal operador 'arco-horizontal) (nth (1- x) (nth (1- y) (first tabuleiro))))
+             (and (equal operador 'arco-vertical) (nth (1- x) (nth (1- y) (second tabuleiro))))
+             )
+             (format t "~&Esta casa ja esta ocupada.")
+             (le-jogada tabuleiro))
+          (t (list operador x y)))
+  )
+)
+
+
+(defun le-operador ()
+	(format t "~%> ------------------------------------------------------")
+	(format t "~%>|        			 Tipo de Jogada				       	|")
+	(format t "~%>|                                                     |")
+	(format t "~%>|            1.colocacao de um arco horizontal        |")     	
+	(format t "~%>|            2.colocacao de um arco vertical          |")
+	(format t "~%>|                                                     |")
+	(format t "~%> ------------------------------------------------------")
+	(format t "~%> Opcao")
+	(format t "~%> ")
+	  (let ((operador-lido (read)))
+			(cond
+			 ((or (not (integerp operador-lido))
+						 (< operador-lido 1) (> operador-lido 2))
+			   (format t "~&Entrada invalida.")(le-operador))
+			   (T (cond
+				   ((= 1 operador-lido) 'arco-horizontal)
+				   (T 'arco-vertical)))
 			)
 		)
 )
 
-(defun iniciar-jogo-humano (peca primeiro-a-jogar) "Função que realiza a primeira jogada do humano num tabuleiro vazio 7x7"
 
+(defun le-valor (valor)
+  (format t "~&Valor de ~A [1 <= ~A <= 8]: " valor valor)
+  (let ((valor-lido (read)))
+        (cond
+         ((or (not(integerp valor-lido))
+                     (< valor-lido 1) (> valor-lido 8))
+           (format t "~&Entrada invalida.")(le-valor valor))
+           (T valor-lido)
+        )
+    )
 )
 
 
-;;; Função de Impresso
+
+
+#|
+	FUNÇÕES QUE IMPRIMEM O TABULEIRO
+|#
+
+
+(defun imprime-tabuleiro (tabuleiro)
+  "Imprime o tabuleiro, linha a linha"
+  (let ((linhas (first tabuleiro)) (colunas (rodar (second tabuleiro))))
+    (mapcar #'(lambda (linha coluna) (progn (imprime-linha linha) (imprime-coluna coluna) (imprime-coluna coluna))) linhas colunas)
+  )
+)
 
 (defun converte-arco-horizontal (v)
   "Converte os inteiros dos arcos horizontais para os simbolos --- (jogador com peca 1) e ... (jogador com peca 2)"
@@ -181,16 +262,6 @@
           (converte-arco-vertical (eighth lista))
 
 ))
-;; (imprime-tabuleiro (tabuleiro-teste))
-(defun imprime-tabuleiro (tabuleiro)
-  "Imprime o tabuleiro, linha a linha"
-  (let ((linhas (first tabuleiro)) (colunas (rodar (second tabuleiro))))
-    (mapcar #'(lambda (linha coluna) (progn (imprime-linha linha) (imprime-coluna coluna) (imprime-coluna coluna))) linhas colunas)
-  )
-)
-
-
-
 
 
 
@@ -209,6 +280,7 @@
 ))
         (t (read stream))))
 
+		
 (defun vencedor-p (novo-numero-caixas peca caixas-jogador1 caixas-jogador2)
   "determina se existe um vencedor. Se existir devolve o jogador que venceu. Senao devolve NIL."
   (cond
@@ -227,8 +299,6 @@
 )
 
 
-
-	
 ;;; Testes
 (defun tabuleiro-teste ()
   '(

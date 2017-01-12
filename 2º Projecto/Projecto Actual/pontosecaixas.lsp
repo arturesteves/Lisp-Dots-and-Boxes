@@ -8,8 +8,8 @@
 ;; cria-no
 (defun cria-no (estado &optional (profundidade 0) (heuristica nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 "Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
-a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pai, ou seja, o nó que o gerou. A profundidade e a heurística por omissão têm valor nil, enquanto que o nó pai por defeito é NIL"
-	(list estado profundidade heuristica no-pai caixas-jogador-1 caixas-jogador-2)
+a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o nó que o gerou. A heuristica por omissão têm valor nil"
+	(list estado profundidade heuristica caixas-jogador-1 caixas-jogador-2)
 )
 
 
@@ -29,12 +29,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 (defun get-no-heuristica (no) "Retorna a heurística do nó"
 	(third no)   ; Igual a: (car (cdr (cdr no)))
 )
-#|
-;;get-no-pai
-(defun get-no-pai (no) "Retorna o nó pai deste nó, ou seja, o nó que gerou este nó"
-	(cadddr no)   ; Igual a: (car (cdr (cdr (cdr no))))
-)
-|#
 
 (defun get-caixas-jogador-1(no) "Retorna o numero de caixas do jogador 1"
 	(fourth no)
@@ -63,60 +57,72 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 
 
-#|
 
-			ALTERAR OS OPERADORES
-			
-|#
 ;;; Funcões auxiliares dos operadores
 
+;;Teste		: (inserir-arco-na-posicao 1 '(0 1 2 3 4) 1)
+;;Resulado	: (1 1 2 3 4)
+
 ;;inserir-arco-na-posicao
-;(defun inserir-arco-na-posicao (indice lista jogador)  "Insere um arco (representado pelo valor [T]) no índice da lista recebida"
-(defun inserir-arco-na-posicao (indice lista jogador) "Insere um arco (representado pelo valor [1 ou 2]) no índice da lista recebida"
+(defun inserir-arco-na-posicao (indice lista peca) "Insere um arco (representado pelo valor [T]) no índice da lista recebida"
 	(cond
 		((null lista) nil)
-		;((= indice 1) (cons T (cdr lista)))
-		((= indice 1) (cons jogador (cdr lista)))
-		(T (cons (car lista) (inserir-arco-na-posicao (- indice 1) (cdr lista) jogador)))
+		((= indice 1) (cons peca (cdr lista)))
+		(T (cons (car lista) (inserir-arco-na-posicao (- indice 1) (cdr lista) peca)))
 	)
 )
 
+
+;;Teste		:(inserir-arco-na-posicao-aux 1 1 '((0 0 0 0) (0 0 0 0)) 1)
+;;Resultado	:((1 0 0 0) (0 0 0 0))
+
 ;;inserir-arco-na-posicao-aux
-(defun inserir-arco-na-posicao-aux (linha coluna lista) "Insere um arco (representado pelo valor [T]) numa lista que representa o conjunto de arcos dum tabuleiro. A posição representada pela linha e a coluna de destino são valores inteiros passados como argumentos"
+(defun inserir-arco-na-posicao-aux (linha coluna lista peca) "Insere um arco (representado pelo valor [T]) numa lista que representa o conjunto de arcos dum tabuleiro. A posição representada pela linha e a coluna de destino são valores inteiros passados como argumentos"
 	(cond
 		((null lista) nil)
-		((= linha 1) (cons (inserir-arco-na-posicao coluna (car lista)) (cdr lista)))
-		(T (cons (car lista) (inserir-arco-na-posicao-aux (- linha 1) coluna (cdr lista))))
+		((= linha 1) (cons 
+						(inserir-arco-na-posicao coluna (car lista) peca)
+						(cdr lista)
+					 )
+		)
+		(T (cons 	(car lista)
+					(inserir-arco-na-posicao-aux (- linha 1) coluna (cdr lista) peca)
+			))
 	)
 )
 
 
 ;;; Operadores
 
+;;Teste		:(inserir-arco-vertical 1 1 (tabuleiro-vazio) 1)
+;;Resultado	: ...((1 NIL NIL NIL NIL NIL NIL)...
+
 ;;arco-vertical
-(defun inserir-arco-vertical (linha coluna tabuleiro) "Insere um arco vertical (representado pelo valor [T]) num tabuleiro passado como argumento"
+(defun inserir-arco-vertical (linha coluna tabuleiro peca) "Insere um arco vertical (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(let ((arcos-horizontais (get-arcos-horizontais tabuleiro))
 		  (arcos-verticais (get-arcos-verticais tabuleiro)))
 	
 		(cond
 			((or (null tabuleiro) (not (possivel-adicionar-arco linha coluna arcos-verticais))) nil)
-			(T (cons arcos-horizontais (list (inserir-arco-na-posicao-aux linha coluna arcos-verticais))))
+			(T (cons arcos-horizontais (list (inserir-arco-na-posicao-aux linha coluna arcos-verticais peca))))
 		)
 	)
 )
 
+;;Teste		:(get-arcos-horizontais (inserir-arco-horizontal 1 2 (tabuleiro-vazio) 1))
+;;Resultado	:..((NIL 1 NIL NIL NIL NIL NIL)..
+
 ;;arco-horizontal
-(defun inserir-arco-horizontal (linha coluna tabuleiro) "Insere um arco horizontal (representado pelo valor [T]) num tabuleiro passado como argumento"
+(defun inserir-arco-horizontal (linha coluna tabuleiro peca) "Insere um arco horizontal (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(let ((arcos-horizontais (get-arcos-horizontais tabuleiro))
 		  (arcos-verticais (get-arcos-verticais tabuleiro)))
 
 		(cond
 			((or (null tabuleiro) (not (possivel-adicionar-arco linha coluna arcos-horizontais))) nil)
-			(T (cons (inserir-arco-na-posicao-aux linha coluna arcos-horizontais) (list arcos-verticais)))
+			(T (cons (inserir-arco-na-posicao-aux linha coluna arcos-horizontais peca) (list arcos-verticais)))
 		)
 	)
 )		
-
 
 ;;possivel-adicionar-arco
 (defun possivel-adicionar-arco (linha coluna lista) "Recebe indices de linha e coluna e uma lista de arcos horizontais ou de arcos verticais e verifica se naquela posição o valor é [T], se for devolve [NIL], se for [NIL] devolve [T]"
@@ -166,7 +172,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 
 
-
 #|
 	Funções que contam o numero de vezes do jogador existentes numa lista
 
@@ -207,26 +212,11 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 |#
 
 
-;; contar-objetivo
-(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada. "
-	(cond
-		((null lista)0)
-		((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))
-		(t (contar-objetivo(cdr lista)))
-	)
-)
-
-
-;; contar-nils-lista
-(defun contar-nils-lista (lista) "Função que irá contar o numero de NILS's existentes numa lista.Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada."
-	(cond 
-		((null lista) 0) 
-		((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
-		(T (contar-nils-lista (cdr lista)))
-	)
-)
 
 ;;; Função Validação de Caixas
+
+;;Teste		:(caixas-fechadas (tabuleiro-teste2))
+;;Resultado	:2
 ;;caixas-fechadas
 (defun caixas-fechadas (tabuleiro) "retorna o numero de caixas fechadas de um tabuleiro."
 	(cond
@@ -276,8 +266,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 	)
 )
 
-
-
 ;;get-cabecas-lista-aux
 (defun get-cabecas-lista-aux(lista n)"Função que vai buscar as cabeças de uma linha vertical ou horizontal,escolhida pelo utilizador, e cria numa nova lista."
 	(cond
@@ -310,6 +298,23 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 )
 
 
+;; contar-objetivo
+(defun contar-objetivo(lista) "Função que irá contar se a caixa está fechada ou não, isto é, se a função auxiliar conta-caixa-fechada. "
+	(cond
+		((null lista)0)
+		((= (contar-nils-lista (car lista)) 0) (+ 1 (contar-objetivo (cdr lista))))
+		(t (contar-objetivo(cdr lista)))
+	)
+)
+
+;; contar-nils-lista
+(defun contar-nils-lista (lista) "Função que irá contar o numero de NILS's existentes numa lista.Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada."
+	(cond 
+		((null lista) 0) 
+		((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
+		(T (contar-nils-lista (cdr lista)))
+	)
+)
 
 #|
 ;;; Heuristicas
@@ -326,24 +331,15 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 
 |#
 
-
-
-
-
-
-#|
-
-		SOLUÇAO DIFERENTE
-
-|#
-
-;; Solução
+;;; Solução
 
 ;; solucaop
 (defun solucaop (no numero-caixas-a-fechar)	"Devolve [T] se o número de caixas a fechar for igual ao número de caixas fechadas do nó, e devolve [NIL] se não for"
 	(= (caixas-fechadas (get-no-estado no)) numero-caixas-a-fechar)
 )
 
+
+#|
 ;; caminho-solucao
 (defun caminho-solucao (no &optional (solucao nil)) "Retorna o caminho até à solução. Ou seja todos os estados desde o inicial à solução."
 	(cond
@@ -351,35 +347,15 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 		(T (caminho-solucao (get-no-pai no) (cons (get-no-estado no) solucao)))
 	) 
 )
+|#
 
-
-;;Teste: (vencedor-p (caixas-fechadas (tabuleiro-teste)))
-;;Resultado: "Jogador 1"
-(defun vencedor-p (tabuleiro)
-	(cond
-		((< (objetivo-jogador1 tabuleiro) (objetivo-jogador2 tabuleiro)) '1)
-		(t
-			'2
-		)
-	)
+;; Funções Teste
+(defun no-teste () " estado profundidade heuristica caixas-jogador-1 caixas-jogador-2"
+	(list (tabuleiro-teste) 0 nil 0 0)
 )
-
-;;Teste:  (avaliar-folha (caixas-fechadas (tabuleiro-teste)))
-;; Resultado: 100
-(defun avaliar-folha(no-final) "Jogador é MAX ou MIN"
-	(cond
-		((equal (vencedor-p no-final) 1) 100)
-		((equal (vencedor-p no-final) 2) (- 100))
-		(t
-			0
-		)
-	)
+(defun no-teste2 () " estado profundidade heuristica caixas-jogador-1 caixas-jogador-2"
+	(list (tabuleiro-testefull) 5 nil 4 4)
 )
-
-(defun avaliar-folha-limite(no)
-
-)
-
 
 
 (defun tabuleiro-teste()
@@ -393,5 +369,33 @@ a profundidade a que se encontra, pela heurística deste mesmo nó e pelo nó pa
 		 (NIL 1 NIL NIL 1 1 2) (NIL 2 1 NIL 1 2 1)
 		 (1 NIL NIL 1 NIL NIL NIL) (1 NIL NIL 1 1 NIL NIL)
 		 (NIL NIL 1 1 NIL NIL NIL) (NIL 2 1 2 1 NIL 2))
+	)
+)
+
+(defun tabuleiro-teste2()
+	'(
+		((1 1 1) (1 NIL NIL) (2 2 2) (2 1 NIL))
+		((2 1 2) (2 2 NIL) (2 NIL 2) (1 1 1))
+	)
+)
+
+(defun tabuleiro-testefull()
+	'(
+		((1 1 1) (1 2 1) (2 2 2) (2 1 2))
+		((2 1 2) (2 2 2) (2 1 2) (1 1 1))
+	)
+)
+
+(defun tabuleiro-vazio()
+	'(
+		((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
+		
+		((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)
+		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
 	)
 )
