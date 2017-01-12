@@ -11,18 +11,15 @@
 ;;Teste		:(vencedorp (no-teste2) 5 4) || (vencedorp (no-teste2) 1 8)
 ;;Resultado :1 || 2
 (defun vencedorp(no caixas-fechadas-j1 caixas-fechadas-j2) "retorna o jogador que venceu a partir. Caso empate retorna 0"
-	(cond
-		(or	((AND		;; Alterar para dentro da primeira validação. Se todas as caixas tao fechadas. Ele faz as verificações
-			(= 	(+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))
-			(> caixas-fechadas-j1 caixas-fechadas-j2)
-			)1)
-			
-			((AND
-			(= 	(+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))
-			(< caixas-fechadas-j1 caixas-fechadas-j2)
-			)2))
-			
-		(t nil)
+	(let ((resultado (= (+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))))
+		(cond
+			(resultado (cond
+						((> caixas-fechadas-j1 caixas-fechadas-j2) 1)
+						((< caixas-fechadas-j1 caixas-fechadas-j2) 2)
+						))
+			(T nil)
+					
+		)
 	)
 )
 
