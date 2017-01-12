@@ -6,7 +6,7 @@
 
 ;;; Constantes
 (defvar *corte-alfa* 0)
-(defvar *corte-beta* 0)
+(defvar *corte-beta* 0) 
 
 ;;Teste		:(vencedorp (no-teste2) 5 4) || (vencedorp (no-teste2) 1 8)
 ;;Resultado :1 || 2
