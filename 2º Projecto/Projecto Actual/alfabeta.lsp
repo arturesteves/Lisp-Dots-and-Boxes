@@ -4,7 +4,7 @@
 ;;;; Programador: Daniel Costa - 120221058
 ;;;; Implementação dos algoritmos de procura
 
-;;; Constantes
+;;; Variáveis Globais
 (defvar *corte-alfa* 0)
 (defvar *corte-beta* 0) 
 
@@ -50,11 +50,117 @@
 	)
 )
 
+;;guardo numa variavel global a melhor jogada? -> mesmo o no?
 
 ;;Algoritmo alfa-beta
-(defun alfa-beta (no profundidade-limite peca caixas-fechadas-j1 caixas-fechadas-j2 &aux (tempo-inicial (get-universal-time)))
+;; Old: (no profundidade-limite peca caixas-fechadas-j1 caixas-fechadas-j2 &optional (alfa 2) (beta 2) &aux (tempo-inicial (get-universal-time)))
+
+;; Aplicar esta condição mo alfabeta ou nos sucessores? 
+	;; ((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
+(defun alfa-beta (no profundidade-limite peca max-or-min &optional (alfa 2) (beta 2) &aux (tempo-inicial (get-universal-time)))
+	(cond
+		((or (= profundidade-limite 0) (no-folhap no)) (funcao-utilidade no))
+		((eql 'MAX) (max-side (sucessores ...) profundidade-limite alfa beta)) 
+		(T (min-side (sucessores ...) profundidade-limite alfa beta))  ;; (eql 'MIN) 
+	)
+)
+
+(defun max-side (sucessores profundidade-limite alfa beta)
+	(cond
+		((null sucessores) nil)
+		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) (- profundidade-limite 1) 'MIN alfa beta)))
+			(cond
+				((> valor-utilidade-no alfa) (max-side (cdr sucessores) (- profundidade-limite 1) valor-utilidade-no beta)) 
+				((>= alfa beta) (setf *corte-alfa* (+ *corte-alfa* 1)) beta) ; houve corte alfa
+				(T alfa)
+			)
+		))
+	)
+)
+
+(defun min-side (sucessores profundidade-limite alfa beta)
+	(cond
+		((null sucessores) nil)
+		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) (- profundidade-limite 1) 'MAX alfa beta)))
+			(cond
+				((> valor-utilidade-no beta) (min-side (cdr sucessores) (- profundidade-limite 1) alfa valor-utilidade-no)) 
+				((<= beta alfa) (setf *corte-beta* (+ *corte-beta* 1)) alfa) ; houve corte beta
+				(T beta)
+			)
+		))
+	)
+)
+
+;;; tenho que ter uma função sucessores-alem que verifica se um no gerado fechou uma caixa ou nao. se fechou vou gerar os sucessores desse no
+;; para depois adicionar a lista de sucessores actuais
+
+;;(= (get-no-utilidade no) alfa)	(max-side )
+
+#||
+(* the minimax value of n, searched to depth d.
+ * If the value is less than min, returns min.
+ * If greater than max, returns max. *)
+ 
+ fun minimax(n: node, d: int, min: int, max: int): int =
+   if leaf(n) or depth=0 return evaluate(n)
+   if n is a max node
+      v := min
+      for each child of n
+         v' := minimax (child,d-1,...,...)
+         if v' > v, v:= v'
+         if v > max return max
+      return v
+   if n is a min node
+      v := max
+      for each child of n
+         v' := minimax (child,d-1,...,...)
+         if v' < v, v:= v'
+         if v < min return min
+      return v  
+||#
+
+
+;; modificar a função, calcular sempre os sucessores demora muito tempo-inicial
+;; ou verifico se o nº de caixas fechadas é igual a 49 ou a numero que ja nao permita o outro ganhar.
+;; verificar se a profundidade é a máxima, pq se for e mais rapido
+(defun no-folhap (no)
+	(let* ((sucessores-no (sucessores no))
+		  (numero-sucessores (length sucessoes-no)))
+		(cond
+			((> numero-sucessores 0) nil)
+			(T T)
+		)
+	)
+)	
+
+;; os nós folha finais são os que ainda têm sucessores
+;; os nós folha são os que já não tem mais sucessores
+
+
+; inteligência -> Ver artigos 
+; caso seja utilizada uma função de utilidade de outra pessoa, esta deve ser mencionada no projecto
+(defun funcao-utilidade (no)
 
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -64,8 +170,27 @@
 ;; Tipo-jogador MAX e MIN
 ;; Simbolo-jogador 1 e 2
 
-;;sucessores
-(defun sucessores (no peca caixas-fechadas-j1 caixas-fechadas-j2)
+;;sucessores 
+; (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas)
+;; 
+;; Tenho que receber a peça pq é a peça a aplicar a inserir nas varias posicoes.
+
+(defun sucessores-alfabeta (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2)
+	(let ((sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2))
+		 )
+		 ;; verificar 
+		 ;; se eu gerar os sucessores todos nunca faço os cortes alfa beta!!!!!
+		
+		;; comoé que sei que é um no folha?	-> todos os do sucessores saoum no folha certo? -> ou depende da profundidade?
+		;;
+		(cond
+			
+		)
+	)
+)
+
+;; pq preciso do numero de caixas fechadas por cada jogador??????
+(defun sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* (
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
 		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
