@@ -6,10 +6,10 @@
 
 ;;; Construtor
 ;; cria-no
-(defun cria-no (estado &optional (profundidade 0) (heuristica nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
+(defun cria-no (estado &optional (profundidade 0) (utilidade nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 "Cria uma lista que representa um nó; Um nó é composto pelo estado que é o tabuleiro, este é um parâmetro obrigatório, é composto também por outros parâmetros, como
-a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o nó que o gerou. A heuristica por omissão têm valor nil"
-	(list estado profundidade heuristica caixas-jogador-1 caixas-jogador-2)
+a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o nó que o gerou. A utilidade por omissão tem valor nil"
+	(list estado profundidade utilidade caixas-jogador-1 caixas-jogador-2)
 )
 
 
@@ -25,8 +25,8 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	(second no)   ; Igual a: (car (cdr no))
 )
 
-;;get-no-heuristica
-(defun get-no-heuristica (no) "Retorna a heurística do nó"
+;;get-no-utilidade
+(defun get-no-utilidade (no) "Retorna a heurística do nó"
 	(third no)   ; Igual a: (car (cdr (cdr no)))
 )
 
@@ -41,7 +41,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 
 ;;custo
 (defun custo (no)"retorna o valor do custo do nó (f). Soma do valor da profundidade com o valor heuristico."
-    (+ (get-no-profundidade no)(get-no-heuristica no))
+    (+ (get-no-profundidade no)(get-no-utilidade no))
 )
 
 
@@ -350,10 +350,10 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 |#
 
 ;; Funções Teste
-(defun no-teste () " estado profundidade heuristica caixas-jogador-1 caixas-jogador-2"
+(defun no-teste () " estado profundidade utilidade caixas-jogador-1 caixas-jogador-2"
 	(list (tabuleiro-teste) 0 nil 0 0)
 )
-(defun no-teste2 () " estado profundidade heuristica caixas-jogador-1 caixas-jogador-2"
+(defun no-teste2 () " estado profundidade utilidade caixas-jogador-1 caixas-jogador-2"
 	(list (tabuleiro-testefull) 5 nil 4 4)
 )
 
