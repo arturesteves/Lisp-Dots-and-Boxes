@@ -32,9 +32,9 @@
 ;;load-files ()
 (defun load-files (caminho) "Funcao que carrega os ficheiros de puzzle e procura para o programa e executa o menu"
 				(progn 
-					(compile-file (concatenate 'string caminho "\\alfabeta.lsp"))
+				;	(compile-file (concatenate 'string caminho "\\alfabeta.lsp"))
 					(compile-file (concatenate 'string caminho "\\pontosecaixas.lsp"))
-					(load (concatenate 'string caminho "\\alfabeta.ofasl")) 
+				;	(load (concatenate 'string caminho "\\alfabeta.ofasl")) 
 					(load (concatenate 'string caminho "\\pontosecaixas.ofasl"))
 					(menu-inicial)
 			   )
@@ -82,8 +82,8 @@
 				(format t "~%> ------------------------------------------------------")
 				(format t "~%>|         Puzzle dos Pontos e das Caixas              |")
 				(format t "~%>|                                                     |")
-				(format t "~%>|            1. Humano vs PC	                        |")
-				;(format t "~%>|            1. PC vs PC (Campeonato)                 |")  
+				(format t "~%>|            1. Humano vs Humano                      |")
+				(format t "~%>|            2. Humano vs PC 			                |")  
 				(format t "~%>|            3. Voltar atrás	                        |")		
 				(format t "~%>|                                                     |")
 				(format t "~%> ------------------------------------------------------")
@@ -93,8 +93,8 @@
 					(cond
 						((not (numberp opcao)) (menu-selecionar-jogo))		
 						((and (<= opcao 3) (>= opcao 1)) (cond
-															((= opcao 1) (fazer-uma-partida))
-															;((= opcao 2) "Campeonato")
+															((= opcao 1) (fazer-uma-partida-humano-humano))
+															((= opcao 2) (fazer-uma-partida-humano-pc))
 															((= opcao 3) (return))
 														)
 						)
@@ -109,42 +109,156 @@
 			)
 		)
 )	
-(defun fazer-uma-partida () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
+(defun fazer-uma-partida-humano-humano () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
+  (if (y-or-n-p "Quer iniciar a partida como Jogador 1? (y/n)")
+      (humano-joga (tabuleiro-inicial) *jogador1* 0 0)
+      (humano-joga (tabuleiro-inicial) *jogador2* 0 0)))
+	  
+(defun fazer-uma-partida-humano-pc () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
   (if (y-or-n-p "Quer iniciar a partida? (y/n)")
       (humano-joga (tabuleiro-inicial) *jogador1* 0 0)
       (humano-joga (tabuleiro-inicial) *jogador2* 0 0)))
 
 
+
 ;;; ------------------------------------------------------------------------------
-;;; JOGADAS
+;;; JOGADA HUMANO VS HUMANO
 ;;; ------------------------------------------------------------------------------
 
-;;humano-joga c/ minimax
+;;humano-joga 
 (defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
-	(let* (
-			(jogada (le-jogada tabuleiro))
-			(novo-tabuleiro (faz-jogada (first jogada) peca (second jogada) (third jogada)))
-			(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))); usar a funcao get-numero-caixas desenvolvida no 1ยบ projeto
-			(cond
-				((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2)
-				(format t "~&Ganhou!"))
-				((tabuleiro-preenchido-p novo-tabuleiro)
-				(format t "~&Empatamos."))
-				((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
-				(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2))
-				((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
-				(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador))
-				(t (humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2))
+	(let* 	(
+				(jogada (le-jogada tabuleiro))	
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 			)
+				(cond
+					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn
+																									(format t "~&Ganhou!")
+																									(jogar-de-novo)
+																								)
+					)
+					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
+					(	(and
+							(= peca *jogador1*) 
+							(> numero-caixas-jogador numero-caixas-j1)
+						)
+						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+					)
+					(
+						(and 
+							(= peca *jogador2*)
+							(> numero-caixas-jogador numero-caixas-j2)
+						)
+						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+					)
+					(t 
+						(progn
+						(imprime-tabuleiro novo-tabuleiro)
+						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+						)
+					)
+				)
     )
 )
 
 
+;;; ------------------------------------------------------------------------------
+;;; JOGADA HUMANO VS COMPUTADOR
+;;; ------------------------------------------------------------------------------
+
+;;humano-joga 
+(defun humano-computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
+	(let* 	(
+				(jogada (le-jogada tabuleiro))	
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+			)
+				(cond
+					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn
+																									(format t "~&Ganhou!")
+																									(jogar-de-novo)
+																								)
+					)
+					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
+					(	(and
+							(= peca *jogador1*) 
+							(> numero-caixas-jogador numero-caixas-j1)
+						)
+						(humano-computador-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+					)
+					(
+						(and 
+							(= peca *jogador2*)
+							(> numero-caixas-jogador numero-caixas-j2)
+						)
+						(humano-computador-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+					)
+					(t 
+						(progn
+						(imprime-tabuleiro novo-tabuleiro)
+						(humano-computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+						)
+					)
+				)
+    )
+)
+
+
+
+
+#|
 ;;computador-joga
-;(defun computador-joga(tabuleiro peca numero-caixas-j1 numero-caixas-j2)
+(defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
+"Retorna uma jogada da máquina (um tabuleiro) após verificar que o jogo ainda não terminou."
+	(let* (
+				(jogada (le-jogada tabuleiro))	
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+			)
+			(cond
+				((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) (format t "~&Ganhou!"))
+				((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
+				(	(and
+						(= peca *jogador1*) 
+						(> numero-caixas-jogador numero-caixas-j1)
+					)
+					(computador-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+				)
+				(
+					(and 
+						(= peca *jogador2*)
+						(> numero-caixas-jogador numero-caixas-j2)
+					)
+					(computador-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+				)
+				(t (computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2))
+			)
+    )
+)
+|#
+
 
 
 ;;; Funções Auxiliares a Jogada
+
+;;jogar-de-novo
+(defun jogar-de-novo()
+	(let ((novo-jogo (progn (format t "~% Pretende jogar de novo? (s/n)")(ler-teclado))))
+		(cond
+			((equal novo-jogo 's)(menu-inicial))
+			(t nil)
+		)
+	)
+)
+;;vencedor-p
+(defun vencedor-p (novo-numero-caixas peca caixas-jogador1 caixas-jogador2) "determina se existe um vencedor. Se existir devolve o jogador que venceu. Senao devolve NIL."
+  (cond
+    ((and (= peca *jogador1*) (>= novo-numero-caixas 25)) *jogador1*)
+    ((and (= peca *jogador2*) (>= novo-numero-caixas 25)) *jogador2*)
+    (T NIL)
+    )
+)
 
 ;;le-jogada
 (defun le-jogada (tabuleiro) "Le uma jogada fazendo a verificacao da sua legalidade. A jogada lida (arco-horizontal ou arco-vertical) e a posicao na no tabuleiro (entre 1 e 8)"
@@ -156,8 +270,8 @@
 		)
 	(cond
 		  ((or
-			 (and (equal operador 'arco-horizontal) (nth (1- x) (nth (1- y) (first tabuleiro))))
-			 (and (equal operador 'arco-vertical) (nth (1- x) (nth (1- y) (second tabuleiro))))
+			 (and (equal operador 'inserir-arco-horizontal) (nth (1- x) (nth (1- y) (first tabuleiro))))
+			 (and (equal operador 'inserir-arco-vertical) (nth (1- x) (nth (1- y) (second tabuleiro))))
 			 )
 			 (format t "~&Esta casa ja esta ocupada.")
 			 (le-jogada tabuleiro))
@@ -182,8 +296,8 @@
 						 (< operador-lido 1) (> operador-lido 2))
 			   (format t "~&Entrada invalida.")(le-operador))
 			   (T (cond
-				   ((= 1 operador-lido) 'arco-horizontal)
-				   (T 'arco-vertical)))
+				   ((= 1 operador-lido) 'inserir-arco-horizontal)
+				   (T 'inserir-arco-vertical)))
 			)
 		)
 )
@@ -203,10 +317,11 @@
 )
 
 ;;; faz-jogada
-(defun faz-jogada (jogador x y tabuleiro) "Cria o novo tabuleiro que consiste numa jogada do jogador selecionado"
-  (cond ((null tabuleiro) nil)
-		((= pos 0) (cons jogador (rest tabuleiro)))
-		(t (cons (first tabuleiro) (faz-jogada jogador (1- pos) (rest tabuleiro))))))
+(defun faz-jogada (tabuleiro peca operador x y)
+  "Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
+  ;(funcall operador tabuleiro peca (1- x) (1- y) )
+  (funcall operador x y tabuleiro peca)
+)
 	
 
 ;;; ------------------------------------------------------------------------------
@@ -229,6 +344,7 @@
 	)
 )
 
+
 ;; converte-arco-horizontal
 (defun converte-arco-horizontal (v)
   "Converte os inteiros dos arcos horizontais para os simbolos --- (jogador com peca 1) e ... (jogador com peca 2)"
@@ -243,15 +359,22 @@
 		((equal v 2) ".  ")
 		(t "   ")))
 
-
 ;; rodar
 (defun rodar (matriz) "Transposta de matriz"
   (apply #'mapcar #'list matriz))
   
-  
+ #|
 ;; imprime-arcos-horizontais
 (defun imprime-arcos-horizontais (lista)
 (mapcar #'(lambda (linha) (imprime-linha linha) ) lista)
+)
+|#
+
+(defun trocar-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
+  (cond
+	((= peca *jogador1*) *jogador2*)
+	((= peca *jogador2*) *jogador1*)
+	)
 )
 
 ;; imprime-linha
@@ -283,27 +406,6 @@
 ))
 
 
-;;humano-joga
-(defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
-  (let* (	(jogada (le-jogada tabuleiro))
-			(novo-tabuleiro (faz-jogada (first jogada) peca (second jogada) (third jogada)))
-			(numero-caixas-jogador (caixas-fechadas novo-tabuleiro)))
-		(cond
-			((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2)(format t "~&Ganhou!"))
-			((tabuleiro-preenchido-p novo-tabuleiro)(format t "~&Empatamos."))
-			((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
-			(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2))
-			((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
-			(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador))
-			(t (humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2))
-		)
-	)
-)
-
-;;computador-joga
-;(defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
-;)
-
 
 ;;; Auxiliares do Jogo
 (defun tabuleiro-inicial (&optional stream)
@@ -320,74 +422,42 @@
 ))
 		(t (read stream))))
 
-#|	
-			VAI BUSCAR AO NOSSO FICHEIRO ALFA-BETA
-			
-(defun vencedor-p (novo-numero-caixas peca caixas-jogador1 caixas-jogador2)
-"Determina se existe um vencedor. Se existir devolve o jogador que venceu. Senao devolve NIL."
-  (cond
-	((and (= peca *jogador1*) (>= novo-numero-caixas 25)) *jogador1*)
-	((and (= peca *jogador2*) (>= novo-numero-caixas 25)) *jogador2*)
-	(T NIL)
-	)
-)
+
+
+#|
+	CONFIRMAR AINDA SE ESTA A CORRER TODAS AS LISTAS DO TABULEIRO!!!
 |#
 
-(defun trocar-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
-  (cond
-	((= peca *jogador1*) *jogador2*)
-	((= peca *jogador2*) *jogador1*)
-	)
-)
-
-
-
-;Teste: (defun tabuleiro-preenchido-p  (tabuleiro)
-;Resultado: 0
 (defun tabuleiro-preenchido-p (tabuleiro)"Verifica se o tabuleiro ja esta completamente preenchido"
 	(cond
-		((null tabuleiro) 0)
-		( (= (contar-nils-sublistas tabuleiro) (+ (length(car tabuleiro)) (length(cadr tabuleiro))) ) T)
+		((null tabuleiro) 0)	
+		( 	(= 	(contar-nils-sublistas tabuleiro) (length tabuleiro)
+			) T)
 		(t nil)
 	)
 )
-#|
-	(defun tabuleiro-preenchido-p (tabuleiro)
-		(member 0 tabuleiro))
-|#
 
-;;Teste: (contar-nils-sublistas (tabuleiro-teste))
-;; Resultado: 0
 (defun contar-nils-sublistas(lista)
 	(cond
-		((null lista)0)
-		((= (contar-nils-lista (caar lista)) 0) (+ 1 (contar-nils-sublistas (cdr lista))))
-		(t (contar-nils-sublistas(cdr lista)))
-	)
-)
-
-;;Teste: (contar-nils-lista '(NIL NIL NIL 2 1 NIL NIL))
-;; Resultado: 5
-;; contar-nils-lista
-(defun contar-nils-lista (lista) "Função que irá contar o numero de NILS's existentes numa lista.Se não existir dará valor 0, ou seja, teriamos uma lista so com T,o que resulta uma caixa fechada."
-	(cond 
-		((null lista) 0) 
-		((equal 'NIL (car lista)) (+ 1 (contar-nils-lista (cdr lista)))) 
-		(T (contar-nils-lista (cdr lista)))
+		((null lista) 0)
+		(	(= (contar-nils-lista (first (get-arcos-horizontais lista))) 0) ;;contar-nils-lista do pontosecaixas
+			(+ 1 (contar-nils-sublistas (cdr lista)))
+		)
+		(t (contar-nils-sublistas (cdr lista)))
 	)
 )
 
 
-
-
-
-
-
-;;; Funções Auxiliares
 
 (defun ler-teclado () "Ler do teclado algo do utilizador"
 	(read)
 )
+
+
+
+
+
+
 
 
 ;;; Testes
@@ -403,4 +473,16 @@
 	(NIL NIL 1 1 NIL NIL NIL) (NIL 2 1 2 1 NIL 2))
   )
 )
-	
+
+(defun tabuleiro-teste2 ()
+  '(
+	(	(1 1 2 2 2 1 2) (2 2 1 1 1 2 2)
+		(2 2 1 2 1 2 2) (2 2 1 1 1 2 2)
+		(2 2 1 2 1 1 2) (1 1 1 1 2 2 1))
+	(
+		(1 1 1 1 1 1 1) (2 1 1 1 1 1 1)
+		(1 1 2 1 1 1 2) (2 2 1 1 1 2 1)
+		(1 1 1 1 1 1 1) (1 2 2 1 1 1 1)
+		(2 1 1 1 2 1 1) (2 2 1 2 1 2 2))
+  )
+)

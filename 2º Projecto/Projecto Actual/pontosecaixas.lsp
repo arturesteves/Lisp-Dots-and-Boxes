@@ -170,49 +170,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 )
 
 
-
-
-#|
-	Funções que contam o numero de vezes do jogador existentes numa lista
-
-
-(defun contar-fehadas-jogador1(lista) "Conta o numero de vezes existente do jogador 1 numa determinada lista"
-	(cond
-		((null lista)0)
-		((equal 1 (car lista)) (+ 1 (contar-fehadas-jogador1 (cdr lista))))
-		(t (contar-fehadas-jogador1 (cdr lista)))
-	)
-)
-
-(defun contar-fehadas-jogador2(lista)  "Conta o numero de vezes existente do jogador 2 numa determinada lista"
-	(cond
-		((null lista)0)
-		((equal 2 (car lista)) (+ 1 (contar-fehadas-jogador2 (cdr lista))))
-		(t (contar-fehadas-jogador2 (cdr lista)))
-	)
-)
-
-
-(defun objetivo-jogador1(lista) "Conta se existe vitoria de o jogador um numa determinada lista. Caso exista uma caixa (1 1 1 1) significa que está fechada pelo jogador 1"
-	(cond
-		((null lista)0)
-		((= (contar-fehadas-jogador1 (car lista)) 0) (+ 1 (objetivo-jogador1 (cdr lista))))
-		(t (objetivo-jogador1(cdr lista)))
-	)
-)
-
-
-(defun objetivo-jogador2(lista) "Conta se existe vitoria de o jogador um numa determinada lista. Caso exista uma caixa (2 2 2 2) significa que está fechada pelo jogador 2"
-	(cond 
-		((null lista)0)
-		((= (contar-fehadas-jogador2 (car lista)) 0) (+ 1 (objetivo-jogador2 (cdr lista))))
-		(t (objetivo-jogador2(cdr lista)))
-	)
-)
-|#
-
-
-
 ;;; Função Validação de Caixas
 
 ;;Teste		:(caixas-fechadas (tabuleiro-teste2))
@@ -357,7 +314,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	(list (tabuleiro-testefull) 5 nil 4 4)
 )
 
-
+#|
 (defun tabuleiro-teste()
 	'(
 		((NIL NIL NIL 2 1 NIL NIL) (NIL NIL NIL NIL 2 1 2)
@@ -372,12 +329,6 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	)
 )
 
-(defun tabuleiro-teste2()
-	'(
-		((1 1 1) (1 NIL NIL) (2 2 2) (2 1 NIL))
-		((2 1 2) (2 2 NIL) (2 NIL 2) (1 1 1))
-	)
-)
 
 (defun tabuleiro-testefull()
 	'(
@@ -399,3 +350,4 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 		(NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))
 	)
 )
+|#
