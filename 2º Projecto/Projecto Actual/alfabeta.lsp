@@ -6,31 +6,11 @@
 
 ;;; Variáveis Globais
 (defvar *corte-alfa* 0)
-(defvar *corte-beta* 0) 
+(defvar *corte-beta* 0)
 
 
-#|
-;;Teste		:(vencedorp (no-teste2) 5 4) || (vencedorp (no-teste2) 1 8)
-;;Resultado :1 || 2
-(defun vencedorp(no caixas-fechadas-j1 caixas-fechadas-j2) "retorna o jogador que venceu a partir. Caso empate retorna 0"
-	(let ((resultado (= (+ caixas-fechadas-j1 caixas-fechadas-j2) (verifica-todas-caixas-fechadas no))))
-		(cond
-			(resultado (cond
-						((> caixas-fechadas-j1 caixas-fechadas-j2) 1)
-						((< caixas-fechadas-j1 caixas-fechadas-j2) 2)
-						))
-			(T nil)
-					
-		)
-	)
-)
-(defun verifica-todas-caixas-fechadas(no)
-	(* 	(length (car (get-arcos-horizontais (get-no-estado no))))
-		(length (car (get-arcos-verticais (get-no-estado no))))
-	)
-)
-|#
 
+;avaliar-folha
 (defun avaliar-folha(no) "Retorna o valor [100] em caso de vitoria do jogador MAX, o valor [-100] em caso de vitoria do jogador MIN ou o valor [0] em caso de empate."
 	(cond
 		((equal (verificar-profundidade-jogador no) 'MAX) 100)
