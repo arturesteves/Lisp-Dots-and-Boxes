@@ -7,6 +7,7 @@
 ;;; Variáveis Globais
 (defvar *corte-alfa* 0)
 (defvar *corte-beta* 0)
+(defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
 
 
 

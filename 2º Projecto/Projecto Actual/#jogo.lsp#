@@ -7,6 +7,7 @@
 ;;;; Constantes:
 (defvar *jogador1* 1)
 (defvar *jogador2* 2)
+(defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
 
 
 ;;; ------------------------------------------------------------------------------
@@ -371,8 +372,11 @@
 
 ;;; faz-jogada
 (defun faz-jogada (tabuleiro peca operador x y)"Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
-	(funcall operador x y tabuleiro peca)
-	;(funcall operador (- x 1) (- y 1) tabuleiro peca)
+	(let ((novo-tabuleiro (funcall operador x y tabuleiro peca)))
+		novo-tabuleiro
+	)
+  ;(funcall operador x y tabuleiro peca)
+ ;(funcall operador (- x 1) (- y 1) tabuleiro peca)
 )
 
 ;;; ------------------------------------------------------------------------------
