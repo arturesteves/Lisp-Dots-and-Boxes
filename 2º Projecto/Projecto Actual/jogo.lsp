@@ -220,7 +220,7 @@
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
-				(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 1000 2 2 tempo-inicial))
+				(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
 				(novo-tabuleiro (get-no-estado *jogada*))
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 			)
@@ -257,6 +257,7 @@
 
 ;;melhor-jogada-computador
 (defun melhor-jogada-computador(tabuleiro)
+
 )
 
 ;;; Funções Auxiliares a Jogada
@@ -319,7 +320,7 @@
 		)
 	(cond
 		  (	(or
-			 (and (equal operador 'inserir-arco-horizontal) (nth (- x 1) (nth (- y 1) (first tabuleiro))))	;; Isto está incorreto!!!!
+			 (and (equal operador 'inserir-arco-horizontal) (nth (- x 1) (nth (- y 1) (first tabuleiro))))	
 			 (and (equal operador 'inserir-arco-vertical) (nth (- x 1) (nth (- y 1) (second tabuleiro))))
 			)
 			(format t "~&Esta casa ja esta ocupada.")
