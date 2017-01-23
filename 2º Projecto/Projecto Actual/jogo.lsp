@@ -143,7 +143,7 @@
 							(= peca *jogador1*) 
 							(> numero-caixas-jogador numero-caixas-j1)
 						)
-						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+						(humano-joga novo-tabuleiro peca numero-caixas-jogador-j1 numero-caixas-j2)	;; antes: numero-caixas-jogador numero-caixas-j2
 					)
 					(
 						(and 
@@ -155,6 +155,7 @@
 					(t 
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
+						(format t "~A" novo-tabuleiro)
 						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 						)
 					)
