@@ -23,13 +23,11 @@
 (defun verificar-profundidade-jogador(no) "Função que verifica se o jogador encontra-se na profundidade de MAX ou MIN"
 	(let ((profundidade (get-no-profundidade no)))
 		(cond
-			((or
-				(evenp profundidade) ;;evenp returns true if integer is even (divisible by two); otherwise, returns false.
-				(= profundidade 0)) 'MAX)
-				(t 'MIN)
+			((or (evenp profundidade) (= profundidade 0)) 'MAX)
+			(t 'MIN)
 		)
 	)
-)
+);;evenp returns true if integer is even (divisible by two); otherwise, returns false.
 
 ;;guardo numa variavel global a melhor jogada? -> mesmo o no?
 
@@ -41,10 +39,11 @@
 (defun alfa-beta (no profundidade-limite peca max-or-min &optional (alfa 2) (beta 2) &aux (tempo-inicial (get-universal-time)))
 	(cond
 		((or (= profundidade-limite 0) (no-folhap no)) (funcao-utilidade no))
-		((eql 'MAX) (max-side (sucessores ...) profundidade-limite alfa beta)) 
-		(T (min-side (sucessores ...) profundidade-limite alfa beta))  ;; (eql 'MIN) 
+		((eql max-or-min 'MAX) (max-side (sucessores no (operadores) profundidade-limite peca (get-caixas-jogador-1 no) (get-caixas-jogador-2 no)) profundidade-limite alfa beta))
+		(T (min-side (sucessores no (operadores) profundidade-limite peca (get-caixas-jogador-1 no) (get-caixas-jogador-2 no)) profundidade-limite alfa beta))  ;; (eql 'MIN) 
 	)
 )
+
 
 (defun max-side (sucessores profundidade-limite alfa beta)
 	(cond
