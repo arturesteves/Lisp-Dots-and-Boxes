@@ -129,11 +129,11 @@
 ;;; ------------------------------------------------------------------------------
 
 ;;humano-joga 
-(defun humano-humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) ;;receber o tempo maximo por jogada
+(defun humano-humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
 	(let* 	(
 				(jogada (le-jogada tabuleiro))
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
-				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro)) ;; conta as caixas fechadas
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 			)
 				(cond				
 					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
@@ -174,53 +174,40 @@
 
 ;;humano-joga 
 (defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
-	(let* 	(
-				(jogada (le-jogada tabuleiro))	
-				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
-				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
-			)
-				(cond
-					
-					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn
-																									(format t "~&Ganhou!")
-																									(jogar-de-novo)
-																							)
-					)
-					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
-					(	(and
-							(= peca *jogador1*) 
+  (let* (
+		(jogada (le-jogada tabuleiro))	
+		(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))
+		(numero-caixas-jogador (caixas-fechadas novo-tabuleiro))
+		)
+			(cond
+				((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2)(format t "~&Ganhou!"))
+				((tabuleiro-preenchido-p novo-tabuleiro)(format t "~&Empatamos."))
+				(
+					(and 	(= peca *jogador1*) 
 							(> numero-caixas-jogador numero-caixas-j1)
-						)
-						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
 					)
-					(
-						(and 
-							(= peca *jogador2*)
-							(> numero-caixas-jogador numero-caixas-j2)
-						)
-						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
-					)
-					(t 
-						(progn
-						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
-						;(computador-joga novo-tabuleiro(trocar-peca peca) numero-caixas-j1 numero-caixas-j2)	;; É a vez do computador Jogar
-						)
-					)
+					(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
 				)
+				(
+					(and 	(= peca *jogador2*)
+							(> numero-caixas-jogador numero-caixas-j2)
+					)
+					(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+				)
+				(t (computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2))
+				;(t (humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2))
+			)
     )
 )
-
-;alfa-beta (no profundidade-limite peca max-or-min &optional (alfa 2) (beta 2) &aux (tempo-inicial (get-universal-time)))
-;cria-no (estado &optional (profundidade 0) (utilidade nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 
 
 ;;computador-joga
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
-				(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
-				(novo-tabuleiro (get-no-estado *jogada*))
+				;(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first (melhor-jogada-pc)) (second (melhor-jogada-pc)) (third(melhor-jogada-pc))) )
+				;(novo-tabuleiro (get-no-estado *jogada*))
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 			)
 			(cond
@@ -254,12 +241,22 @@
 		)
 )
 
-;;melhor-jogada-computador
-(defun melhor-jogada-computador(tabuleiro)
-)
 
 ;;; Funções Auxiliares a Jogada
 
+;;melhor-jogada-pc
+(defun melhor-jogada-pc()
+(list (random-lista (operadores))(random 9)(random 9))
+)
+
+;funções auxiliares para melhor jogada do computador
+(defun random-lista(set) "Pick one element of set, and make a list of it."
+  (append (random-elt set)))
+
+(defun random-elt (escolha) "Choose an element from a list at random."
+  (elt escolha (random (length escolha))))
+
+  
 ;;jogar-de-novo
 (defun jogar-de-novo()
 	(let ((novo-jogo (progn (format t "~% Pretende jogar de novo? (s/n)")(ler-teclado))))
@@ -284,9 +281,6 @@
 	)
 )
 |#
-
-
-
 ;;vencedor-p 	novo-numero-caixas e o numero de caixas fechadas existentes
 (defun vencedor-p (novo-numero-caixas peca caixas-jogador1 caixas-jogador2) "determina se existe um vencedor. Se existir devolve o jogador que venceu. Senao devolve NIL."
   (cond
@@ -304,9 +298,10 @@
 		) *jogador2*
 	)
     
-	(T NIL)
+	(T nil)
     )
 )
+
 
 ;;le-jogada
 (defun le-jogada (tabuleiro) "Le uma jogada fazendo a verificacao da sua legalidade. A jogada lida (arco-horizontal ou arco-vertical) e a posicao na no tabuleiro (entre 1 e 8)"
@@ -369,10 +364,10 @@
 	)
 )
 
+;(inserir-arco-vertical 1 1 (tabuleiro-inicial) 1)
 ;;; faz-jogada
 (defun faz-jogada (tabuleiro peca operador x y)"Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
 	(funcall operador x y tabuleiro peca)
-	;(funcall operador (- x 1) (- y 1) tabuleiro peca)
 )
 
 ;;; ------------------------------------------------------------------------------
