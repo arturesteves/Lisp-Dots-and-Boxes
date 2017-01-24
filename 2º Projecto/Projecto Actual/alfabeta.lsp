@@ -107,7 +107,7 @@
 	(let* ((sucessores-no (sucessores no))
 		  (numero-sucessores (length sucessoes-no)))
 		(cond
-			((> numero-sucessores 0) nil)
+			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
 			(T T)
 		)
 	)
@@ -119,8 +119,8 @@
 
 ; inteligência -> Ver artigos 
 ; caso seja utilizada uma função de utilidade de outra pessoa, esta deve ser mencionada no projecto
-(defun funcao-utilidade (no)
-
+(defun funcao-utilidade (tabuleiro caixas-fechadas-j1 caixas-fechadas-j2)
+	1
 )
 
 
@@ -155,8 +155,23 @@
 ;; 
 ;; Tenho que receber a peça pq é a peça a aplicar a inserir nas varias posicoes.
 
-(defun sucessores-alfabeta (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2)
-	(let ((sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2))
+(defun sucessores-alfabeta (no operadores profundidade peca funca-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+	(let* ((sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2))
+		  (novos-sucessores (mapcar #'(lambda (node)
+											(let ((fechou-caixa (verifica-se-fechou-caixa node (+ caixas-fechadas-j1 caixas-fechadas-j2))))
+													(cond
+														((null fechou-caixa) nil)
+														(T (sucessores node operadores peca profundidade funca-utilidade caixas-fechadas-j1 caixas-fechadas-j2))
+													)
+											)
+										) sucessores))
+		 ;;;;; FALTA AGORA FAZER A UNIÃO COM OS OUTROS SUCESSORES.
+		 #||
+			1. passar por todos os sucessores e verificar se o nº de caixas aumentou, se não aumentou retorna os sucessores,
+				se aumentou, vai encontrar os sucessores para aquele no e depois é feito um append aos antigos.
+			
+			
+		 ||#
 		 )
 		 ;; verificar 
 		 ;; se eu gerar os sucessores todos nunca faço os cortes alfa beta!!!!!
@@ -169,42 +184,60 @@
 	)
 )
 
-;; pq preciso do numero de caixas fechadas por cada jogador??????
-(defun sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2)
-	(let* (
+#||
+Analisar todos os sucessores, usar 'mapcar'
+
+(mapcar 
+
+Acabar
+||#
+(defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
+	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
+		(= caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
+	)
+)
+
+;;falta testar
+(defun sucessores (no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
 		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
 		   (lista-linhas-colunas-possiveis (cond 
 											((eql operador 'inserir-arco-horizontal) (reverse (lista-combinacoes (+ numero-linhas 1) numero-colunas)))
 											((eql operador 'inserir-arco-vertical)   (reverse (lista-combinacoes (+ numero-colunas 1) numero-linhas))))))
 		(cond
-			((equal peca 1))
-			((equal peca 2))
+			((null operadores) nil)
+			((= (get-no-profundidade no) profundidade) nil) ; não procura mais
+			(T (append 
+				(sucessores-todas-possibilidades no operador peca lista-linhas-colunas-possiveis funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+				(sucessores no (cdr operadores) peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+				))
 		)
 	)
 )
 
-
-(defun sucessores-todas-possibilidades (no operador possibilidades funcao-heuristica numero-objectivo-caixas)
+;; falta testar
+(defun sucessores-todas-possibilidades (no operador peca possibilidades funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* ((primeira-possibilidade (car possibilidades))
 		   (possibilidades-validas (not (null possibilidades)))
-		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador primeira-possibilidade) funcao-heuristica numero-objectivo-caixas)) (T nil)))
+		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador (append primeira-possibilidade (list peca))) funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)) (T nil)))
 		   (resultado-avaliado (cond ((null resultado) nil) (T (list resultado)))))
 		  
 		(cond
 			((null possibilidades) nil)
 			
-			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador (cdr possibilidades) funcao-heuristica numero-objectivo-caixas)))
+			(T (append resultado-avaliado (sucessores-todas-possibilidades no operador peca (cdr possibilidades) funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)))
 		)
 	)
 )
 
-(defun sucessores-aux (no lista-operador-parametros funcao-heuristica numero-objectivo-caixas)
+;; falta testar 
+(defun sucessores-aux (no lista-operador-parametros funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* ((operador (car lista-operador-parametros))
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (cond ((not (null funcao-heuristica)) (funcall funcao-heuristica tabuleiro numero-objectivo-caixas)) (T nil)) no)))
+			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade tabuleiro caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)
 			(T resultado)

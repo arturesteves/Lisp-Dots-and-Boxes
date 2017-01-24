@@ -413,7 +413,7 @@
 
 ;;; faz-jogada
 (defun faz-jogada (tabuleiro peca operador x y)"Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
-	(funcall operador x y tabuleiro peca)
+	(funcall operador x y peca tabuleiro)
 )
 
 ;;; ------------------------------------------------------------------------------

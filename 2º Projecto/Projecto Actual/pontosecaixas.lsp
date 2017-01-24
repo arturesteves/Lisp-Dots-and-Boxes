@@ -97,8 +97,8 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 ;;Teste		:(inserir-arco-vertical 1 1 (tabuleiro-vazio) 1)
 ;;Resultado	: ...((1 NIL NIL NIL NIL NIL NIL)...
 
-;;arco-vertical
-(defun inserir-arco-vertical (linha coluna tabuleiro peca) "Insere um arco vertical (representado pelo valor [T]) num tabuleiro passado como argumento"
+;;arco-vertical	;;; anteS: (defun inserir-arco-vertical (linha coluna tabuleiro peca)
+(defun inserir-arco-vertical (linha coluna peca tabuleiro) "Insere um arco vertical (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(let ((arcos-horizontais (get-arcos-horizontais tabuleiro))
 		  (arcos-verticais (get-arcos-verticais tabuleiro)))
 	
@@ -113,7 +113,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 ;;Resultado	:..((NIL 1 NIL NIL NIL NIL NIL)..
 
 ;;arco-horizontal
-(defun inserir-arco-horizontal (linha coluna tabuleiro peca) "Insere um arco horizontal (representado pelo valor [T]) num tabuleiro passado como argumento"
+(defun inserir-arco-horizontal (linha coluna peca tabuleiro) "Insere um arco horizontal (representado pelo valor [T]) num tabuleiro passado como argumento"
 	(let ((arcos-horizontais (get-arcos-horizontais tabuleiro))
 		  (arcos-verticais (get-arcos-verticais tabuleiro)))
 
