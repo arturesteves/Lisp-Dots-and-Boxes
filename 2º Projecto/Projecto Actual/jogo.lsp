@@ -184,14 +184,14 @@
 			)
 				(cond				
 					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
-					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos.")) ;; verifica se o tabuleiro esta preenchido,todas as caixas fechadas.
+					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
 					(	(and
 							(= peca *jogador1*) 
 							(> numero-caixas-jogador numero-caixas-j1)
 						)
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+						(humano-humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
 						)
 					)
 					(
@@ -201,12 +201,13 @@
 						)
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+						(humano-humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
 						)
 					)
-					(t ;;quando chegar a esta parte e para ser a ver do outro jogador
+					(t
 						(progn
-						;(imprime-tabuleiro novo-tabuleiro)
+						(imprime-tabuleiro novo-tabuleiro)
+						;(humano-humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 						(computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 						)
 					)
@@ -223,35 +224,37 @@
 				(novo-tabuleiro (faz-jogada tabuleiro 2 (first (melhor-jogada-pc)) (second (melhor-jogada-pc)) (third(melhor-jogada-pc))) )
 				;(novo-tabuleiro (get-no-estado *jogada*))
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
-			)
-			(cond
-					
-					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn
-																									(format t "~&Ganhou!")
-																									(jogar-de-novo)
-																							)
-					)
-					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
-					(	(and
-							(= peca *jogador1*) 
-							(> numero-caixas-jogador numero-caixas-j1)
+				)
+					(cond				
+						((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
+						((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
+						(	(and
+								(= peca *jogador1*) 
+								(> numero-caixas-jogador numero-caixas-j1)
+							)
+							(progn
+							(imprime-tabuleiro novo-tabuleiro)
+							(computador-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+							)
 						)
-						(computador-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
-					)
-					(
-						(and 
-							(= peca *jogador2*)
-							(> numero-caixas-jogador numero-caixas-j2)
+						(
+							(and 
+								(= peca *jogador2*)
+								(> numero-caixas-jogador numero-caixas-j2)
+							)
+							(progn
+							(imprime-tabuleiro novo-tabuleiro)
+							(computador-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+							)
 						)
-						(computador-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
-					)
-					(t 
-						(progn
-						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+						(t
+							(progn
+							(imprime-tabuleiro novo-tabuleiro)
+							;(humano-humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+							(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+							)
 						)
 					)
-			)	
 		)
 )
 
@@ -260,15 +263,26 @@
 
 ;;melhor-jogada-pc			ALTERAR POIS ESTA RANDOM - NAO É INTELIGENTE
 (defun melhor-jogada-pc()
-(list (random-lista (operadores))(random 9)(random 9))
+	(let*
+		(
+			(x (random 9))
+			(y (random 9))
+		)
+		(cond
+			((eq x 0)	(list (random-set (operadores)) (+ x 1) y))
+			((eq y 0)	(list (random-set (operadores)) x (+ y 1)))
+			(t (list (random-set (operadores))x y))
+		)
+		;(list (random-set (operadores))x y)
+	)
 )
 
 ;funções auxiliares para melhor jogada do computador
-(defun random-lista(set) "Pick one element of set, and make a list of it."
+(defun random-set(set) "Pick one element of set, and make a list of it."
   (append (random-elt set)))
 
-(defun random-elt (escolha) "Choose an element from a list at random."
-  (elt escolha (random (length escolha))))
+(defun random-elt (element) "Choose an element from a list at random."
+  (elt element (random (length element))))
 
   
 ;;jogar-de-novo
@@ -397,9 +411,6 @@
 	)
 )
 
-
-
-;(inserir-arco-vertical 1 1 (tabuleiro-inicial) 1)
 ;;; faz-jogada
 (defun faz-jogada (tabuleiro peca operador x y)"Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
 	(funcall operador x y tabuleiro peca)
