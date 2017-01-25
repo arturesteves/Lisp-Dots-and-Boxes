@@ -218,18 +218,20 @@
 (defun sucessores-alfabeta (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	
 	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
-		   (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
-		   (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
+		     (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
+		     (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
 										(mapcar #'(lambda (node)
-											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas)))
-													;(sucessores node operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
+													(caixas-fechadas-jogador-1 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
+													(caixas-fechadas-jogador-2 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
 													(cond
 														((null fechou-caixa) (list node))
-														;((null fechou-caixa) (list 1))
+
 														;;Se chegar ao T, significa que o computador vai jogar outra vez!
 														(T 											;;aqui verificar qual e a peça e incrementar conforme a peça!
-														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
-														;(list (length (sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))))
+														;; actual
+														;;;;;;;(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
+														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2))))
 											)) sucessores_resultado)) )
 		 )
 		novos-sucessores
