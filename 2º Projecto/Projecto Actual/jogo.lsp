@@ -76,7 +76,7 @@
 	)
 )
 
-;;menu-selecionar-jogo
+;;iniciar-jogada
 (defun iniciar-jogada()
 		(loop	
 			(progn
@@ -174,13 +174,17 @@
 ;;; ------------------------------------------------------------------------------
 ;;; JOGADA HUMANO VS COMPUTADOR
 ;;; ------------------------------------------------------------------------------
-
+#|
+(defun faz-jogada (tabuleiro peca operador x y)
+	(funcall operador x y peca tabuleiro)
+)
+|#
 ;;humano-joga 
 (defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
 	(let* 	(
-				(jogada (le-jogada tabuleiro))
+				(jogada (le-jogada tabuleiro)) ;; (INSERIR-ARCO-HORIZONTAL 1 1)
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
-				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))	
 			)
 				(cond				
 					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
@@ -191,7 +195,7 @@
 						)
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2)
+						(humano-joga novo-tabuleiro peca numero-caixas-jogador  numero-caixas-j2)
 						)
 					)
 					(
@@ -201,17 +205,17 @@
 						)
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
+
 						)
 					)
 					(t
 						(progn
-						(imprime-tabuleiro novo-tabuleiro)
-						;(humano-humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+						;(imprime-tabuleiro novo-tabuleiro)
 						(computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 						)
 					)
-				)
+				) ;;; NAO ESQUECER -> FECHOU CAIXA VOLTA A JOGAR!!!
     )
 )
 
@@ -221,9 +225,16 @@
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
 				;(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
-				(novo-tabuleiro (faz-jogada tabuleiro 2 (first (melhor-jogada-pc)) (second (melhor-jogada-pc)) (third(melhor-jogada-pc))) )
-				;(novo-tabuleiro (get-no-estado *jogada*))
+				(jogada (melhor-jogada-pc tabuleiro)) ;(INSERIR-ARCO-VERTICAL 7 6)
+				
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada))) ;; Retorna tabuleiro que executa o operador
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				
+				(fechou-caixa  (cond((> numero-caixas-jogador (caixas-fechadas tabuleiro)) T) (T NIL)) )
+				
+
+				;;														1
+
 				)
 					(cond				
 						((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
@@ -258,24 +269,31 @@
 		)
 )
 
-
 ;;; Funções Auxiliares a Jogada
 
-;;melhor-jogada-pc			ALTERAR POIS ESTA RANDOM - NAO É INTELIGENTE
-(defun melhor-jogada-pc()
-	(let*
-		(
+;;le-jogada-pc
+(defun melhor-jogada-pc (tabuleiro) "Le uma jogada fazendo a verificacao da sua legalidade. A jogada lida (arco-horizontal ou arco-vertical) e a posicao na no tabuleiro (entre 1 e 8)"
+  (format t "~&A sua jogada: ~% ")
+  (let* ( 
+			(operador (random-set (operadores)))
 			(x (random 9))
-			(y (random 9))
+			(y (random 8))
 		)
-		(cond
+	(cond	
 			((eq x 0)	(list (random-set (operadores)) (+ x 1) y))
 			((eq y 0)	(list (random-set (operadores)) x (+ y 1)))
-			(t (list (random-set (operadores))x y))
-		)
-		;(list (random-set (operadores))x y)
+		  (	(or
+			 (and	(equal operador 'inserir-arco-horizontal) 	(nth (- y 1) (nth (- x 1) (first tabuleiro))))
+			 (and 	(equal operador 'inserir-arco-vertical) 	(nth (- y 1) (nth (- x 1) (second tabuleiro))))
+			)
+			(format t "~&Esta casa ja esta ocupada.")
+			(melhor-jogada-pc tabuleiro)
+			)
+		  (t (list operador x y))
 	)
+  )
 )
+
 
 ;funções auxiliares para melhor jogada do computador
 (defun random-set(set) "Pick one element of set, and make a list of it."
