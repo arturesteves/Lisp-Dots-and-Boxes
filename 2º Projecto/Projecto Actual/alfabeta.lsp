@@ -9,6 +9,8 @@
 (defvar *corte-beta* 0)
 (defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
 (defvar *nos-analisados* 0) ;; variavel que guarda o numero de nos visitados
+(defvar *tempo-despendido*)
+
 
 
 ;avaliar-folha
@@ -155,50 +157,41 @@
 ;; 
 ;; Tenho que receber a peça pq é a peça a aplicar a inserir nas varias posicoes.
 
-(defun sucessores-alfabeta (no operadores profundidade peca funca-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-	(let* ((sucessores (no operadores profundidade peca caixas-fechadas-j1 caixas-fechadas-j2))
-		  (novos-sucessores (mapcar #'(lambda (node)
-											(let ((fechou-caixa (verifica-se-fechou-caixa node (+ caixas-fechadas-j1 caixas-fechadas-j2))))
+(defun sucessores-alfabeta-teste (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+	
+	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+		   (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
+		   (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
+										(mapcar #'(lambda (node)
+											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas)))
+													;(sucessores node operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 													(cond
-														((null fechou-caixa) nil)
-														(T (sucessores node operadores peca profundidade funca-utilidade caixas-fechadas-j1 caixas-fechadas-j2))
-													)
-											)
-										) sucessores))
-		 ;;;;; FALTA AGORA FAZER A UNIÃO COM OS OUTROS SUCESSORES.
-		 #||
-			1. passar por todos os sucessores e verificar se o nº de caixas aumentou, se não aumentou retorna os sucessores,
-				se aumentou, vai encontrar os sucessores para aquele no e depois é feito um append aos antigos.
-			
-			
-		 ||#
+														((null fechou-caixa) (list node))
+														;((null fechou-caixa) (list 1))
+														;;Se chegar ao T, significa que o computador vai jogar outra vez!
+														(T 											;;aqui verificar qual e a peça e incrementar conforme a peça!
+														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
+														;(list (length (sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))))
+											)) sucessores_resultado)) )
 		 )
-		 ;; verificar 
-		 ;; se eu gerar os sucessores todos nunca faço os cortes alfa beta!!!!!
-		
-		;; comoé que sei que é um no folha?	-> todos os do sucessores saoum no folha certo? -> ou depende da profundidade?
-		;;
-		(cond
-			
-		)
+		novos-sucessores
 	)
 )
 
-#||
-Analisar todos os sucessores, usar 'mapcar'
-
-(mapcar 
-
-Acabar
-||#
 (defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
 	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
-		(= caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
+		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
+	)
+)
+
+(defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
+	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
+		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
 	)
 )
 
 ;;falta testar
-(defun sucessores (no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(defun sucessores (no operadores peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
 		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
@@ -207,10 +200,10 @@ Acabar
 											((eql operador 'inserir-arco-vertical)   (reverse (lista-combinacoes (+ numero-colunas 1) numero-linhas))))))
 		(cond
 			((null operadores) nil)
-			((= (get-no-profundidade no) profundidade) nil) ; não procura mais
+			((= (get-no-profundidade no) profundidade-maxima) nil) ; não procura mais
 			(T (append 
 				(sucessores-todas-possibilidades no operador peca lista-linhas-colunas-possiveis funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-				(sucessores no (cdr operadores) peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+				(sucessores no (cdr operadores) peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 				))
 		)
 	)
