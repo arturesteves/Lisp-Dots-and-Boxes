@@ -38,8 +38,8 @@
 
 ;; Aplicar esta condição mo alfabeta ou nos sucessores? 
 	;; ((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
-(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time)) 	;; tempo de quando começou a 1ª procura no alfabeta
-																																	(tempo-maximo (5000)))) ; 5 milisegundos
+(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux (tempo-inicial (get-universal-time)) 	;; tempo de quando começou a 1ª procura no alfabeta
+																																	(tempo-maximo 5000)) ; 5 milisegundos
 	(let* ((peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca))))
 			(no-max (e-no-maxp no))
 			(caixas-jogador-1 (get-caixas-jogador-1 no))
