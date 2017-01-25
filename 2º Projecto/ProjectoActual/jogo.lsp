@@ -139,7 +139,7 @@
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 			)
 				(cond				
-					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
+					((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
 					(	(and
 							(= peca *jogador1*) 
@@ -187,7 +187,7 @@
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))	
 			)
 				(cond				
-					((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
+					((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
 					(	(and
 							(= peca *jogador1*) 
@@ -220,6 +220,7 @@
 )
 
 
+;cria-no (estado &optional (profundidade 0) (utilidade nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 ;; -joga
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
@@ -229,7 +230,9 @@
 				;(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
 				(valor-alfa-beta (alfa-beta (cria-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 4 peca 'funcao-utilidade))
 				;;;;; Este valor 'valor-alfa-beta' usar para escrever no log.
-				(novo-tabuleiro (get-no-estado *jogada-pc*))
+				
+				
+				(novo-tabuleiro (get-no-estado *jogada-pc*))	;; ESTA JOGADA-PC está a null!
 				
 				
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
@@ -247,7 +250,7 @@
 
 				)
 					(cond				
-						((vencedor-p peca numero-caixas-jogador numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
+						((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 						((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
 						(	(and
 								(= peca *jogador1*) 
