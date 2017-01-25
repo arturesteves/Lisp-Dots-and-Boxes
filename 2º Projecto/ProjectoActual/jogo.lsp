@@ -220,25 +220,30 @@
 )
 
 
-;;computador-joga
+;; -joga
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
-				(tempo-maximo (5000))
-				(profundidade-limite)
+				
+				;;;;;;alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time))
+				;(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
+				(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 4 peca 'funcao-utilidade))
+				;;;;; Este valor 'valor-alfa-beta' usar para escrever no log.
+				(novo-tabuleiro (get-no-estado *jogada-pc*))
 				
 				
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				#||
 				
-				
-				
-				(valor-alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time))(tempo-maximo (5000))))
 				(jogada (melhor-jogada-pc tabuleiro)) ;(INSERIR-ARCO-VERTICAL 7 6)
 				
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada))) ;; Retorna tabuleiro que executa o operador
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 				
-;				(fechou-caixa  (cond((> numero-caixas-jogador (caixas-fechadas tabuleiro)) T) (T NIL)) )
-													1
+				(fechou-caixa  (cond((> numero-caixas-jogador (caixas-fechadas tabuleiro)) T) (T NIL)) )
+				||#
+
+				;;														
 
 				)
 					(cond				
@@ -266,7 +271,7 @@
 						(t
 							(progn
 							(imprime-tabuleiro novo-tabuleiro)
-							;(humano-humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
+							;(humano-humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)	
 							(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 							)
 						)
