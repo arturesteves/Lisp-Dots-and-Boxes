@@ -113,13 +113,13 @@
 
 ;;Utilizado para Humano vs Humano	
 (defun fazer-uma-partida-humano-humano () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
-  (if (y-or-n-p "Quer iniciar a partida como Jogador 1? (y/n)")
+  (if (y-or-n-p "Quer ser o 1º a iniciar a partida como Jogador 1? (y/n)")
       (humano-humano-joga (tabuleiro-inicial) *jogador1* 0 0)
       (humano-humano-joga (tabuleiro-inicial) *jogador2* 0 0)))
 
 ;;Utilizado para Humano vs Computador	  
 (defun fazer-uma-partida-humano-pc () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
-  (if (y-or-n-p "Quer iniciar a partida? (y/n)")
+  (if (y-or-n-p "Quer ser o 1º a iniciar a partida como Jogador 1? (y/n)")
       (humano-joga (tabuleiro-inicial) *jogador1* 0 0)
       (computador-joga (tabuleiro-inicial) *jogador2* 0 0)))
 
@@ -183,33 +183,29 @@
 (defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
 	(let* 	(
 				(jogada (le-jogada tabuleiro)) ;; (INSERIR-ARCO-HORIZONTAL 1 1)
+				(numero-caixas-fechadas-antigo (caixas-fechadas tabuleiro))
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
-				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))	
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				;(continua-vez-do-humano (
 			)
 				(cond				
 					((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
-					(	(and
-							(= peca *jogador1*) 
-							(> numero-caixas-jogador numero-caixas-j1)
-						)
-						(progn
+					;((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
+					((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
+						#||(progn
 						(imprime-tabuleiro novo-tabuleiro)
 						(humano-joga novo-tabuleiro peca numero-caixas-jogador  numero-caixas-j2)
-						)
-					)
-					(
-						(and 
-							(= peca *jogador2*)
-							(> numero-caixas-jogador numero-caixas-j2)
-						)
+						)||#
+						(imprime-tabuleiro novo-tabuleiro)
+						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2))
+					
+					;((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
+					((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)
-
-						)
-					)
-					(t
+						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)))
+					(T 
 						(progn
 						;(imprime-tabuleiro novo-tabuleiro)
 						(computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
@@ -446,6 +442,8 @@
 (defun faz-jogada (tabuleiro peca operador x y)"Faz uma jogada com base numa das duas operacoes posiveis, num tabuleiro, uma peca com a qual jogar e duas coordenadas recebidos por parametro."
 	(funcall operador x y peca tabuleiro)
 )
+
+
 
 ;;; ------------------------------------------------------------------------------
 ;;; IMPRIME TABULEIRO
