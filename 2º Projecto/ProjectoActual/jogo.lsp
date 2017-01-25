@@ -33,9 +33,9 @@
 ;;load-files ()
 (defun load-files (caminho) "Funcao que carrega os ficheiros de puzzle e procura para o programa e executa o menu"
 				(progn 
-				;	(compile-file (concatenate 'string caminho "\\alfabeta.lsp"))
+					(compile-file (concatenate 'string caminho "\\alfabeta.lsp"))
 					(compile-file (concatenate 'string caminho "\\pontosecaixas.lsp"))
-				;	(load (concatenate 'string caminho "\\alfabeta.ofasl")) 
+					(load (concatenate 'string caminho "\\alfabeta.ofasl")) 
 					(load (concatenate 'string caminho "\\pontosecaixas.ofasl"))
 					(menu-inicial)
 			   )
@@ -227,7 +227,7 @@
 				
 				;;;;;;alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time))
 				;(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 1 peca 'MAX 2 2 tempo-inicial))
-				(valor-alfa-beta (alfa-beta (criar-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 4 peca 'funcao-utilidade))
+				(valor-alfa-beta (alfa-beta (cria-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 4 peca 'funcao-utilidade))
 				;;;;; Este valor 'valor-alfa-beta' usar para escrever no log.
 				(novo-tabuleiro (get-no-estado *jogada-pc*))
 				

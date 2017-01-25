@@ -106,7 +106,6 @@
 )
  
  
- 
  (defun e-no-maxp (no)
 	(let ((profundidade (get-no-profundidade no)))
 		(cond
@@ -157,13 +156,13 @@
 ;; verificar se a profundidade é a máxima, pq se for e mais rapido
 (defun no-folhap (no)
 	(let* ((sucessores-no (sucessores no))
-		  (numero-sucessores (length sucessoes-no)))
+		  (numero-sucessores (length sucessores-no)))
 		(cond
 			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
 			(T T)
 		)
 	)
-)	
+)
 
 ;; os nós folha finais são os que ainda têm sucessores
 ;; os nós folha são os que já não tem mais sucessores
@@ -174,27 +173,6 @@
 (defun funcao-utilidade (tabuleiro caixas-fechadas-j1 caixas-fechadas-j2)
 	1
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ;;; Sucessores
