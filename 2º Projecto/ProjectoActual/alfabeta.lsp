@@ -38,7 +38,7 @@
 
 ;; Aplicar esta condição mo alfabeta ou nos sucessores? 
 	;; ((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
-(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux (tempo-inicial (get-universal-time)) 	;; tempo de quando começou a 1ª procura no alfabeta
+(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time)) 	;; tempo de quando começou a 1ª procura no alfabeta
 																																	(tempo-maximo 5000)) ; 5 milisegundos
 	(let* ((peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca))))
 			(no-max (e-no-maxp no))
@@ -48,26 +48,28 @@
 			(tempo-actual (get-universal-time))	;; tempo de quando começou a n pesquisa
 			(tempo-gasto (- tempo-actual tempo-inicial))
 			(tempo-dispendido (setf *tempo-despendido* tempo-gasto))
+			
+			(nos-analisados (setf *nos-analisados* (+ *nos-analisados* 1)))
 			)
 			
 		(cond
-			((or  (>= tempo-gasto tempo-actual) 
-					(no-folhap no) 
-					(= profundidade-limite (get-no-profundidade no))) (progn 
-																									(setf *nos-analisados* (+ *nos-analisados* 1))	
-																									(funcall f-utilidade no)))
+			((or  (>= tempo-gasto tempo-maximo) 
+					;(no-folhap no) 	;; REVER QUE ESTA MERDA TA A FALHAR
+					(= profundidade-limite (get-no-profundidade no))) 
+																									;;(setf *nos-analisados* (+ *nos-analisados* 1))	
+																									(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2))
 																						
-			(no-max (max-side (sucessores-alfabeta-teste no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))		
+			(no-max (max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))		
 			; equivalente a ((not no-max) ())
-			(T (min-side (sucessores-alfabeta-teste no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
+			(T (min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
 		)
 	)
-)
+)	
 
 (defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
 		((null sucessores) nil)
-		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)))
+		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo)))
 			(cond
 			
 			;; check 	Aqui algures é preciso fazer update da melhor jogada
@@ -75,7 +77,7 @@
 				#||
 				Old: ((> valor-utilidade-no alfa) (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
 				||#
-				((> valor-utilidade-no alfa) (progn 
+				((> valor-utilidade-no alfa) (progn
 															(setf *jogada-pc* (car sucessores))		;; Actualiza a melhor jogada!
 															(max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo)))
 				((>= alfa beta) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
@@ -90,13 +92,13 @@
  (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
 		((null sucessores) nil)
-		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)))
+		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo)))
 			(cond
 			
 			;; check	Aqui algures é preciso fazer update da melhor jogada
 			;;; Tenho que ir buscar o menor dos sucessores? e esse fica a melhor jogada?
 				((> valor-utilidade-no beta) (progn
-																(setf *jogada-pc* (car sucessores))
+																;(setf *jogada-pc* (car sucessores))
 																(min-side (cdr sucessores) profundidade-limite peca f-utilidade alfa valor-utilidade-no tempo-inicial tempo-maximo)))
 				((<= beta alfa) (setf *corte-alfa* (+ *corte-alfa* 1)) alfa) ; houve corte beta
 				(T beta)
@@ -155,9 +157,11 @@
 ;; modificar a função, calcular sempre os sucessores demora muito tempo-inicial
 ;; ou verifico se o nº de caixas fechadas é igual a 49 ou a numero que ja nao permita o outro ganhar.
 ;; verificar se a profundidade é a máxima, pq se for e mais rapido
+;;;;;;;;; (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
 (defun no-folhap (no)
-	(let* ((sucessores-no (sucessores no))
-		  (numero-sucessores (length sucessoes-no)))
+	; os valores, peça, profundidade, caixas-fechadas-j1 e caixas-fechadas-j2 são valores dummy neste caso, pq nao e necessário usar
+	(let* ((sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0)) 
+		  (numero-sucessores (length sucessores-no)))
 		(cond
 			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
 			(T T)
@@ -171,8 +175,12 @@
 
 ; inteligência -> Ver artigos 
 ; caso seja utilizada uma função de utilidade de outra pessoa, esta deve ser mencionada no projecto
-(defun funcao-utilidade (tabuleiro caixas-fechadas-j1 caixas-fechadas-j2)
-	1
+(defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
+	    (cond
+        ((= peca *jogador1*)(cond ((> caixas-fechadas-j1 caixas-fechadas-j2) 100) (T -100)))
+        ((= peca *jogador2*)(cond ((> caixas-fechadas-j2 caixas-fechadas-j1) 100) (T -100)))
+        (T 0)
+    )
 )
 
 
@@ -207,7 +215,7 @@
 ;; 
 ;; Tenho que receber a peça pq é a peça a aplicar a inserir nas varias posicoes.
 
-(defun sucessores-alfabeta-teste (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(defun sucessores-alfabeta (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	
 	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		   (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
@@ -263,7 +271,7 @@
 (defun sucessores-todas-possibilidades (no operador peca possibilidades funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* ((primeira-possibilidade (car possibilidades))
 		   (possibilidades-validas (not (null possibilidades)))
-		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador (append primeira-possibilidade (list peca))) funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)) (T nil)))
+		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador (append primeira-possibilidade (list peca))) peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)) (T nil)))
 		   (resultado-avaliado (cond ((null resultado) nil) (T (list resultado)))))
 		  
 		(cond
@@ -275,12 +283,12 @@
 )
 
 ;; falta testar 
-(defun sucessores-aux (no lista-operador-parametros funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(defun sucessores-aux (no lista-operador-parametros peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	(let* ((operador (car lista-operador-parametros))
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade tabuleiro caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
+			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade tabuleiro peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)
 			(T resultado)
