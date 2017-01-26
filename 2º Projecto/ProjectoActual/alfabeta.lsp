@@ -67,7 +67,7 @@
 )
 
 
- 
+
  (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
 		((null sucessores) nil)
@@ -168,19 +168,29 @@
 ; http://people.eecs.berkeley.edu/~russell/code/search/algorithms/minimax.lisp
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
-(defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2 &optional (numero-caixas 25))
+(defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
 with values +1, -1, or 0. Some games have a wider ,variety of possible outcomes; the
 payoffs in backgammon range from +I92 to -192. This chapter deals mainly with
 zero-sum games, although we will briefly mention non-zero-sum games. "
-	#||(cond
+(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+		(vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
+(progn
+	(format t "~%~%~A~%" numero-caixas-fechadas)
+	(format t "~%~%~A~%" vencedor-resultado)
+	(cond
 		(
 			(and
 				(= peca *jogador1*)
 				(and
-					(= (vencedor-p numero-caixas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador1*) ;; verificar numero-caixas
+					(and 
+						(not (null vencedor-resultado))
+						(= vencedor-resultado *jogador1*)
+					)
 					(equal (verificar-profundidade-jogador no) 'MAX)
+					;(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador1*) ;; verificar numero-caixas
+					;(equal (verificar-profundidade-jogador no) 'MAX)
 				)
 			)
 		100
@@ -189,15 +199,23 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			(and
 				(= peca *jogador2*)
 				(and
-				(= (vencedor-p numero-caixas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador2*) ;; verificar numero-caixas
+					(and 
+						(not (null vencedor-resultado))
+						(= vencedor-resultado *jogador2*)
+					)
+					(equal (verificar-profundidade-jogador no) 'MAX)
+				#||(and
+				(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador2*) ;; verificar numero-caixas
 				(equal (verificar-profundidade-jogador no) 'MAX)
+				)||#
 				)
 			)
 		(- 0 100)
 		)
 	(t 0)
-	)||#
-	1
+	)
+	)
+	)
 )
 
 
@@ -310,7 +328,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
-			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade tabuleiro peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
+			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)
 			(T resultado)
