@@ -85,6 +85,21 @@
 		))
 	)
 )
+
+#||
+(defun f-min (sucessores profundidade-max f-utilidade f-sucessores lista-operadores simbolo caixas-jogador1 caixas-jogador2 alfa beta)
+	(let ((value-linha (alfabeta (car sucessores) (1- profundidade-max) f-utilidade f-sucessores lista-operadores (trocar-peca simbolo) 1 caixas-jogador1 caixas-jogador2 alfa beta)))
+		(cond
+			((null (cdr sucessores)) value-linha)
+			((<= value-linha alfa) (progn (setf *numero-cortes-alfa* (1+ *numero-cortes-alfa*)) alfa))
+			(T (f-min (cdr sucessores) profundidade-max f-utilidade f-sucessores lista-operadores simbolo caixas-jogador1 caixas-jogador2 alfa value-linha))
+		)
+	)
+)
+
+
+
+||#
  
  
  

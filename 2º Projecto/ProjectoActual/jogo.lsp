@@ -229,6 +229,7 @@
 				
 				
 				(novo-tabuleiro (get-no-estado *jogada-pc*))	;; ESTA JOGADA-PC está a null!
+			
 				
 				
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
@@ -245,6 +246,12 @@
 				;;														
 
 				)
+				(progn
+				
+								(format t "~%~%~%Jogada: ~A~%" *jogada-pc*)
+				
+				(format t "~%~%~%TAB: ~A~%" novo-tabuleiro)
+				
 					(cond				
 						((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 						((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
@@ -274,6 +281,8 @@
 							(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)
 							)
 						)
+					)
+					
 					)
 		)
 )
