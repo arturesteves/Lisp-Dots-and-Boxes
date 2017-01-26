@@ -158,12 +158,7 @@
 ;; verificar se a profundidade é a máxima, pq se for e mais rapido
 ;;;;;;;;; (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
 (defun no-folhap (no)
-<<<<<<< HEAD
-	(let* ((sucessores-no (sucessores no))
-=======
-	; os valores, peça, profundidade, caixas-fechadas-j1 e caixas-fechadas-j2 são valores dummy neste caso, pq nao e necessário usar
 	(let* ((sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0)) 
->>>>>>> ce35c9e2351f5a24eeca7ee1e28b0e7ffc88ac9c
 		  (numero-sucessores (length sucessores-no)))
 		(cond
 			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
