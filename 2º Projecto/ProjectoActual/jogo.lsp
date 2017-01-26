@@ -191,8 +191,8 @@
 				(cond				
 					((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 					((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
-					;((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
-					((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
+					((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-j1))
+					;((and (= peca *jogador1*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
 						#||(progn
 						(imprime-tabuleiro novo-tabuleiro)
 						(humano-joga novo-tabuleiro peca numero-caixas-jogador  numero-caixas-j2)
@@ -200,8 +200,8 @@
 						(imprime-tabuleiro novo-tabuleiro)
 						(humano-joga novo-tabuleiro peca numero-caixas-jogador numero-caixas-j2))
 					
-					;((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
-					((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
+					((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-j2))
+					;((and (= peca *jogador2*) (> numero-caixas-jogador numero-caixas-fechadas-antigo))
 						(progn
 						(imprime-tabuleiro novo-tabuleiro)
 						(humano-joga novo-tabuleiro peca numero-caixas-j1 numero-caixas-jogador)))

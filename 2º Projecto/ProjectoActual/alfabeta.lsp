@@ -32,7 +32,7 @@
 			)
 			
 		(cond
-			((or  (>= tempo-gasto tempo-maximo) 
+			((or  ;(>= tempo-gasto tempo-maximo) 
 					(no-folhap no) 	;; REVER QUE ESTA MERDA TA A FALHAR
 					(= profundidade-limite (get-no-profundidade no))) 
 																									;;(setf *nos-analisados* (+ *nos-analisados* 1))	
@@ -40,7 +40,7 @@
 																						
 			(no-max (max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))		
 			; equivalente a ((not no-max) ())
-			(T (min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
+			((not no-max) (min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
 		)
 	)
 )	
@@ -174,7 +174,7 @@ a numeric value for the terminal states. In chess, the outcome is a win, loss, o
 with values +1, -1, or 0. Some games have a wider ,variety of possible outcomes; the
 payoffs in backgammon range from +I92 to -192. This chapter deals mainly with
 zero-sum games, although we will briefly mention non-zero-sum games. "
-	(cond
+	#||(cond
 		(
 			(and
 				(= peca *jogador1*)
@@ -196,7 +196,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		(- 0 100)
 		)
 	(t 0)
-	)
+	)||#
+	1
 )
 
 
@@ -242,7 +243,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 										(mapcar #'(lambda (node)
 											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
 													(caixas-fechadas-jogador-1 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
-													(caixas-fechadas-jogador-2 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
+													(caixas-fechadas-jogador-2 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1))))
 													(cond
 														((null fechou-caixa) (list node))
 
@@ -250,7 +251,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 														(T 											;;aqui verificar qual e a peça e incrementar conforme a peça!
 														;; actual
 														;;;;;;;(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
-														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2))))
+														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2)))
 											)) sucessores_resultado)) )
 		 )
 		novos-sucessores
