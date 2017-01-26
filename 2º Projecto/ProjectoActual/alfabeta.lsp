@@ -9,7 +9,7 @@
 (defvar *corte-beta* 0)
 (defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
 (defvar *nos-analisados* 0) ;; variavel que guarda o numero de nos visitados
-(defvar *tempo-despendido*)
+(defvar *tempo-despendido* 0)
 
 
 ;;Algoritmo alfa-beta
@@ -162,6 +162,7 @@
 	)
 )	
 
+
 ;; os nós folha finais são os que ainda têm sucessores
 ;; os nós folha são os que já não tem mais sucessores
 
@@ -183,6 +184,7 @@
 ; http://people.eecs.berkeley.edu/~russell/code/search/algorithms/minimax.lisp
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
+
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
@@ -219,10 +221,10 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 						(= vencedor-resultado *jogador2*)
 					)
 					(equal (verificar-profundidade-jogador no) 'MAX)
-				#||(and
+				(and
 				(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador2*) ;; verificar numero-caixas
 				(equal (verificar-profundidade-jogador no) 'MAX)
-				)||#
+				)
 				)
 			)
 		(- 0 100)
@@ -232,6 +234,11 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 	)
 	)
 )
+
+
+
+
+
 
 
 ;verificar-jogador
@@ -275,8 +282,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		     (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
 										(mapcar #'(lambda (node)
 											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
-													(caixas-fechadas-jogador-1 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
-													(caixas-fechadas-jogador-2 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1))))
+													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
+													(caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2))))
 													(cond
 														((null fechou-caixa) (list node))
 
@@ -296,12 +303,12 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
 	)
 )
-
+#||
 (defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
 	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
 		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
 	)
-)
+)||#
 
 ;;falta testar
 (defun sucessores (no operadores peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)

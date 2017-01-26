@@ -215,14 +215,13 @@
     )
 )
 
-#|| VELHA
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
 				;(alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time)))))
 				
 				;; em vez de 0 é o valor da prof. do tabuleiro + 1
-				(valor-alfa-beta (alfa-beta (cria-no tabuleiro nil numero-caixas-j1 numero-caixas-j2) 5 peca 'funcao-utilidade -1000 1000 tempo-inicial))
+				(valor-alfa-beta (alfa-beta (criar-no tabuleiro nil numero-caixas-j1 numero-caixas-j2) 5 peca 'funcao-utilidade -1000 1000 tempo-inicial))
 				;(jogada (melhor-jogada-pc tabuleiro)) ;(INSERIR-ARCO-VERTICAL 7 6)
 				
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada))) ;; Retorna tabuleiro que executa o operador
@@ -266,10 +265,10 @@
 					)
 		)
 )
-||#
+
 ;cria-no (estado &optional (profundidade 0) (utilidade nil) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
 ;; -joga
-
+#||
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
 		(let* 	(
 				(tempo-inicial (get-universal-time)) ;; get tempo atual
@@ -285,7 +284,18 @@
 				
 				
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				#||
+				
+				(jogada (melhor-jogada-pc tabuleiro)) ;(INSERIR-ARCO-VERTICAL 7 6)
+				
+				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada))) ;; Retorna tabuleiro que executa o operador
+				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
+				
+				(fechou-caixa  (cond((> numero-caixas-jogador (caixas-fechadas tabuleiro)) T) (T NIL)) )
+				||#
 
+				;;														
+#||
 				)
 				(progn
 				
@@ -327,6 +337,7 @@
 					)
 		)
 )
+||#
 
 ;;; Funções Auxiliares a Jogada
 
