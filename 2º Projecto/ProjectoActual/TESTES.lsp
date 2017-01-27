@@ -92,6 +92,13 @@
   )
 )
 
+
+
+#||
+
+Verificar os sucessores deste tab.
+
+||#
 (defun tabuleiro-teste2 ()
   '(
 	(	(NIL 1 2 2 2 1 2) (2 2 1 1 1 2 2)
@@ -104,3 +111,12 @@
 		(2 1 1 1 2 1 1) (2 2 1 2 1 2 2))
   )
 )
+
+(defun no-tabuleiro-teste2()
+	(cria-no (tabuleiro-teste2) 0 nil 0 0)
+)
+
+;; a funcionar
+(sucessores (no-tabuleiro-teste2) (operadores) 1 1 'funcao-utilidade 0 0)
+
+(sucessores-alfabeta (no-tabuleiro-teste2) (operadores) 1 1 'funcao-utilidade 0 0)	
