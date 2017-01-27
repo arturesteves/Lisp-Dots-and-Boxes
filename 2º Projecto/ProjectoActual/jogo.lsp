@@ -276,27 +276,18 @@
 				;;;;;;alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000) &aux ((tempo-inicial (get-universal-time))
 				(valor-alfa-beta (alfa-beta (cria-no tabuleiro 0 nil numero-caixas-j1 numero-caixas-j2) 4 peca 'funcao-utilidade))
 				;;;;; Este valor 'valor-alfa-beta' usar para escrever no log.
-<<<<<<< HEAD
 				(novo-tabuleiro (get-no-estado *jogada-pc*))	;; ESTA JOGADA-PC está a null!						
 				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 				;(estatisticas (estatisticas-log *jogada-pc* peca numero-caixas-j1 numero-caixas-j2))
-=======
-				
-				
-				(novo-tabuleiro (get-no-estado *jogada-pc*))	;; ESTA JOGADA-PC está a null!
-			
-				
-				
-				(numero-caixas-jogador (caixas-fechadas  novo-tabuleiro))
 
->>>>>>> 945a07c1de5762be3664899eff1c45e2a755fc30
 				)
 				(progn				
 				;(format t "~%~%~%Jogada PC guardada: ~A~%" *jogada-pc*) ;; Se passa nil automaticamente tabulero terá nil LOGO 
-				;(format t "~%~%~%TABuleiro da Jogada PC guardada: ~A~%" novo-tabuleiro)
+				(format t "~%~%~%TABuleiro inicial: ~A~%" tabuleiro)
+				(format t "~%~%~%TABuleiro da Jogada PC guardada: ~A~%" novo-tabuleiro)
 				;(format t "~%~%~%Numero Caixas: ~A~%" numero-caixas-jogador)
 					(cond				
-						((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
+						;((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	(format t "~&Ganhou!")(jogar-de-novo)))
 						((tabuleiro-preenchido-p novo-tabuleiro) (format t "~&Empatamos."))
 						(	(and
 								(= peca *jogador1*) 

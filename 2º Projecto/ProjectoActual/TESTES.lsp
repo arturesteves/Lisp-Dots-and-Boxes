@@ -92,6 +92,14 @@
   )
 )
 
+
+(sucessores-alfabeta (no-teste2)(operadores) 1 1 'funcao-utilidade 0 0)
+
+(defun no-teste2()
+	(cria-no (tabuleiro-teste2) 0 nil 0 0)
+)
+
+
 (defun tabuleiro-teste2 ()
   '(
 	(	(NIL 1 2 2 2 1 2) (2 2 1 1 1 2 2)

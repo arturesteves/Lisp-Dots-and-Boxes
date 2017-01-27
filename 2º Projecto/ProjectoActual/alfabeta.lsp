@@ -33,6 +33,7 @@
 			
 			;(nos-analisados 	(setf *nos-analisados* (+ *nos-analisados* 1)))
 		)
+		(format t "~%NOOO:~a~%"no)
 		(cond
 			(	(or
 					(>= tempo-gasto tempo-maximo)
@@ -232,12 +233,15 @@
 ;; ou verifico se o nº de caixas fechadas é igual a 49 ou a numero que ja nao permita o outro ganhar.
 ;; verificar se a profundidade é a máxima, pq se for e mais rapido
 ;;;;;;;;; (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
+;;PROFUNDIDADE NO = PROF.MAX
 (defun no-folhap (no)
 	(let* (
 			;(sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0))
 			(sucessores-no (sucessores no (operadores) 1 (get-no-profundidade no) 'funcao-utilidade (get-caixas-jogador-1 no) (get-caixas-jogador-1 no)))
-			(numero-sucessores (length sucessores-no)))
+			(numero-sucessores (length sucessores-no))
+)
 		(cond
+			
 			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
 			(T T)
 		)
@@ -269,21 +273,53 @@
 
 
 ;VERIFICAR SE O NO ACABA O JOGO, SE ACABAR DA 500
-
-
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
 with values +1, -1, or 0. Some games have a wider ,variety of possible outcomes; the
 payoffs in backgammon range from +I92 to -192. This chapter deals mainly with
 zero-sum games, although we will briefly mention non-zero-sum games. "
-(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+	(let* (	
+		(numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		(vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
-	(progn
-	;(format t "~%caixa fechadas ~%~A~%" numero-caixas-fechadas)
-	(format t "~%vencedor ~%~A~%" vencedor-resultado) 
-		(cond
-			(
+		(progn
+		;(format t "~%caixa fechadas ~%~A~%" numero-caixas-fechadas)
+		;(format t "~%vencedor F-U: ~%~A~%" vencedor-resultado) 
+			(cond
+				(
+					(null vencedor-resultado)
+					(cond
+						((> caixas-fechadas-j1 caixas-fechadas-j2) 50)
+					(t -50)
+					)
+				)
+			
+			
+				(
+					(and
+						(= vencedor-resultado *jogador1*)
+						(equal (verificar-profundidade-jogador no) 'MAX)
+					)
+						100
+				)
+				
+				(
+					(and
+						(= vencedor-resultado *jogador2*)
+						(equal (verificar-profundidade-jogador no) 'MAX)
+					)
+						-100
+				)
+				
+
+				
+				(t 0)
+			)
+		)
+	)
+)
+				
+			#|
 				(and	
 					(= peca *jogador1*)
 					(and
@@ -295,7 +331,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 					)
 				)
 			100
-			)		
+			)
+			
 			(
 				(and
 					(= peca *jogador2*)
@@ -306,15 +343,25 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 					)
 				)
-			(- 0 100)
+			-100
 			)
-		(t 0)
+			
+		; (t 0)
+		(t
+			(cond
+				( (> caixas-fechadas-j1 caixas-fechadas-j2) 50)
+				(t
+					-50
+				)
+			
+			)
+		)
 		)
 	)
 )
 )
 ;
-
+|#
 #|
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
