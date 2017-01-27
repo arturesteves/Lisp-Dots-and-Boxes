@@ -38,7 +38,7 @@
 			(	(or
 					(>= tempo-gasto tempo-maximo)
 					;(no-folhap no) 	;; REVER
-					(= profundidade-limite (get-no-profundidade no))
+					(= profundidade-limite (get-no-profundidade no))	;; esta condicao fica no no-folhap
 				)
 				(progn
 					(setf *nos-analisados* (+ *nos-analisados* 1))
@@ -421,6 +421,10 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
 													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
 													(caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2))))
+													
+													(format t "~%~% Node:~a" node)
+													(format t "~%~% Node:~a" fechou-caixa)
+													
 													(cond
 														((null fechou-caixa) (list node))
 
@@ -428,10 +432,16 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 														(T 											;;aqui verificar qual e a peça e incrementar conforme a peça!
 														;; actual
 														;;;;;;;(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
-														(sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2)))
+															(let ((new-sucessores (sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2)))
+																(cond
+																	((null new-sucessores) (list node))
+																	(T new-sucessores)
+																)
+															)))
 											)) sucessores_resultado)) )
 		 )
 		novos-sucessores
+		;sucessores_resultado
 	)
 )
 ;
@@ -493,8 +503,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			;(tua (format t "~%Peca: ~a"peca))
 			;(novo-numero-caixas-fechadas (caixas-fechadas resultado-operacao))
 			;(num-caixas-fechadas-j1 (- novo-numero-caixas-fechadas caixas-fechadas-j2))
-			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadas caixas-fechadas-j1))
-			
+			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadascaixas-fechadas-j1))
+																										;;Aqui no funcall nao é 'no', é 'resultado-operacao', e nao é peça é troca peça
 			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)

@@ -93,6 +93,7 @@
 )
 
 
+<<<<<<< HEAD
 (sucessores-alfabeta (no-teste2)(operadores) 1 1 'funcao-utilidade 0 0)
 
 (defun no-teste2()
@@ -100,6 +101,14 @@
 )
 
 
+=======
+
+#||
+
+Verificar os sucessores deste tab.
+
+||#
+>>>>>>> 3a43e06255cd46f972d662501d4cc20da69a42e1
 (defun tabuleiro-teste2 ()
   '(
 	(	(NIL 1 2 2 2 1 2) (2 2 1 1 1 2 2)
@@ -112,3 +121,12 @@
 		(2 1 1 1 2 1 1) (2 2 1 2 1 2 2))
   )
 )
+
+(defun no-tabuleiro-teste2()
+	(cria-no (tabuleiro-teste2) 0 nil 0 0)
+)
+
+;; a funcionar
+(sucessores (no-tabuleiro-teste2) (operadores) 1 1 'funcao-utilidade 0 0)
+
+(sucessores-alfabeta (no-tabuleiro-teste2) (operadores) 1 1 'funcao-utilidade 0 0)	
