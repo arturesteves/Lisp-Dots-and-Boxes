@@ -306,10 +306,3 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 )
 |#
 
-;; Funções Teste
-(defun no-teste () " estado profundidade utilidade caixas-jogador-1 caixas-jogador-2"
-	(list (tabuleiro-teste) 0 nil 0 0)
-)
-(defun no-teste2 () " estado profundidade utilidade caixas-jogador-1 caixas-jogador-2"
-	(list (tabuleiro-testefull) 5 nil 4 4)
-)
