@@ -14,9 +14,89 @@
 
 ;;Algoritmo alfa-beta
 ;; Old: (no profundidade-limite peca caixas-fechadas-j1 caixas-fechadas-j2 &optional (alfa 2) (beta 2) &aux (tempo-inicial (get-universal-time)))
-
 ;; Aplicar esta condição mo alfabeta ou nos sucessores? 
 	;; ((and (equal 'dfs algoritmo-procura) (= (get-no-profundidade no) profundidade)) nil)
+
+	
+;; novo alfa-beta
+;;Teste: (alfa-beta (no-teste-1-fecha-1-caixa) (get-no-profundidade (no-teste-1-fecha-1-caixa)) 1 'funcao-utilidade)	
+;;Resul: 0
+(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time))(tempo-maximo 5000)) 	;; tempo de quando começou a 1ª procura no alfabeta
+	(let*(	
+			(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
+			(max-mix (verificar-profundidade-jogador no)) ;;MAX ou MIN
+			(caixas-jogador-1	(get-caixas-jogador-1 no))
+			(caixas-jogador-2 	(get-caixas-jogador-2 no))
+			(tempo-actual 		(get-universal-time))
+			(tempo-gasto 		(- tempo-actual tempo-inicial))
+			(tempo-dispendido	(setf *tempo-despendido* tempo-gasto))
+			
+			;(nos-analisados 	(setf *nos-analisados* (+ *nos-analisados* 1)))
+		)
+		(cond
+			(	(or
+					(>= tempo-gasto tempo-maximo)
+					;(no-folhap no) 	;; REVER
+					(= profundidade-limite (get-no-profundidade no))
+				)
+				(progn
+					(setf *nos-analisados* (+ *nos-analisados* 1))
+					(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2)
+				;	(format t "~%NOS ANALISADOS~%~a~%"*nos-analisados*)
+				;	(format t "~%TEMPO DISPENDIDO~%~a~%"tempo-dispendido)
+				)	
+			)
+
+			(
+				(eq max-mix 'MAX)
+				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
+			)
+			(T
+				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
+			)
+		)
+	)
+)
+
+;;Função Alfa
+(defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+	(cond
+		((null sucessores) alfa)
+		(T (let (
+				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo))
+				)
+			(cond
+				((> valor-utilidade-no alfa)	(setf *jogada-pc* (car sucessores))	;; Actualiza a melhor jogada!
+												valor-utilidade-no
+												)
+				;(format t "~%~a~~%"*jogada-pc*)
+				((>= alfa beta) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
+				(T (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
+			)
+		))
+	)
+)
+
+
+;;Função Beta
+(defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+	(cond
+		((null sucessores) beta)
+		(T (let (
+				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo))
+				)
+			(cond
+				((< valor-utilidade-no beta) valor-utilidade-no)
+				((<= beta alfa) (setf *corte-alfa* (+ *corte-alfa* 1)) alfa) ; houve corte beta
+				(T (min-side (cdr sucessores) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo))
+			)
+		))
+	)
+)
+
+
+#||
+;;Teste: (alfa-beta (no-teste-1-fecha-1-caixa) (get-no-profundidade (no-teste-1-fecha-1-caixa)) 1 'funcao-utilidade)
 (defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time)) 	;; tempo de quando começou a 1ª procura no alfabeta
 																																	(tempo-maximo 5000)) ; 5 milisegundos
 	(let* ((peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca))))
@@ -27,23 +107,23 @@
 			(tempo-actual (get-universal-time))	;; tempo de quando começou a n pesquisa
 			(tempo-gasto (- tempo-actual tempo-inicial))
 			(tempo-dispendido (setf *tempo-despendido* tempo-gasto))
-			
 			(nos-analisados (setf *nos-analisados* (+ *nos-analisados* 1)))
 			)
-			
+			(format t "Jogada-pc: ~a"  *jogada-pc*)
 		(cond
-			((or  ;(>= tempo-gasto tempo-maximo) 
+			(	(or  ;(>= tempo-gasto tempo-maximo) 
 					(no-folhap no) 	;; REVER QUE ESTA MERDA TA A FALHAR
 					(= profundidade-limite (get-no-profundidade no))) 
-																									;;(setf *nos-analisados* (+ *nos-analisados* 1))	
-																									(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2))
-																						
-			(no-max (max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))		
-			; equivalente a ((not no-max) ())
-			((not no-max) (min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
+					;;(setf *nos-analisados* (+ *nos-analisados* 1))
+						(print "1")
+					(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2))
+				
+			(no-max (print "2")(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))		
+			((not no-max) (print "3")(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo))
 		)
 	)
 )	
+
 
 (defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
@@ -53,14 +133,16 @@
 			
 			;; check 	Aqui algures é preciso fazer update da melhor jogada
 			;;; Tenho que ir buscar o maior dos sucessores? e esse fica a melhor jogada?
-				#||
-				Old: ((> valor-utilidade-no alfa) (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
-				||#
-				((> valor-utilidade-no alfa) (progn
-															(setf *jogada-pc* (car sucessores))		;; Actualiza a melhor jogada!
-															(max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo)))
+				
+				;Old: ((> valor-utilidade-no alfa) (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
+				
+				((> valor-utilidade-no alfa); (progn
+												(setf *jogada-pc* (car sucessores))		;; Actualiza a melhor jogada!
+												;(max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
+												)
 				((>= alfa beta) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
-				(T alfa)
+				;(T alfa)
+				(T (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
 			)
 		))
 	)
@@ -68,7 +150,7 @@
 
 
 
- (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+(defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
 		((null sucessores) nil)
 		(T (let ((valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo)))
@@ -85,6 +167,7 @@
 		))
 	)
 )
+||#
 
 #||
 (defun f-min (sucessores profundidade-max f-utilidade f-sucessores lista-operadores simbolo caixas-jogador1 caixas-jogador2 alfa beta)
@@ -96,14 +179,11 @@
 		)
 	)
 )
-
-
-
 ||#
  
  
- 
- (defun e-no-maxp (no)
+ ;; ESTAS DUAS FUNÇÕES JA EXISTEM. ELIMINAR!!!! (trocar-peca) e (verificar-profundidade-jogador) <------------------------------------
+(defun e-no-maxp (no)
 	(let ((profundidade (get-no-profundidade no)))
 		(cond
 			((or (= profundidade 0) (evenp profundidade)) T)
@@ -112,7 +192,7 @@
 	)
 )
  
- (defun troca-peca (peca)
+(defun troca-peca (peca)
 	(cond
 		((= peca 1) 2)
 		(T 1)
@@ -153,8 +233,10 @@
 ;; verificar se a profundidade é a máxima, pq se for e mais rapido
 ;;;;;;;;; (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
 (defun no-folhap (no)
-	(let* ((sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0)) 
-		  (numero-sucessores (length sucessores-no)))
+	(let* (
+			;(sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0))
+			(sucessores-no (sucessores no (operadores) 1 (get-no-profundidade no) 'funcao-utilidade (get-caixas-jogador-1 no) (get-caixas-jogador-1 no)))
+			(numero-sucessores (length sucessores-no)))
 		(cond
 			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
 			(T T)
@@ -183,6 +265,9 @@
 ; http://people.eecs.berkeley.edu/~russell/code/search/algorithms/minimax.lisp
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
+
+#||
+;VERIFICAR SE O NO ACABA O JOGO, SE ACABAR DA 500
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
@@ -192,17 +277,15 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 (let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		(vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
 (progn
-	(format t "~%~%~A~%" numero-caixas-fechadas)
-	(format t "~%~%~A~%" vencedor-resultado)
+	;(format t "~%caixa fechadas ~%~A~%" numero-caixas-fechadas)
+	(format t "~%vencedor ~%~A~%" vencedor-resultado) 
 	(cond
 		(
-			(and
+			(and	
 				(= peca *jogador1*)
 				(and
-					(and 
-						(not (null vencedor-resultado))
-						(= vencedor-resultado *jogador1*)
-					)
+					(not (null vencedor-resultado))
+					(= vencedor-resultado *jogador1*)
 					(equal (verificar-profundidade-jogador no) 'MAX)
 					;(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador1*) ;; verificar numero-caixas
 					;(equal (verificar-profundidade-jogador no) 'MAX)
@@ -219,10 +302,6 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 						(= vencedor-resultado *jogador2*)
 					)
 					(equal (verificar-profundidade-jogador no) 'MAX)
-				#||(and
-				(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador2*) ;; verificar numero-caixas
-				(equal (verificar-profundidade-jogador no) 'MAX)
-				)||#
 				)
 			)
 		(- 0 100)
@@ -232,8 +311,25 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 	)
 	)
 )
+;
+||#
+
+(defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
+"A utility function (also called an objective function or payoff function), which gives
+a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
+with values +1, -1, or 0. Some games have a wider ,variety of possible outcomes; the
+payoffs in backgammon range from +I92 to -192. This chapter deals mainly with
+zero-sum games, although we will briefly mention non-zero-sum games. "
+	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+		(vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
+		
+		
+	)
+)
 
 
+		
+		
 ;verificar-jogador
 (defun verificar-profundidade-jogador(no) "Função que verifica se o jogador encontra-se na profundidade de MAX ou MIN"
 	(let ((profundidade (get-no-profundidade no)))
@@ -267,6 +363,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 ; (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas)
 ;; 
 ;; Tenho que receber a peça pq é a peça a aplicar a inserir nas varias posicoes.
+;Teste: (sucessores-alfabeta (no-teste-1) (operadores) 1 1 'funcao-utilidade 0 0)
 
 (defun sucessores-alfabeta (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
 	
@@ -275,8 +372,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		     (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
 										(mapcar #'(lambda (node)
 											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
-													(caixas-fechadas-jogador-1 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
-													(caixas-fechadas-jogador-2 (cond ((= peca *jogador-1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1))))
+													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
+													(caixas-fechadas-jogador-2 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1))))
 													(cond
 														((null fechou-caixa) (list node))
 
@@ -343,6 +440,13 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			(tabuleiro (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
 			(resultado-operacao (apply operador parametros))
+			;(numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+			;(ta (format t "~%Resultado: ~a"resultado-operacao))
+			;(tua (format t "~%Peca: ~a"peca))
+			;(novo-numero-caixas-fechadas (caixas-fechadas resultado-operacao))
+			;(num-caixas-fechadas-j1 (- novo-numero-caixas-fechadas caixas-fechadas-j2))
+			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadas caixas-fechadas-j1))
+			
 			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)
