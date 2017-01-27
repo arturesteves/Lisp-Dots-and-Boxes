@@ -37,7 +37,7 @@
 			(	(or
 					(>= tempo-gasto tempo-maximo)
 					;(no-folhap no) 	;; REVER
-					(= profundidade-limite (get-no-profundidade no))
+					(= profundidade-limite (get-no-profundidade no))	;; esta condicao fica no no-folhap
 				)
 				(progn
 					(setf *nos-analisados* (+ *nos-analisados* 1))
@@ -446,8 +446,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			;(tua (format t "~%Peca: ~a"peca))
 			;(novo-numero-caixas-fechadas (caixas-fechadas resultado-operacao))
 			;(num-caixas-fechadas-j1 (- novo-numero-caixas-fechadas caixas-fechadas-j2))
-			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadas caixas-fechadas-j1))
-			
+			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadascaixas-fechadas-j1))
+																										;;Aqui no funcall nao é 'no', é 'resultado-operacao', e nao é peça é troca peça
 			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
 		(cond
 			((null resultado-operacao) nil)
