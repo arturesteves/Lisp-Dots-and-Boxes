@@ -74,3 +74,33 @@
 (alfa-beta (no-teste-1-fecha-1-caixa) 4 1 'funcao-utilidade)
 
 (imprime-tabuleiro (tabuleiro-teste1))
+
+
+
+
+
+(defun tabuleiro-teste ()
+  '(
+	((NIL NIL NIL 2 1 NIL NIL) (NIL NIL NIL NIL 2 1 2)
+	(1 2 1 2 2 2 NIL) (2 NIL NIL NIL 1 2 NIL)
+	(2 2 NIL NIL 2 1 NIL) (2 2 NIL 1 1 2 NIL)
+	(2 2 NIL 2 1 1 NIL) (1 1 NIL 1 2 2 NIL))
+	((NIL NIL NIL 1 1 1 1) (NIL NIL NIL 1 1 1 1)
+	(NIL 1 NIL NIL 1 1 2) (NIL 2 1 NIL 1 2 1)
+	(1 NIL NIL 1 NIL NIL NIL) (1 NIL NIL 1 1 NIL NIL)
+	(NIL NIL 1 1 NIL NIL NIL) (NIL 2 1 2 1 NIL 2))
+  )
+)
+
+(defun tabuleiro-teste2 ()
+  '(
+	(	(NIL 1 2 2 2 1 2) (2 2 1 1 1 2 2)
+		(2 2 1 2 1 2 2) (2 2 1 1 1 2 2)
+		(2 2 1 2 1 1 2) (1 1 1 1 2 2 1))
+	(
+		(1 1 1 1 1 1 1) (2 1 1 1 1 1 1)
+		(1 1 2 1 1 1 2) (2 2 1 1 1 2 1)
+		(1 1 1 1 1 1 1) (1 2 2 1 1 1 1)
+		(2 1 1 1 2 1 1) (2 2 1 2 1 2 2))
+  )
+)

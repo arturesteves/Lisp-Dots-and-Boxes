@@ -9,7 +9,7 @@
 (defvar *corte-beta* 0)
 (defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
 (defvar *nos-analisados* 0) ;; variavel que guarda o numero de nos visitados
-(defvar *tempo-despendido*)
+(defvar *tempo-despendido* 0)
 
 
 ;;Algoritmo alfa-beta
@@ -244,6 +244,7 @@
 	)
 )	
 
+
 ;; os nós folha finais são os que ainda têm sucessores
 ;; os nós folha são os que já não tem mais sucessores
 
@@ -266,8 +267,10 @@
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
 
-#||
+
 ;VERIFICAR SE O NO ACABA O JOGO, SE ACABAR DA 500
+
+
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
@@ -276,44 +279,43 @@ payoffs in backgammon range from +I92 to -192. This chapter deals mainly with
 zero-sum games, although we will briefly mention non-zero-sum games. "
 (let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		(vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
-(progn
+	(progn
 	;(format t "~%caixa fechadas ~%~A~%" numero-caixas-fechadas)
 	(format t "~%vencedor ~%~A~%" vencedor-resultado) 
-	(cond
-		(
-			(and	
-				(= peca *jogador1*)
-				(and
-					(not (null vencedor-resultado))
-					(= vencedor-resultado *jogador1*)
-					(equal (verificar-profundidade-jogador no) 'MAX)
-					;(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador1*) ;; verificar numero-caixas
-					;(equal (verificar-profundidade-jogador no) 'MAX)
-				)
-			)
-		100
-		)		
-		(
-			(and
-				(= peca *jogador2*)
-				(and
-					(and 
+		(cond
+			(
+				(and	
+					(= peca *jogador1*)
+					(and
 						(not (null vencedor-resultado))
-						(= vencedor-resultado *jogador2*)
+						(= vencedor-resultado *jogador1*)
+						(equal (verificar-profundidade-jogador no) 'MAX)
+						;(eql (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2) *jogador1*) ;; verificar numero-caixas
+						;(equal (verificar-profundidade-jogador no) 'MAX)
 					)
-					(equal (verificar-profundidade-jogador no) 'MAX)
 				)
+			100
+			)		
+			(
+				(and
+					(= peca *jogador2*)
+					(and 
+							(not (null vencedor-resultado))
+							(= vencedor-resultado *jogador2*)
+							(equal (verificar-profundidade-jogador no) 'MAX)
+
+					)
+				)
+			(- 0 100)
 			)
-		(- 0 100)
+		(t 0)
 		)
-	(t 0)
-	)
-	)
 	)
 )
+)
 ;
-||#
 
+#|
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
 a numeric value for the terminal states. In chess, the outcome is a win, loss, or draw,
@@ -326,10 +328,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		
 	)
 )
+||#
 
-
-		
-		
 ;verificar-jogador
 (defun verificar-profundidade-jogador(no) "Função que verifica se o jogador encontra-se na profundidade de MAX ou MIN"
 	(let ((profundidade (get-no-profundidade no)))
@@ -373,7 +373,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 										(mapcar #'(lambda (node)
 											(let ((fechou-caixa (verifica-se-fechou-caixa node numero-caixas-fechadas))
 													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
-													(caixas-fechadas-jogador-2 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1))))
+													(caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2))))
 													(cond
 														((null fechou-caixa) (list node))
 
@@ -387,18 +387,19 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		novos-sucessores
 	)
 )
+;
 
 (defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
 	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
 		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
 	)
 )
-
+#||
 (defun verifica-se-fechou-caixa (no numero-caixas-fechadas-anterior)
 	(let ((caixas-actualmente-fechadas (caixas-fechadas (get-no-estado no))))
 		(> caixas-actualmente-fechadas numero-caixas-fechadas-anterior)
 	)
-)
+)||#
 
 ;;falta testar
 (defun sucessores (no operadores peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
