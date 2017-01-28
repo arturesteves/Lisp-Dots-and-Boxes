@@ -27,6 +27,7 @@
 ;;Resul: 0
 (defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time))(tempo-maximo 5000)) 	;; tempo de quando começou a 1ª procura no alfabeta
 (format t "Entrei Alfa-beta~%")	
+(format t "Intervalo : [~a, ~a] ~%" alfa beta)
 	
 	(let*(	
 			;(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
@@ -51,7 +52,11 @@
 					;(format t "Nó avaliado: ~a~%" no)
 					;(format t "Caixas J.1: ~a~%" caixas-jogador-1)
 					;(format t "Caixas J.2: ~a~%" caixas-jogador-2)
-					(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2)
+											
+											;;DEIXEI DE RETORNAR O VALOR DA FUNCAO UTILIDADE calculado aqui, MAS VOU RETORNAR O VAlor da utilidaed ja calculado anteriormente!
+											;(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2)
+										(get-no-utilidade no)
+											
 				;	(format t "~%NOS ANALISADOS~%~a~%"*nos-analisados*)
 				;	(format t "~%TEMPO DISPENDIDO~%~a~%"tempo-dispendido)
 				)	
@@ -71,15 +76,20 @@
 ;;Função Alfa
 (defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 (format t "Entrei max-side~%")
+(format t "Intervalo : [~a, ~a] ~%" alfa beta)
 	(cond
 		((null sucessores) alfa)
 		(T (let* ((nova-peca (troca-peca peca))
 				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
 				)
 			(cond
-				((> valor-utilidade-no alfa)	(setf *jogada-pc* (car sucessores))	;; Actualiza a melhor jogada!
-												valor-utilidade-no
-												)
+				((> valor-utilidade-no alfa)	(progn
+																	(format t "Nova jogada guardada: ~a~%" (car sucessores))
+																	;(format t "Valor utilidade: ~a~%" valor-utilidade-no)
+																	;(format t "Valor alfa: ~a~%~%" alfa)
+																	(setf *jogada-pc* (car sucessores))	;; Actualiza a melhor jogada!
+																	valor-utilidade-no
+												))
 				;(format t "~%~a~~%"*jogada-pc*)
 				((>= alfa beta) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
 				(T (max-side (cdr sucessores) profundidade-limite peca f-utilidade valor-utilidade-no beta tempo-inicial tempo-maximo))
@@ -89,9 +99,11 @@
 )
 
 
+
 ;;Função Beta
 (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 (format t "Entrei min-side~%")
+(format t "Intervalo : [~a, ~a] ~%" alfa beta)
 	(cond
 		((null sucessores) beta)
 		(T (let* ((nova-peca (troca-peca peca))
@@ -260,6 +272,31 @@
 )	
 
 
+
+
+;; NOVA FUNÇÃO
+(defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2 old-numero-caixas-j1 old-numero-caixas-j2)
+	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
+			 (vencedor-resultado (vencedor-p numero-caixas-fechadas peca caixas-fechadas-j1 caixas-fechadas-j2)))
+
+			 
+		(cond
+			(vencedor-resultado (cond ((= vencedor-resultado *jogador2*) 2000) (T -2000)))	;; se o PC ganhar -> 2000 ; se for o Humano -> -2000
+			(T 
+				;(j1-fechou-caixa ((cond ((> caixas
+				
+				(cond
+					((> caixas-fechadas-j2 old-numero-caixas-j2) 50)	  ; PC fechou uma caixa 
+					((> caixas-fechadas-j1 old-numero-caixas-j1) -50)  ; Humano fechou uma caixa 
+					(T 0)	;; ninguem fechou caixa
+				)
+			)
+		)
+	)
+)
+
+
+
 ;; os nós folha finais são os que ainda têm sucessores
 ;; os nós folha são os que já não tem mais sucessores
 
@@ -281,7 +318,7 @@
 ; http://people.eecs.berkeley.edu/~russell/code/search/algorithms/minimax.lisp
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
-
+#||
 ;;Dando mais valor a medida que se fecha caixas. Aqui sei essa diferença através do num. de caixas-j1 e caixas-j2
 ;VERIFICAR SE O NO ACABA O JOGO, SE ACABAR DA 500
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
@@ -305,6 +342,11 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 				((and (= vencedor-resultado *jogador2*) (equal (verificar-profundidade-jogador no) 'MAX)) -100)
 				(T 0))))
 )
+||#
+
+
+
+
 				
 			#|
 				(and	
@@ -435,6 +477,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 											)) sucessores_resultado)) )
 		 )
 		novos-sucessores
+		
 		;sucessores_resultado
 	)
 )
@@ -475,7 +518,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 ;; falta testar
 (defun sucessores-todas-possibilidades (no operador peca possibilidades funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-(format t "Entrei sucessores-todas-possibilidades~%")
+;(format t "Entrei sucessores-todas-possibilidades~%")
 
 	(let* ((primeira-possibilidade (car possibilidades))
 		   (possibilidades-validas (not (null possibilidades)))
@@ -492,13 +535,16 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 ;; falta testar 
 (defun sucessores-aux (no lista-operador-parametros peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-(format t "Entrei sucessores-aux~%")
+;(format t "Entrei sucessores-aux~%")
 
 	(let* ((operador (car lista-operador-parametros))
 			(tabuleiro-pai (get-no-estado no))
 			(parametros (append (cadr lista-operador-parametros) (list tabuleiro-pai)))
-			(tabuleiro-gerado (apply operador parametros)))
+			(tabuleiro-gerado (apply operador parametros))
 			
+			
+			(old-numero-caixas-j1 (get-caixas-jogador-1 no))
+			(old-numero-caixas-j2 (get-caixas-jogador-2 no)))
 			;(numero-caixas-fechadas-tab-pai (caixas-fechadas tabuleiro-pai))	-> chamado na funcao novo-numero-caixas
 			
 			;(numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
@@ -517,23 +563,33 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			((null tabuleiro-gerado) nil)
 			;(T resultado)
 			(T (let* ((numero-caixas-fechadas-tab-gerado (caixas-fechadas tabuleiro-gerado))
-						(numero-caixas-jogador-1 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j2))
-						(numero-caixas-jogador-2 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j1))
+			
+					;;MUDAR ESTA PARTE DAS CAIXAS, QUE ESTA MAL, se a peça for 1, as peças do 2 nao muda! se a peça for 2 as peças 1 nao mudam!
+						(numero-caixas-jogador-1 (cond ((= peca *jogador1*) (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j2)) (T caixas-fechadas-j1)))
+						(numero-caixas-jogador-2 (cond ((= peca *jogador2*) (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j1)) (T caixas-fechadas-j2)))
+						;(numero-caixas-jogador-1 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j2))
+						;(numero-caixas-jogador-2 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j1))
+						
+					;;MUDAR
 						(profundidade  (+ 1 (get-no-profundidade no)))
-						(valor-utilidade (funcall funcao-utilidade no peca numero-caixas-jogador-1 numero-caixas-jogador-2))
+						(valor-utilidade (funcall funcao-utilidade no peca numero-caixas-jogador-1 numero-caixas-jogador-2 old-numero-caixas-j1 old-numero-caixas-j2))
 						)
 			
 	;(format t "~%~%SUCESSORES-AUX~%~%")
-	(format t "~%TAB Gerado: ~a~%" tabuleiro-gerado)
+		#||(format t "~%Profundidade: ~a" profundidade)||#
+
+#||		
+	(format t "~%~%~%~%~%~%JOGADA:~%")
+	(format t "TAB Gerado: ~a~%" tabuleiro-gerado)
 	(imprime-tabuleiro tabuleiro-gerado)
-	#||(format t "~%Profundidade: ~a" profundidade)||#
-	(format t "~%Valor utilidade: ~a~%" valor-utilidade)
-	#||(format t "~%Antigo num. caixas jogador 1: ~a" caixas-fechadas-j1)
-	(format t "~%Antigo num. caixas jogador 2: ~a" caixas-fechadas-j2)
-	(format t "~%Novo num. caixas jogador 1: ~a" numero-caixas-jogador-1)
-	(format t "~%Novo num. caixas jogador 2: ~a~%~%~%" numero-caixas-jogador-2)
+
+	(format t "Valor utilidade: ~a~%" valor-utilidade)
+	(format t "Antigo num. caixas jogador 1: ~a~%" caixas-fechadas-j1)
+	(format t "Antigo num. caixas jogador 2: ~a~%" caixas-fechadas-j2)
+	(format t "Novo num. caixas jogador 1: ~a~%" numero-caixas-jogador-1)
+	(format t "Novo num. caixas jogador 2: ~a~%~%" numero-caixas-jogador-2)
 	;(imprime-tabuleiro tabuleiro-gerado)
-	(format t "fim tab")
+	;(format t "fim tab")
 	||#
 				(cria-no tabuleiro-gerado
 											 profundidade

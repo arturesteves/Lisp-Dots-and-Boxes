@@ -34,6 +34,26 @@
 
 -----------------------
 
+;2 x 2
+
+
+;;Actualmente, a testar neste
+(defun tabuleiro-vazio-2x2 () "Retorna um tabuleiro sem caixas fechadas de dimensão 2x2"
+	(list '((NIL NIL) (NIL NIL) (NIL NIL))
+			'((NIL NIL) (NIL NIL) (NIL NIL))
+	)
+)	;; Próxima jogada é um 2, e é o pc a realizar
+
+(defun no-teste-vazio-2x2()
+	(cria-no (tabuleiro-vazio-2x2) 0 nil 0 0)
+)
+
+
+(imprime-tabuleiro (tabuleiro-vazio-2x2))
+
+
+--------------------------
+
 
 
 
