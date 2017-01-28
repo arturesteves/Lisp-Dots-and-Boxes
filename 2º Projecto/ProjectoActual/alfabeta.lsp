@@ -8,6 +8,10 @@
 (defvar *corte-alfa* 0)
 (defvar *corte-beta* 0)
 (defvar *jogada-pc* nil) ;;variavel que guarda o tabuleiro que corresponde a melhor jogada que é atualizada pelo algoritmo cada vez que o valor de beta é atualizado.
+
+
+(defvar *no-escolhido-pc* nil)
+
 (defvar *nos-analisados* 0) ;; variavel que guarda o numero de nos visitados
 (defvar *tempo-despendido* 0)
 
@@ -22,8 +26,10 @@
 ;;Teste: (alfa-beta (no-teste-1-fecha-1-caixa) (get-no-profundidade (no-teste-1-fecha-1-caixa)) 1 'funcao-utilidade)	
 ;;Resul: 0
 (defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time))(tempo-maximo 5000)) 	;; tempo de quando começou a 1ª procura no alfabeta
+(format t "Entrei Alfa-beta~%")	
+	
 	(let*(	
-			(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
+			;(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
 			(max-mix (verificar-profundidade-jogador no)) ;;MAX ou MIN
 			(caixas-jogador-1	(get-caixas-jogador-1 no))
 			(caixas-jogador-2 	(get-caixas-jogador-2 no))
@@ -33,7 +39,7 @@
 			
 			;(nos-analisados 	(setf *nos-analisados* (+ *nos-analisados* 1)))
 		)
-		(format t "~%NOOO:~a~%"no)
+		;(format t "~%NOOO:~a~%"no)
 		(cond
 			(	(or
 					(>= tempo-gasto tempo-maximo)
@@ -42,6 +48,9 @@
 				)
 				(progn
 					(setf *nos-analisados* (+ *nos-analisados* 1))
+					;(format t "Nó avaliado: ~a~%" no)
+					;(format t "Caixas J.1: ~a~%" caixas-jogador-1)
+					;(format t "Caixas J.2: ~a~%" caixas-jogador-2)
 					(funcall f-utilidade no peca caixas-jogador-1 caixas-jogador-2)
 				;	(format t "~%NOS ANALISADOS~%~a~%"*nos-analisados*)
 				;	(format t "~%TEMPO DISPENDIDO~%~a~%"tempo-dispendido)
@@ -50,10 +59,10 @@
 
 			(
 				(eq max-mix 'MAX)
-				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
+				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 			)
 			(T
-				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca-a-jogar f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
+				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 			)
 		)
 	)
@@ -61,10 +70,11 @@
 
 ;;Função Alfa
 (defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+(format t "Entrei max-side~%")
 	(cond
 		((null sucessores) alfa)
-		(T (let (
-				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo))
+		(T (let* ((nova-peca (troca-peca peca))
+				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
 				)
 			(cond
 				((> valor-utilidade-no alfa)	(setf *jogada-pc* (car sucessores))	;; Actualiza a melhor jogada!
@@ -81,10 +91,11 @@
 
 ;;Função Beta
 (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+(format t "Entrei min-side~%")
 	(cond
 		((null sucessores) beta)
-		(T (let (
-				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite (troca-peca peca) f-utilidade alfa beta tempo-inicial tempo-maximo))
+		(T (let* ((nova-peca (troca-peca peca))
+				(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
 				)
 			(cond
 				((< valor-utilidade-no beta) valor-utilidade-no)
@@ -195,8 +206,8 @@
  
 (defun troca-peca (peca)
 	(cond
-		((= peca 1) 2)
-		(T 1)
+		((= peca *jogador1*) *jogador2*)
+		(T *jogador1*)
 	)
  )
 
@@ -271,7 +282,7 @@
 ; http://www.sti-innsbruck.at/sites/default/files/Knowledge-Representation-Search-and-Rules/Russel-&-Norvig-Inference-and-Logic-Sections-6.pdf
 |#
 
-
+;;Dando mais valor a medida que se fecha caixas. Aqui sei essa diferença através do num. de caixas-j1 e caixas-j2
 ;VERIFICAR SE O NO ACABA O JOGO, SE ACABAR DA 500
 (defun funcao-utilidade (no peca caixas-fechadas-j1 caixas-fechadas-j2)
 "A utility function (also called an objective function or payoff function), which gives
@@ -286,37 +297,12 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		;(format t "~%caixa fechadas ~%~A~%" numero-caixas-fechadas)
 		;(format t "~%vencedor F-U: ~%~A~%" vencedor-resultado) 
 			(cond
-				(
-					(null vencedor-resultado)
-					(cond
-						((> caixas-fechadas-j1 caixas-fechadas-j2) 50)
-					(t -50)
-					)
-				)
-			
-			
-				(
-					(and
-						(= vencedor-resultado *jogador1*)
-						(equal (verificar-profundidade-jogador no) 'MAX)
-					)
-						100
-				)
-				
-				(
-					(and
-						(= vencedor-resultado *jogador2*)
-						(equal (verificar-profundidade-jogador no) 'MAX)
-					)
-						-100
-				)
-				
-
-				
-				(t 0)
-			)
-		)
-	)
+				((null vencedor-resultado) (cond
+															((> caixas-fechadas-j1 caixas-fechadas-j2) 50)
+															(t -50)))
+				((and (= vencedor-resultado *jogador1*) (equal (verificar-profundidade-jogador no) 'MAX)) 100)
+				((and (= vencedor-resultado *jogador2*) (equal (verificar-profundidade-jogador no) 'MAX)) -100)
+				(T 0))))
 )
 				
 			#|
@@ -413,7 +399,7 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 ;Teste: (sucessores-alfabeta (no-teste-1) (operadores) 1 1 'funcao-utilidade 0 0)
 
 (defun sucessores-alfabeta (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-	
+(format t "Entrei sucessores-alfabeta~%")	
 	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		     (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retonra bem os sucessores
 		     (novos-sucessores (apply 'append 	;; remove os nills da lista retornada
@@ -422,13 +408,19 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
 													(caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2))))
 													
-													(format t "~%~% Node:~a" node)
-													(format t "~%~% Node:~a" fechou-caixa)
+													(format t "~%~% Sucessor com sucessores:")
+													(format t "Fechou caixas: ~a~%" fechou-caixa)
+													;(format t "~%~% Node:~a" node)
+													;(format t "~%~% Node:~a" fechou-caixa)
 													
 													(cond
 														((null fechou-caixa) (list node))
 
 														;;Se chegar ao T, significa que o computador vai jogar outra vez!
+														#|| Aqui ir buscar o valor utilidade do 'node', se for == 1000, significa que o jogo acabou, logo nao e preciso ir gerar sucessores?
+																Pq, se nao tiver algo do género, o que vai acontecer é que vou gerar sucessores quando o tab. estiver cheio.
+																
+														||#
 														(T 											;;aqui verificar qual e a peça e incrementar conforme a peça!
 														;; actual
 														;;;;;;;(sucessores node operadores peca (+ profundidade 1) funcao-utilidade (+ caixas-fechadas-j1 1) caixas-fechadas-j2)))
@@ -460,6 +452,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 ;;falta testar
 (defun sucessores (no operadores peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(format t "Entrei sucessores~%")
+
 	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
 		   (numero-colunas (numero-colunas-tabuleiro (get-no-estado no)))
@@ -479,6 +473,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 ;; falta testar
 (defun sucessores-todas-possibilidades (no operador peca possibilidades funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(format t "Entrei sucessores-todas-possibilidades~%")
+
 	(let* ((primeira-possibilidade (car possibilidades))
 		   (possibilidades-validas (not (null possibilidades)))
 		   (resultado (cond (possibilidades-validas (sucessores-aux no (list operador (append primeira-possibilidade (list peca))) peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)) (T nil)))
@@ -494,10 +490,15 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 
 ;; falta testar 
 (defun sucessores-aux (no lista-operador-parametros peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
+(format t "Entrei sucessores-aux~%")
+
 	(let* ((operador (car lista-operador-parametros))
-			(tabuleiro (get-no-estado no))
-			(parametros (append (cadr lista-operador-parametros) (list tabuleiro)))
-			(resultado-operacao (apply operador parametros))
+			(tabuleiro-pai (get-no-estado no))
+			(parametros (append (cadr lista-operador-parametros) (list tabuleiro-pai)))
+			(tabuleiro-gerado (apply operador parametros)))
+			
+			;(numero-caixas-fechadas-tab-pai (caixas-fechadas tabuleiro-pai))	-> chamado na funcao novo-numero-caixas
+			
 			;(numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 			;(ta (format t "~%Resultado: ~a"resultado-operacao))
 			;(tua (format t "~%Peca: ~a"peca))
@@ -505,14 +506,51 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 			;(num-caixas-fechadas-j1 (- novo-numero-caixas-fechadas caixas-fechadas-j2))
 			; (num-caixas-fechadas-j2 (- novo-numero-caixas-fechadascaixas-fechadas-j1))
 																										;;Aqui no funcall nao é 'no', é 'resultado-operacao', e nao é peça é troca peça
-			(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
+;(resultado (cria-no resultado-operacao (+ 1 (get-no-profundidade no)) (funcall funcao-utilidade no peca caixas-fechadas-j1 caixas-fechadas-j2) caixas-fechadas-j1 caixas-fechadas-j2 )))
+		
+		;(format t "~%Num caixas fechadas tab pai: ~a" numero-caixas-fechadas-tab-pai)
+		;(format t "Resultado Operação:~a" tabuleiro-gerado)
+		
 		(cond
-			((null resultado-operacao) nil)
-			(T resultado)
+			((null tabuleiro-gerado) nil)
+			;(T resultado)
+			(T (let* ((numero-caixas-fechadas-tab-gerado (caixas-fechadas tabuleiro-gerado))
+						(numero-caixas-jogador-1 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j2))
+						(numero-caixas-jogador-2 (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j1))
+						(profundidade  (+ 1 (get-no-profundidade no)))
+						(valor-utilidade (funcall funcao-utilidade no peca numero-caixas-jogador-1 numero-caixas-jogador-2))
+						)
+			
+	;(format t "~%~%SUCESSORES-AUX~%~%")
+	(format t "~%TAB Gerado: ~a" tabuleiro-gerado)
+	(format t "~%Profundidade: ~a" profundidade)
+	(format t "~%Valor utilidade: ~a" valor-utilidade)
+	(format t "~%Antigo num. caixas jogador 1: ~a" caixas-fechadas-j1)
+	(format t "~%Antigo num. caixas jogador 2: ~a" caixas-fechadas-j2)
+	(format t "~%Novo num. caixas jogador 1: ~a" numero-caixas-jogador-1)
+	(format t "~%Novo num. caixas jogador 2: ~a~%~%~%" numero-caixas-jogador-2)
+	;(imprime-tabuleiro tabuleiro-gerado)
+	(format t "fim tab")
+				(cria-no tabuleiro-gerado
+											 profundidade
+											 valor-utilidade
+											 numero-caixas-jogador-1 
+											 numero-caixas-jogador-2)))
 		)
 	)
 )
-	
+#||
+(defun novo-numero-caixas (tabuleiro-pai tabuleiro-gerado)
+	(let ((numero-caixas-fechadas-tab-pai (caixas-fechadas tabuleiro-pai))
+			(numero-caixas-fechadas-tab-gerado (caixas-fechadas tabuleiro-gerado)))
+		
+		(cond
+			((null tabuleiro-gerado) (list 0 0))	; list -> (numero-caixas-j1 numero-caixas-j2)	-> será de um sucessor não válido, tabuleiro a NIL
+			(T (let (
+		)
+	)
+)
+||#
 
 #|
 (defun sucessores (no operadores algoritmo-procura profundidade funcao-heuristica numero-objectivo-caixas) "Dado um nó é retornada uma lista com todos os sucessores desse mesmo nó"
