@@ -4,9 +4,6 @@
 ;;;; Programador: Daniel Costa - 120221058
 
 
-
-
-
 ;;; Construtor
 ;; cria-no
 (defun cria-no (estado &optional (profundidade 0) (utilidade 0) (caixas-jogador-1 0)(caixas-jogador-2 0)) 
@@ -41,6 +38,13 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	(fifth no)
 )
 
+
+;;custo
+(defun custo (no)"retorna o valor do custo do nó (f). Soma do valor da profundidade com o valor heuristico."
+    (+ (get-no-profundidade no)(get-no-utilidade no))
+)
+
+
 ;;get-arcos-horizontais
 (defun get-arcos-horizontais (tabuleiro) "Retorna a lista dos arcos horizontais de um tabuleiro"
 	(car tabuleiro)
@@ -50,6 +54,9 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 (defun get-arcos-verticais (tabuleiro) "Retorna a lista dos arcos verticiais de um tabuleiro"
 	(car (cdr tabuleiro))
 )
+
+
+
 
 ;;; Funcões auxiliares dos operadores
 
@@ -162,6 +169,7 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	)
 )
 
+
 ;;; Função Validação de Caixas
 
 ;;Teste		:(caixas-fechadas (tabuleiro-teste2))
@@ -265,11 +273,36 @@ a profundidade a que se encontra, pela heurística deste mesmo nó, ou seja, o n
 	)
 )
 
+#|
+;;; Heuristicas
 
-;; trocar-peca
-(defun troca-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
-	(cond
-		((= peca *jogador1*) *jogador2*)
-		((= peca *jogador2*) *jogador1*)
-	)
+;; heuristica1
+(defun heuristica1 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
+	(- numero-caixas-a-fechar (caixas-fechadas tabuleiro)  1)
 )
+
+;; heuristica2
+(defun heuristica2 (tabuleiro numero-caixas-a-fechar) "Usada uma heurística que priveligia os tabuleiros com o maior número de caixas fechadas"
+	(/ (+ numero-caixas-a-fechar  (caixas-fechadas tabuleiro)) 2)
+)
+
+|#
+
+;;; Solução
+
+;; solucaop
+(defun solucaop (no numero-caixas-a-fechar)	"Devolve [T] se o número de caixas a fechar for igual ao número de caixas fechadas do nó, e devolve [NIL] se não for"
+	(= (caixas-fechadas (get-no-estado no)) numero-caixas-a-fechar)
+)
+
+
+#|
+;; caminho-solucao
+(defun caminho-solucao (no &optional (solucao nil)) "Retorna o caminho até à solução. Ou seja todos os estados desde o inicial à solução."
+	(cond
+		((null (get-no-estado no)) solucao)
+		(T (caminho-solucao (get-no-pai no) (cons (get-no-estado no) solucao)))
+	) 
+)
+|#
+
