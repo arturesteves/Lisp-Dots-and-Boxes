@@ -186,7 +186,7 @@
 |#
 ;;humano-joga 
 (defun humano-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2)
-(format t "Entrei humano-joga~%")
+(format t "~%~%~%Entrei humano-joga~%")
 
 	(let* 	(
 				(jogada (le-jogada tabuleiro)) ;; (INSERIR-ARCO-HORIZONTAL 1 1)
@@ -197,7 +197,9 @@
 			)
 				;(format t "~%Numero-caixas-jogador: ~a"  numero-caixas-jogador)
 				
-				
+				(format t "~%~%~%Numero Caixas: ~A~%" numero-caixas-jogador)
+				(format t "~%~%~%Caixas J1: ~A~%" numero-caixas-j1)
+				(format t "~%~%~%Caixas J2: ~A~%" numero-caixas-j2)
 				(cond				
 					((vencedor-p numero-caixas-jogador peca numero-caixas-j1 numero-caixas-j2) 	(progn	
 																																						(format t "~&Ganhou!")
@@ -284,7 +286,7 @@
 ;; -joga
 
 (defun computador-joga (tabuleiro peca numero-caixas-j1 numero-caixas-j2) 
-(format t "Entrei computador-joga~%")
+(format t "~%~%~%Entrei computador-joga~%")
 
 
 

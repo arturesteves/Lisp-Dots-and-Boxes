@@ -298,7 +298,8 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 		;(format t "~%vencedor F-U: ~%~A~%" vencedor-resultado) 
 			(cond
 				((null vencedor-resultado) (cond
-															((> caixas-fechadas-j1 caixas-fechadas-j2) 50)
+															((> caixas-fechadas-j2 caixas-fechadas-j1) 50)
+															((= caixas-fechadas-j2 caixas-fechadas-j1) 0)
 															(t -50)))
 				((and (= vencedor-resultado *jogador1*) (equal (verificar-profundidade-jogador no) 'MAX)) 100)
 				((and (= vencedor-resultado *jogador2*) (equal (verificar-profundidade-jogador no) 'MAX)) -100)
@@ -408,8 +409,9 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 													(caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
 													(caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2))))
 													
-													(format t "~%~% Sucessor com sucessores:")
-													(format t "Fechou caixas: ~a~%" fechou-caixa)
+												;	(format t "~%~% Sucessor com sucessores:")
+												;	(format t "Fechou caixas: ~a~%" fechou-caixa)
+												
 													;(format t "~%~% Node:~a" node)
 													;(format t "~%~% Node:~a" fechou-caixa)
 													
@@ -522,15 +524,17 @@ zero-sum games, although we will briefly mention non-zero-sum games. "
 						)
 			
 	;(format t "~%~%SUCESSORES-AUX~%~%")
-	(format t "~%TAB Gerado: ~a" tabuleiro-gerado)
-	(format t "~%Profundidade: ~a" profundidade)
-	(format t "~%Valor utilidade: ~a" valor-utilidade)
-	(format t "~%Antigo num. caixas jogador 1: ~a" caixas-fechadas-j1)
+	(format t "~%TAB Gerado: ~a~%" tabuleiro-gerado)
+	(imprime-tabuleiro tabuleiro-gerado)
+	#||(format t "~%Profundidade: ~a" profundidade)||#
+	(format t "~%Valor utilidade: ~a~%" valor-utilidade)
+	#||(format t "~%Antigo num. caixas jogador 1: ~a" caixas-fechadas-j1)
 	(format t "~%Antigo num. caixas jogador 2: ~a" caixas-fechadas-j2)
 	(format t "~%Novo num. caixas jogador 1: ~a" numero-caixas-jogador-1)
 	(format t "~%Novo num. caixas jogador 2: ~a~%~%~%" numero-caixas-jogador-2)
 	;(imprime-tabuleiro tabuleiro-gerado)
 	(format t "fim tab")
+	||#
 				(cria-no tabuleiro-gerado
 											 profundidade
 											 valor-utilidade
