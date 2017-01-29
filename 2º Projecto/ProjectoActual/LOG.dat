@@ -1,0 +1,923 @@
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 110 
+
+Cortes Beta: 109 
+
+Nos analisados: 12208 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 218 
+
+Cortes Beta: 216 
+
+Nos analisados: 23978 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 324 
+
+Cortes Beta: 321 
+
+Nos analisados: 35318 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 428 
+
+Cortes Beta: 424 
+
+Nos analisados: 46236 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 530 
+
+Cortes Beta: 525 
+
+Nos analisados: 56740 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 630 
+
+Cortes Beta: 624 
+
+Nos analisados: 66838 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 728 
+
+Cortes Beta: 721 
+
+Nos analisados: 76538 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 NIL NIL) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 824 
+
+Cortes Beta: 816 
+
+Nos analisados: 85848 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 NIL NIL) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 2 
+
+Cortes Alfa: 917 
+
+Cortes Beta: 2888 
+
+Nos analisados: 105542 
+
+Tempo Máximo: 9 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 NIL NIL) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 4 
+
+Cortes Alfa: 1008 
+
+Cortes Beta: 6078 
+
+Nos analisados: 125624 
+
+Tempo Máximo: 12 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 NIL) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 5 
+
+Cortes Alfa: 1097 
+
+Cortes Beta: 10682 
+
+Nos analisados: 146406 
+
+Tempo Máximo: 16 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 6 
+
+Cortes Alfa: 1184 
+
+Cortes Beta: 15952 
+
+Nos analisados: 167149 
+
+Tempo Máximo: 18 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 7 
+
+Cortes Alfa: 1269 
+
+Cortes Beta: 21938 
+
+Nos analisados: 187920 
+
+Tempo Máximo: 18 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 7 
+
+Cortes Alfa: 1353 
+
+Cortes Beta: 22021 
+
+Nos analisados: 195058 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 9 
+
+Cortes Alfa: 1434 
+
+Cortes Beta: 23661 
+
+Nos analisados: 210103 
+
+Tempo Máximo: 5 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1513 
+
+Cortes Beta: 26143 
+
+Nos analisados: 225354 
+
+Tempo Máximo: 7 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 NIL) (1 NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1590 
+
+Cortes Beta: 26296 
+
+Nos analisados: 231592 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1665 
+
+Cortes Beta: 26445 
+
+Nos analisados: 237518 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 NIL NIL NIL NIL) (1 1 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1738 
+
+Cortes Beta: 26590 
+
+Nos analisados: 243140 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 NIL NIL NIL) (1 1 1 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1809 
+
+Cortes Beta: 26731 
+
+Nos analisados: 248466 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 1878 
+
+Cortes Beta: 26868 
+
+Nos analisados: 253504 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 13 
+
+Cortes Alfa: 1945 
+
+Cortes Beta: 27803 
+
+Nos analisados: 263649 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 15 
+
+Cortes Alfa: 2010 
+
+Cortes Beta: 29246 
+
+Nos analisados: 273776 
+
+Tempo Máximo: 4 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 2 NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 15 
+
+Cortes Alfa: 2073 
+
+Cortes Beta: 29370 
+
+Nos analisados: 277999 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 2 NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 17 
+
+Cortes Alfa: 2134 
+
+Cortes Beta: 30184 
+
+Nos analisados: 286468 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 2 NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 19 
+
+Cortes Alfa: 2193 
+
+Cortes Beta: 31362 
+
+Nos analisados: 294821 
+
+Tempo Máximo: 3 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 NIL 2 2) (1 1 2 2 2 2 2) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 19 
+
+Cortes Alfa: 2250 
+
+Cortes Beta: 31474 
+
+Nos analisados: 298300 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 1 2 2) (1 1 2 2 2 2 2) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 21 
+
+Cortes Alfa: 2304 
+
+Cortes Beta: 32932 
+
+Nos analisados: 309092 
+
+Tempo Máximo: 3 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 1 2 2) (1 1 2 2 2 2 2) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 23 
+
+Cortes Alfa: 2356 
+
+Cortes Beta: 34663 
+
+Nos analisados: 319545 
+
+Tempo Máximo: 3 
+___________________________________________________
+
+Vencedor: 2 
+
+Tabuleiro: (((1 2 2 2 2 2 2) (1 1 1 2 2 2 2) (1 1 2 2 1 2 2) (1 1 2 2 2 2 2) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 2 2 NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 25 
+
+Cortes Alfa: 2406 
+
+Cortes Beta: 36736 
+
+Nos analisados: 329717 
+
+Tempo Máximo: 5 
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 2516 
+
+Cortes Beta: 36845 
+
+Nos analisados: 341925 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 2624 
+
+Cortes Beta: 36952 
+
+Nos analisados: 353695 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 2730 
+
+Cortes Beta: 37057 
+
+Nos analisados: 365035 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 2834 
+
+Cortes Beta: 37160 
+
+Nos analisados: 375953 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 2936 
+
+Cortes Beta: 37261 
+
+Nos analisados: 386457 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3036 
+
+Cortes Beta: 37360 
+
+Nos analisados: 396555 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3134 
+
+Cortes Beta: 37457 
+
+Nos analisados: 406257 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL 2 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3229 
+
+Cortes Beta: 37756 
+
+Nos analisados: 415778 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL 2 NIL NIL 2) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3322 
+
+Cortes Beta: 38194 
+
+Nos analisados: 425064 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL 2 NIL NIL 2) (2 NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3413 
+
+Cortes Beta: 38623 
+
+Nos analisados: 433970 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL 2 NIL NIL 2) (2 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3502 
+
+Cortes Beta: 39042 
+
+Nos analisados: 442507 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL NIL 2 NIL NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 0 
+
+Cortes Alfa: 3589 
+
+Cortes Beta: 39452 
+
+Nos analisados: 450682 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL 1 2 NIL NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 2 
+
+Cortes Alfa: 3673 
+
+Cortes Beta: 42322 
+
+Nos analisados: 475826 
+
+Tempo Máximo: 7 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL 1 2 2 NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 4 
+
+Cortes Alfa: 3756 
+
+Cortes Beta: 45676 
+
+Nos analisados: 493487 
+
+Tempo Máximo: 7 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (NIL NIL 1 2 2 NIL 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 4 
+
+Cortes Alfa: 3837 
+
+Cortes Beta: 46062 
+
+Nos analisados: 500618 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 NIL 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 6 
+
+Cortes Alfa: 3916 
+
+Cortes Beta: 46062 
+
+Nos analisados: 513337 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 8 
+
+Cortes Alfa: 3993 
+
+Cortes Beta: 47776 
+
+Nos analisados: 527183 
+
+Tempo Máximo: 4 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 10 
+
+Cortes Alfa: 4067 
+
+Cortes Beta: 51386 
+
+Nos analisados: 548140 
+
+Tempo Máximo: 9 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 11 
+
+Cortes Alfa: 4140 
+
+Cortes Beta: 55536 
+
+Nos analisados: 563352 
+
+Tempo Máximo: 8 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 13 
+
+Cortes Alfa: 4211 
+
+Cortes Beta: 58129 
+
+Nos analisados: 576292 
+
+Tempo Máximo: 5 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 NIL) (NIL NIL NIL 2 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 NIL NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 13 
+
+Cortes Alfa: 4280 
+
+Cortes Beta: 58385 
+
+Nos analisados: 581454 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 NIL NIL 2 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 14 
+
+Cortes Alfa: 4348 
+
+Cortes Beta: 58385 
+
+Nos analisados: 586078 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 NIL 2 NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 16 
+
+Cortes Alfa: 4413 
+
+Cortes Beta: 59639 
+
+Nos analisados: 596012 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 NIL 2 NIL NIL 2) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 16 
+
+Cortes Alfa: 4476 
+
+Cortes Beta: 59862 
+
+Nos analisados: 600336 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 NIL 2 NIL NIL 2) (2 2 NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 18 
+
+Cortes Alfa: 4536 
+
+Cortes Beta: 59922 
+
+Nos analisados: 611806 
+
+Tempo Máximo: 1 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 NIL 2 NIL NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 18 
+
+Cortes Alfa: 4595 
+
+Cortes Beta: 60129 
+
+Nos analisados: 615619 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 NIL NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 1 2 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 20 
+
+Cortes Alfa: 4652 
+
+Cortes Beta: 60129 
+
+Nos analisados: 622288 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 2 NIL 2) (2 2 2 NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 1 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 22 
+
+Cortes Alfa: 4707 
+
+Cortes Beta: 61589 
+
+Nos analisados: 630001 
+
+Tempo Máximo: 3 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 2 NIL 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 1 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 NIL NIL NIL NIL NIL) (2 1 NIL NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 22 
+
+Cortes Alfa: 4760 
+
+Cortes Beta: 61766 
+
+Nos analisados: 633100 
+
+Tempo Máximo: 0 
+___________________________________________________
+
+Vencedor: NIL 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 NIL NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 1 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (2 1 1 NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 24 
+
+Cortes Alfa: 4811 
+
+Cortes Beta: 63565 
+
+Nos analisados: 640300 
+
+Tempo Máximo: 2 
+___________________________________________________
+
+Vencedor: 2 
+
+Tabuleiro: (((2 2 2 2 2 2 2) (2 2 1 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 2 2 2) (2 2 2 2 NIL 2 NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL) (NIL NIL NIL NIL NIL NIL NIL)) ((1 1 1 1 NIL NIL NIL) (1 2 2 1 NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 1 2 NIL NIL NIL) (2 2 2 NIL NIL NIL NIL) (1 1 1 1 NIL NIL NIL) (2 2 2 2 NIL NIL NIL) (2 1 1 NIL NIL NIL NIL))) 
+
+Caixas Fechadas: 25 
+
+Cortes Alfa: 4860 
+
+Cortes Beta: 65286 
+
+Nos analisados: 647092 
+
+Tempo Máximo: 3 
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________

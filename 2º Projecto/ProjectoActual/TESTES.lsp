@@ -104,6 +104,11 @@
 	(cria-no (tabuleiro-teste1-fecha-1-caixa) 0 nil 0 0)
 )
 
+(alfa-beta (no-teste-1-fecha-1-caixa) 4 1 'funcao-utilidade)
+
+
+
+
 ;;Testar os sucessores:
 ;; sem fechar caixas
 
