@@ -258,7 +258,7 @@
 						 (numero-caixas-jogador-2 (cond ((= peca *jogador2*) (- numero-caixas-fechadas-tab-gerado caixas-fechadas-j1)) (T caixas-fechadas-j2)))
 						 (profundidade  (+ 1 (get-no-profundidade no)))
 						 (valor-utilidade (funcall funcao-utilidade no peca old-utilidade numero-caixas-jogador-1 numero-caixas-jogador-2 old-numero-caixas-j1 old-numero-caixas-j2)))
-						 
+				
 				(cria-no tabuleiro-gerado profundidade valor-utilidade numero-caixas-jogador-1 numero-caixas-jogador-2))))
 	)
 )
