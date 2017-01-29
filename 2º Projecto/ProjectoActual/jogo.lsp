@@ -23,12 +23,6 @@
 )
 
 
-;;Tabuleiro Teste Fecha 3 Caixas
-(defun tabuleiro-teste-fecha-3-caixa () "Retorna um tabuleiro sem caixas fechadas de dimensão 3 x 3"
-    (list  '((1 NIL NIL) (2 NIL NIL) (1 NIL NIL) (1 NIL NIL))
-            '((1 1 1) (NIL NIL NIL) (NIL NIL NIL) (NIL NIL NIL))
-    )
-)
 ;;;para eliminar
 ;_-------------------------------------------------------------------------------------------------------
 
@@ -153,11 +147,12 @@
 (defun fazer-uma-partida-humano-pc () "Caso pretende ser o primeiro a jogar. Passa o jogador1, caso contrario jogador2"
   (if (y-or-n-p "Quer ser o 1º a iniciar a partida como Jogador 1? (y/n)")
 	  ;(humano-joga (tabuleiro-vazio-2x2) *jogador1* 0 0)
-	  (humano-joga (tabuleiro-teste-fecha-3-caixa) *jogador1* 0 0)
+	  ;(humano-joga (tabuleiro-teste-fecha-3-caixa) *jogador1* 0 0)
+	  (humano-joga (tabuleiro-inicial) *jogador1* 0 0)
 	 
 	  
-	 (computador-joga (tabuleiro-teste-fecha-3-caixa) *jogador1* 0 0)))
-	  ;(computador-joga (tabuleiro-inicial) *jogador2* 0 0)))
+	  ;(computador-joga (tabuleiro-teste-fecha-3-caixa) *jogador1* 0 0)))
+	  (computador-joga (tabuleiro-inicial) *jogador2* 0 0)))
 	  ;(computador-joga (tabuleiro-vazio-2x2) *jogador2* 0 0)))
 	  
 	  
@@ -276,7 +271,11 @@
 			(cond				
 				((vencedor-p novo-tabuleiro numero-caixas-fechadas-tabuleiro peca numero-caixas-j1 number-caixas-jogador2) (progn	(format t "~&Ganhou!")(jogar-de-novo)))
 				((tabuleiro-preenchido-p novo-tabuleiro) (progn (format t "~&Empatamos")(jogar-de-novo)))
-				
+			
+				((and (= peca *jogador2*) (> numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old))
+						;(imprime-tabuleiro novo-tabuleiro)
+						(computador-joga novo-tabuleiro peca numero-caixas-j1 number-caixas-jogador2))
+						
 				(T (progn
 						(imprime-tabuleiro novo-tabuleiro)
 						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 number-caixas-jogador2)
