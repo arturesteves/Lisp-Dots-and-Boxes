@@ -12,16 +12,10 @@
 (defvar *tempo-despendido* 0)
 
 
-(defun trocar-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
-  (cond
-	((= peca *jogador1*) *jogador2*)
-	((= peca *jogador2*) *jogador1*)
-	)
-)
 
-(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time))(tempo-maximo 5000))
+(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -999999) (beta 999999)  (tempo-inicial (get-universal-time))(tempo-maximo 5000))
 	(let*(	
-			;(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
+			(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
 			(max-mix (verificar-profundidade-jogador no)) ;;MAX ou MIN
 			(caixas-jogador-1	(get-caixas-jogador-1 no))
 			(caixas-jogador-2 	(get-caixas-jogador-2 no))
@@ -33,7 +27,7 @@
 		;(format t "~%NOOO:~a~%"no)
 		(cond
 			(	(or
-					(>= tempo-gasto tempo-maximo)
+					;(>= tempo-gasto tempo-maximo)
 					;(no-folhap no) 	;; REVER
 					(= profundidade-limite (get-no-profundidade no))	;; esta condicao fica no no-folhap
 				)
@@ -45,10 +39,10 @@
 
 			(
 				(eq max-mix 'MAX)
-				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
 			)
 			(T
-				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca-a-jogar f-utilidade alfa beta tempo-inicial tempo-maximo)
 			)
 		)
 	)
@@ -60,11 +54,9 @@
 (defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
 	(cond
 		((null sucessores) alfa)
-		(T (let*(
-					(nova-peca (trocar-peca peca))
+		(T (let*((nova-peca (trocar-peca peca))
 					(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
-					(novo-alfa (verifica-maior-sucessor alfa valor-utilidade-no (car sucessores)))
-				)
+					(novo-alfa (verifica-maior-sucessor alfa valor-utilidade-no (car sucessores))))
 			(cond
 				;(format t "~%~a~~%"*jogada-pc*)
 				((<= beta novo-alfa) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
@@ -75,24 +67,15 @@
 )
 
 
-(defun verifica-maior-sucessor (alfa valor-utilidade sucessores)
-	(cond
-		((> valor-utilidade alfa) (setf *jogada-pc* sucessores) valor-utilidade)
-		(t alfa)
-	)
-)
-
 ;;Função Beta
 (defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo) "Função para descobrir o valor mais baixo entre o value e os valores dos sucessores"
 ;(format t "Entrei min-side~%")
 ;(format t "Intervalo : [~a, ~a] ~%" alfa beta)
 	(cond
 		((null sucessores) beta)
-		(T (let*(	
-					(nova-peca (trocar-peca peca))
+		(T (let*((nova-peca (trocar-peca peca))
 					(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
-					(novo-beta (verifica-menor-sucessor beta valor-utilidade-no (car sucessores)))
-				)
+					(novo-beta (verifica-menor-sucessor beta valor-utilidade-no)))
 			(cond
 				((<= novo-beta alfa) (setf *corte-alfa* (+ *corte-alfa* 1)) alfa) ; houve corte beta
 				(T (min-side (cdr sucessores) profundidade-limite peca f-utilidade alfa novo-beta tempo-inicial tempo-maximo))
@@ -101,7 +84,21 @@
 	)
 )
 
-(defun verifica-menor-sucessor (beta valor-utilidade sucessores)
+(defun trocar-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
+  (cond
+	((= peca *jogador1*) *jogador2*)
+	((= peca *jogador2*) *jogador1*)
+	)
+)
+
+(defun verifica-maior-sucessor (alfa valor-utilidade sucessor)
+	(cond
+		((> valor-utilidade alfa) (setf *jogada-pc* sucessor) valor-utilidade)
+		(t alfa)
+	)
+)
+
+(defun verifica-menor-sucessor (beta valor-utilidade)
 	(cond
 		((< valor-utilidade beta) valor-utilidade)
 		(t beta)
@@ -142,7 +139,6 @@
 	)
 )
 
-#|	SEM UTILIDADE
 (defun e-no-maxp (no)
 	(let ((profundidade (get-no-profundidade no)))
 		(cond
@@ -151,7 +147,7 @@
 		)
 	)
 )
-|#
+
 (defun no-folhap (no)
 	(let* (
 			;(sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0))
@@ -184,7 +180,7 @@
 
 
 (defun sucessores-alfabeta (no operadores profundidade peca funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-(format t "Entrei sucessores-alfabeta~%")	
+;(format t "Entrei sucessores-alfabeta~%")	
 
 	(let* ((numero-caixas-fechadas (caixas-fechadas (get-no-estado no)))
 		     (sucessores_resultado (sucessores no operadores peca profundidade funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2))	;;retorna os sucessores
@@ -196,7 +192,7 @@
 																			((null fechou-caixa) (list node))
 																			(T (let* ((caixas-fechadas-jogador-1 (cond ((= peca *jogador1*) (+ caixas-fechadas-j1 1)) (T caixas-fechadas-j1)))
 																						 (caixas-fechadas-jogador-2 (cond ((= peca *jogador2*) (+ caixas-fechadas-j2 1)) (T caixas-fechadas-j2)))
-																						 (new-sucessores (sucessores node operadores peca (+ profundidade 1) funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2)))
+																						 (new-sucessores (sucessores node operadores peca profundidade funcao-utilidade caixas-fechadas-jogador-1 caixas-fechadas-jogador-2)))
 																				(cond
 																					((null new-sucessores) (list node))
 																					(T new-sucessores))))))
@@ -208,7 +204,7 @@
 )
 
 (defun sucessores (no operadores peca profundidade-maxima funcao-utilidade caixas-fechadas-j1 caixas-fechadas-j2)
-(format t "Entrei sucessores~%")
+;(format t "Entrei sucessores~%")
 
 	(let* ((operador (car operadores))
 		   (numero-linhas (numero-linhas-tabuleiro (get-no-estado no)))
