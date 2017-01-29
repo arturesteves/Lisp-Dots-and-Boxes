@@ -12,7 +12,115 @@
 (defvar *tempo-despendido* 0)
 
 
+(defun trocar-peca (peca) "Troca a peca de um jogador para a peca de outro jogador."
+  (cond
+	((= peca *jogador1*) *jogador2*)
+	((= peca *jogador2*) *jogador1*)
+	)
+)
 
+(defun alfa-beta (no profundidade-limite peca f-utilidade &optional (alfa -1000) (beta 1000)  (tempo-inicial (get-universal-time))(tempo-maximo 5000))
+	(let*(	
+			;(peca-a-jogar (cond ((= (get-no-profundidade no) 0) peca) (T (troca-peca peca)))) ;;Troca de peça
+			(max-mix (verificar-profundidade-jogador no)) ;;MAX ou MIN
+			(caixas-jogador-1	(get-caixas-jogador-1 no))
+			(caixas-jogador-2 	(get-caixas-jogador-2 no))
+			(tempo-actual 		(get-universal-time))
+			(tempo-gasto 		(- tempo-actual tempo-inicial))
+			(tempo-dispendido	(setf *tempo-despendido* tempo-gasto))
+			;(nos-analisados 	(setf *nos-analisados* (+ *nos-analisados* 1)))
+		)
+		;(format t "~%NOOO:~a~%"no)
+		(cond
+			(	(or
+					(>= tempo-gasto tempo-maximo)
+					;(no-folhap no) 	;; REVER
+					(= profundidade-limite (get-no-profundidade no))	;; esta condicao fica no no-folhap
+				)
+				(progn
+					(setf *nos-analisados* (+ *nos-analisados* 1))
+										(get-no-utilidade no)			
+				)	
+			)
+
+			(
+				(eq max-mix 'MAX)
+				(max-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+			)
+			(T
+				(min-side (sucessores-alfabeta no (operadores) profundidade-limite peca f-utilidade caixas-jogador-1 caixas-jogador-2) profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+			)
+		)
+	)
+)
+
+
+
+;;Função Alfa
+(defun max-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo)
+	(cond
+		((null sucessores) alfa)
+		(T (let*(
+					(nova-peca (trocar-peca peca))
+					(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
+					(novo-alfa (verifica-maior-sucessor alfa valor-utilidade-no (car sucessores)))
+				)
+			(cond
+				;(format t "~%~a~~%"*jogada-pc*)
+				((<= beta novo-alfa) (setf *corte-beta* (+ *corte-beta* 1)) beta) ; houve corte alfa
+				(T (max-side (cdr sucessores) profundidade-limite peca f-utilidade novo-alfa beta tempo-inicial tempo-maximo))
+			)
+		))
+	)
+)
+
+
+(defun verifica-maior-sucessor (alfa valor-utilidade sucessores)
+	(cond
+		((> valor-utilidade alfa) (setf *jogada-pc* sucessores) valor-utilidade)
+		(t alfa)
+	)
+)
+
+;;Função Beta
+(defun min-side (sucessores profundidade-limite peca f-utilidade alfa beta tempo-inicial tempo-maximo) "Função para descobrir o valor mais baixo entre o value e os valores dos sucessores"
+;(format t "Entrei min-side~%")
+;(format t "Intervalo : [~a, ~a] ~%" alfa beta)
+	(cond
+		((null sucessores) beta)
+		(T (let*(	
+					(nova-peca (trocar-peca peca))
+					(valor-utilidade-no (alfa-beta (car sucessores) profundidade-limite nova-peca f-utilidade alfa beta tempo-inicial tempo-maximo))
+					(novo-beta (verifica-menor-sucessor beta valor-utilidade-no (car sucessores)))
+				)
+			(cond
+				((<= novo-beta alfa) (setf *corte-alfa* (+ *corte-alfa* 1)) alfa) ; houve corte beta
+				(T (min-side (cdr sucessores) profundidade-limite peca f-utilidade alfa novo-beta tempo-inicial tempo-maximo))
+			)
+		))
+	)
+)
+
+(defun verifica-menor-sucessor (beta valor-utilidade sucessores)
+	(cond
+		((< valor-utilidade beta) valor-utilidade)
+		(t beta)
+	)
+)
+
+
+(defun no-folhap (no)
+	(let* (
+			(sucessores-no (sucessores no (operadores) 1 (get-no-profundidade no) 'funcao-utilidade (get-caixas-jogador-1 no) (get-caixas-jogador-1 no)))
+			(numero-sucessores (length sucessores-no))
+)
+		(cond
+			
+			((> numero-sucessores 0) nil)	;; se nao tiver sucessores ou a profundidade do no, for igual a profundidade maxima
+			(T T)
+		)
+	)
+)
 
 
 (defun funcao-utilidade (no peca old-utilidade caixas-fechadas-j1 caixas-fechadas-j2 old-numero-caixas-j1 old-numero-caixas-j2)
@@ -34,6 +142,7 @@
 	)
 )
 
+#|	SEM UTILIDADE
 (defun e-no-maxp (no)
 	(let ((profundidade (get-no-profundidade no)))
 		(cond
@@ -42,7 +151,7 @@
 		)
 	)
 )
-
+|#
 (defun no-folhap (no)
 	(let* (
 			;(sucessores-no (sucessores no (operadores) 1 0 'funcao-utilidade 0 0))
