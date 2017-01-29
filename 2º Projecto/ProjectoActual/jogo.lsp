@@ -218,14 +218,17 @@
 	(let* ((jogada (le-jogada tabuleiro)) 
 				(novo-tabuleiro (faz-jogada tabuleiro peca (first jogada) (second jogada) (third jogada)))		
 				(numero-caixas-fechadas-tabuleiro-old (caixas-fechadas tabuleiro))
-				(numero-caixas-fechadas-tabuleiro (caixas-fechadas  novo-tabuleiro)))
+				(numero-caixas-fechadas-tabuleiro (caixas-fechadas  novo-tabuleiro))
+				(number-caixas-jogador1 (+ numero-caixas-j1 (- numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old)))
+				)
 				
-				(format t "Num caixas Humano: ~a~%" numero-caixas-j1)
+				(format t "Num caixas Humano: ~a~%" number-caixas-jogador1)
 				(format t "Num caixas PC: ~a~%" numero-caixas-j2)
 				(format t "Avaliação: ~a~%" (and (= peca *jogador1*) (> numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old)))
+				(format t "Tabule: ~a~%" number-caixas-jogador1)
 				
 				(cond				
-					((vencedor-p tabuleiro numero-caixas-fechadas-tabuleiro peca numero-caixas-j1 numero-caixas-j2) 	(progn (format t "~&Ganhou!")
+					((vencedor-p tabuleiro numero-caixas-fechadas-tabuleiro peca number-caixas-jogador1 numero-caixas-j2) 	(progn (format t "~&Ganhou!")
 																														(jogar-de-novo)))
 																																										
 					((tabuleiro-preenchido-p novo-tabuleiro) (progn 
@@ -234,11 +237,11 @@
 					
 					((and (= peca *jogador1*) (> numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old))
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro peca numero-caixas-fechadas-tabuleiro numero-caixas-j2))
+						(humano-joga novo-tabuleiro peca number-caixas-jogador1 numero-caixas-j2))
 						
 					(T (progn
 						;(imprime-tabuleiro novo-tabuleiro)
-						(computador-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 numero-caixas-j2)))
+						(computador-joga novo-tabuleiro (trocar-peca peca) number-caixas-jogador1 numero-caixas-j2)))
 				)
     )
 )
@@ -252,20 +255,22 @@
 			(valor-alfa-beta (alfa-beta (cria-no tabuleiro 0 0 numero-caixas-j1 numero-caixas-j2) 3 peca 'funcao-utilidade)) ;;;;; Este valor 'valor-alfa-beta' usar para escrever no log.
 			;(estatisticas (estatisticas-log *jogada-pc* peca numero-caixas-j1 numero-caixas-j2))
 			(novo-tabuleiro (get-no-estado *jogada-pc*))
+			(numero-caixas-fechadas-tabuleiro-old (caixas-fechadas tabuleiro))
 			(numero-caixas-fechadas-tabuleiro (caixas-fechadas  novo-tabuleiro))
-			(num-caixas-j2 (cond ((> numero-caixas-fechadas-tabuleiro numero-caixas-j2) numero-caixas-fechadas-tabuleiro) (T numero-caixas-j2))))
+			(number-caixas-jogador2 (+ numero-caixas-j2 (- numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old))))
+			;(num-caixas-j2 (cond ((> numero-caixas-fechadas-tabuleiro numero-caixas-j2) numero-caixas-fechadas-tabuleiro) (T numero-caixas-j2))))
 			
 			(format t "Num caixas Humano: ~a~%" numero-caixas-j1)
-				(format t "Num caixas PC: ~a~%" num-caixas-j2)
+				(format t "Num caixas PC: ~a~%" number-caixas-jogador2)
 				
 		(progn				
 			(cond				
-				((vencedor-p tabuleiro numero-caixas-fechadas-tabuleiro peca numero-caixas-j1 numero-caixas-j2) (progn	(format t "~&Ganhou!")(jogar-de-novo)))
+				((vencedor-p tabuleiro numero-caixas-fechadas-tabuleiro peca numero-caixas-j1 number-caixas-jogador2) (progn	(format t "~&Ganhou!")(jogar-de-novo)))
 				((tabuleiro-preenchido-p novo-tabuleiro) (progn (format t "~&Empatamos")(jogar-de-novo)))
 				
 				(T (progn
 						(imprime-tabuleiro novo-tabuleiro)
-						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 num-caixas-j2)
+						(humano-joga novo-tabuleiro (trocar-peca peca) numero-caixas-j1 number-caixas-jogador2)
 					)
 				)
 			)
