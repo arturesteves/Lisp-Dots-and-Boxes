@@ -178,6 +178,8 @@
 				(numero-caixas-fechadas-tabuleiro (caixas-fechadas  novo-tabuleiro))			
 				(number-caixas-jogador1 (+ numero-caixas-j1 (- numero-caixas-fechadas-tabuleiro numero-caixas-fechadas-tabuleiro-old)))
 				)
+				(format t "~%Caixas Jogador1: ~A~%" numero-caixas-j1) ;;Apresenta o numero de caixas do Jogador 1
+				(format t "~%Caixas Jogador2: ~A~%" numero-caixas-j2) ;;Apresenta o numero de caixas do Jogador 2
 				(cond				
 					((vencedor-p novo-tabuleiro numero-caixas-fechadas-tabuleiro peca number-caixas-jogador1 numero-caixas-j2) (format t "~&Ganhou!"))																																					
 					((tabuleiro-preenchido-p novo-tabuleiro)(format t "~%&Empatamos.~%"))					
@@ -476,13 +478,6 @@
 		;;Esta parte será mostrada na consola
 			(format t "~%Vencedor: ~s ~%" peca-vencedora)
 			(format t "~%Tabuleiro: ~s ~%" tabuleiro)
-			(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas tabuleiro))
-			(format t "~%Cortes Alfa: ~s ~%"*corte-alfa* )
-			(format t "~%Cortes Beta: ~s ~%"*corte-beta* )
-			(format t "~%Nos analisados: ~s ~%"*nos-analisados* )
-			(format t "~%Tempo Maximo ~s ~%" *tempo-despendido*)
-
-	;)
+			(format t "~%Caixas Fechadas: ~s ~%" (caixas-fechadas tabuleiro))		
 )
-
 ;	
